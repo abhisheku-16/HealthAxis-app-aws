@@ -1,0 +1,681 @@
+﻿@page "/patients"
+
+@using S4_HealthAxis.Shared.DTOs.Patient
+@using S4_HealthAxis.Shared.Enums
+@using S4_HealthAxis.Blazor.Services
+@using S4_HealthAxis.Blazor.Shared
+@using System.ComponentModel.DataAnnotations
+@using System.Linq
+
+@inject IPatientService PatientService
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h3 class="mb-1 fw-bold text-dark">Patient Registry</h3>
+        <p class="text-muted mb-0">View and update patient records.</p>
+    </div>
+</div>
+
+@if (!string.IsNullOrEmpty(_pageError))
+{
+    <div class="alert alert-danger shadow-sm mb-4">
+        <i class="bi bi-exclamation-triangle-fill me-2"></i>
+        <strong>Error:</strong> @_pageError
+    </div>
+}
+
+<!-- SUMMARY CARDS -->
+<div class="row g-3 mb-4">
+    <div class="col-md-3">
+        <button type="button"
+                class="ha-summary-card ha-summary-card-all @GetPatientCardClass(PatientViewFilter.All)"
+                @onclick="() => SetPatientFilter(PatientViewFilter.All)">
+            <div class="ha-summary-card-label">Total Patients</div>
+            <div class="ha-summary-card-value">@TotalPatientsCount</div>
+        </button>
+    </div>
+
+    <div class="col-md-3">
+        <button type="button"
+                class="ha-summary-card ha-summary-card-active @GetPatientCardClass(PatientViewFilter.Active)"
+                @onclick="() => SetPatientFilter(PatientViewFilter.Active)">
+            <div class="ha-summary-card-label">Active Patients</div>
+            <div class="ha-summary-card-value">@ActivePatientsCount</div>
+        </button>
+    </div>
+
+    <div class="col-md-3">
+        <button type="button"
+                class="ha-summary-card ha-summary-card-inactive @GetPatientCardClass(PatientViewFilter.Inactive)"
+                @onclick="() => SetPatientFilter(PatientViewFilter.Inactive)">
+            <div class="ha-summary-card-label">Inactive Patients</div>
+            <div class="ha-summary-card-value">@InactivePatientsCount</div>
+        </button>
+    </div>
+
+    <div class="col-md-3">
+        <button type="button"
+                class="ha-summary-card ha-summary-card-insured @GetPatientCardClass(PatientViewFilter.Insured)"
+                @onclick="() => SetPatientFilter(PatientViewFilter.Insured)">
+            <div class="ha-summary-card-label">Insured Patients</div>
+            <div class="ha-summary-card-value">@InsuredPatientsCount</div>
+        </button>
+    </div>
+</div>
+
+<!-- SEARCH + SORT -->
+<div class="row mb-3 g-3">
+    <div class="col-md-5">
+        <div class="input-group shadow-sm">
+            <span class="input-group-text bg-white border-end-0">
+                <i class="bi bi-search text-muted"></i>
+            </span>
+            <input type="text"
+                   class="form-control border-start-0 ps-0"
+                   placeholder="Search by Name or ID..."
+                   @bind="SearchQuery"
+                   @bind:event="oninput" />
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="shadow-sm">
+            <InputSelect class="form-select" @bind-Value="SelectedSortOption">
+                <option value="@PatientSortOption.NameAsc">Sort by: Name (A–Z)</option>
+                <option value="@PatientSortOption.NameDesc">Sort by: Name (Z–A)</option>
+                <option value="@PatientSortOption.Id">Sort by: ID</option>
+            </InputSelect>
+        </div>
+    </div>
+</div>
+
+<div class="card shadow-sm border-0 ha-data-card">
+    <div class="card-body p-0">
+        @if (_loading)
+        {
+            <div class="text-center p-5">
+                <div class="spinner-border text-primary" role="status"></div>
+                <p class="mt-2 text-muted">Loading patients...</p>
+            </div>
+        }
+        else if (_patients == null || !_patients.Any())
+        {
+            <div class="text-center p-5 text-muted">
+                <i class="bi bi-people fs-1"></i>
+                <p class="mt-2">No patients found in the registry.</p>
+            </div>
+        }
+        else if (!FilteredPatients.Any())
+        {
+            <div class="text-center p-5 text-muted">
+                <i class="bi bi-search fs-1"></i>
+                <p class="mt-2">No patients match the selected filters.</p>
+            </div>
+        }
+        else
+        {
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0 ha-data-table ha-patients-table">
+                    <thead>
+                        <tr>
+                            <th class="ps-4">ID</th>
+                            <th>Full Name</th>
+                            <th>DOB</th>
+                            <th>Gender</th>
+                            <th>Phone</th>
+                            <th>Insurance ID</th>
+                            <th>Status</th>
+                            <th class="text-end pe-4">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var patient in PagedPatients)
+                        {
+                            <tr>
+                                <td class="ps-4 text-muted">#@patient.PatientId</td>
+
+                                <td>
+                                    <div class="ha-patient-name">@patient.FullName</div>
+                                </td>
+
+                                <td>
+                                    <span class="ha-patient-dob">@patient.DateOfBirth.ToString("MMM dd, yyyy")</span>
+                                </td>
+
+                                <td>
+                                    <span class="ha-gender-pill">@patient.Gender.ToString()</span>
+                                </td>
+
+                                <td>
+                                    <span class="ha-patient-phone">@patient.PhoneNumber</span>
+                                </td>
+
+                                <td>
+                                    <span class="ha-patient-insurance">
+                                        @(string.IsNullOrEmpty(patient.InsuranceId) ? "N/A" : patient.InsuranceId)
+                                    </span>
+                                </td>
+
+                                <td>
+                                    @if (patient.IsActive)
+                                    {
+                                        <span class="badge bg-success bg-opacity-10 text-success border border-success ha-table-pill">
+                                            Active
+                                        </span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge bg-danger bg-opacity-10 text-danger border border-danger ha-table-pill">
+                                            Inactive
+                                        </span>
+                                    }
+                                </td>
+
+                                <td class="text-end pe-4">
+                                    <button class="btn btn-sm btn-outline-primary me-2 ha-table-action"
+                                            @onclick="() => OpenEditModal(patient)">
+                                        <i class="bi bi-pencil"></i>
+                                    </button>
+
+                                    @if (patient.IsActive)
+                                    {
+                                        <button class="btn btn-sm btn-outline-danger ha-table-action"
+                                                @onclick="() => AskTogglePatientStatus(patient.PatientId, false)">
+                                            Disable
+                                        </button>
+                                    }
+                                    else
+                                    {
+                                        <button class="btn btn-sm btn-outline-success ha-table-action"
+                                                @onclick="() => AskTogglePatientStatus(patient.PatientId, true)">
+                                            Enable
+                                        </button>
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+            @if (TotalPages > 1)
+            {
+                <div class="card-footer bg-white border-0 d-flex justify-content-between align-items-center py-3 flex-wrap gap-2">
+                    <span class="text-muted small">
+                        Showing @StartRecord to @EndRecord of @FilteredPatients.Count() patients
+                    </span>
+
+                    <nav>
+                        <ul class="pagination pagination-sm mb-0">
+                            <li class="page-item @(_currentPage == 1 ? "disabled" : "")">
+                                <button class="page-link"
+                                        disabled="@(_currentPage == 1)"
+                                        @onclick="PreviousPage">
+                                    Previous
+                                </button>
+                            </li>
+
+                            <li class="page-item disabled">
+                                <span class="page-link text-dark">
+                                    Page @_currentPage of @TotalPages
+                                </span>
+                            </li>
+
+                            <li class="page-item @(_currentPage == TotalPages ? "disabled" : "")">
+                                <button class="page-link"
+                                        disabled="@(_currentPage == TotalPages)"
+                                        @onclick="NextPage">
+                                    Next
+                                </button>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            }
+        }
+    </div>
+</div>
+
+@if (_showModal)
+{
+    <div class="modal fade show d-block" tabindex="-1" style="background-color: rgba(0,0,0,0.5);">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content border-0 shadow">
+
+                <div class="modal-header bg-light border-0">
+                    <h5 class="modal-title fw-bold">@(_isEditing ? "Edit Patient" : "Add New Patient")</h5>
+                    <button type="button" class="btn-close" @onclick="CloseModal"></button>
+                </div>
+
+                <div class="modal-body p-4">
+                    <EditForm Model="@_formData" OnValidSubmit="ConfirmSavePatient">
+                        <DataAnnotationsValidator />
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-medium">Full Name <span class="text-danger">*</span></label>
+                                <InputText class="form-control"
+                                           @bind-Value="_formData.FullName"
+                                           placeholder="e.g. Jane Smith" />
+                                <ValidationMessage For="@(() => _formData.FullName)" class="text-danger small mt-1" />
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-medium">Date of Birth <span class="text-danger">*</span></label>
+                                <InputDate class="form-control" @bind-Value="_formData.DateOfBirth" />
+                                <ValidationMessage For="@(() => _formData.DateOfBirth)" class="text-danger small mt-1" />
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-medium">Gender <span class="text-danger">*</span></label>
+                                <InputSelect TValue="Gender" class="form-select" @bind-Value="_formData.Gender">
+                                    @foreach (Gender g in Enum.GetValues(typeof(Gender)))
+                                    {
+                                        <option value="@g">@g.ToString()</option>
+                                    }
+                                </InputSelect>
+                                <ValidationMessage For="@(() => _formData.Gender)" class="text-danger small mt-1" />
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-medium">Phone Number <span class="text-danger">*</span></label>
+                                <InputText class="form-control"
+                                           @bind-Value="_formData.PhoneNumber"
+                                           placeholder="(555) 555-5555" />
+                                <ValidationMessage For="@(() => _formData.PhoneNumber)" class="text-danger small mt-1" />
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-4">
+                                <label class="form-label fw-medium">Email Address</label>
+
+                                @if (_isEditing)
+                                {
+                                    <InputText class="form-control bg-light text-muted"
+                                               @bind-Value="_formData.Email"
+                                               readonly
+                                               placeholder="patient@example.com" />
+
+                                    <small class="text-muted mt-1 d-block">
+                                        Email cannot be changed.
+                                    </small>
+                                }
+                                else
+                                {
+                                    <InputText class="form-control"
+                                               @bind-Value="_formData.Email"
+                                               placeholder="patient@example.com" />
+
+                                    <ValidationMessage For="@(() => _formData.Email)" class="text-danger small mt-1" />
+                                }
+                            </div>
+
+                            <div class="col-md-6 mb-4">
+                                <label class="form-label fw-medium">Insurance Number</label>
+                                <InputText class="form-control"
+                                           @bind-Value="_formData.InsuranceNumber"
+                                           placeholder="INS-123456789" />
+                                <ValidationMessage For="@(() => _formData.InsuranceNumber)" class="text-danger small mt-1" />
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-end gap-2">
+                            <button type="button" class="btn btn-light" @onclick="CloseModal">Cancel</button>
+                            <button type="submit" class="btn btn-primary" disabled="@_isSaving">
+                                @if (_isSaving)
+                                {
+                                    <span class="spinner-border spinner-border-sm me-2"></span>
+                                }
+                                @(_isEditing ? "Save Changes" : "Register Patient")
+                            </button>
+                        </div>
+                    </EditForm>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<ConfirmDialog IsOpen="@_showConfirmDialog"
+               Title="@_confirmTitle"
+               Message="@_confirmMessage"
+               ConfirmText="@_confirmButtonText"
+               IsDanger="@_confirmIsDanger"
+               OnConfirm="ConfirmAction"
+               OnCancel="CancelConfirmation" />
+
+@code {
+    private List<PatientDto>? _patients;
+    private bool _loading = true;
+    private string? _pageError = null;
+
+    private string _searchQuery = "";
+    private int _currentPage = 1;
+    private readonly int _pageSize = 5;
+
+    private bool _showModal = false;
+    private bool _isEditing = false;
+    private bool _isSaving = false;
+    private int _editingPatientId = 0;
+
+    private bool _showConfirmDialog = false;
+    private string _confirmTitle = "";
+    private string _confirmMessage = "";
+    private string _confirmButtonText = "Confirm";
+    private bool _confirmIsDanger = false;
+    private Func<Task>? _pendingConfirmedAction;
+
+    private PatientViewFilter CurrentPatientFilter { get; set; } = PatientViewFilter.All;
+
+    private PatientSortOption _selectedSortOption = PatientSortOption.NameAsc;
+    private PatientSortOption SelectedSortOption
+    {
+        get => _selectedSortOption;
+        set
+        {
+            _selectedSortOption = value;
+            _currentPage = 1;
+        }
+    }
+
+    private PatientFormModel _formData = new();
+
+    public class PatientFormModel
+    {
+        [Required(ErrorMessage = "Full Name is required")]
+        public string FullName { get; set; } = string.Empty;
+
+        [Required]
+        public DateOnly DateOfBirth { get; set; } = DateOnly.FromDateTime(DateTime.Today.AddYears(-20));
+
+        [Required]
+        public Gender Gender { get; set; }
+
+        [Required(ErrorMessage = "Phone Number is required")]
+        [Phone(ErrorMessage = "Invalid phone format")]
+        public string PhoneNumber { get; set; } = string.Empty;
+
+        [EmailAddress(ErrorMessage = "Invalid email format")]
+        public string? Email { get; set; }
+
+        public string? InsuranceNumber { get; set; }
+    }
+
+    private enum PatientViewFilter
+    {
+        All,
+        Active,
+        Inactive,
+        Insured
+    }
+
+    private enum PatientSortOption
+    {
+        NameAsc,
+        NameDesc,
+        Id
+    }
+
+    private string SearchQuery
+    {
+        get => _searchQuery;
+        set
+        {
+            _searchQuery = value;
+            _currentPage = 1;
+        }
+    }
+
+    private int TotalPatientsCount => _patients?.Count ?? 0;
+    private int ActivePatientsCount => _patients?.Count(p => p.IsActive) ?? 0;
+    private int InactivePatientsCount => _patients?.Count(p => !p.IsActive) ?? 0;
+    private int InsuredPatientsCount => _patients?.Count(p => !string.IsNullOrWhiteSpace(p.InsuranceId)) ?? 0;
+
+    private IEnumerable<PatientDto> FilteredPatients =>
+        ApplySorting(
+            (_patients ?? Enumerable.Empty<PatientDto>())
+            .Where(p =>
+                CurrentPatientFilter switch
+                {
+                    PatientViewFilter.Active => p.IsActive,
+                    PatientViewFilter.Inactive => !p.IsActive,
+                    PatientViewFilter.Insured => !string.IsNullOrWhiteSpace(p.InsuranceId),
+                    _ => true
+                })
+            .Where(p =>
+                string.IsNullOrWhiteSpace(SearchQuery)
+                || p.FullName.Contains(SearchQuery, StringComparison.OrdinalIgnoreCase)
+                || p.PatientId.ToString().Contains(SearchQuery))
+        );
+
+    private int TotalPages => Math.Max(1, (int)Math.Ceiling(FilteredPatients.Count() / (double)_pageSize));
+
+    private IEnumerable<PatientDto> PagedPatients =>
+        FilteredPatients.Skip((_currentPage - 1) * _pageSize).Take(_pageSize);
+
+    private int StartRecord => FilteredPatients.Any() ? ((_currentPage - 1) * _pageSize) + 1 : 0;
+    private int EndRecord => FilteredPatients.Any() ? Math.Min(_currentPage * _pageSize, FilteredPatients.Count()) : 0;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadPatients();
+    }
+
+    private async Task LoadPatients()
+    {
+        try
+        {
+            _loading = true;
+            _pageError = null;
+            _patients = await PatientService.GetAllAsync();
+
+            EnsureValidPage();
+        }
+        catch (Exception ex)
+        {
+            _pageError = $"Could not load patients: {ex.Message}";
+        }
+        finally
+        {
+            _loading = false;
+        }
+    }
+
+    private IEnumerable<PatientDto> ApplySorting(IEnumerable<PatientDto> patients)
+    {
+        return _selectedSortOption switch
+        {
+            PatientSortOption.NameAsc => patients.OrderBy(p => p.FullName),
+            PatientSortOption.NameDesc => patients.OrderByDescending(p => p.FullName),
+            PatientSortOption.Id => patients.OrderBy(p => p.PatientId),
+            _ => patients.OrderBy(p => p.FullName)
+        };
+    }
+
+    private void SetPatientFilter(PatientViewFilter filter)
+    {
+        CurrentPatientFilter = filter;
+        _currentPage = 1;
+        EnsureValidPage();
+    }
+
+    private string GetPatientCardClass(PatientViewFilter filter) =>
+        CurrentPatientFilter == filter ? "active" : "";
+
+    private void OpenAddModal()
+    {
+        _isEditing = false;
+        _formData = new PatientFormModel();
+        _showModal = true;
+    }
+
+    private void OpenEditModal(PatientDto patient)
+    {
+        _isEditing = true;
+        _editingPatientId = patient.PatientId;
+
+        _formData = new PatientFormModel
+        {
+            FullName = patient.FullName,
+            DateOfBirth = patient.DateOfBirth,
+            Gender = patient.Gender,
+            PhoneNumber = patient.PhoneNumber,
+            Email = patient.Email,
+            InsuranceNumber = patient.InsuranceId
+        };
+
+        _showModal = true;
+    }
+
+    private void CloseModal()
+    {
+        _showModal = false;
+    }
+
+    private void OpenConfirmation(string title, string message, string confirmText, bool isDanger, Func<Task> action)
+    {
+        _confirmTitle = title;
+        _confirmMessage = message;
+        _confirmButtonText = confirmText;
+        _confirmIsDanger = isDanger;
+        _pendingConfirmedAction = action;
+        _showConfirmDialog = true;
+    }
+
+    private void CancelConfirmation()
+    {
+        _showConfirmDialog = false;
+        _pendingConfirmedAction = null;
+    }
+
+    private async Task ConfirmAction()
+    {
+        _showConfirmDialog = false;
+
+        if (_pendingConfirmedAction != null)
+        {
+            await _pendingConfirmedAction.Invoke();
+            _pendingConfirmedAction = null;
+        }
+    }
+
+    private Task ConfirmSavePatient()
+    {
+        OpenConfirmation(
+            _isEditing ? "Confirm Changes" : "Confirm Patient Registration",
+            _isEditing
+                ? "Do you want to save these changes to the patient record?"
+                : "Do you want to register this new patient?",
+            _isEditing ? "Save Changes" : "Register Patient",
+            false,
+            HandleSubmit);
+
+        return Task.CompletedTask;
+    }
+
+    private Task AskTogglePatientStatus(int patientId, bool activate)
+    {
+        OpenConfirmation(
+            activate ? "Enable Patient" : "Disable Patient",
+            activate
+                ? "Do you want to enable this patient?"
+                : "Do you want to disable this patient?",
+            activate ? "Enable" : "Disable",
+            !activate,
+            () => ToggleStatus(patientId, activate));
+
+        return Task.CompletedTask;
+    }
+
+    private async Task HandleSubmit()
+    {
+        try
+        {
+            _isSaving = true;
+            _pageError = null;
+
+            if (_isEditing)
+            {
+                var updateDto = new UpdatePatientDto
+                {
+                    FullName = _formData.FullName,
+                    DateOfBirth = _formData.DateOfBirth,
+                    Gender = _formData.Gender,
+                    PhoneNumber = _formData.PhoneNumber,
+                    Email = _formData.Email,
+                    InsuranceNumber = _formData.InsuranceNumber
+                };
+
+                await PatientService.UpdateAsync(_editingPatientId, updateDto);
+            }
+            else
+            {
+                var createDto = new CreatePatientDto
+                {
+                    FullName = _formData.FullName,
+                    DateOfBirth = _formData.DateOfBirth,
+                    Gender = _formData.Gender,
+                    PhoneNumber = _formData.PhoneNumber,
+                    Email = _formData.Email,
+                    InsuranceNumber = _formData.InsuranceNumber
+                };
+
+                await PatientService.CreateAsync(createDto);
+            }
+
+            CloseModal();
+            await LoadPatients();
+        }
+        catch (Exception ex)
+        {
+            _pageError = $"An error occurred while saving: {ex.Message}";
+        }
+        finally
+        {
+            _isSaving = false;
+        }
+    }
+
+    private async Task ToggleStatus(int patientId, bool activate)
+    {
+        try
+        {
+            _pageError = null;
+
+            if (activate)
+                await PatientService.ActivateAsync(patientId);
+            else
+                await PatientService.DeactivateAsync(patientId);
+
+            await LoadPatients();
+        }
+        catch (Exception ex)
+        {
+            _pageError = $"Failed to change status: {ex.Message}";
+        }
+    }
+
+    private void PreviousPage()
+    {
+        if (_currentPage > 1)
+            _currentPage--;
+    }
+
+    private void NextPage()
+    {
+        if (_currentPage < TotalPages)
+            _currentPage++;
+    }
+
+    private void EnsureValidPage()
+    {
+        if (_currentPage < 1)
+            _currentPage = 1;
+
+        if (_currentPage > TotalPages)
+            _currentPage = TotalPages;
+    }
+}

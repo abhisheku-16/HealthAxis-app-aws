@@ -1,0 +1,296 @@
+﻿@page "/dashboard"
+
+@using S4_HealthAxis.Blazor.Models
+@using S4_HealthAxis.Blazor.Services
+
+@inject IAdminService AdminService
+
+<div class="ha-dashboard-header mb-4">
+    <div>
+        <h3 class="mb-1 fw-bold text-dark">Dashboard Overview</h3>
+        <p class="text-muted mb-0">Welcome back to the Care Management Portal.</p>
+    </div>
+
+    <div class="ha-dashboard-actions">
+        <a href="/appointments" class="btn btn-light ha-dashboard-action-btn">
+            <i class="bi bi-eye me-1"></i> View Appointments
+        </a>
+    </div>
+</div>
+
+
+@if (_loading)
+{
+    <div class="d-flex justify-content-center mt-5">
+        <div class="spinner-border text-primary" role="status"></div>
+    </div>
+}
+else if (_dashboard == null)
+{
+    <div class="alert alert-danger shadow-sm border-0">
+        <i class="bi bi-exclamation-triangle-fill me-2"></i>
+        Failed to load dashboard data. Please try refreshing the page.
+    </div>
+}
+else
+{
+    <!-- KPI CARDS -->
+    <div class="row g-4 mb-4">
+        <div class="col-xl-2 col-lg-4 col-md-6">
+            <a href="/doctors" class="dash-card-link">
+                <div class="dash-card card-doctors">
+                    <div class="card-header-ui">
+                        <h5 class="card-title">Total Doctors</h5>
+                        <i class="bi bi-person-badge card-icon"></i>
+                    </div>
+                    <h2 class="card-value">@_dashboard.TotalDoctors</h2>
+                </div>
+            </a>
+        </div>
+
+        <div class="col-xl-2 col-lg-4 col-md-6">
+            <a href="/doctors" class="dash-card-link">
+                <div class="dash-card ha-kpi-card-active-doctors">
+                    <div class="card-header-ui">
+                        <h5 class="card-title">Active Doctors</h5>
+                        <i class="bi bi-person-check card-icon"></i>
+                    </div>
+                    <h2 class="card-value">@_dashboard.ActiveDoctors</h2>
+                </div>
+            </a>
+        </div>
+
+        <div class="col-xl-2 col-lg-4 col-md-6">
+            <a href="/patients" class="dash-card-link">
+                <div class="dash-card card-patients">
+                    <div class="card-header-ui">
+                        <h5 class="card-title">Total Patients</h5>
+                        <i class="bi bi-people card-icon"></i>
+                    </div>
+                    <h2 class="card-value">@_dashboard.TotalPatients</h2>
+                </div>
+            </a>
+        </div>
+
+        <div class="col-xl-2 col-lg-4 col-md-6">
+            <a href="/patients" class="dash-card-link">
+                <div class="dash-card ha-kpi-card-active-patients">
+                    <div class="card-header-ui">
+                        <h5 class="card-title">Active Patients</h5>
+                        <i class="bi bi-person-heart card-icon"></i>
+                    </div>
+                    <h2 class="card-value">@_dashboard.ActivePatients</h2>
+                </div>
+            </a>
+        </div>
+
+        <div class="col-xl-2 col-lg-4 col-md-6">
+            <a href="/appointments" class="dash-card-link">
+                <div class="dash-card card-today">
+                    <div class="card-header-ui">
+                        <h5 class="card-title">Today's Appointments</h5>
+                        <i class="bi bi-calendar-day card-icon"></i>
+                    </div>
+                    <h2 class="card-value">@_dashboard.TodayAppointments</h2>
+                </div>
+            </a>
+        </div>
+
+        <div class="col-xl-2 col-lg-4 col-md-6">
+            <a href="/appointments" class="dash-card-link">
+                <div class="dash-card ha-kpi-card-pending">
+                    <div class="card-header-ui">
+                        <h5 class="card-title">Pending Appointments</h5>
+                        <i class="bi bi-hourglass-split card-icon"></i>
+                    </div>
+                    <h2 class="card-value">@_dashboard.PendingAppointments</h2>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <!-- MAIN INSIGHTS -->
+    <div class="row g-4 mb-4">
+
+        <!-- Doctor Availability -->
+        <div class="col-lg-4">
+            <div class="chart-card">
+                <div class="ha-panel-header">
+                    <h5 class="chart-title mb-0">Doctor Availability</h5>
+                    <span class="ha-panel-subtitle">Based on active doctor count</span>
+                </div>
+
+                <div class="css-donut-container">
+                    <div class="donut-chart" style="--percentage: @_activeDoctorPercentage; --chart-color: #38b2ac;">
+                        <div class="donut-inner">
+                            <span class="donut-percentage">@_activeDoctorPercentage%</span>
+                            <span class="donut-label">Active</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ha-legend-row">
+                    <div class="ha-legend-item">
+                        <span class="ha-dot ha-dot-green"></span>
+                        <span>Active: @_dashboard.ActiveDoctors</span>
+                    </div>
+
+                    <div class="ha-legend-item">
+                        <span class="ha-dot ha-dot-light"></span>
+                        <span>Inactive: @_inactiveDoctors</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Appointment Progress -->
+        <div class="col-lg-8">
+            <div class="chart-card">
+                <div class="ha-panel-header">
+                    <h5 class="chart-title mb-0">Today's Appointment Progress</h5>
+                    <span class="ha-panel-subtitle">Real-time operational snapshot</span>
+                </div>
+
+                <div class="row g-3 mt-1">
+                    <div class="col-md-4">
+                        <div class="ha-mini-stat ha-mini-stat-pending">
+                            <div class="ha-mini-stat-label">Pending</div>
+                            <div class="ha-mini-stat-value">@_dashboard.PendingAppointments</div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="ha-mini-stat ha-mini-stat-completed">
+                            <div class="ha-mini-stat-label">Completed</div>
+                            <div class="ha-mini-stat-value">@_dashboard.CompletedAppointments</div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="ha-mini-stat ha-mini-stat-other">
+                            <div class="ha-mini-stat-label">Other / Remaining</div>
+                            <div class="ha-mini-stat-value">@_remainingAppointments</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ha-progress-track mt-4">
+                    <div class="ha-progress-segment ha-progress-pending"
+                         style="width:@($"{_pendingPct}%")"></div>
+
+                    <div class="ha-progress-segment ha-progress-completed"
+                         style="width:@($"{_completedPct}%")"></div>
+
+                    <div class="ha-progress-segment ha-progress-other"
+                         style="width:@($"{_remainingPct}%")"></div>
+                </div>
+
+                <div class="ha-progress-legend mt-3">
+                    <div class="ha-legend-item">
+                        <span class="ha-dot ha-dot-pending"></span>
+                        <span>Pending</span>
+                    </div>
+
+                    <div class="ha-legend-item">
+                        <span class="ha-dot ha-dot-completed"></span>
+                        <span>Completed</span>
+                    </div>
+
+                    <div class="ha-legend-item">
+                        <span class="ha-dot ha-dot-other"></span>
+                        <span>Other / Remaining</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SECONDARY INSIGHTS -->
+    <div class="row g-4">
+        <div class="col-md-4">
+            <div class="chart-card ha-insight-card">
+                <div class="ha-insight-title">
+                    <i class="bi bi-check2-circle me-2"></i>
+                    Completed Today
+                </div>
+                <div class="ha-insight-value text-success">@_dashboard.CompletedAppointments</div>
+                <div class="ha-insight-subtext">Appointments successfully completed today</div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="chart-card ha-insight-card">
+                <div class="ha-insight-title">
+                    <i class="bi bi-person-dash me-2"></i>
+                    Inactive Doctors
+                </div>
+                <div class="ha-insight-value text-danger">@_inactiveDoctors</div>
+                <div class="ha-insight-subtext">Doctors currently not active in the system</div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="chart-card ha-insight-card">
+                <div class="ha-insight-title">
+                    <i class="bi bi-person-x me-2"></i>
+                    Inactive Patients
+                </div>
+                <div class="ha-insight-value text-warning">@_inactivePatients</div>
+                <div class="ha-insight-subtext">Patients currently marked inactive</div>
+            </div>
+        </div>
+    </div>
+}
+
+@code {
+    private DashboardDto? _dashboard;
+    private bool _loading = true;
+
+    private int _activeDoctorPercentage = 0;
+    private int _inactiveDoctors = 0;
+    private int _inactivePatients = 0;
+    private int _remainingAppointments = 0;
+
+    private double _pendingPct = 0;
+    private double _completedPct = 0;
+    private double _remainingPct = 0;
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            _dashboard = await AdminService.GetDashboardAsync();
+
+            if (_dashboard != null)
+            {
+                // Doctor availability
+                _inactiveDoctors = Math.Max(_dashboard.TotalDoctors - _dashboard.ActiveDoctors, 0);
+                _inactivePatients = Math.Max(_dashboard.TotalPatients - _dashboard.ActivePatients, 0);
+
+                _activeDoctorPercentage = _dashboard.TotalDoctors > 0
+                    ? (int)Math.Round((_dashboard.ActiveDoctors / (double)_dashboard.TotalDoctors) * 100)
+                    : 0;
+
+                // Appointment progress
+                _remainingAppointments = Math.Max(
+                    _dashboard.TodayAppointments - (_dashboard.PendingAppointments + _dashboard.CompletedAppointments),
+                    0);
+
+                if (_dashboard.TodayAppointments > 0)
+                {
+                    _pendingPct = (_dashboard.PendingAppointments / (double)_dashboard.TodayAppointments) * 100;
+                    _completedPct = (_dashboard.CompletedAppointments / (double)_dashboard.TodayAppointments) * 100;
+                    _remainingPct = (_remainingAppointments / (double)_dashboard.TodayAppointments) * 100;
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+        }
+        finally
+        {
+            _loading = false;
+        }
+    }
+}

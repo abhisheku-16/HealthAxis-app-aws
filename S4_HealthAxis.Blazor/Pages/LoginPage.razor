@@ -1,0 +1,197 @@
+﻿@page "/login"
+@layout EmptyLayout
+
+@using Microsoft.AspNetCore.Components.Authorization
+@using Microsoft.JSInterop
+@using S4_HealthAxis.Blazor.Services
+@using S4_HealthAxis.Shared.DTOs.Auth
+
+@inject IAuthService AuthService
+@inject NavigationManager Navigation
+@inject IJSRuntime JS
+@inject AuthenticationStateProvider AuthenticationStateProvider
+
+<div class="ha-login-page">
+
+    <section class="ha-login-visual">
+        <div class="login-left">
+
+            <div class="login-left-visual">
+                <img src="images/login-healthcare-hero.png"
+                     alt="Healthcare admin illustration"
+                     class="login-hero-image" />
+                <div class="login-left-overlay"></div>
+            </div>
+
+            <div class="left-content">
+                <div class="left-text">
+                    <h3>HealthAxis Login Portal</h3>
+                    <p>Secure access for healthcare administrators</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="ha-login-form-panel">
+        <div class="ha-login-form-shell">
+            <div class="ha-login-form-card">
+
+                <div class="ha-login-heading-block">
+                    <h2>Admin Sign In</h2>
+                    <p>Enter your credentials to continue.</p>
+                </div>
+
+                @if (!string.IsNullOrWhiteSpace(_error))
+                {
+                    <div class="ha-login-alert">
+                        <i class="bi bi-exclamation-triangle-fill"></i>
+                        <span>@_error</span>
+                    </div>
+                }
+
+                <EditForm Model="_login" OnValidSubmit="Login">
+                    <DataAnnotationsValidator />
+
+                    <div class="ha-login-field">
+                        <label>Email Address</label>
+                        <InputText class="form-control ha-login-input"
+                                   placeholder="admin@hospital.com"
+                                   @bind-Value="_login.Email" />
+                    </div>
+
+                    <div class="ha-login-field ha-login-password-field">
+                        <label>Password</label>
+
+                        <InputText type="@(_showPassword ? "text" : "password")"
+                                   class="form-control ha-login-input ha-login-input-password"
+                                   placeholder="Enter your password"
+                                   @bind-Value="_login.Password" />
+
+                        <button type="button"
+                                class="ha-login-password-toggle"
+                                @onclick="TogglePassword"
+                                tabindex="-1">
+                            <i class="bi @( _showPassword ? "bi-eye-slash" : "bi-eye")"></i>
+                            <span>@(_showPassword ? "Hide" : "Show")</span>
+                        </button>
+                    </div>
+
+                    <button type="submit"
+                            class="ha-login-submit"
+                            disabled="@_isLoading">
+
+                        @if (_isLoading)
+                        {
+                            <span class="ha-login-spinner"></span>
+                        }
+
+                        <span>@(_isLoading ? "Signing in..." : "Log In")</span>
+                    </button>
+                </EditForm>
+
+                <div class="ha-login-footer-note">
+                    Authorized admin access only.
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+</div>
+
+@code {
+    [Parameter]
+    [SupplyParameterFromQuery(Name = "accessToken")]
+    public string? AccessToken { get; set; }
+
+    [Parameter]
+    [SupplyParameterFromQuery(Name = "refreshToken")]
+    public string? RefreshToken { get; set; }
+
+    [Parameter]
+    [SupplyParameterFromQuery(Name = "email")]
+    public string? Email { get; set; }
+
+    [Parameter]
+    [SupplyParameterFromQuery(Name = "role")]
+    public string? Role { get; set; }
+
+    [Parameter]
+    [SupplyParameterFromQuery(Name = "referenceId")]
+    public string? ReferenceId { get; set; }
+
+    [Parameter]
+    [SupplyParameterFromQuery(Name = "mustChangePassword")]
+    public string? MustChangePassword { get; set; }
+
+    private readonly LoginDto _login = new();
+    private string? _error;
+    private bool _isLoading = false;
+    private bool _showPassword = false;
+    private bool _handledAngularLogin = false;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (!firstRender || _handledAngularLogin)
+        {
+            return;
+        }
+
+        if (string.IsNullOrWhiteSpace(AccessToken) &&
+            string.IsNullOrWhiteSpace(RefreshToken) &&
+            string.IsNullOrWhiteSpace(Role))
+        {
+            return;
+        }
+
+        _handledAngularLogin = true;
+
+        if (string.IsNullOrWhiteSpace(AccessToken) ||
+            string.IsNullOrWhiteSpace(RefreshToken) ||
+            !string.Equals(Role, "Admin", StringComparison.OrdinalIgnoreCase))
+        {
+            _error = "Invalid admin login handoff. Please login again.";
+            await InvokeAsync(StateHasChanged);
+            return;
+        }
+
+        await JS.InvokeVoidAsync("localStorage.setItem", "authToken", AccessToken);
+        await JS.InvokeVoidAsync("localStorage.setItem", "refreshToken", RefreshToken);
+        await JS.InvokeVoidAsync("localStorage.setItem", "authEmail", Email ?? string.Empty);
+        await JS.InvokeVoidAsync("localStorage.setItem", "authRole", Role);
+        await JS.InvokeVoidAsync("localStorage.setItem", "authReferenceId", ReferenceId ?? string.Empty);
+
+        if (AuthenticationStateProvider is CustomAuthStateProvider customAuthStateProvider)
+        {
+            customAuthStateProvider.NotifyUserAuthentication(AccessToken);
+        }
+
+        Navigation.NavigateTo("/dashboard", forceLoad: true);
+    }
+
+    private async Task Login()
+    {
+        _isLoading = true;
+        _error = null;
+
+        var success = await AuthService.LoginAsync(_login);
+
+        _isLoading = false;
+
+        if (success)
+        {
+            Navigation.NavigateTo("/dashboard");
+        }
+        else
+        {
+            _error = "Invalid email or password. Please try again.";
+        }
+    }
+
+    private void TogglePassword()
+    {
+        _showPassword = !_showPassword;
+    }
+}
+

@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="S4_HealthAxis.Blazor/S4_HealthAxis.Blazor.csproj" />
+  <Project Path="S4_HealthAxis.Shared/S4_HealthAxis.Shared.csproj" />
+  <Project Path="S4_HealthAxis.Tests/S4_HealthAxis.Tests.csproj" />
+  <Project Path="S4_HealthAxisApi/S4_HealthAxisApi.csproj" />
+</Solution>

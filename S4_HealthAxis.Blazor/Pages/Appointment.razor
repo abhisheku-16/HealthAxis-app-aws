@@ -1,0 +1,909 @@
+﻿@page "/appointments"
+
+@using S4_HealthAxis.Shared.DTOs.Appointment
+@using S4_HealthAxis.Shared.DTOs.Doctor
+@using S4_HealthAxis.Shared.DTOs.Patient
+@using S4_HealthAxis.Shared.Enums
+@using S4_HealthAxis.Blazor.Services
+@using S4_HealthAxis.Blazor.Shared
+@using System.ComponentModel.DataAnnotations
+@using System.Linq
+
+@inject IAppointmentService AppointmentService
+@inject IDoctorService DoctorService
+@inject IPatientService PatientService
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h3 class="mb-1 fw-bold text-dark">Appointment Dashboard</h3>
+        <p class="text-muted mb-0">Monitor schedule health and manage bookings.</p>
+    </div>
+
+</div>
+
+@if (!string.IsNullOrEmpty(_pageError))
+{
+    <div class="alert alert-danger shadow-sm mb-4">
+        <i class="bi bi-exclamation-triangle-fill me-2"></i>
+        <strong>Error:</strong> @_pageError
+    </div>
+}
+
+@if (_appointments != null)
+{
+    <div class="card shadow-sm border-0 mb-4 ha-appointments-overview-card">
+        <div class="card-body p-4">
+            <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-3">
+                <h5 class="fw-bold mb-0">Schedule Overview</h5>
+
+                <div class="ha-appt-toolbar">
+                    <button type="button"
+                            class="ha-mini-filter-btn @(CurrentStatusFilter == AppointmentStatusFilter.All ? "active" : "")"
+                            @onclick="() => SetStatusFilter(AppointmentStatusFilter.All)">
+                        All
+                    </button>
+
+                    <button type="button"
+                            class="ha-mini-filter-btn @(!_showWeekView ? "active" : "")"
+                            @onclick="() => ToggleChart(false)">
+                        Today
+                    </button>
+
+                    <button type="button"
+                            class="ha-mini-filter-btn @(_showWeekView ? "active" : "")"
+                            @onclick="() => ToggleChart(true)">
+                        This Week
+                    </button>
+                </div>
+            </div>
+
+            <div class="row g-3 mb-4">
+                <!-- ALL -->
+                <div class="col-xl col-lg-4 col-md-6">
+                    <button type="button"
+                            class="ha-appt-stat-card ha-appt-stat-all @GetStatusCardClass(AppointmentStatusFilter.All)"
+                            @onclick="() => SetStatusFilter(AppointmentStatusFilter.All)">
+                        <div class="ha-appt-stat-icon">
+                            <i class="bi bi-card-list"></i>
+                        </div>
+                        <div class="ha-appt-stat-content">
+                            <div class="ha-appt-stat-label">All Appointments</div>
+                            <div class="ha-appt-stat-value">@Analytics.Total</div>
+                        </div>
+                    </button>
+                </div>
+
+                <!-- PENDING -->
+                <div class="col-xl col-lg-4 col-md-6">
+                    <button type="button"
+                            class="ha-appt-stat-card ha-appt-stat-pending @GetStatusCardClass(AppointmentStatusFilter.Pending)"
+                            @onclick="() => SetStatusFilter(AppointmentStatusFilter.Pending)">
+                        <div class="ha-appt-stat-icon">
+                            <i class="bi bi-hourglass-split"></i>
+                        </div>
+                        <div class="ha-appt-stat-content">
+                            <div class="ha-appt-stat-label">Pending</div>
+                            <div class="ha-appt-stat-value">@Analytics.Pending</div>
+                        </div>
+                    </button>
+                </div>
+
+                <!-- CONFIRMED -->
+                <div class="col-xl col-lg-4 col-md-6">
+                    <button type="button"
+                            class="ha-appt-stat-card ha-appt-stat-confirmed @GetStatusCardClass(AppointmentStatusFilter.Confirmed)"
+                            @onclick="() => SetStatusFilter(AppointmentStatusFilter.Confirmed)">
+                        <div class="ha-appt-stat-icon">
+                            <i class="bi bi-check-circle"></i>
+                        </div>
+                        <div class="ha-appt-stat-content">
+                            <div class="ha-appt-stat-label">Confirmed</div>
+                            <div class="ha-appt-stat-value">@Analytics.Confirmed</div>
+                        </div>
+                    </button>
+                </div>
+
+                <!-- COMPLETED -->
+                <div class="col-xl col-lg-4 col-md-6">
+                    <button type="button"
+                            class="ha-appt-stat-card ha-appt-stat-completed @GetStatusCardClass(AppointmentStatusFilter.Completed)"
+                            @onclick="() => SetStatusFilter(AppointmentStatusFilter.Completed)">
+                        <div class="ha-appt-stat-icon">
+                            <i class="bi bi-check2-square"></i>
+                        </div>
+                        <div class="ha-appt-stat-content">
+                            <div class="ha-appt-stat-label">Completed</div>
+                            <div class="ha-appt-stat-value">@Analytics.Completed</div>
+                        </div>
+                    </button>
+                </div>
+
+                <!-- CANCELLED -->
+                <div class="col-xl col-lg-4 col-md-6">
+                    <button type="button"
+                            class="ha-appt-stat-card ha-appt-stat-cancelled @GetStatusCardClass(AppointmentStatusFilter.Cancelled)"
+                            @onclick="() => SetStatusFilter(AppointmentStatusFilter.Cancelled)">
+                        <div class="ha-appt-stat-icon">
+                            <i class="bi bi-x-circle"></i>
+                        </div>
+                        <div class="ha-appt-stat-content">
+                            <div class="ha-appt-stat-label">Cancelled</div>
+                            <div class="ha-appt-stat-value">@Analytics.Cancelled</div>
+                        </div>
+                    </button>
+                </div>
+            </div>
+
+            @if (Analytics.Total > 0)
+            {
+                <div class="ha-appt-distribution-wrap">
+                    <div class="ha-appt-donut" style="@GetDonutStyle()">
+                        <div class="ha-appt-donut-inner"></div>
+                    </div>
+                    <div class="ha-appt-distribution-text">
+                        @(_showWeekView ? "This Week's Appointment Distribution" : "Today's Appointment Distribution")
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+}
+
+<div class="card shadow-sm border-0 ha-data-card">
+    <div class="card-header bg-white border-bottom p-3 d-flex justify-content-between align-items-center flex-wrap gap-2">
+        <h6 class="mb-0 fw-bold">All Appointments</h6>
+
+        <div class="input-group input-group-sm w-auto shadow-sm">
+            <span class="input-group-text bg-white">
+                <i class="bi bi-search"></i>
+            </span>
+            <input type="text"
+                   class="form-control"
+                   placeholder="Search ID or Patient..."
+                   @bind="SearchQuery"
+                   @bind:event="oninput"
+                   style="min-width: 250px;" />
+        </div>
+    </div>
+
+    <div class="card-body p-0">
+        @if (_loading)
+        {
+            <div class="text-center p-5">
+                <div class="spinner-border text-primary"></div>
+            </div>
+        }
+        else if (!FilteredAppointments.Any())
+        {
+            <div class="text-center p-5 text-muted">
+                <i class="bi bi-calendar-x fs-1"></i>
+                <p class="mt-2">No appointments found.</p>
+            </div>
+        }
+        else
+        {
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0 ha-data-table ha-appointments-table">
+                    <thead>
+                        <tr>
+                            <th class="ps-4">ID</th>
+                            <th>Date</th>
+                            <th>Time Slot</th>
+                            <th>Patient</th>
+                            <th>Doctor</th>
+                            <th>Status</th>
+                            <th class="text-end pe-4">Quick Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var appt in PagedAppointments)
+                        {
+                            <tr>
+                                <td class="ps-4 text-muted">#@appt.AppointmentId</td>
+
+                                <td>
+                                    <span class="ha-appt-date">
+                                        @appt.ScheduledDate.ToString("MMM dd, yyyy")
+                                    </span>
+                                </td>
+
+                                <td>
+                                    <span class="ha-time-slot-pill">
+                                        <i class="bi bi-clock me-1"></i>
+                                        @GetEnumDisplayName((AppointmentTimeSlot)appt.TimeSlot)
+                                    </span>
+                                </td>
+
+                                <td>
+                                    <span class="ha-appt-person">
+                                        @(string.IsNullOrWhiteSpace(appt.PatientName) ? "—" : appt.PatientName)
+                                    </span>
+                                </td>
+
+                                <td>
+                                    <span class="ha-appt-person">
+                                        @(string.IsNullOrWhiteSpace(appt.DoctorName) ? "—" : $"Dr. {appt.DoctorName}")
+                                    </span>
+                                </td>
+
+                                <td>@GetStatusBadge(appt.Status)</td>
+
+                                <td class="text-end pe-4">
+                                    @if (appt.Status == 0) // Pending
+                                    {
+                                        <button class="btn btn-sm btn-outline-primary me-1 ha-table-action"
+                                                title="Confirm"
+                                                @onclick="() => AskConfirmAppointment(appt.AppointmentId)">
+                                            <i class="bi bi-check-lg"></i>
+                                        </button>
+                                    }
+
+                                    @if (appt.Status == 1) // Confirmed
+                                    {
+                                        <button class="btn btn-sm btn-outline-success me-1 ha-table-action"
+                                                title="Mark Completed"
+                                                @onclick="() => AskCompleteAppointment(appt.AppointmentId)">
+                                            <i class="bi bi-flag-fill"></i>
+                                        </button>
+                                    }
+
+                                    <button class="btn btn-sm btn-outline-secondary me-1 ha-table-action"
+                                            title="Reschedule"
+                                            @onclick="() => OpenEditModal(appt)">
+                                        <i class="bi bi-pencil"></i>
+                                    </button>
+
+                                    @if (appt.Status == 0 || appt.Status == 1)
+                                    {
+                                        <button class="btn btn-sm btn-outline-danger ha-table-action"
+                                                title="Cancel"
+                                                @onclick="() => OpenCancelModal(appt.AppointmentId)">
+                                            <i class="bi bi-x-lg"></i>
+                                        </button>
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+            @if (TotalPages > 1)
+            {
+                <div class="card-footer bg-white border-0 d-flex justify-content-between align-items-center py-3 flex-wrap gap-2">
+                    <span class="text-muted small">
+                        Showing @StartRecord to @EndRecord of @FilteredAppointments.Count() entries
+                    </span>
+
+                    <nav>
+                        <ul class="pagination pagination-sm mb-0">
+                            <li class="page-item @(_currentPage == 1 ? "disabled" : "")">
+                                <button class="page-link"
+                                        disabled="@(_currentPage == 1)"
+                                        @onclick="PreviousPage">
+                                    Prev
+                                </button>
+                            </li>
+
+                            <li class="page-item disabled">
+                                <span class="page-link text-dark">@_currentPage / @TotalPages</span>
+                            </li>
+
+                            <li class="page-item @(_currentPage == TotalPages ? "disabled" : "")">
+                                <button class="page-link"
+                                        disabled="@(_currentPage == TotalPages)"
+                                        @onclick="NextPage">
+                                    Next
+                                </button>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            }
+        }
+    </div>
+</div>
+
+@if (_showAddModal)
+{
+    <div class="modal fade show d-block" tabindex="-1" style="background-color: rgba(0,0,0,0.5);">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 shadow">
+                <div class="modal-header bg-light border-0">
+                    <h5 class="modal-title fw-bold">@(_isEditing ? "Reschedule Appointment" : "Book Appointment")</h5>
+                    <button type="button" class="btn-close" @onclick="CloseAddModal"></button>
+                </div>
+
+                <div class="modal-body p-4">
+                    <EditForm Model="@_formData" OnValidSubmit="ConfirmSaveAppointment">
+                        <DataAnnotationsValidator />
+
+                        <div class="mb-3">
+                            <label class="form-label fw-medium">Select Patient</label>
+                            <InputSelect class="form-select"
+                                         @bind-Value="_formData.PatientId"
+                                         disabled="@_isEditing">
+                                <option value="0" disabled>-- Choose Patient --</option>
+                                @foreach (var p in _activePatients)
+                                {
+                                    <option value="@p.PatientId">@p.FullName (ID: @p.PatientId)</option>
+                                }
+                            </InputSelect>
+                            <ValidationMessage For="@(() => _formData.PatientId)" class="text-danger small mt-1" />
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label fw-medium">Select Doctor</label>
+                            <InputSelect class="form-select" @bind-Value="_formData.DoctorId">
+                                <option value="0" disabled>-- Choose Doctor --</option>
+                                @foreach (var d in _activeDoctors)
+                                {
+                                    <option value="@d.DoctorId">Dr. @d.FullName</option>
+                                }
+                            </InputSelect>
+                            <ValidationMessage For="@(() => _formData.DoctorId)" class="text-danger small mt-1" />
+                        </div>
+
+                        <div class="row">
+                            <div class="col-6 mb-3">
+                                <label class="form-label fw-medium">Date</label>
+                                <InputDate class="form-control"
+                                           @bind-Value="_formData.ScheduledDate"
+                                           min="@DateTime.Today.ToString("yyyy-MM-dd")" />
+                                <ValidationMessage For="@(() => _formData.ScheduledDate)" class="text-danger small mt-1" />
+                            </div>
+
+                            <div class="col-6 mb-3">
+                                <label class="form-label fw-medium">Time Slot</label>
+                                <InputSelect TValue="int" class="form-select" @bind-Value="_formData.TimeSlot">
+                                    <option value="0" disabled>-- Choose Slot --</option>
+                                    @foreach (AppointmentTimeSlot slot in Enum.GetValues(typeof(AppointmentTimeSlot)))
+                                    {
+                                        <option value="@((int)slot)">@GetEnumDisplayName(slot)</option>
+                                    }
+                                </InputSelect>
+                                <ValidationMessage For="@(() => _formData.TimeSlot)" class="text-danger small mt-1" />
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-end gap-2 mt-2">
+                            <button type="button" class="btn btn-light" @onclick="CloseAddModal">Cancel</button>
+                            <button type="submit" class="btn btn-primary" disabled="@_isSaving">
+                                @if (_isSaving)
+                                {
+                                    <span class="spinner-border spinner-border-sm me-2"></span>
+                                }
+                                @(_isEditing ? "Reschedule" : "Book")
+                            </button>
+                        </div>
+                    </EditForm>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@if (_showCancelModal)
+{
+    <div class="modal fade show d-block" tabindex="-1" style="background-color: rgba(0,0,0,0.5);">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 shadow">
+                <div class="modal-header bg-danger text-white border-0">
+                    <h5 class="modal-title fw-bold">
+                        <i class="bi bi-exclamation-triangle me-2"></i>
+                        Cancel Appointment
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" @onclick="CloseCancelModal"></button>
+                </div>
+
+                <div class="modal-body p-4">
+                    <p>Provide a reason before cancelling Appointment <strong>#@_cancelId</strong>.</p>
+
+                    <div class="mb-3">
+                        <label class="form-label fw-medium">Cancellation Reason</label>
+                        <textarea class="form-control"
+                                  @bind="_cancelReason"
+                                  rows="3"
+                                  placeholder="Patient requested cancellation..."></textarea>
+                    </div>
+
+                    <div class="d-flex justify-content-end gap-2">
+                        <button type="button" class="btn btn-light" @onclick="CloseCancelModal">Nevermind</button>
+
+                        <button type="button"
+                                class="btn btn-danger"
+                                disabled="@(string.IsNullOrWhiteSpace(_cancelReason) || _isSaving)"
+                                @onclick="ConfirmCancelFromReasonModal">
+                            @if (_isSaving)
+                            {
+                                <span class="spinner-border spinner-border-sm me-2"></span>
+                            }
+                            Continue
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<ConfirmDialog IsOpen="@_showConfirmDialog"
+               Title="@_confirmTitle"
+               Message="@_confirmMessage"
+               ConfirmText="@_confirmButtonText"
+               IsDanger="@_confirmIsDanger"
+               OnConfirm="ConfirmAction"
+               OnCancel="CancelConfirmation" />
+
+@code {
+    private List<AppointmentDetailsDto>? _appointments = new();
+    private List<PatientDto> _activePatients = new();
+    private List<DoctorDto> _activeDoctors = new();
+
+    private bool _loading = true;
+    private string? _pageError = null;
+
+    // Search + pagination
+    private string _searchQuery = "";
+    private int _currentPage = 1;
+    private readonly int _pageSize = 5;
+
+    // Analytics
+    private bool _showWeekView = false;
+    private ChartData Analytics = new();
+
+    // Status filter
+    private AppointmentStatusFilter CurrentStatusFilter { get; set; } = AppointmentStatusFilter.All;
+
+    // Modals
+    private bool _showAddModal = false;
+    private bool _showCancelModal = false;
+    private bool _isEditing = false;
+    private bool _isSaving = false;
+
+    private int _cancelId = 0;
+    private string _cancelReason = "";
+
+    private AppointmentFormModel _formData = new();
+
+    // Confirm dialog
+    private bool _showConfirmDialog = false;
+    private string _confirmTitle = "";
+    private string _confirmMessage = "";
+    private string _confirmButtonText = "Confirm";
+    private bool _confirmIsDanger = false;
+    private Func<Task>? _pendingConfirmedAction;
+
+    private enum AppointmentStatusFilter
+    {
+        All,
+        Pending,
+        Confirmed,
+        Completed,
+        Cancelled
+    }
+
+    private sealed class ChartData
+    {
+        public int Pending { get; set; }
+        public int Confirmed { get; set; }
+        public int Completed { get; set; }
+        public int Cancelled { get; set; }
+
+        public int Total => Pending + Confirmed + Completed + Cancelled;
+
+        public double PendingPct => Total == 0 ? 0 : (Pending / (double)Total) * 100;
+        public double ConfirmedPct => Total == 0 ? 0 : (Confirmed / (double)Total) * 100;
+        public double CompletedPct => Total == 0 ? 0 : (Completed / (double)Total) * 100;
+        public double CancelledPct => Total == 0 ? 0 : (Cancelled / (double)Total) * 100;
+    }
+
+    public class AppointmentFormModel
+    {
+        public int AppointmentId { get; set; }
+
+        [Range(1, int.MaxValue, ErrorMessage = "Please select a patient")]
+        public int PatientId { get; set; }
+
+        [Range(1, int.MaxValue, ErrorMessage = "Please select a doctor")]
+        public int DoctorId { get; set; }
+
+        [Required]
+        public DateOnly ScheduledDate { get; set; } = DateOnly.FromDateTime(DateTime.Today.AddDays(1));
+
+        [Range(1, 48, ErrorMessage = "Valid time slot required")]
+        public int TimeSlot { get; set; } = 0;
+    }
+
+    private string SearchQuery
+    {
+        get => _searchQuery;
+        set
+        {
+            _searchQuery = value;
+            _currentPage = 1;
+        }
+    }
+
+    private IEnumerable<AppointmentDetailsDto> FilteredAppointments =>
+        (_appointments ?? new List<AppointmentDetailsDto>())
+        .Where(a =>
+            CurrentStatusFilter switch
+            {
+                AppointmentStatusFilter.Pending => a.Status == 0,
+                AppointmentStatusFilter.Confirmed => a.Status == 1,
+                AppointmentStatusFilter.Cancelled => a.Status == 2,
+                AppointmentStatusFilter.Completed => a.Status == 3,
+                _ => true
+            })
+        .Where(a =>
+            string.IsNullOrWhiteSpace(SearchQuery)
+            || a.AppointmentId.ToString().Contains(SearchQuery, StringComparison.OrdinalIgnoreCase)
+            || (!string.IsNullOrWhiteSpace(a.PatientName) && a.PatientName.Contains(SearchQuery, StringComparison.OrdinalIgnoreCase))
+            || (!string.IsNullOrWhiteSpace(a.DoctorName) && a.DoctorName.Contains(SearchQuery, StringComparison.OrdinalIgnoreCase)))
+        .OrderByDescending(a => a.ScheduledDate)
+        .ThenBy(a => a.TimeSlot);
+
+    private int TotalPages => Math.Max(1, (int)Math.Ceiling(FilteredAppointments.Count() / (double)_pageSize));
+
+    private IEnumerable<AppointmentDetailsDto> PagedAppointments =>
+        FilteredAppointments.Skip((_currentPage - 1) * _pageSize).Take(_pageSize);
+
+    private int StartRecord => FilteredAppointments.Any() ? ((_currentPage - 1) * _pageSize) + 1 : 0;
+    private int EndRecord => FilteredAppointments.Any() ? Math.Min(_currentPage * _pageSize, FilteredAppointments.Count()) : 0;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadData();
+    }
+
+    private async Task LoadData()
+    {
+        try
+        {
+            _loading = true;
+            _pageError = null;
+
+            _appointments = await AppointmentService.GetAllAsync() ?? new();
+            var allPatients = await PatientService.GetAllAsync() ?? new();
+            var allDoctors = await DoctorService.GetAllAsync() ?? new();
+
+            _activePatients = allPatients.Where(p => p.IsActive).ToList();
+            _activeDoctors = allDoctors.Where(d => d.IsActive).ToList();
+
+            EnsureValidPage();
+            CalculateAnalytics();
+        }
+        catch (Exception ex)
+        {
+            _pageError = $"Failed to load dashboard data: {ex.Message}";
+        }
+        finally
+        {
+            _loading = false;
+        }
+    }
+
+    private void ToggleChart(bool showWeek)
+    {
+        _showWeekView = showWeek;
+        CalculateAnalytics();
+    }
+
+    private void CalculateAnalytics()
+    {
+        if (_appointments == null)
+            return;
+
+        var today = DateOnly.FromDateTime(DateTime.Today);
+
+        var targetSet = _appointments.Where(a =>
+            _showWeekView
+                ? (a.ScheduledDate >= today && a.ScheduledDate <= today.AddDays(7))
+                : a.ScheduledDate == today)
+            .ToList();
+
+        Analytics = new ChartData
+        {
+            Pending = targetSet.Count(a => a.Status == 0),
+            Confirmed = targetSet.Count(a => a.Status == 1),
+            Cancelled = targetSet.Count(a => a.Status == 2),
+            Completed = targetSet.Count(a => a.Status == 3)
+        };
+    }
+
+    private void SetStatusFilter(AppointmentStatusFilter filter)
+    {
+        CurrentStatusFilter = filter;
+        _currentPage = 1;
+        EnsureValidPage();
+    }
+
+    private string GetStatusCardClass(AppointmentStatusFilter filter) =>
+        CurrentStatusFilter == filter ? "active" : string.Empty;
+
+    private string GetDonutStyle()
+    {
+        var pending = Analytics.PendingPct;
+        var confirmed = Analytics.ConfirmedPct;
+        var completed = Analytics.CompletedPct;
+        var cancelled = Analytics.CancelledPct;
+
+        var c1 = pending;
+        var c2 = pending + confirmed;
+        var c3 = c2 + completed;
+        var c4 = c3 + cancelled;
+
+        return $"background: conic-gradient(" +
+               $"#f59e0b 0% {c1}%, " +
+               $"#2563eb {c1}% {c2}%, " +
+               $"#16a34a {c2}% {c3}%, " +
+               $"#ef4444 {c3}% {c4}%);";
+    }
+
+    // Confirmation dialog helpers
+    private void OpenConfirmation(string title, string message, string confirmText, bool isDanger, Func<Task> action)
+    {
+        _confirmTitle = title;
+        _confirmMessage = message;
+        _confirmButtonText = confirmText;
+        _confirmIsDanger = isDanger;
+        _pendingConfirmedAction = action;
+        _showConfirmDialog = true;
+    }
+
+    private void CancelConfirmation()
+    {
+        _showConfirmDialog = false;
+        _pendingConfirmedAction = null;
+    }
+
+    private async Task ConfirmAction()
+    {
+        _showConfirmDialog = false;
+
+        if (_pendingConfirmedAction != null)
+        {
+            await _pendingConfirmedAction.Invoke();
+            _pendingConfirmedAction = null;
+        }
+    }
+
+    // Quick actions
+    private Task AskConfirmAppointment(int id)
+    {
+        OpenConfirmation(
+            "Confirm Appointment",
+            $"Do you want to confirm appointment #{id}?",
+            "Confirm Appointment",
+            false,
+            async () => await ExecuteAction(async () => await AppointmentService.ConfirmAsync(id)));
+
+        return Task.CompletedTask;
+    }
+
+    private Task AskCompleteAppointment(int id)
+    {
+        OpenConfirmation(
+            "Complete Appointment",
+            $"Do you want to mark appointment #{id} as completed?",
+            "Mark Completed",
+            false,
+            async () => await ExecuteAction(async () => await AppointmentService.CompleteAsync(id)));
+
+        return Task.CompletedTask;
+    }
+
+    private async Task ExecuteAction(Func<Task> action)
+    {
+        try
+        {
+            _pageError = null;
+            await action();
+            await LoadData();
+        }
+        catch (Exception ex)
+        {
+            _pageError = ex.Message;
+        }
+    }
+
+    // Cancel flow
+    private void OpenCancelModal(int id)
+    {
+        _cancelId = id;
+        _cancelReason = "";
+        _showCancelModal = true;
+    }
+
+    private void CloseCancelModal()
+    {
+        _showCancelModal = false;
+        _cancelReason = "";
+        _cancelId = 0;
+    }
+
+    private Task ConfirmCancelFromReasonModal()
+    {
+        OpenConfirmation(
+            "Cancel Appointment",
+            $"Do you want to cancel appointment #{_cancelId}? This action requires the provided reason and cannot be undone.",
+            "Confirm Cancellation",
+            true,
+            SubmitCancel);
+
+        return Task.CompletedTask;
+    }
+
+    private async Task SubmitCancel()
+    {
+        _isSaving = true;
+
+        try
+        {
+            await AppointmentService.CancelAsync(_cancelId, new CancelAppointmentDto
+            {
+                CancellationReason = _cancelReason
+            });
+
+            _showCancelModal = false;
+            _cancelReason = "";
+            _cancelId = 0;
+
+            await LoadData();
+        }
+        catch (Exception ex)
+        {
+            _pageError = ex.Message;
+        }
+        finally
+        {
+            _isSaving = false;
+        }
+    }
+
+    // Add / Edit modal
+    private void OpenAddModal()
+    {
+        _isEditing = false;
+        _formData = new AppointmentFormModel();
+        _showAddModal = true;
+    }
+
+    private void OpenEditModal(AppointmentDetailsDto appt)
+    {
+        _isEditing = true;
+        _formData = new AppointmentFormModel
+        {
+            AppointmentId = appt.AppointmentId,
+            PatientId = appt.PatientId,
+            DoctorId = appt.DoctorId,
+            ScheduledDate = appt.ScheduledDate,
+            TimeSlot = appt.TimeSlot
+        };
+        _showAddModal = true;
+    }
+
+    private void CloseAddModal()
+    {
+        _showAddModal = false;
+    }
+
+    private Task ConfirmSaveAppointment()
+    {
+        OpenConfirmation(
+            _isEditing ? "Save Appointment Changes" : "Book Appointment",
+            _isEditing
+                ? "Do you want to save these changes to the appointment?"
+                : "Do you want to book this appointment?",
+            _isEditing ? "Save Changes" : "Book Appointment",
+            false,
+            HandleSubmit);
+
+        return Task.CompletedTask;
+    }
+
+    private async Task HandleSubmit()
+    {
+        _isSaving = true;
+
+        try
+        {
+            if (_isEditing)
+            {
+                await AppointmentService.UpdateAsync(
+                    _formData.AppointmentId,
+                    new UpdateAppointmentDto
+                    {
+                        DoctorId = _formData.DoctorId,
+                        ScheduledDate = _formData.ScheduledDate,
+                        TimeSlot = _formData.TimeSlot
+                    });
+            }
+            else
+            {
+                await AppointmentService.CreateAsync(
+                    new CreateAppointmentDto
+                    {
+                        PatientId = _formData.PatientId,
+                        DoctorId = _formData.DoctorId,
+                        ScheduledDate = _formData.ScheduledDate,
+                        TimeSlot = _formData.TimeSlot
+                    });
+            }
+
+            _showAddModal = false;
+            await LoadData();
+        }
+        catch (Exception ex)
+        {
+            _pageError = ex.Message;
+        }
+        finally
+        {
+            _isSaving = false;
+        }
+    }
+
+    // Pagination
+    private void PreviousPage()
+    {
+        if (_currentPage > 1)
+            _currentPage--;
+    }
+
+    private void NextPage()
+    {
+        if (_currentPage < TotalPages)
+            _currentPage++;
+    }
+
+    private void EnsureValidPage()
+    {
+        if (_currentPage < 1)
+            _currentPage = 1;
+
+        if (_currentPage > TotalPages)
+            _currentPage = TotalPages;
+    }
+
+    // Helpers
+    private static string GetEnumDisplayName(Enum enumValue)
+    {
+        var type = enumValue.GetType();
+        var memberInfo = type.GetMember(enumValue.ToString());
+
+        if (memberInfo.Length > 0)
+        {
+            var attrs = memberInfo[0].GetCustomAttributes(typeof(DisplayAttribute), false);
+            if (attrs.Length > 0)
+            {
+                return ((DisplayAttribute)attrs[0]).Name ?? enumValue.ToString();
+            }
+        }
+
+        return enumValue.ToString();
+    }
+
+    private static RenderFragment GetStatusBadge(int status) => builder =>
+    {
+        switch (status)
+        {
+            case 0:
+                builder.AddMarkupContent(0, "<span class='badge bg-warning text-dark ha-table-pill'><i class='bi bi-hourglass-split me-1'></i> Pending</span>");
+                break;
+            case 1:
+                builder.AddMarkupContent(0, "<span class='badge bg-primary ha-table-pill'><i class='bi bi-check-circle me-1'></i> Confirmed</span>");
+                break;
+            case 2:
+                builder.AddMarkupContent(0, "<span class='badge bg-danger ha-table-pill'><i class='bi bi-x-circle me-1'></i> Cancelled</span>");
+                break;
+            case 3:
+                builder.AddMarkupContent(0, "<span class='badge bg-success ha-table-pill'><i class='bi bi-check2-square me-1'></i> Completed</span>");
+                break;
+            default:
+                builder.AddMarkupContent(0, $"<span class='badge bg-secondary ha-table-pill'>Unknown ({status})</span>");
+                break;
+        }
+    };
+}

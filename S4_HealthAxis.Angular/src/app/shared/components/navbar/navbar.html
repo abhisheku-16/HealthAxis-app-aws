@@ -1,0 +1,289 @@
+<header class="ha-navbar">
+  <a class="ha-brand" routerLink="/">
+    <span class="ha-brand-icon">
+      <i class="bi bi-heart-pulse"></i>
+    </span>
+    <span>HealthAxis</span>
+  </a>
+
+  <nav class="ha-nav-links">
+    @if (!isLoggedIn) {
+      @if (showHomeLink) {
+        <a
+          routerLink="/"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+        >
+          Home
+        </a>
+      }
+
+      @if (showPatientJourneyLink) {
+        <a routerLink="/" fragment="journey">
+          Patient Journey
+        </a>
+      }
+
+      @if (showLoginLink) {
+        <a routerLink="/login" routerLinkActive="active">
+          Login
+        </a>
+      }
+
+      @if (showRegisterLink) {
+        <a routerLink="/register" routerLinkActive="active" class="ha-register-link">
+          Register
+        </a>
+      }
+    }
+
+    @if (isLoggedIn) {
+      <div class="ha-profile-menu">
+        <button type="button" class="ha-profile-button" (click)="toggleMenu()">
+          <span class="ha-profile-avatar">
+            <i class="bi bi-person-circle"></i>
+          </span>
+
+          <span class="ha-profile-text">
+            {{ displayName }}
+          </span>
+
+          <i class="bi bi-chevron-down"></i>
+        </button>
+
+        @if (isMenuOpen) {
+          <div class="ha-profile-dropdown">
+            <div class="ha-profile-summary">
+              <strong>{{ displayName }}</strong>
+              <span>{{ userEmail }}</span>
+              <small>{{ role }}</small>
+            </div>
+
+            <button
+              type="button"
+              class="ha-dropdown-item"
+              (click)="openChangePasswordModal()"
+            >
+              <i class="bi bi-key"></i>
+              Change Password
+            </button>
+
+            <button
+              type="button"
+              class="ha-dropdown-item logout"
+              (click)="openLogoutConfirmModal()"
+            >
+              <i class="bi bi-box-arrow-right"></i>
+              Logout
+            </button>
+          </div>
+        }
+      </div>
+    }
+  </nav>
+</header>
+
+@if (showChangePasswordModal) {
+  <div class="ha-password-modal-backdrop">
+    <div class="ha-password-modal-card">
+      <button
+        type="button"
+        class="ha-password-modal-close"
+        [disabled]="changingPassword"
+        (click)="closeChangePasswordModal()"
+      >
+        <i class="bi bi-x-lg"></i>
+      </button>
+
+      <div class="ha-password-modal-icon">
+        <i class="bi bi-key"></i>
+      </div>
+
+      <h2>Change Password</h2>
+
+      <p class="ha-password-modal-subtitle">
+        Enter your current password and create a stronger new password for your HealthAxis account.
+      </p>
+
+      @if (passwordErrorMessage) {
+        <div class="ha-password-alert error">
+          <i class="bi bi-exclamation-triangle"></i>
+          <span>{{ passwordErrorMessage }}</span>
+        </div>
+      }
+
+      @if (passwordSuccessMessage) {
+        <div class="ha-password-alert success">
+          <i class="bi bi-check-circle"></i>
+          <span>{{ passwordSuccessMessage }}</span>
+        </div>
+      }
+
+      <div class="ha-password-field">
+        <label>Current Password</label>
+
+        <div class="ha-password-input-wrap">
+          <input
+            [type]="showCurrentPassword ? 'text' : 'password'"
+            placeholder="Enter current password"
+            [(ngModel)]="changePasswordForm.currentPassword"
+          />
+
+          <button
+            type="button"
+            class="ha-password-toggle"
+            (click)="toggleCurrentPasswordVisibility()"
+          >
+            <i
+              class="bi"
+              [class.bi-eye]="!showCurrentPassword"
+              [class.bi-eye-slash]="showCurrentPassword">
+            </i>
+          </button>
+        </div>
+      </div>
+
+      <div class="ha-password-field">
+        <label>New Password</label>
+
+        <div class="ha-password-input-wrap">
+          <input
+            [type]="showNewPassword ? 'text' : 'password'"
+            placeholder="Enter new password"
+            [(ngModel)]="changePasswordForm.newPassword"
+          />
+
+          <button
+            type="button"
+            class="ha-password-toggle"
+            (click)="toggleNewPasswordVisibility()"
+          >
+            <i
+              class="bi"
+              [class.bi-eye]="!showNewPassword"
+              [class.bi-eye-slash]="showNewPassword">
+            </i>
+          </button>
+        </div>
+      </div>
+
+      @if (changePasswordForm.newPassword) {
+        <div class="ha-password-strength">
+          <div class="ha-strength-track">
+            <span [class]="passwordStrengthClass"></span>
+          </div>
+
+          <div class="ha-strength-info">
+            <small>Password strength</small>
+            <strong [class]="passwordStrengthClass">
+              {{ passwordStrengthLabel }}
+            </strong>
+          </div>
+        </div>
+
+        <ul class="ha-password-rules">
+          <li [class.valid]="hasMinLength">At least 8 characters</li>
+          <li [class.valid]="hasUppercase">At least one uppercase letter</li>
+          <li [class.valid]="hasLowercase">At least one lowercase letter</li>
+          <li [class.valid]="hasNumber">At least one number</li>
+          <li [class.valid]="hasSpecialCharacter">At least one special character</li>
+        </ul>
+      }
+
+      @if (isNewPasswordSameAsCurrent) {
+        <small class="ha-password-error">
+          New password cannot be the same as current password.
+        </small>
+      }
+
+      <div class="ha-password-field">
+        <label>Confirm New Password</label>
+
+        <div class="ha-password-input-wrap">
+          <input
+            [type]="showConfirmPassword ? 'text' : 'password'"
+            placeholder="Confirm new password"
+            [(ngModel)]="changePasswordForm.confirmNewPassword"
+          />
+
+          <button
+            type="button"
+            class="ha-password-toggle"
+            (click)="toggleConfirmPasswordVisibility()"
+          >
+            <i
+              class="bi"
+              [class.bi-eye]="!showConfirmPassword"
+              [class.bi-eye-slash]="showConfirmPassword">
+            </i>
+          </button>
+        </div>
+      </div>
+
+      @if (changePasswordForm.confirmNewPassword && !passwordsMatch) {
+        <small class="ha-password-error">
+          New password and confirm password do not match.
+        </small>
+      }
+
+      <div class="ha-password-modal-actions">
+        <button
+          type="button"
+          class="ha-password-secondary-btn"
+          [disabled]="changingPassword"
+          (click)="closeChangePasswordModal()"
+        >
+          Cancel
+        </button>
+
+        <button
+          type="button"
+          class="ha-password-primary-btn"
+          [disabled]="changingPassword || !canSubmitChangePassword"
+          (click)="submitChangePassword()"
+        >
+          @if (changingPassword) {
+            <span class="spinner-border spinner-border-sm me-2"></span>
+            Updating...
+          } @else {
+            Update Password
+          }
+        </button>
+      </div>
+    </div>
+  </div>
+}
+
+@if (showLogoutConfirmModal) {
+  <div class="ha-password-modal-backdrop">
+    <div class="ha-password-modal-card ha-logout-confirm-card">
+      <div class="ha-logout-modal-icon">
+        <i class="bi bi-box-arrow-right"></i>
+      </div>
+
+      <h2>Confirm Logout</h2>
+
+      <p class="ha-password-modal-subtitle">
+        Are you sure you want to logout from your HealthAxis account?
+      </p>
+
+      <div class="ha-password-modal-actions">
+        <button
+          type="button"
+          class="ha-password-secondary-btn"
+          (click)="closeLogoutConfirmModal()"
+        >
+          Cancel
+        </button>
+
+        <button
+          type="button"
+          class="ha-logout-danger-btn"
+          (click)="confirmLogout()"
+        >
+          Yes, Logout
+        </button>
+      </div>
+    </div>
+  </div>
+}
