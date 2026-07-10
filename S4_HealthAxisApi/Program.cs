@@ -1,19 +1,20 @@
 using HealthAxis.API.Data;
+using MassTransit;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi;
+using S4_HealthAxisApi.BackgroundServices;
+using S4_HealthAxisApi.Consumers;
+using S4_HealthAxisApi.Messaging;
+using S4_HealthAxisApi.Middleware;
 using S4_HealthAxisApi.Repository.Implementation;
 using S4_HealthAxisApi.Repository.Interface;
 using S4_HealthAxisApi.Services.Implementation;
 using S4_HealthAxisApi.Services.Interface;
+using Serilog;
 using System.Text;
 using System.Text.Json;
-using S4_HealthAxisApi.Middleware;
-using S4_HealthAxisApi.BackgroundServices;
-using Serilog;
-using MassTransit;
-using S4_HealthAxisApi.Consumers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -42,8 +43,9 @@ builder.Services.AddControllers()
 #endregion
 
 #region Swagger
-// ✅ Add Swagger services
+
 builder.Services.AddEndpointsApiExplorer();
+
 builder.Services.AddSwaggerGen(options =>
 {
     options.SwaggerDoc(
@@ -54,6 +56,7 @@ builder.Services.AddSwaggerGen(options =>
             Version = "v1",
             Description = "Healthcare Appointment Management API"
         });
+
     options.AddSecurityDefinition(
         "bearer",
         new OpenApiSecurityScheme
@@ -65,6 +68,7 @@ builder.Services.AddSwaggerGen(options =>
             BearerFormat = "JWT",
             Description = "Enter JWT token.\n\nExample: Bearer eyJhbGciOiJIUzI1NiIs..."
         });
+
     options.AddSecurityRequirement(document =>
         new OpenApiSecurityRequirement
         {
@@ -74,7 +78,6 @@ builder.Services.AddSwaggerGen(options =>
         });
 });
 
-
 #endregion
 
 #region Database
@@ -83,6 +86,19 @@ builder.Services.AddDbContext<HealthAxisDbContext>(options =>
 {
     options.UseSqlServer(
         builder.Configuration.GetConnectionString("DefaultConnection"));
+});
+
+#endregion
+
+#region Garnet Distributed Cache
+
+builder.Services.AddStackExchangeRedisCache(options =>
+{
+    options.Configuration =
+        builder.Configuration.GetSection("Garnet")["ConnectionString"];
+
+    options.InstanceName =
+        builder.Configuration.GetSection("Garnet")["InstanceName"] ?? "HealthAxis:";
 });
 
 #endregion
@@ -160,6 +176,7 @@ builder.Services.AddScoped<IHealthRecordService, HealthRecordService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IAdminService, AdminService>();
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IRabbitMqPublisher, RabbitMqPublisher>();
 
 #endregion
 
@@ -228,3 +245,4 @@ app.MapControllers();
 #endregion
 
 await app.RunAsync();
+

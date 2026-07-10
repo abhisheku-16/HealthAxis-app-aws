@@ -1,22 +1,33 @@
-﻿using S4_HealthAxis.Shared.DTOs.Doctor;
+﻿using Microsoft.Extensions.Caching.Distributed;
+using S4_HealthAxis.Shared.DTOs.Doctor;
 using S4_HealthAxis.Shared.Enums;
 using S4_HealthAxisApi.Models;
 using S4_HealthAxisApi.Repository.Interface;
 using S4_HealthAxisApi.Services.Interface;
+using System.Text.Json;
 
 namespace S4_HealthAxisApi.Services.Implementation
 {
     public class DoctorService : IDoctorService
     {
+        private static readonly TimeSpan AvailabilityCacheDuration =
+            TimeSpan.FromMinutes(5);
+
         private readonly IDoctorRepository _doctorRepository;
         private readonly IUserService _userService;
+        private readonly IDistributedCache _cache;
+        private readonly ILogger<DoctorService> _logger;
 
         public DoctorService(
             IDoctorRepository doctorRepository,
-            IUserService userService)
+            IUserService userService,
+            IDistributedCache cache,
+            ILogger<DoctorService> logger)
         {
             _doctorRepository = doctorRepository;
             _userService = userService;
+            _cache = cache;
+            _logger = logger;
         }
 
         public async Task<IEnumerable<DoctorDto>> GetAllAsync(
@@ -113,6 +124,32 @@ namespace S4_HealthAxisApi.Services.Implementation
                 throw new KeyNotFoundException("Doctor not found.");
             }
 
+            var cacheKey = BuildAvailabilityCacheKey(doctorId, date);
+
+            var cachedAvailability =
+                await _cache.GetStringAsync(cacheKey);
+
+            if (!string.IsNullOrWhiteSpace(cachedAvailability))
+            {
+                var cachedSlots =
+                    JsonSerializer.Deserialize<List<int>>(cachedAvailability)
+                    ?? [];
+
+                _logger.LogInformation(
+                    "Doctor availability cache hit. DoctorId {DoctorId}, Date {Date}, CacheKey {CacheKey}.",
+                    doctorId,
+                    date,
+                    cacheKey);
+
+                return cachedSlots;
+            }
+
+            _logger.LogInformation(
+                "Doctor availability cache miss. DoctorId {DoctorId}, Date {Date}, CacheKey {CacheKey}.",
+                doctorId,
+                date,
+                cacheKey);
+
             var bookedSlots =
                 await _doctorRepository.GetBookedSlotsAsync(
                     doctorId,
@@ -122,7 +159,30 @@ namespace S4_HealthAxisApi.Services.Implementation
                 Enum.GetValues<AppointmentTimeSlot>()
                     .Select(slot => (int)slot);
 
-            return allSlots.Except(bookedSlots);
+            var availableSlots =
+                allSlots
+                    .Except(bookedSlots)
+                    .ToList();
+
+            var serializedAvailability =
+                JsonSerializer.Serialize(availableSlots);
+
+            await _cache.SetStringAsync(
+                cacheKey,
+                serializedAvailability,
+                new DistributedCacheEntryOptions
+                {
+                    AbsoluteExpirationRelativeToNow = AvailabilityCacheDuration
+                });
+
+            _logger.LogInformation(
+                "Doctor availability cached. DoctorId {DoctorId}, Date {Date}, CacheKey {CacheKey}, TTLMinutes {TTLMinutes}.",
+                doctorId,
+                date,
+                cacheKey,
+                AvailabilityCacheDuration.TotalMinutes);
+
+            return availableSlots;
         }
 
         public async Task<DoctorCreationResultDto> CreateDoctorWithAccountAsync(
@@ -205,6 +265,13 @@ namespace S4_HealthAxisApi.Services.Implementation
 
             await _doctorRepository.UpdateAsync(doctor);
             await _doctorRepository.SaveChangesAsync();
+        }
+
+        private static string BuildAvailabilityCacheKey(
+            int doctorId,
+            DateOnly date)
+        {
+            return $"doctors:{doctorId}:availability:{date:yyyy-MM-dd}";
         }
 
         private static void ValidateDoctor(CreateDoctorDto dto)

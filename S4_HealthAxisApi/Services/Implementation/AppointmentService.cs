@@ -1,8 +1,9 @@
-﻿using MassTransit;
+﻿using Microsoft.Extensions.Caching.Distributed;
 using S4_HealthAxis.Shared.DTOs.Appointment;
 using S4_HealthAxis.Shared.DTOs.Doctor;
 using S4_HealthAxis.Shared.Enums;
 using S4_HealthAxisApi.Events;
+using S4_HealthAxisApi.Messaging;
 using S4_HealthAxisApi.Models;
 using S4_HealthAxisApi.Repository.Interface;
 using S4_HealthAxisApi.Services.Interface;
@@ -14,21 +15,24 @@ namespace S4_HealthAxisApi.Services.Implementation
         private readonly IAppointmentRepository _appointmentRepository;
         private readonly IPatientRepository _patientRepository;
         private readonly IDoctorRepository _doctorRepository;
-        private readonly IPublishEndpoint _publishEndpoint;
+        private readonly IRabbitMqPublisher _rabbitMqPublisher;
         private readonly ILogger<AppointmentService> _logger;
+        private readonly IDistributedCache _cache;
 
         public AppointmentService(
             IAppointmentRepository appointmentRepository,
             IPatientRepository patientRepository,
             IDoctorRepository doctorRepository,
-            IPublishEndpoint publishEndpoint,
-            ILogger<AppointmentService> logger)
+            IRabbitMqPublisher rabbitMqPublisher,
+            ILogger<AppointmentService> logger,
+            IDistributedCache cache)
         {
             _appointmentRepository = appointmentRepository;
             _patientRepository = patientRepository;
             _doctorRepository = doctorRepository;
-            _publishEndpoint = publishEndpoint;
+            _rabbitMqPublisher = rabbitMqPublisher;
             _logger = logger;
+            _cache = cache;
         }
 
         public async Task<IEnumerable<AppointmentDetailsDto>> GetAllAsync()
@@ -109,9 +113,13 @@ namespace S4_HealthAxisApi.Services.Implementation
             await _appointmentRepository.AddAsync(appointment);
             await _appointmentRepository.SaveChangesAsync();
 
+            await InvalidateDoctorAvailabilityCacheAsync(
+                appointment.DoctorId,
+                appointment.ScheduledDate);
+
             var patient = await _patientRepository.GetByIdAsync(dto.PatientId);
 
-            await _publishEndpoint.Publish(
+            await _rabbitMqPublisher.PublishAsync(
                 new AppointmentBookedEvent
                 {
                     AppointmentId = appointment.AppointmentId,
@@ -128,6 +136,12 @@ namespace S4_HealthAxisApi.Services.Implementation
                 appointment.DoctorId,
                 appointment.ScheduledDate,
                 appointment.TimeSlot);
+
+            _logger.LogInformation(
+                "AppointmentBookedEvent published for AppointmentId {AppointmentId}, PatientId {PatientId}, DoctorId {DoctorId}.",
+                appointment.AppointmentId,
+                appointment.PatientId,
+                appointment.DoctorId);
 
             return MapToAppointmentDto(appointment);
         }
@@ -158,12 +172,23 @@ namespace S4_HealthAxisApi.Services.Implementation
                 dto.ScheduledDate,
                 dto.TimeSlot);
 
+            var oldDoctorId = appointment.DoctorId;
+            var oldScheduledDate = appointment.ScheduledDate;
+
             appointment.DoctorId = dto.DoctorId;
             appointment.ScheduledDate = dto.ScheduledDate;
             appointment.TimeSlot = (AppointmentTimeSlot)dto.TimeSlot;
 
             await _appointmentRepository.UpdateAsync(appointment);
             await _appointmentRepository.SaveChangesAsync();
+
+            await InvalidateDoctorAvailabilityCacheAsync(
+                oldDoctorId,
+                oldScheduledDate);
+
+            await InvalidateDoctorAvailabilityCacheAsync(
+                appointment.DoctorId,
+                appointment.ScheduledDate);
         }
 
         public async Task UpdateStatusAsync(int id, UpdateAppointmentStatusDto dto)
@@ -181,6 +206,7 @@ namespace S4_HealthAxisApi.Services.Implementation
             }
 
             var newStatus = (AppointmentStatus)dto.Status;
+            var shouldInvalidateAvailabilityCache = false;
 
             if (appointment.Status == AppointmentStatus.Completed)
             {
@@ -223,6 +249,7 @@ namespace S4_HealthAxisApi.Services.Implementation
 
                     appointment.Status = AppointmentStatus.Cancelled;
                     appointment.CancellationReason = dto.CancellationReason.Trim();
+                    shouldInvalidateAvailabilityCache = true;
                     break;
 
                 default:
@@ -231,6 +258,13 @@ namespace S4_HealthAxisApi.Services.Implementation
 
             await _appointmentRepository.UpdateAsync(appointment);
             await _appointmentRepository.SaveChangesAsync();
+
+            if (shouldInvalidateAvailabilityCache)
+            {
+                await InvalidateDoctorAvailabilityCacheAsync(
+                    appointment.DoctorId,
+                    appointment.ScheduledDate);
+            }
         }
 
         public async Task ConfirmAsync(int id)
@@ -302,6 +336,10 @@ namespace S4_HealthAxisApi.Services.Implementation
 
             await _appointmentRepository.UpdateAsync(appointment);
             await _appointmentRepository.SaveChangesAsync();
+
+            await InvalidateDoctorAvailabilityCacheAsync(
+                appointment.DoctorId,
+                appointment.ScheduledDate);
         }
 
         public async Task<IEnumerable<DoctorScheduleItemDto>> GetDoctorUpcomingScheduleAsync(int doctorId)
@@ -457,6 +495,30 @@ namespace S4_HealthAxisApi.Services.Implementation
             {
                 throw new InvalidOperationException("Doctor is already booked for this time slot.");
             }
+        }
+
+        private async Task InvalidateDoctorAvailabilityCacheAsync(
+            int doctorId,
+            DateOnly date)
+        {
+            var cacheKey = BuildAvailabilityCacheKey(
+                doctorId,
+                date);
+
+            await _cache.RemoveAsync(cacheKey);
+
+            _logger.LogInformation(
+                "Doctor availability cache invalidated. DoctorId {DoctorId}, Date {Date}, CacheKey {CacheKey}.",
+                doctorId,
+                date,
+                cacheKey);
+        }
+
+        private static string BuildAvailabilityCacheKey(
+            int doctorId,
+            DateOnly date)
+        {
+            return $"doctors:{doctorId}:availability:{date:yyyy-MM-dd}";
         }
 
         private static void ValidateBookingDateAndSlot(DateOnly date, int timeSlot)

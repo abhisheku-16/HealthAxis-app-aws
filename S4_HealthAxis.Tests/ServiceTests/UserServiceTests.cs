@@ -6,7 +6,7 @@ using S4_HealthAxisApi.Repository.Interface;
 using S4_HealthAxisApi.Services.Implementation;
 using Xunit;
 
-namespace S4_HealthAxis.Tests.Services
+namespace S4_HealthAxis.Tests.ServiceTests
 {
     public class UserServiceTests
     {

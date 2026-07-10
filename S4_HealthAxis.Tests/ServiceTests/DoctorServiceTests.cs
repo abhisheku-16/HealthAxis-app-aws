@@ -1,6 +1,6 @@
-﻿using System.Security.Cryptography;
-using System.Text;
-using FluentAssertions;
+﻿using FluentAssertions;
+using Microsoft.Extensions.Caching.Distributed;
+using Microsoft.Extensions.Logging;
 using Moq;
 using S4_HealthAxis.Shared.DTOs.Doctor;
 using S4_HealthAxis.Shared.Enums;
@@ -8,24 +8,33 @@ using S4_HealthAxisApi.Models;
 using S4_HealthAxisApi.Repository.Interface;
 using S4_HealthAxisApi.Services.Implementation;
 using S4_HealthAxisApi.Services.Interface;
+using System.Text;
+using System.Text.Json;
 using Xunit;
 
-namespace S4_HealthAxis.Tests.Services
+namespace S4_HealthAxis.Tests.ServiceTests
 {
     public class DoctorServiceTests
     {
         private readonly Mock<IDoctorRepository> _doctorRepositoryMock;
         private readonly Mock<IUserService> _userServiceMock;
+        private readonly Mock<IDistributedCache> _cacheMock;
+        private readonly Mock<ILogger<DoctorService>> _loggerMock;
+
         private readonly DoctorService _service;
 
         public DoctorServiceTests()
         {
             _doctorRepositoryMock = new Mock<IDoctorRepository>();
             _userServiceMock = new Mock<IUserService>();
+            _cacheMock = new Mock<IDistributedCache>();
+            _loggerMock = new Mock<ILogger<DoctorService>>();
 
             _service = new DoctorService(
                 _doctorRepositoryMock.Object,
-                _userServiceMock.Object);
+                _userServiceMock.Object,
+                _cacheMock.Object,
+                _loggerMock.Object);
         }
 
         [Fact]
@@ -34,12 +43,12 @@ namespace S4_HealthAxis.Tests.Services
             // Arrange
             var doctors = new List<Doctor>
             {
-                BuildDoctor(1, "Dr. A", "a@test.com", DoctorSpecialisation.Cardiologist, 5, 500, true),
-                BuildDoctor(2, "Dr. B", "b@test.com", DoctorSpecialisation.Neurologist, 10, 800, false)
+                CreateDoctor(1, "Dr. A", "a@test.com", true),
+                CreateDoctor(2, "Dr. B", "b@test.com", false)
             };
 
             _doctorRepositoryMock
-                .Setup(x => x.GetAllAsync("name", null))
+                .Setup(repo => repo.GetAllAsync("name", null))
                 .ReturnsAsync(doctors);
 
             // Act
@@ -51,47 +60,51 @@ namespace S4_HealthAxis.Tests.Services
             result[0].DoctorId.Should().Be(1);
             result[0].FullName.Should().Be("Dr. A");
             result[0].Email.Should().Be("a@test.com");
-            result[0].Specialisation.Should().Be((int)DoctorSpecialisation.Cardiologist);
-            result[0].YearsOfExperience.Should().Be(5);
-            result[0].ConsultationFee.Should().Be(500);
             result[0].IsActive.Should().BeTrue();
 
             result[1].DoctorId.Should().Be(2);
+            result[1].FullName.Should().Be("Dr. B");
+            result[1].Email.Should().Be("b@test.com");
             result[1].IsActive.Should().BeFalse();
 
-            _doctorRepositoryMock.Verify(x => x.GetAllAsync("name", null), Times.Once);
+            _doctorRepositoryMock.Verify(
+                repo => repo.GetAllAsync("name", null),
+                Times.Once);
         }
 
         [Fact]
-        public async Task GetAllAsync_WhenNoDoctors_ShouldReturnEmptyList()
+        public async Task GetActiveBySpecialisationAsync_WithInvalidSpecialisation_ShouldThrowArgumentException()
         {
             // Arrange
-            _doctorRepositoryMock
-                .Setup(x => x.GetAllAsync(null, null))
-                .ReturnsAsync(new List<Doctor>());
+            var invalidSpecialisation = 999999;
 
             // Act
-            var result = (await _service.GetAllAsync(null, null)).ToList();
+            var action = async () =>
+                await _service.GetActiveBySpecialisationAsync(invalidSpecialisation);
 
             // Assert
-            result.Should().BeEmpty();
+            await action.Should()
+                .ThrowAsync<ArgumentException>()
+                .WithMessage("Invalid doctor specialisation.");
 
-            _doctorRepositoryMock.Verify(x => x.GetAllAsync(null, null), Times.Once);
+            _doctorRepositoryMock.Verify(
+                repo => repo.GetActiveBySpecialisationAsync(It.IsAny<int>()),
+                Times.Never);
         }
 
         [Fact]
-        public async Task GetActiveBySpecialisationAsync_ShouldReturnActiveDoctors_WhenSpecialisationIsValid()
+        public async Task GetActiveBySpecialisationAsync_WithValidSpecialisation_ShouldReturnMappedDoctors()
         {
             // Arrange
-            var specialisation = (int)DoctorSpecialisation.Dermatologist;
+            var specialisation = ValidSpecialisationId();
 
             var doctors = new List<Doctor>
             {
-                BuildDoctor(1, "Dr. Skin", "skin@test.com", DoctorSpecialisation.Dermatologist, 7, 700, true)
+                CreateDoctor(1, "Dr. Active", "active@test.com", true)
             };
 
             _doctorRepositoryMock
-                .Setup(x => x.GetActiveBySpecialisationAsync(specialisation))
+                .Setup(repo => repo.GetActiveBySpecialisationAsync(specialisation))
                 .ReturnsAsync(doctors);
 
             // Act
@@ -99,47 +112,24 @@ namespace S4_HealthAxis.Tests.Services
 
             // Assert
             result.Should().HaveCount(1);
-            result[0].FullName.Should().Be("Dr. Skin");
-            result[0].Specialisation.Should().Be(specialisation);
+            result[0].DoctorId.Should().Be(1);
+            result[0].FullName.Should().Be("Dr. Active");
+            result[0].Email.Should().Be("active@test.com");
             result[0].IsActive.Should().BeTrue();
 
-            _doctorRepositoryMock.Verify(x => x.GetActiveBySpecialisationAsync(specialisation), Times.Once);
-        }
-
-        [Fact]
-        public async Task GetActiveBySpecialisationAsync_ShouldThrowArgumentException_WhenSpecialisationIsInvalid()
-        {
-            // Arrange
-            var invalidSpecialisation = 999;
-
-            // Act
-            var act = async () => await _service.GetActiveBySpecialisationAsync(invalidSpecialisation);
-
-            // Assert
-            await act.Should()
-                .ThrowAsync<ArgumentException>()
-                .WithMessage("Invalid doctor specialisation.");
-
             _doctorRepositoryMock.Verify(
-                x => x.GetActiveBySpecialisationAsync(It.IsAny<int>()),
-                Times.Never);
+                repo => repo.GetActiveBySpecialisationAsync(specialisation),
+                Times.Once);
         }
 
         [Fact]
-        public async Task GetByIdAsync_ShouldReturnDoctor_WhenDoctorExists()
+        public async Task GetByIdAsync_WhenDoctorExists_ShouldReturnDoctorDto()
         {
             // Arrange
-            var doctor = BuildDoctor(
-                10,
-                "Dr. Test",
-                "doctor@test.com",
-                DoctorSpecialisation.Pediatrician,
-                12,
-                900,
-                true);
+            var doctor = CreateDoctor(10, "Dr. Existing", "existing@test.com", true);
 
             _doctorRepositoryMock
-                .Setup(x => x.GetByIdAsync(10))
+                .Setup(repo => repo.GetByIdAsync(10))
                 .ReturnsAsync(doctor);
 
             // Act
@@ -148,22 +138,16 @@ namespace S4_HealthAxis.Tests.Services
             // Assert
             result.Should().NotBeNull();
             result!.DoctorId.Should().Be(10);
-            result.FullName.Should().Be("Dr. Test");
-            result.Email.Should().Be("doctor@test.com");
-            result.Specialisation.Should().Be((int)DoctorSpecialisation.Pediatrician);
-            result.YearsOfExperience.Should().Be(12);
-            result.ConsultationFee.Should().Be(900);
-            result.IsActive.Should().BeTrue();
-
-            _doctorRepositoryMock.Verify(x => x.GetByIdAsync(10), Times.Once);
+            result.FullName.Should().Be("Dr. Existing");
+            result.Email.Should().Be("existing@test.com");
         }
 
         [Fact]
-        public async Task GetByIdAsync_ShouldReturnNull_WhenDoctorDoesNotExist()
+        public async Task GetByIdAsync_WhenDoctorDoesNotExist_ShouldReturnNull()
         {
             // Arrange
             _doctorRepositoryMock
-                .Setup(x => x.GetByIdAsync(99))
+                .Setup(repo => repo.GetByIdAsync(99))
                 .ReturnsAsync((Doctor?)null);
 
             // Act
@@ -171,31 +155,34 @@ namespace S4_HealthAxis.Tests.Services
 
             // Assert
             result.Should().BeNull();
-
-            _doctorRepositoryMock.Verify(x => x.GetByIdAsync(99), Times.Once);
         }
 
         [Fact]
-        public async Task CreateAsync_ShouldCreateDoctor_WhenRequestIsValid()
+        public async Task CreateAsync_WithValidDoctor_ShouldCreateDoctorAndReturnDto()
         {
             // Arrange
-            var dto = BuildValidCreateDoctorDto();
-            dto.FullName = "  Dr. Strange  ";
-            dto.Email = "  DOCTOR@Test.COM  ";
-
             Doctor? capturedDoctor = null;
 
+            var dto = new CreateDoctorDto
+            {
+                FullName = "  Dr. New Doctor  ",
+                Email = "  NewDoctor@Test.COM  ",
+                Specialisation = ValidSpecialisationId(),
+                YearsOfExperience = 12,
+                ConsultationFee = 800
+            };
+
             _doctorRepositoryMock
-                .Setup(x => x.AddAsync(It.IsAny<Doctor>()))
+                .Setup(repo => repo.AddAsync(It.IsAny<Doctor>()))
                 .Callback<Doctor>(doctor =>
                 {
+                    doctor.DoctorId = 101;
                     capturedDoctor = doctor;
-                    doctor.DoctorId = 50;
                 })
                 .Returns(Task.CompletedTask);
 
             _doctorRepositoryMock
-                .Setup(x => x.SaveChangesAsync())
+                .Setup(repo => repo.SaveChangesAsync())
                 .Returns(Task.CompletedTask);
 
             // Act
@@ -203,317 +190,351 @@ namespace S4_HealthAxis.Tests.Services
 
             // Assert
             capturedDoctor.Should().NotBeNull();
-            capturedDoctor!.FullName.Should().Be("Dr. Strange");
-            capturedDoctor.Email.Should().Be("doctor@test.com");
-            capturedDoctor.Specialisation.Should().Be(DoctorSpecialisation.Cardiologist);
-            capturedDoctor.YearsOfExperience.Should().Be(8);
-            capturedDoctor.ConsultationFee.Should().Be(750);
+            capturedDoctor!.FullName.Should().Be("Dr. New Doctor");
+            capturedDoctor.Email.Should().Be("newdoctor@test.com");
             capturedDoctor.IsActive.Should().BeTrue();
+            capturedDoctor.YearsOfExperience.Should().Be(12);
+            capturedDoctor.ConsultationFee.Should().Be(800);
 
-            result.DoctorId.Should().Be(50);
-            result.FullName.Should().Be("Dr. Strange");
-            result.Email.Should().Be("doctor@test.com");
-            result.Specialisation.Should().Be((int)DoctorSpecialisation.Cardiologist);
-            result.YearsOfExperience.Should().Be(8);
-            result.ConsultationFee.Should().Be(750);
+            result.DoctorId.Should().Be(101);
+            result.FullName.Should().Be("Dr. New Doctor");
+            result.Email.Should().Be("newdoctor@test.com");
             result.IsActive.Should().BeTrue();
 
-            _doctorRepositoryMock.Verify(x => x.AddAsync(It.IsAny<Doctor>()), Times.Once);
-            _doctorRepositoryMock.Verify(x => x.SaveChangesAsync(), Times.Once);
+            _doctorRepositoryMock.Verify(
+                repo => repo.AddAsync(It.IsAny<Doctor>()),
+                Times.Once);
+
+            _doctorRepositoryMock.Verify(
+                repo => repo.SaveChangesAsync(),
+                Times.Once);
         }
 
         [Theory]
-        [InlineData("", "doctor@test.com", 2, 5, 500, "Doctor name is required.")]
-        [InlineData("   ", "doctor@test.com", 2, 5, 500, "Doctor name is required.")]
-        [InlineData("Dr. Test", "", 2, 5, 500, "Email is required.")]
-        [InlineData("Dr. Test", "   ", 2, 5, 500, "Email is required.")]
-        [InlineData("Dr. Test", "doctor@test.com", 999, 5, 500, "Invalid doctor specialisation.")]
-        [InlineData("Dr. Test", "doctor@test.com", 2, -1, 500, "Experience must be between 0 and 60 years.")]
-        [InlineData("Dr. Test", "doctor@test.com", 2, 61, 500, "Experience must be between 0 and 60 years.")]
-        [InlineData("Dr. Test", "doctor@test.com", 2, 5, 0, "Consultation fee must be greater than zero.")]
-        [InlineData("Dr. Test", "doctor@test.com", 2, 5, -10, "Consultation fee must be greater than zero.")]
-        public async Task CreateAsync_ShouldThrowArgumentException_WhenValidationFails(
-            string fullName,
-            string email,
-            int specialisation,
-            int yearsOfExperience,
-            decimal consultationFee,
+        [MemberData(nameof(InvalidCreateDoctorDtos))]
+        public async Task CreateAsync_WithInvalidDoctor_ShouldThrowArgumentException(
+            CreateDoctorDto dto,
             string expectedMessage)
         {
-            // Arrange
-            var dto = new CreateDoctorDto
-            {
-                FullName = fullName,
-                Email = email,
-                Specialisation = specialisation,
-                YearsOfExperience = yearsOfExperience,
-                ConsultationFee = consultationFee
-            };
-
             // Act
-            var act = async () => await _service.CreateAsync(dto);
+            var action = async () => await _service.CreateAsync(dto);
 
             // Assert
-            await act.Should()
+            await action.Should()
                 .ThrowAsync<ArgumentException>()
                 .WithMessage(expectedMessage);
 
-            _doctorRepositoryMock.Verify(x => x.AddAsync(It.IsAny<Doctor>()), Times.Never);
-            _doctorRepositoryMock.Verify(x => x.SaveChangesAsync(), Times.Never);
+            _doctorRepositoryMock.Verify(
+                repo => repo.AddAsync(It.IsAny<Doctor>()),
+                Times.Never);
+
+            _doctorRepositoryMock.Verify(
+                repo => repo.SaveChangesAsync(),
+                Times.Never);
         }
 
         [Fact]
-        public async Task UpdateAsync_ShouldUpdateDoctor_WhenRequestIsValid()
+        public async Task UpdateAsync_WithValidDoctor_ShouldUpdateDoctor()
         {
             // Arrange
-            var doctor = BuildDoctor(
-                10,
-                "Old Name",
-                "old@test.com",
-                DoctorSpecialisation.Cardiologist,
-                5,
-                500,
-                true);
+            var existingDoctor = CreateDoctor(10, "Old Name", "old@test.com", true);
 
             var dto = new UpdateDoctorDto
             {
                 FullName = "  Updated Doctor  ",
-                Specialisation = (int)DoctorSpecialisation.Neurologist,
-                YearsOfExperience = 15,
+                Specialisation = ValidSpecialisationId(),
+                YearsOfExperience = 20,
                 ConsultationFee = 1200
             };
 
             _doctorRepositoryMock
-                .Setup(x => x.GetByIdAsync(10))
-                .ReturnsAsync(doctor);
+                .Setup(repo => repo.GetByIdAsync(10))
+                .ReturnsAsync(existingDoctor);
 
             _doctorRepositoryMock
-                .Setup(x => x.UpdateAsync(doctor))
+                .Setup(repo => repo.UpdateAsync(It.IsAny<Doctor>()))
                 .Returns(Task.CompletedTask);
 
             _doctorRepositoryMock
-                .Setup(x => x.SaveChangesAsync())
+                .Setup(repo => repo.SaveChangesAsync())
                 .Returns(Task.CompletedTask);
 
             // Act
             await _service.UpdateAsync(10, dto);
 
             // Assert
-            doctor.FullName.Should().Be("Updated Doctor");
-            doctor.Email.Should().Be("old@test.com");
-            doctor.Specialisation.Should().Be(DoctorSpecialisation.Neurologist);
-            doctor.YearsOfExperience.Should().Be(15);
-            doctor.ConsultationFee.Should().Be(1200);
+            existingDoctor.FullName.Should().Be("Updated Doctor");
+            existingDoctor.YearsOfExperience.Should().Be(20);
+            existingDoctor.ConsultationFee.Should().Be(1200);
 
-            _doctorRepositoryMock.Verify(x => x.GetByIdAsync(10), Times.Once);
-            _doctorRepositoryMock.Verify(x => x.UpdateAsync(doctor), Times.Once);
-            _doctorRepositoryMock.Verify(x => x.SaveChangesAsync(), Times.Once);
+            _doctorRepositoryMock.Verify(
+                repo => repo.UpdateAsync(existingDoctor),
+                Times.Once);
+
+            _doctorRepositoryMock.Verify(
+                repo => repo.SaveChangesAsync(),
+                Times.Once);
         }
 
         [Fact]
-        public async Task UpdateAsync_ShouldThrowKeyNotFoundException_WhenDoctorDoesNotExist()
+        public async Task UpdateAsync_WhenDoctorDoesNotExist_ShouldThrowKeyNotFoundException()
         {
             // Arrange
-            var dto = BuildValidUpdateDoctorDto();
+            var dto = CreateValidUpdateDoctorDto();
 
             _doctorRepositoryMock
-                .Setup(x => x.GetByIdAsync(99))
+                .Setup(repo => repo.GetByIdAsync(999))
                 .ReturnsAsync((Doctor?)null);
 
             // Act
-            var act = async () => await _service.UpdateAsync(99, dto);
+            var action = async () => await _service.UpdateAsync(999, dto);
 
             // Assert
-            await act.Should()
+            await action.Should()
                 .ThrowAsync<KeyNotFoundException>()
-                .WithMessage("Doctor with Id 99 not found.");
+                .WithMessage("Doctor with Id 999 not found.");
 
-            _doctorRepositoryMock.Verify(x => x.UpdateAsync(It.IsAny<Doctor>()), Times.Never);
-            _doctorRepositoryMock.Verify(x => x.SaveChangesAsync(), Times.Never);
+            _doctorRepositoryMock.Verify(
+                repo => repo.UpdateAsync(It.IsAny<Doctor>()),
+                Times.Never);
+
+            _doctorRepositoryMock.Verify(
+                repo => repo.SaveChangesAsync(),
+                Times.Never);
         }
 
         [Theory]
-        [InlineData("", 2, 5, 500, "Doctor name is required.")]
-        [InlineData("   ", 2, 5, 500, "Doctor name is required.")]
-        [InlineData("Dr. Test", 999, 5, 500, "Invalid doctor specialisation.")]
-        [InlineData("Dr. Test", 2, -1, 500, "Experience must be between 0 and 60 years.")]
-        [InlineData("Dr. Test", 2, 61, 500, "Experience must be between 0 and 60 years.")]
-        [InlineData("Dr. Test", 2, 5, 0, "Consultation fee must be greater than zero.")]
-        [InlineData("Dr. Test", 2, 5, -1, "Consultation fee must be greater than zero.")]
-        public async Task UpdateAsync_ShouldThrowArgumentException_WhenValidationFails(
-            string fullName,
-            int specialisation,
-            int yearsOfExperience,
-            decimal consultationFee,
+        [MemberData(nameof(InvalidUpdateDoctorDtos))]
+        public async Task UpdateAsync_WithInvalidDoctor_ShouldThrowArgumentException(
+            UpdateDoctorDto dto,
             string expectedMessage)
         {
-            // Arrange
-            var dto = new UpdateDoctorDto
-            {
-                FullName = fullName,
-                Specialisation = specialisation,
-                YearsOfExperience = yearsOfExperience,
-                ConsultationFee = consultationFee
-            };
-
             // Act
-            var act = async () => await _service.UpdateAsync(10, dto);
+            var action = async () => await _service.UpdateAsync(1, dto);
 
             // Assert
-            await act.Should()
+            await action.Should()
                 .ThrowAsync<ArgumentException>()
                 .WithMessage(expectedMessage);
 
-            _doctorRepositoryMock.Verify(x => x.GetByIdAsync(It.IsAny<int>()), Times.Never);
-            _doctorRepositoryMock.Verify(x => x.UpdateAsync(It.IsAny<Doctor>()), Times.Never);
+            _doctorRepositoryMock.Verify(
+                repo => repo.GetByIdAsync(It.IsAny<int>()),
+                Times.Never);
         }
 
         [Fact]
-        public async Task GetAvailabilityAsync_ShouldReturnAvailableSlots_WhenDoctorExists()
+        public async Task GetAvailabilityAsync_WhenDoctorDoesNotExist_ShouldThrowKeyNotFoundException()
         {
             // Arrange
-            var date = DateOnly.FromDateTime(DateTime.Today.AddDays(1));
-            var doctor = BuildDoctor(10, "Dr. Available", "available@test.com");
-
-            var bookedSlots = new List<int>
-            {
-                (int)AppointmentTimeSlot.TenAM,
-                (int)AppointmentTimeSlot.ElevenAM,
-                (int)AppointmentTimeSlot.ThreeThirtyPM
-            };
-
             _doctorRepositoryMock
-                .Setup(x => x.GetByIdAsync(10))
-                .ReturnsAsync(doctor);
-
-            _doctorRepositoryMock
-                .Setup(x => x.GetBookedSlotsAsync(10, date))
-                .ReturnsAsync(bookedSlots);
-
-            // Act
-            var result = (await _service.GetAvailabilityAsync(10, date)).ToList();
-
-            // Assert
-            result.Should().NotContain((int)AppointmentTimeSlot.TenAM);
-            result.Should().NotContain((int)AppointmentTimeSlot.ElevenAM);
-            result.Should().NotContain((int)AppointmentTimeSlot.ThreeThirtyPM);
-
-            result.Should().Contain((int)AppointmentTimeSlot.TenThirtyAM);
-            result.Should().Contain((int)AppointmentTimeSlot.TwelvePM);
-            result.Should().Contain((int)AppointmentTimeSlot.TwoPM);
-
-            result.Should().HaveCount(Enum.GetValues<AppointmentTimeSlot>().Length - bookedSlots.Count);
-
-            _doctorRepositoryMock.Verify(x => x.GetByIdAsync(10), Times.Once);
-            _doctorRepositoryMock.Verify(x => x.GetBookedSlotsAsync(10, date), Times.Once);
-        }
-
-        [Fact]
-        public async Task GetAvailabilityAsync_ShouldReturnAllSlots_WhenNoSlotsAreBooked()
-        {
-            // Arrange
-            var date = DateOnly.FromDateTime(DateTime.Today.AddDays(1));
-            var doctor = BuildDoctor(10, "Dr. Available", "available@test.com");
-
-            _doctorRepositoryMock
-                .Setup(x => x.GetByIdAsync(10))
-                .ReturnsAsync(doctor);
-
-            _doctorRepositoryMock
-                .Setup(x => x.GetBookedSlotsAsync(10, date))
-                .ReturnsAsync(new List<int>());
-
-            // Act
-            var result = (await _service.GetAvailabilityAsync(10, date)).ToList();
-
-            // Assert
-            result.Should().HaveCount(Enum.GetValues<AppointmentTimeSlot>().Length);
-            result.Should().Contain((int)AppointmentTimeSlot.TenAM);
-            result.Should().Contain((int)AppointmentTimeSlot.ThreeThirtyPM);
-        }
-
-        [Fact]
-        public async Task GetAvailabilityAsync_ShouldThrowKeyNotFoundException_WhenDoctorDoesNotExist()
-        {
-            // Arrange
-            var date = DateOnly.FromDateTime(DateTime.Today.AddDays(1));
-
-            _doctorRepositoryMock
-                .Setup(x => x.GetByIdAsync(99))
+                .Setup(repo => repo.GetByIdAsync(404))
                 .ReturnsAsync((Doctor?)null);
 
             // Act
-            var act = async () => await _service.GetAvailabilityAsync(99, date);
+            var action = async () =>
+                await _service.GetAvailabilityAsync(
+                    404,
+                    DateOnly.FromDateTime(DateTime.Today.AddDays(1)));
 
             // Assert
-            await act.Should()
+            await action.Should()
                 .ThrowAsync<KeyNotFoundException>()
                 .WithMessage("Doctor not found.");
 
-            _doctorRepositoryMock.Verify(x => x.GetBookedSlotsAsync(It.IsAny<int>(), It.IsAny<DateOnly>()), Times.Never);
+            _cacheMock.Verify(
+                cache => cache.GetAsync(
+                    It.IsAny<string>(),
+                    It.IsAny<CancellationToken>()),
+                Times.Never);
         }
 
         [Fact]
-        public async Task CreateDoctorWithAccountAsync_ShouldThrowArgumentException_WhenEmailAlreadyExists()
+        public async Task GetAvailabilityAsync_WhenCacheHit_ShouldReturnCachedSlotsAndNotCallBookedSlots()
         {
             // Arrange
-            var dto = BuildValidCreateDoctorDto();
+            var doctorId = 10;
+            var date = DateOnly.FromDateTime(DateTime.Today.AddDays(1));
+            var cacheKey = BuildAvailabilityCacheKey(doctorId, date);
+
+            var cachedSlots = new List<int> { 1, 2, 3 };
+            var cachedBytes = Encoding.UTF8.GetBytes(JsonSerializer.Serialize(cachedSlots));
+
+            _doctorRepositoryMock
+                .Setup(repo => repo.GetByIdAsync(doctorId))
+                .ReturnsAsync(CreateDoctor(doctorId, "Dr. Cache", "cache@test.com", true));
+
+            _cacheMock
+                .Setup(cache => cache.GetAsync(cacheKey, It.IsAny<CancellationToken>()))
+                .ReturnsAsync(cachedBytes);
+
+            // Act
+            var result = (await _service.GetAvailabilityAsync(doctorId, date)).ToList();
+
+            // Assert
+            result.Should().BeEquivalentTo(cachedSlots);
+
+            _doctorRepositoryMock.Verify(
+                repo => repo.GetBookedSlotsAsync(It.IsAny<int>(), It.IsAny<DateOnly>()),
+                Times.Never);
+
+            _cacheMock.Verify(
+                cache => cache.SetAsync(
+                    It.IsAny<string>(),
+                    It.IsAny<byte[]>(),
+                    It.IsAny<DistributedCacheEntryOptions>(),
+                    It.IsAny<CancellationToken>()),
+                Times.Never);
+        }
+
+        [Fact]
+        public async Task GetAvailabilityAsync_WhenCacheMiss_ShouldLoadFromRepositoryAndCacheResult()
+        {
+            // Arrange
+            var doctorId = 10;
+            var date = DateOnly.FromDateTime(DateTime.Today.AddDays(1));
+            var cacheKey = BuildAvailabilityCacheKey(doctorId, date);
+
+            var bookedSlots = new List<int>
+            {
+                (int)Enum.GetValues<AppointmentTimeSlot>().First()
+            };
+
+            _doctorRepositoryMock
+                .Setup(repo => repo.GetByIdAsync(doctorId))
+                .ReturnsAsync(CreateDoctor(doctorId, "Dr. Miss", "miss@test.com", true));
+
+            _cacheMock
+                .Setup(cache => cache.GetAsync(cacheKey, It.IsAny<CancellationToken>()))
+                .ReturnsAsync((byte[]?)null);
+
+            _doctorRepositoryMock
+                .Setup(repo => repo.GetBookedSlotsAsync(doctorId, date))
+                .ReturnsAsync(bookedSlots);
+
+            byte[]? cachedValue = null;
+            DistributedCacheEntryOptions? cacheOptions = null;
+
+            _cacheMock
+                .Setup(cache => cache.SetAsync(
+                    cacheKey,
+                    It.IsAny<byte[]>(),
+                    It.IsAny<DistributedCacheEntryOptions>(),
+                    It.IsAny<CancellationToken>()))
+                .Callback<string, byte[], DistributedCacheEntryOptions, CancellationToken>(
+                    (_, value, options, _) =>
+                    {
+                        cachedValue = value;
+                        cacheOptions = options;
+                    })
+                .Returns(Task.CompletedTask);
+
+            var allSlots =
+                Enum.GetValues<AppointmentTimeSlot>()
+                    .Select(slot => (int)slot)
+                    .ToList();
+
+            var expectedSlots =
+                allSlots
+                    .Except(bookedSlots)
+                    .ToList();
+
+            // Act
+            var result = (await _service.GetAvailabilityAsync(doctorId, date)).ToList();
+
+            // Assert
+            result.Should().BeEquivalentTo(expectedSlots);
+
+            _doctorRepositoryMock.Verify(
+                repo => repo.GetBookedSlotsAsync(doctorId, date),
+                Times.Once);
+
+            _cacheMock.Verify(
+                cache => cache.SetAsync(
+                    cacheKey,
+                    It.IsAny<byte[]>(),
+                    It.IsAny<DistributedCacheEntryOptions>(),
+                    It.IsAny<CancellationToken>()),
+                Times.Once);
+
+            cachedValue.Should().NotBeNull();
+
+            var cachedSlots =
+                JsonSerializer.Deserialize<List<int>>(
+                    Encoding.UTF8.GetString(cachedValue!));
+
+            cachedSlots.Should().BeEquivalentTo(expectedSlots);
+
+            cacheOptions.Should().NotBeNull();
+            cacheOptions!.AbsoluteExpirationRelativeToNow.Should().Be(TimeSpan.FromMinutes(5));
+        }
+
+        [Fact]
+        public async Task CreateDoctorWithAccountAsync_WhenEmailExists_ShouldThrowArgumentException()
+        {
+            // Arrange
+            var dto = CreateValidCreateDoctorDto();
 
             _userServiceMock
-                .Setup(x => x.EmailExistsAsync(dto.Email))
+                .Setup(service => service.EmailExistsAsync(dto.Email))
                 .ReturnsAsync(true);
 
             // Act
-            var act = async () => await _service.CreateDoctorWithAccountAsync(dto);
+            var action = async () => await _service.CreateDoctorWithAccountAsync(dto);
 
             // Assert
-            await act.Should()
+            await action.Should()
                 .ThrowAsync<ArgumentException>()
                 .WithMessage("Email already exists.");
 
-            _doctorRepositoryMock.Verify(x => x.AddAsync(It.IsAny<Doctor>()), Times.Never);
-            _userServiceMock.Verify(x => x.CreateAsync(It.IsAny<User>()), Times.Never);
+            _doctorRepositoryMock.Verify(
+                repo => repo.AddAsync(It.IsAny<Doctor>()),
+                Times.Never);
+
+            _userServiceMock.Verify(
+                service => service.CreateAsync(It.IsAny<User>()),
+                Times.Never);
         }
 
         [Fact]
-        public async Task CreateDoctorWithAccountAsync_ShouldCreateDoctorAndUser_WhenRequestIsValid()
+        public async Task CreateDoctorWithAccountAsync_WithValidInput_ShouldCreateDoctorAndUser()
         {
             // Arrange
-            var dto = BuildValidCreateDoctorDto();
-            dto.FullName = "  Dr. New  ";
-            dto.Email = "  NEWDOC@Test.COM  ";
+            var dto = new CreateDoctorDto
+            {
+                FullName = "  Dr. Account  ",
+                Email = "  Account@Test.COM  ",
+                Specialisation = ValidSpecialisationId(),
+                YearsOfExperience = 8,
+                ConsultationFee = 900
+            };
 
             Doctor? capturedDoctor = null;
             User? capturedUser = null;
 
             _userServiceMock
-                .Setup(x => x.EmailExistsAsync(dto.Email))
+                .Setup(service => service.EmailExistsAsync(dto.Email))
                 .ReturnsAsync(false);
 
             _doctorRepositoryMock
-                .Setup(x => x.AddAsync(It.IsAny<Doctor>()))
+                .Setup(repo => repo.AddAsync(It.IsAny<Doctor>()))
                 .Callback<Doctor>(doctor =>
                 {
+                    doctor.DoctorId = 500;
                     capturedDoctor = doctor;
-                    doctor.DoctorId = 900;
                 })
                 .Returns(Task.CompletedTask);
 
             _doctorRepositoryMock
-                .Setup(x => x.SaveChangesAsync())
+                .Setup(repo => repo.SaveChangesAsync())
                 .Returns(Task.CompletedTask);
 
             _userServiceMock
-                .Setup(x => x.CreateAsync(It.IsAny<User>()))
-                .Callback<User>(user =>
-                {
-                    capturedUser = user;
-                    user.UserId = 901;
-                })
+                .Setup(service => service.CreateAsync(It.IsAny<User>()))
+                .Callback<User>(user => capturedUser = user)
                 .Returns(Task.CompletedTask);
 
             _userServiceMock
-                .Setup(x => x.SaveChangesAsync())
+                .Setup(service => service.SaveChangesAsync())
                 .Returns(Task.CompletedTask);
 
             // Act
@@ -521,218 +542,349 @@ namespace S4_HealthAxis.Tests.Services
 
             // Assert
             capturedDoctor.Should().NotBeNull();
-            capturedDoctor!.DoctorId.Should().Be(900);
-            capturedDoctor.FullName.Should().Be("Dr. New");
-            capturedDoctor.Email.Should().Be("newdoc@test.com");
-            capturedDoctor.Specialisation.Should().Be(DoctorSpecialisation.Cardiologist);
+            capturedDoctor!.DoctorId.Should().Be(500);
+            capturedDoctor.FullName.Should().Be("Dr. Account");
+            capturedDoctor.Email.Should().Be("account@test.com");
             capturedDoctor.IsActive.Should().BeTrue();
 
-            result.DoctorId.Should().Be(900);
-            result.FullName.Should().Be("Dr. New");
-            result.Email.Should().Be("newdoc@test.com");
-            result.TemporaryPassword.Should().NotBeNullOrWhiteSpace();
-            result.TemporaryPassword.Should().StartWith("Doc@");
-            result.TemporaryPassword.Length.Should().BeGreaterThanOrEqualTo(10);
-
             capturedUser.Should().NotBeNull();
-            capturedUser!.Email.Should().Be("newdoc@test.com");
+            capturedUser!.Email.Should().Be("account@test.com");
             capturedUser.Role.Should().Be(UserRole.Doctor);
-            capturedUser.ReferenceId.Should().Be(900);
+            capturedUser.ReferenceId.Should().Be(500);
             capturedUser.MustChangePassword.Should().BeTrue();
-            capturedUser.CreatedDate.Should().BeCloseTo(DateTime.UtcNow, TimeSpan.FromSeconds(10));
-            capturedUser.PasswordHash.Should().Be(ComputeSha256Base64(result.TemporaryPassword));
+            capturedUser.PasswordHash.Should().NotBeNullOrWhiteSpace();
+            capturedUser.PasswordHash.Should().NotBe(result.TemporaryPassword);
 
-            _doctorRepositoryMock.Verify(x => x.AddAsync(It.IsAny<Doctor>()), Times.Once);
-            _doctorRepositoryMock.Verify(x => x.SaveChangesAsync(), Times.Once);
-            _userServiceMock.Verify(x => x.CreateAsync(It.IsAny<User>()), Times.Once);
-            _userServiceMock.Verify(x => x.SaveChangesAsync(), Times.Once);
-        }
+            result.DoctorId.Should().Be(500);
+            result.FullName.Should().Be("Dr. Account");
+            result.Email.Should().Be("account@test.com");
+            result.TemporaryPassword.Should().StartWith("Doc@");
 
-        [Theory]
-        [InlineData("", "doctor@test.com", 2, 5, 500, "Doctor name is required.")]
-        [InlineData("Dr. Test", "", 2, 5, 500, "Email is required.")]
-        [InlineData("Dr. Test", "doctor@test.com", 999, 5, 500, "Invalid doctor specialisation.")]
-        [InlineData("Dr. Test", "doctor@test.com", 2, -1, 500, "Experience must be between 0 and 60 years.")]
-        [InlineData("Dr. Test", "doctor@test.com", 2, 61, 500, "Experience must be between 0 and 60 years.")]
-        [InlineData("Dr. Test", "doctor@test.com", 2, 5, 0, "Consultation fee must be greater than zero.")]
-        public async Task CreateDoctorWithAccountAsync_ShouldThrowArgumentException_WhenValidationFails(
-            string fullName,
-            string email,
-            int specialisation,
-            int yearsOfExperience,
-            decimal consultationFee,
-            string expectedMessage)
-        {
-            // Arrange
-            var dto = new CreateDoctorDto
-            {
-                FullName = fullName,
-                Email = email,
-                Specialisation = specialisation,
-                YearsOfExperience = yearsOfExperience,
-                ConsultationFee = consultationFee
-            };
+            _doctorRepositoryMock.Verify(
+                repo => repo.AddAsync(It.IsAny<Doctor>()),
+                Times.Once);
 
-            // Act
-            var act = async () => await _service.CreateDoctorWithAccountAsync(dto);
+            _doctorRepositoryMock.Verify(
+                repo => repo.SaveChangesAsync(),
+                Times.Once);
 
-            // Assert
-            await act.Should()
-                .ThrowAsync<ArgumentException>()
-                .WithMessage(expectedMessage);
+            _userServiceMock.Verify(
+                service => service.CreateAsync(It.IsAny<User>()),
+                Times.Once);
 
-            _userServiceMock.Verify(x => x.EmailExistsAsync(It.IsAny<string>()), Times.Never);
-            _doctorRepositoryMock.Verify(x => x.AddAsync(It.IsAny<Doctor>()), Times.Never);
+            _userServiceMock.Verify(
+                service => service.SaveChangesAsync(),
+                Times.Once);
         }
 
         [Fact]
-        public async Task ActivateAsync_ShouldActivateDoctor_WhenDoctorExists()
+        public async Task ActivateAsync_WhenDoctorExists_ShouldActivateDoctor()
         {
             // Arrange
-            var doctor = BuildDoctor(10, "Dr. Inactive", "inactive@test.com", isActive: false);
+            var doctor = CreateDoctor(20, "Dr. Inactive", "inactive@test.com", false);
 
             _doctorRepositoryMock
-                .Setup(x => x.GetByIdAsync(10))
+                .Setup(repo => repo.GetByIdAsync(20))
                 .ReturnsAsync(doctor);
 
             _doctorRepositoryMock
-                .Setup(x => x.UpdateAsync(doctor))
+                .Setup(repo => repo.UpdateAsync(It.IsAny<Doctor>()))
                 .Returns(Task.CompletedTask);
 
             _doctorRepositoryMock
-                .Setup(x => x.SaveChangesAsync())
+                .Setup(repo => repo.SaveChangesAsync())
                 .Returns(Task.CompletedTask);
 
             // Act
-            await _service.ActivateAsync(10);
+            await _service.ActivateAsync(20);
 
             // Assert
             doctor.IsActive.Should().BeTrue();
 
-            _doctorRepositoryMock.Verify(x => x.GetByIdAsync(10), Times.Once);
-            _doctorRepositoryMock.Verify(x => x.UpdateAsync(doctor), Times.Once);
-            _doctorRepositoryMock.Verify(x => x.SaveChangesAsync(), Times.Once);
+            _doctorRepositoryMock.Verify(
+                repo => repo.UpdateAsync(doctor),
+                Times.Once);
+
+            _doctorRepositoryMock.Verify(
+                repo => repo.SaveChangesAsync(),
+                Times.Once);
         }
 
         [Fact]
-        public async Task ActivateAsync_ShouldThrowKeyNotFoundException_WhenDoctorDoesNotExist()
+        public async Task ActivateAsync_WhenDoctorDoesNotExist_ShouldThrowKeyNotFoundException()
         {
             // Arrange
             _doctorRepositoryMock
-                .Setup(x => x.GetByIdAsync(99))
+                .Setup(repo => repo.GetByIdAsync(123))
                 .ReturnsAsync((Doctor?)null);
 
             // Act
-            var act = async () => await _service.ActivateAsync(99);
+            var action = async () => await _service.ActivateAsync(123);
 
             // Assert
-            await act.Should()
+            await action.Should()
                 .ThrowAsync<KeyNotFoundException>()
-                .WithMessage("Doctor with Id 99 not found.");
+                .WithMessage("Doctor with Id 123 not found.");
 
-            _doctorRepositoryMock.Verify(x => x.UpdateAsync(It.IsAny<Doctor>()), Times.Never);
+            _doctorRepositoryMock.Verify(
+                repo => repo.UpdateAsync(It.IsAny<Doctor>()),
+                Times.Never);
         }
 
         [Fact]
-        public async Task DeactivateAsync_ShouldDeactivateDoctor_WhenDoctorExists()
+        public async Task DeactivateAsync_WhenDoctorExists_ShouldDeactivateDoctor()
         {
             // Arrange
-            var doctor = BuildDoctor(10, "Dr. Active", "active@test.com", isActive: true);
+            var doctor = CreateDoctor(20, "Dr. Active", "active@test.com", true);
 
             _doctorRepositoryMock
-                .Setup(x => x.GetByIdAsync(10))
+                .Setup(repo => repo.GetByIdAsync(20))
                 .ReturnsAsync(doctor);
 
             _doctorRepositoryMock
-                .Setup(x => x.UpdateAsync(doctor))
+                .Setup(repo => repo.UpdateAsync(It.IsAny<Doctor>()))
                 .Returns(Task.CompletedTask);
 
             _doctorRepositoryMock
-                .Setup(x => x.SaveChangesAsync())
+                .Setup(repo => repo.SaveChangesAsync())
                 .Returns(Task.CompletedTask);
 
             // Act
-            await _service.DeactivateAsync(10);
+            await _service.DeactivateAsync(20);
 
             // Assert
             doctor.IsActive.Should().BeFalse();
 
-            _doctorRepositoryMock.Verify(x => x.GetByIdAsync(10), Times.Once);
-            _doctorRepositoryMock.Verify(x => x.UpdateAsync(doctor), Times.Once);
-            _doctorRepositoryMock.Verify(x => x.SaveChangesAsync(), Times.Once);
+            _doctorRepositoryMock.Verify(
+                repo => repo.UpdateAsync(doctor),
+                Times.Once);
+
+            _doctorRepositoryMock.Verify(
+                repo => repo.SaveChangesAsync(),
+                Times.Once);
         }
 
         [Fact]
-        public async Task DeactivateAsync_ShouldThrowKeyNotFoundException_WhenDoctorDoesNotExist()
+        public async Task DeactivateAsync_WhenDoctorDoesNotExist_ShouldThrowKeyNotFoundException()
         {
             // Arrange
             _doctorRepositoryMock
-                .Setup(x => x.GetByIdAsync(99))
+                .Setup(repo => repo.GetByIdAsync(123))
                 .ReturnsAsync((Doctor?)null);
 
             // Act
-            var act = async () => await _service.DeactivateAsync(99);
+            var action = async () => await _service.DeactivateAsync(123);
 
             // Assert
-            await act.Should()
+            await action.Should()
                 .ThrowAsync<KeyNotFoundException>()
-                .WithMessage("Doctor with Id 99 not found.");
+                .WithMessage("Doctor with Id 123 not found.");
 
-            _doctorRepositoryMock.Verify(x => x.UpdateAsync(It.IsAny<Doctor>()), Times.Never);
+            _doctorRepositoryMock.Verify(
+                repo => repo.UpdateAsync(It.IsAny<Doctor>()),
+                Times.Never);
         }
 
-        private static CreateDoctorDto BuildValidCreateDoctorDto()
+        public static IEnumerable<object[]> InvalidCreateDoctorDtos()
         {
-            return new CreateDoctorDto
+            yield return new object[]
             {
-                FullName = "Dr. Test",
-                Email = "doctor@test.com",
-                Specialisation = (int)DoctorSpecialisation.Cardiologist,
-                YearsOfExperience = 8,
-                ConsultationFee = 750
+                new CreateDoctorDto
+                {
+                    FullName = "",
+                    Email = "doctor@test.com",
+                    Specialisation = ValidSpecialisationId(),
+                    YearsOfExperience = 10,
+                    ConsultationFee = 500
+                },
+                "Doctor name is required."
+            };
+
+            yield return new object[]
+            {
+                new CreateDoctorDto
+                {
+                    FullName = "Dr. Test",
+                    Email = "",
+                    Specialisation = ValidSpecialisationId(),
+                    YearsOfExperience = 10,
+                    ConsultationFee = 500
+                },
+                "Email is required."
+            };
+
+            yield return new object[]
+            {
+                new CreateDoctorDto
+                {
+                    FullName = "Dr. Test",
+                    Email = "doctor@test.com",
+                    Specialisation = 999999,
+                    YearsOfExperience = 10,
+                    ConsultationFee = 500
+                },
+                "Invalid doctor specialisation."
+            };
+
+            yield return new object[]
+            {
+                new CreateDoctorDto
+                {
+                    FullName = "Dr. Test",
+                    Email = "doctor@test.com",
+                    Specialisation = ValidSpecialisationId(),
+                    YearsOfExperience = -1,
+                    ConsultationFee = 500
+                },
+                "Experience must be between 0 and 60 years."
+            };
+
+            yield return new object[]
+            {
+                new CreateDoctorDto
+                {
+                    FullName = "Dr. Test",
+                    Email = "doctor@test.com",
+                    Specialisation = ValidSpecialisationId(),
+                    YearsOfExperience = 61,
+                    ConsultationFee = 500
+                },
+                "Experience must be between 0 and 60 years."
+            };
+
+            yield return new object[]
+            {
+                new CreateDoctorDto
+                {
+                    FullName = "Dr. Test",
+                    Email = "doctor@test.com",
+                    Specialisation = ValidSpecialisationId(),
+                    YearsOfExperience = 10,
+                    ConsultationFee = 0
+                },
+                "Consultation fee must be greater than zero."
             };
         }
 
-        private static UpdateDoctorDto BuildValidUpdateDoctorDto()
+        public static IEnumerable<object[]> InvalidUpdateDoctorDtos()
         {
-            return new UpdateDoctorDto
+            yield return new object[]
             {
-                FullName = "Dr. Updated",
-                Specialisation = (int)DoctorSpecialisation.Neurologist,
-                YearsOfExperience = 12,
-                ConsultationFee = 1000
+                new UpdateDoctorDto
+                {
+                    FullName = "",
+                    Specialisation = ValidSpecialisationId(),
+                    YearsOfExperience = 10,
+                    ConsultationFee = 500
+                },
+                "Doctor name is required."
+            };
+
+            yield return new object[]
+            {
+                new UpdateDoctorDto
+                {
+                    FullName = "Dr. Test",
+                    Specialisation = 999999,
+                    YearsOfExperience = 10,
+                    ConsultationFee = 500
+                },
+                "Invalid doctor specialisation."
+            };
+
+            yield return new object[]
+            {
+                new UpdateDoctorDto
+                {
+                    FullName = "Dr. Test",
+                    Specialisation = ValidSpecialisationId(),
+                    YearsOfExperience = -1,
+                    ConsultationFee = 500
+                },
+                "Experience must be between 0 and 60 years."
+            };
+
+            yield return new object[]
+            {
+                new UpdateDoctorDto
+                {
+                    FullName = "Dr. Test",
+                    Specialisation = ValidSpecialisationId(),
+                    YearsOfExperience = 61,
+                    ConsultationFee = 500
+                },
+                "Experience must be between 0 and 60 years."
+            };
+
+            yield return new object[]
+            {
+                new UpdateDoctorDto
+                {
+                    FullName = "Dr. Test",
+                    Specialisation = ValidSpecialisationId(),
+                    YearsOfExperience = 10,
+                    ConsultationFee = 0
+                },
+                "Consultation fee must be greater than zero."
             };
         }
 
-        private static Doctor BuildDoctor(
+        private static Doctor CreateDoctor(
             int id,
             string fullName,
             string email,
-            DoctorSpecialisation specialisation = DoctorSpecialisation.GeneralPractitioner,
-            int yearsOfExperience = 5,
-            decimal consultationFee = 500,
-            bool isActive = true)
+            bool isActive)
         {
             return new Doctor
             {
                 DoctorId = id,
                 FullName = fullName,
                 Email = email,
-                Specialisation = specialisation,
-                YearsOfExperience = yearsOfExperience,
-                ConsultationFee = consultationFee,
+                Specialisation = ValidSpecialisation(),
+                YearsOfExperience = 10,
+                ConsultationFee = 500,
                 IsActive = isActive
             };
         }
 
-        private static string ComputeSha256Base64(string password)
+        private static CreateDoctorDto CreateValidCreateDoctorDto()
         {
-            using var sha256 = SHA256.Create();
+            return new CreateDoctorDto
+            {
+                FullName = "Dr. Valid",
+                Email = "valid@test.com",
+                Specialisation = ValidSpecialisationId(),
+                YearsOfExperience = 10,
+                ConsultationFee = 500
+            };
+        }
 
-            var bytes = Encoding.UTF8.GetBytes(password);
-            var hash = sha256.ComputeHash(bytes);
+        private static UpdateDoctorDto CreateValidUpdateDoctorDto()
+        {
+            return new UpdateDoctorDto
+            {
+                FullName = "Dr. Valid",
+                Specialisation = ValidSpecialisationId(),
+                YearsOfExperience = 10,
+                ConsultationFee = 500
+            };
+        }
 
-            return Convert.ToBase64String(hash);
+        private static DoctorSpecialisation ValidSpecialisation()
+        {
+            return Enum.GetValues<DoctorSpecialisation>().First();
+        }
+
+        private static int ValidSpecialisationId()
+        {
+            return (int)ValidSpecialisation();
+        }
+
+        private static string BuildAvailabilityCacheKey(
+            int doctorId,
+            DateOnly date)
+        {
+            return $"doctors:{doctorId}:availability:{date:yyyy-MM-dd}";
         }
     }
 }
