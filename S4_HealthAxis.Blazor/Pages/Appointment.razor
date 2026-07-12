@@ -15,10 +15,10 @@
 
 <div class="d-flex justify-content-between align-items-center mb-4">
     <div>
+        <Appointment />
         <h3 class="mb-1 fw-bold text-dark">Appointment Dashboard</h3>
-        <p class="text-muted mb-0">Monitor schedule health and manage bookings.</p>
+        <p class="text-muted mb-0">Monitor schedule health, reschedule bookings, and cancel appointments.</p>
     </div>
-
 </div>
 
 @if (!string.IsNullOrEmpty(_pageError))
@@ -58,7 +58,6 @@
             </div>
 
             <div class="row g-3 mb-4">
-                <!-- ALL -->
                 <div class="col-xl col-lg-4 col-md-6">
                     <button type="button"
                             class="ha-appt-stat-card ha-appt-stat-all @GetStatusCardClass(AppointmentStatusFilter.All)"
@@ -73,7 +72,6 @@
                     </button>
                 </div>
 
-                <!-- PENDING -->
                 <div class="col-xl col-lg-4 col-md-6">
                     <button type="button"
                             class="ha-appt-stat-card ha-appt-stat-pending @GetStatusCardClass(AppointmentStatusFilter.Pending)"
@@ -88,7 +86,6 @@
                     </button>
                 </div>
 
-                <!-- CONFIRMED -->
                 <div class="col-xl col-lg-4 col-md-6">
                     <button type="button"
                             class="ha-appt-stat-card ha-appt-stat-confirmed @GetStatusCardClass(AppointmentStatusFilter.Confirmed)"
@@ -103,7 +100,6 @@
                     </button>
                 </div>
 
-                <!-- COMPLETED -->
                 <div class="col-xl col-lg-4 col-md-6">
                     <button type="button"
                             class="ha-appt-stat-card ha-appt-stat-completed @GetStatusCardClass(AppointmentStatusFilter.Completed)"
@@ -118,7 +114,6 @@
                     </button>
                 </div>
 
-                <!-- CANCELLED -->
                 <div class="col-xl col-lg-4 col-md-6">
                     <button type="button"
                             class="ha-appt-stat-card ha-appt-stat-cancelled @GetStatusCardClass(AppointmentStatusFilter.Cancelled)"
@@ -159,7 +154,7 @@
             </span>
             <input type="text"
                    class="form-control"
-                   placeholder="Search ID or Patient..."
+                   placeholder="Search ID, Patient, or Doctor..."
                    @bind="SearchQuery"
                    @bind:event="oninput"
                    style="min-width: 250px;" />
@@ -192,9 +187,10 @@
                             <th>Patient</th>
                             <th>Doctor</th>
                             <th>Status</th>
-                            <th class="text-end pe-4">Quick Actions</th>
+                            <th class="text-end pe-4">Admin Actions</th>
                         </tr>
                     </thead>
+
                     <tbody>
                         @foreach (var appt in PagedAppointments)
                         {
@@ -229,37 +225,23 @@
                                 <td>@GetStatusBadge(appt.Status)</td>
 
                                 <td class="text-end pe-4">
-                                    @if (appt.Status == 0) // Pending
+                                    @if (CanAdminModifyAppointment(appt.Status))
                                     {
-                                        <button class="btn btn-sm btn-outline-primary me-1 ha-table-action"
-                                                title="Confirm"
-                                                @onclick="() => AskConfirmAppointment(appt.AppointmentId)">
-                                            <i class="bi bi-check-lg"></i>
+                                        <button class="btn btn-sm btn-outline-secondary me-1 ha-table-action"
+                                                title="Reschedule"
+                                                @onclick="() => OpenRescheduleModal(appt)">
+                                            <i class="bi bi-pencil"></i>
                                         </button>
-                                    }
 
-                                    @if (appt.Status == 1) // Confirmed
-                                    {
-                                        <button class="btn btn-sm btn-outline-success me-1 ha-table-action"
-                                                title="Mark Completed"
-                                                @onclick="() => AskCompleteAppointment(appt.AppointmentId)">
-                                            <i class="bi bi-flag-fill"></i>
-                                        </button>
-                                    }
-
-                                    <button class="btn btn-sm btn-outline-secondary me-1 ha-table-action"
-                                            title="Reschedule"
-                                            @onclick="() => OpenEditModal(appt)">
-                                        <i class="bi bi-pencil"></i>
-                                    </button>
-
-                                    @if (appt.Status == 0 || appt.Status == 1)
-                                    {
                                         <button class="btn btn-sm btn-outline-danger ha-table-action"
                                                 title="Cancel"
                                                 @onclick="() => OpenCancelModal(appt.AppointmentId)">
                                             <i class="bi bi-x-lg"></i>
                                         </button>
+                                    }
+                                    else
+                                    {
+                                        <span class="text-muted small">No action</span>
                                     }
                                 </td>
                             </tr>
@@ -304,25 +286,25 @@
     </div>
 </div>
 
-@if (_showAddModal)
+@if (_showRescheduleModal)
 {
     <div class="modal fade show d-block" tabindex="-1" style="background-color: rgba(0,0,0,0.5);">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content border-0 shadow">
                 <div class="modal-header bg-light border-0">
-                    <h5 class="modal-title fw-bold">@(_isEditing ? "Reschedule Appointment" : "Book Appointment")</h5>
-                    <button type="button" class="btn-close" @onclick="CloseAddModal"></button>
+                    <h5 class="modal-title fw-bold">Reschedule Appointment</h5>
+                    <button type="button" class="btn-close" @onclick="CloseRescheduleModal"></button>
                 </div>
 
                 <div class="modal-body p-4">
-                    <EditForm Model="@_formData" OnValidSubmit="ConfirmSaveAppointment">
+                    <EditForm Model="@_formData" OnValidSubmit="ConfirmRescheduleAppointment">
                         <DataAnnotationsValidator />
 
                         <div class="mb-3">
-                            <label class="form-label fw-medium">Select Patient</label>
+                            <label class="form-label fw-medium">Patient</label>
                             <InputSelect class="form-select"
                                          @bind-Value="_formData.PatientId"
-                                         disabled="@_isEditing">
+                                         disabled>
                                 <option value="0" disabled>-- Choose Patient --</option>
                                 @foreach (var p in _activePatients)
                                 {
@@ -367,13 +349,16 @@
                         </div>
 
                         <div class="d-flex justify-content-end gap-2 mt-2">
-                            <button type="button" class="btn btn-light" @onclick="CloseAddModal">Cancel</button>
+                            <button type="button" class="btn btn-light" @onclick="CloseRescheduleModal">
+                                Cancel
+                            </button>
+
                             <button type="submit" class="btn btn-primary" disabled="@_isSaving">
                                 @if (_isSaving)
                                 {
                                     <span class="spinner-border spinner-border-sm me-2"></span>
                                 }
-                                @(_isEditing ? "Reschedule" : "Book")
+                                Reschedule
                             </button>
                         </div>
                     </EditForm>
@@ -404,11 +389,13 @@
                         <textarea class="form-control"
                                   @bind="_cancelReason"
                                   rows="3"
-                                  placeholder="Patient requested cancellation..."></textarea>
+                                  placeholder="Reason for cancellation..."></textarea>
                     </div>
 
                     <div class="d-flex justify-content-end gap-2">
-                        <button type="button" class="btn btn-light" @onclick="CloseCancelModal">Nevermind</button>
+                        <button type="button" class="btn btn-light" @onclick="CloseCancelModal">
+                            Nevermind
+                        </button>
 
                         <button type="button"
                                 class="btn btn-danger"
@@ -443,22 +430,17 @@
     private bool _loading = true;
     private string? _pageError = null;
 
-    // Search + pagination
     private string _searchQuery = "";
     private int _currentPage = 1;
     private readonly int _pageSize = 5;
 
-    // Analytics
     private bool _showWeekView = false;
     private ChartData Analytics = new();
 
-    // Status filter
     private AppointmentStatusFilter CurrentStatusFilter { get; set; } = AppointmentStatusFilter.All;
 
-    // Modals
-    private bool _showAddModal = false;
+    private bool _showRescheduleModal = false;
     private bool _showCancelModal = false;
-    private bool _isEditing = false;
     private bool _isSaving = false;
 
     private int _cancelId = 0;
@@ -466,7 +448,6 @@
 
     private AppointmentFormModel _formData = new();
 
-    // Confirm dialog
     private bool _showConfirmDialog = false;
     private string _confirmTitle = "";
     private string _confirmMessage = "";
@@ -530,10 +511,10 @@
         .Where(a =>
             CurrentStatusFilter switch
             {
-                AppointmentStatusFilter.Pending => a.Status == 0,
-                AppointmentStatusFilter.Confirmed => a.Status == 1,
-                AppointmentStatusFilter.Cancelled => a.Status == 2,
-                AppointmentStatusFilter.Completed => a.Status == 3,
+                AppointmentStatusFilter.Pending => a.Status == (int)AppointmentStatus.Pending,
+                AppointmentStatusFilter.Confirmed => a.Status == (int)AppointmentStatus.Confirmed,
+                AppointmentStatusFilter.Cancelled => a.Status == (int)AppointmentStatus.Cancelled,
+                AppointmentStatusFilter.Completed => a.Status == (int)AppointmentStatus.Completed,
                 _ => true
             })
         .Where(a =>
@@ -550,6 +531,7 @@
         FilteredAppointments.Skip((_currentPage - 1) * _pageSize).Take(_pageSize);
 
     private int StartRecord => FilteredAppointments.Any() ? ((_currentPage - 1) * _pageSize) + 1 : 0;
+
     private int EndRecord => FilteredAppointments.Any() ? Math.Min(_currentPage * _pageSize, FilteredAppointments.Count()) : 0;
 
     protected override async Task OnInitializedAsync()
@@ -593,22 +575,24 @@
     private void CalculateAnalytics()
     {
         if (_appointments == null)
+        {
             return;
+        }
 
         var today = DateOnly.FromDateTime(DateTime.Today);
 
         var targetSet = _appointments.Where(a =>
             _showWeekView
-                ? (a.ScheduledDate >= today && a.ScheduledDate <= today.AddDays(7))
+                ? a.ScheduledDate >= today && a.ScheduledDate <= today.AddDays(7)
                 : a.ScheduledDate == today)
             .ToList();
 
         Analytics = new ChartData
         {
-            Pending = targetSet.Count(a => a.Status == 0),
-            Confirmed = targetSet.Count(a => a.Status == 1),
-            Cancelled = targetSet.Count(a => a.Status == 2),
-            Completed = targetSet.Count(a => a.Status == 3)
+            Pending = targetSet.Count(a => a.Status == (int)AppointmentStatus.Pending),
+            Confirmed = targetSet.Count(a => a.Status == (int)AppointmentStatus.Confirmed),
+            Cancelled = targetSet.Count(a => a.Status == (int)AppointmentStatus.Cancelled),
+            Completed = targetSet.Count(a => a.Status == (int)AppointmentStatus.Completed)
         };
     }
 
@@ -641,8 +625,18 @@
                $"#ef4444 {c3}% {c4}%);";
     }
 
-    // Confirmation dialog helpers
-    private void OpenConfirmation(string title, string message, string confirmText, bool isDanger, Func<Task> action)
+    private static bool CanAdminModifyAppointment(int status)
+    {
+        return status == (int)AppointmentStatus.Pending ||
+               status == (int)AppointmentStatus.Confirmed;
+    }
+
+    private void OpenConfirmation(
+        string title,
+        string message,
+        string confirmText,
+        bool isDanger,
+        Func<Task> action)
     {
         _confirmTitle = title;
         _confirmMessage = message;
@@ -669,46 +663,6 @@
         }
     }
 
-    // Quick actions
-    private Task AskConfirmAppointment(int id)
-    {
-        OpenConfirmation(
-            "Confirm Appointment",
-            $"Do you want to confirm appointment #{id}?",
-            "Confirm Appointment",
-            false,
-            async () => await ExecuteAction(async () => await AppointmentService.ConfirmAsync(id)));
-
-        return Task.CompletedTask;
-    }
-
-    private Task AskCompleteAppointment(int id)
-    {
-        OpenConfirmation(
-            "Complete Appointment",
-            $"Do you want to mark appointment #{id} as completed?",
-            "Mark Completed",
-            false,
-            async () => await ExecuteAction(async () => await AppointmentService.CompleteAsync(id)));
-
-        return Task.CompletedTask;
-    }
-
-    private async Task ExecuteAction(Func<Task> action)
-    {
-        try
-        {
-            _pageError = null;
-            await action();
-            await LoadData();
-        }
-        catch (Exception ex)
-        {
-            _pageError = ex.Message;
-        }
-    }
-
-    // Cancel flow
     private void OpenCancelModal(int id)
     {
         _cancelId = id;
@@ -762,17 +716,8 @@
         }
     }
 
-    // Add / Edit modal
-    private void OpenAddModal()
+    private void OpenRescheduleModal(AppointmentDetailsDto appt)
     {
-        _isEditing = false;
-        _formData = new AppointmentFormModel();
-        _showAddModal = true;
-    }
-
-    private void OpenEditModal(AppointmentDetailsDto appt)
-    {
-        _isEditing = true;
         _formData = new AppointmentFormModel
         {
             AppointmentId = appt.AppointmentId,
@@ -781,58 +726,43 @@
             ScheduledDate = appt.ScheduledDate,
             TimeSlot = appt.TimeSlot
         };
-        _showAddModal = true;
+
+        _showRescheduleModal = true;
     }
 
-    private void CloseAddModal()
+    private void CloseRescheduleModal()
     {
-        _showAddModal = false;
+        _showRescheduleModal = false;
     }
 
-    private Task ConfirmSaveAppointment()
+    private Task ConfirmRescheduleAppointment()
     {
         OpenConfirmation(
-            _isEditing ? "Save Appointment Changes" : "Book Appointment",
-            _isEditing
-                ? "Do you want to save these changes to the appointment?"
-                : "Do you want to book this appointment?",
-            _isEditing ? "Save Changes" : "Book Appointment",
+            "Save Appointment Changes",
+            $"Do you want to reschedule appointment #{_formData.AppointmentId}?",
+            "Save Changes",
             false,
-            HandleSubmit);
+            HandleRescheduleSubmit);
 
         return Task.CompletedTask;
     }
 
-    private async Task HandleSubmit()
+    private async Task HandleRescheduleSubmit()
     {
         _isSaving = true;
 
         try
         {
-            if (_isEditing)
-            {
-                await AppointmentService.UpdateAsync(
-                    _formData.AppointmentId,
-                    new UpdateAppointmentDto
-                    {
-                        DoctorId = _formData.DoctorId,
-                        ScheduledDate = _formData.ScheduledDate,
-                        TimeSlot = _formData.TimeSlot
-                    });
-            }
-            else
-            {
-                await AppointmentService.CreateAsync(
-                    new CreateAppointmentDto
-                    {
-                        PatientId = _formData.PatientId,
-                        DoctorId = _formData.DoctorId,
-                        ScheduledDate = _formData.ScheduledDate,
-                        TimeSlot = _formData.TimeSlot
-                    });
-            }
+            await AppointmentService.UpdateAsync(
+                _formData.AppointmentId,
+                new UpdateAppointmentDto
+                {
+                    DoctorId = _formData.DoctorId,
+                    ScheduledDate = _formData.ScheduledDate,
+                    TimeSlot = _formData.TimeSlot
+                });
 
-            _showAddModal = false;
+            _showRescheduleModal = false;
             await LoadData();
         }
         catch (Exception ex)
@@ -845,29 +775,35 @@
         }
     }
 
-    // Pagination
     private void PreviousPage()
     {
         if (_currentPage > 1)
+        {
             _currentPage--;
+        }
     }
 
     private void NextPage()
     {
         if (_currentPage < TotalPages)
+        {
             _currentPage++;
+        }
     }
 
     private void EnsureValidPage()
     {
         if (_currentPage < 1)
+        {
             _currentPage = 1;
+        }
 
         if (_currentPage > TotalPages)
+        {
             _currentPage = TotalPages;
+        }
     }
 
-    // Helpers
     private static string GetEnumDisplayName(Enum enumValue)
     {
         var type = enumValue.GetType();
@@ -876,6 +812,7 @@
         if (memberInfo.Length > 0)
         {
             var attrs = memberInfo[0].GetCustomAttributes(typeof(DisplayAttribute), false);
+
             if (attrs.Length > 0)
             {
                 return ((DisplayAttribute)attrs[0]).Name ?? enumValue.ToString();
@@ -889,21 +826,26 @@
     {
         switch (status)
         {
-            case 0:
+            case (int)AppointmentStatus.Pending:
                 builder.AddMarkupContent(0, "<span class='badge bg-warning text-dark ha-table-pill'><i class='bi bi-hourglass-split me-1'></i> Pending</span>");
                 break;
-            case 1:
+
+            case (int)AppointmentStatus.Confirmed:
                 builder.AddMarkupContent(0, "<span class='badge bg-primary ha-table-pill'><i class='bi bi-check-circle me-1'></i> Confirmed</span>");
                 break;
-            case 2:
+
+            case (int)AppointmentStatus.Cancelled:
                 builder.AddMarkupContent(0, "<span class='badge bg-danger ha-table-pill'><i class='bi bi-x-circle me-1'></i> Cancelled</span>");
                 break;
-            case 3:
+
+            case (int)AppointmentStatus.Completed:
                 builder.AddMarkupContent(0, "<span class='badge bg-success ha-table-pill'><i class='bi bi-check2-square me-1'></i> Completed</span>");
                 break;
+
             default:
                 builder.AddMarkupContent(0, $"<span class='badge bg-secondary ha-table-pill'>Unknown ({status})</span>");
                 break;
         }
     };
 }
+

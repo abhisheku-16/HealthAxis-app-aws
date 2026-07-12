@@ -20,6 +20,7 @@ namespace S4_HealthAxisApi.Migrations
                     DoctorId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     FullName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
                     Specialisation = table.Column<int>(type: "int", nullable: false),
                     YearsOfExperience = table.Column<int>(type: "int", nullable: false),
                     ConsultationFee = table.Column<decimal>(type: "decimal(10,2)", precision: 10, scale: 2, nullable: false),
@@ -28,6 +29,23 @@ namespace S4_HealthAxisApi.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Doctors", x => x.DoctorId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Notifications",
+                columns: table => new
+                {
+                    NotificationId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    DoctorId = table.Column<int>(type: "int", nullable: false),
+                    AppointmentId = table.Column<int>(type: "int", nullable: true),
+                    Message = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
+                    IsRead = table.Column<bool>(type: "bit", nullable: false),
+                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Notifications", x => x.NotificationId);
                 });
 
             migrationBuilder.CreateTable(
@@ -48,6 +66,26 @@ namespace S4_HealthAxisApi.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Patients", x => x.PatientId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Users",
+                columns: table => new
+                {
+                    UserId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
+                    PasswordHash = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Role = table.Column<int>(type: "int", nullable: false),
+                    ReferenceId = table.Column<int>(type: "int", nullable: true),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    RefreshToken = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    MustChangePassword = table.Column<bool>(type: "bit", nullable: false),
+                    RefreshTokenExpiryTime = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Users", x => x.UserId);
                 });
 
             migrationBuilder.CreateTable(
@@ -119,11 +157,11 @@ namespace S4_HealthAxisApi.Migrations
 
             migrationBuilder.InsertData(
                 table: "Doctors",
-                columns: new[] { "DoctorId", "ConsultationFee", "FullName", "IsActive", "Specialisation", "YearsOfExperience" },
+                columns: new[] { "DoctorId", "ConsultationFee", "Email", "FullName", "IsActive", "Specialisation", "YearsOfExperience" },
                 values: new object[,]
                 {
-                    { 1, 500.00m, "Arun Nair", true, 1, 8 },
-                    { 2, 1000.00m, "Rohan Menon", true, 2, 12 }
+                    { 1, 500.00m, "arun.nair@healthaxis.com", "Arun Nair", true, 1, 8 },
+                    { 2, 1000.00m, "rohan.menon@healthaxis.com", "Rohan Menon", true, 2, 12 }
                 });
 
             migrationBuilder.InsertData(
@@ -131,14 +169,14 @@ namespace S4_HealthAxisApi.Migrations
                 columns: new[] { "PatientId", "DateOfBirth", "Email", "FullName", "Gender", "InsuranceNumber", "InsuranceStatus", "IsActive", "PhoneNumber" },
                 values: new object[,]
                 {
-                    { 1, new DateOnly(1995, 5, 10), "anand@example.com", "Ayush Sharma", 1, "INS1001", 2, true, "9876543210" },
-                    { 2, new DateOnly(2000, 11, 5), "riya@example.com", "Riya Shukla", 2, "INS1002", 2, true, "9876543211" }
+                    { 1, new DateOnly(1995, 5, 10), "ayush.sharma@example.com", "Ayush Sharma", 1, "INS1001", 2, true, "9876543210" },
+                    { 2, new DateOnly(2000, 11, 5), "riya.shukla@example.com", "Riya Shukla", 2, "INS1002", 2, true, "9876543211" }
                 });
 
             migrationBuilder.InsertData(
                 table: "Appointments",
                 columns: new[] { "AppointmentId", "CancellationReason", "DoctorId", "PatientId", "ScheduledDate", "Status", "TimeSlot" },
-                values: new object[] { 1, null, 1, 1, new DateOnly(2026, 6, 20), 0, 1 });
+                values: new object[] { 1, null, 1, 1, new DateOnly(2026, 7, 20), 0, 1 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Appointments_DoctorId_ScheduledDate_TimeSlot",
@@ -150,6 +188,12 @@ namespace S4_HealthAxisApi.Migrations
                 name: "IX_Appointments_PatientId",
                 table: "Appointments",
                 column: "PatientId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Doctors_Email",
+                table: "Doctors",
+                column: "Email",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_HealthRecords_AppointmentId",
@@ -166,6 +210,18 @@ namespace S4_HealthAxisApi.Migrations
                 name: "IX_HealthRecords_PatientId",
                 table: "HealthRecords",
                 column: "PatientId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Patients_Email",
+                table: "Patients",
+                column: "Email",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Users_Email",
+                table: "Users",
+                column: "Email",
+                unique: true);
         }
 
         /// <inheritdoc />
@@ -173,6 +229,12 @@ namespace S4_HealthAxisApi.Migrations
         {
             migrationBuilder.DropTable(
                 name: "HealthRecords");
+
+            migrationBuilder.DropTable(
+                name: "Notifications");
+
+            migrationBuilder.DropTable(
+                name: "Users");
 
             migrationBuilder.DropTable(
                 name: "Appointments");

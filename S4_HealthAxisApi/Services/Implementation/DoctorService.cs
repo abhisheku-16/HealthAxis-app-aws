@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Caching.Distributed;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Caching.Distributed;
 using S4_HealthAxis.Shared.DTOs.Doctor;
 using S4_HealthAxis.Shared.Enums;
 using S4_HealthAxisApi.Models;
@@ -17,17 +18,20 @@ namespace S4_HealthAxisApi.Services.Implementation
         private readonly IUserService _userService;
         private readonly IDistributedCache _cache;
         private readonly ILogger<DoctorService> _logger;
+        private readonly IPasswordHasher<User> _passwordHasher;
 
         public DoctorService(
             IDoctorRepository doctorRepository,
             IUserService userService,
             IDistributedCache cache,
-            ILogger<DoctorService> logger)
+            ILogger<DoctorService> logger,
+            IPasswordHasher<User> passwordHasher)
         {
             _doctorRepository = doctorRepository;
             _userService = userService;
             _cache = cache;
             _logger = logger;
+            _passwordHasher = passwordHasher;
         }
 
         public async Task<IEnumerable<DoctorDto>> GetAllAsync(
@@ -214,12 +218,14 @@ namespace S4_HealthAxisApi.Services.Implementation
             var user = new User
             {
                 Email = doctor.Email,
-                PasswordHash = HashPassword(temporaryPassword),
                 Role = UserRole.Doctor,
                 ReferenceId = doctor.DoctorId,
                 CreatedDate = DateTime.UtcNow,
                 MustChangePassword = true
             };
+
+            user.PasswordHash =
+                _passwordHasher.HashPassword(user, temporaryPassword);
 
             await _userService.CreateAsync(user);
             await _userService.SaveChangesAsync();
@@ -332,20 +338,6 @@ namespace S4_HealthAxisApi.Services.Implementation
         private static string GenerateTemporaryPassword()
         {
             return $"Doc@{Random.Shared.Next(100000, 999999)}";
-        }
-
-        private static string HashPassword(string password)
-        {
-            using var sha256 =
-                System.Security.Cryptography.SHA256.Create();
-
-            var bytes =
-                System.Text.Encoding.UTF8.GetBytes(password);
-
-            var hash =
-                sha256.ComputeHash(bytes);
-
-            return Convert.ToBase64String(hash);
         }
 
         private static DoctorDto MapToDoctorDto(Doctor doctor)

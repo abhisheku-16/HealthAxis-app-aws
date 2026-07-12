@@ -1,4 +1,5 @@
-﻿using Microsoft.IdentityModel.Tokens;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.IdentityModel.Tokens;
 using S4_HealthAxis.Shared.DTOs.Auth;
 using S4_HealthAxis.Shared.Enums;
 using S4_HealthAxisApi.Models;
@@ -14,17 +15,20 @@ namespace S4_HealthAxisApi.Services.Implementation
     public class AuthService : IAuthService
     {
         private readonly IUserRepository _userRepository;
-        private readonly IConfiguration _configuration;
         private readonly IPatientRepository _patientRepository;
+        private readonly IConfiguration _configuration;
+        private readonly IPasswordHasher<User> _passwordHasher;
 
         public AuthService(
             IUserRepository userRepository,
             IPatientRepository patientRepository,
-            IConfiguration configuration)
+            IConfiguration configuration,
+            IPasswordHasher<User> passwordHasher)
         {
             _userRepository = userRepository;
             _patientRepository = patientRepository;
             _configuration = configuration;
+            _passwordHasher = passwordHasher;
         }
 
         public async Task<(bool Success, string Message, AuthResponseDto? Data)> RegisterAsync(
@@ -45,11 +49,13 @@ namespace S4_HealthAxisApi.Services.Implementation
             var user = new User
             {
                 Email = email,
-                PasswordHash = HashPassword(request.Password),
                 Role = request.Role,
                 CreatedDate = DateTime.UtcNow,
                 MustChangePassword = false
             };
+
+            user.PasswordHash =
+                _passwordHasher.HashPassword(user, request.Password);
 
             var refreshToken = GenerateRefreshToken();
 
@@ -107,12 +113,14 @@ namespace S4_HealthAxisApi.Services.Implementation
             var user = new User
             {
                 Email = email,
-                PasswordHash = HashPassword(request.Password),
                 Role = UserRole.Patient,
                 ReferenceId = patient.PatientId,
                 CreatedDate = DateTime.UtcNow,
                 MustChangePassword = false
             };
+
+            user.PasswordHash =
+                _passwordHasher.HashPassword(user, request.Password);
 
             var refreshToken = GenerateRefreshToken();
 
@@ -150,9 +158,13 @@ namespace S4_HealthAxisApi.Services.Implementation
                 return (false, "Invalid email or password.", null);
             }
 
-            var hashedPassword = HashPassword(request.Password);
+            var verificationResult =
+                _passwordHasher.VerifyHashedPassword(
+                    user,
+                    user.PasswordHash,
+                    request.Password);
 
-            if (user.PasswordHash != hashedPassword)
+            if (verificationResult == PasswordVerificationResult.Failed)
             {
                 return (false, "Invalid email or password.", null);
             }
@@ -222,8 +234,8 @@ namespace S4_HealthAxisApi.Services.Implementation
         }
 
         public async Task<(bool Success, string Message)> ChangePasswordAsync(
-    string email,
-    ChangePasswordDto request)
+            string email,
+            ChangePasswordDto request)
         {
             if (string.IsNullOrWhiteSpace(email))
             {
@@ -271,14 +283,19 @@ namespace S4_HealthAxisApi.Services.Implementation
                 return (false, "User account not found.");
             }
 
-            var currentPasswordHash = HashPassword(request.CurrentPassword);
+            var currentPasswordVerificationResult =
+                _passwordHasher.VerifyHashedPassword(
+                    user,
+                    user.PasswordHash,
+                    request.CurrentPassword);
 
-            if (user.PasswordHash != currentPasswordHash)
+            if (currentPasswordVerificationResult == PasswordVerificationResult.Failed)
             {
                 return (false, "Current password is incorrect.");
             }
 
-            user.PasswordHash = HashPassword(request.NewPassword);
+            user.PasswordHash =
+                _passwordHasher.HashPassword(user, request.NewPassword);
 
             user.MustChangePassword = false;
 
@@ -353,7 +370,7 @@ namespace S4_HealthAxisApi.Services.Implementation
 
                 new Claim(
                     "ReferenceId",
-                    user.ReferenceId.ToString()),
+                    user.ReferenceId?.ToString() ?? string.Empty),
 
                 new Claim(
                     "MustChangePassword",
@@ -376,16 +393,6 @@ namespace S4_HealthAxisApi.Services.Implementation
         {
             return Convert.ToBase64String(
                 RandomNumberGenerator.GetBytes(64));
-        }
-
-        private static string HashPassword(string password)
-        {
-            using var sha256 = SHA256.Create();
-
-            var bytes = Encoding.UTF8.GetBytes(password);
-            var hash = sha256.ComputeHash(bytes);
-
-            return Convert.ToBase64String(hash);
         }
     }
 }

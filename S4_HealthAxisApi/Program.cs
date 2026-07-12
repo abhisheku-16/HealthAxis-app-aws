@@ -1,6 +1,7 @@
 using HealthAxis.API.Data;
 using MassTransit;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi;
@@ -8,6 +9,7 @@ using S4_HealthAxisApi.BackgroundServices;
 using S4_HealthAxisApi.Consumers;
 using S4_HealthAxisApi.Messaging;
 using S4_HealthAxisApi.Middleware;
+using S4_HealthAxisApi.Models;
 using S4_HealthAxisApi.Repository.Implementation;
 using S4_HealthAxisApi.Repository.Interface;
 using S4_HealthAxisApi.Services.Implementation;
@@ -164,6 +166,7 @@ builder.Services.AddScoped<IAppointmentRepository, AppointmentRepository>();
 builder.Services.AddScoped<IHealthRecordRepository, HealthRecordRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IAdminRepository, AdminRepository>();
+builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
 
 #endregion
 

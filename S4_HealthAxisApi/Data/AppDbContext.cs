@@ -1,12 +1,10 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using S4_HealthAxis.Shared.Enums;
 using S4_HealthAxisApi.Models;
 
 namespace HealthAxis.API.Data
 {
-    public class HealthAxisDbContext : IdentityDbContext<IdentityUser>
+    public class HealthAxisDbContext : DbContext
     {
         public HealthAxisDbContext(DbContextOptions<HealthAxisDbContext> options)
             : base(options)
@@ -14,77 +12,86 @@ namespace HealthAxis.API.Data
         }
 
         public DbSet<Patient> Patients => Set<Patient>();
+
         public DbSet<Doctor> Doctors => Set<Doctor>();
+
         public DbSet<Appointment> Appointments => Set<Appointment>();
+
         public DbSet<HealthRecord> HealthRecords => Set<HealthRecord>();
 
-        // Keep custom users separate from IdentityDbContext.Users
         public DbSet<User> AppUsers => Set<User>();
 
-        public DbSet<Notification> Notifications { get; set; }
+        public DbSet<Notification> Notifications => Set<Notification>();
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
 
-            // IMPORTANT:
-            // Keep the custom User entity mapped to the existing Users table
-            // even though the DbSet property name is AppUsers.
             builder.Entity<User>().ToTable("Users");
 
-            // Appointment Relationships
+            builder.Entity<User>()
+                .HasIndex(user => user.Email)
+                .IsUnique();
+
+            builder.Entity<Doctor>()
+                .HasIndex(doctor => doctor.Email)
+                .IsUnique();
+
+            builder.Entity<Patient>()
+                .HasIndex(patient => patient.Email)
+                .IsUnique();
+
             builder.Entity<Appointment>()
-                .HasOne(a => a.Patient)
-                .WithMany(p => p.Appointments)
-                .HasForeignKey(a => a.PatientId)
+                .HasOne(appointment => appointment.Patient)
+                .WithMany(patient => patient.Appointments)
+                .HasForeignKey(appointment => appointment.PatientId)
                 .OnDelete(DeleteBehavior.Restrict);
 
             builder.Entity<Appointment>()
-                .HasOne(a => a.Doctor)
-                .WithMany(d => d.Appointments)
-                .HasForeignKey(a => a.DoctorId)
+                .HasOne(appointment => appointment.Doctor)
+                .WithMany(doctor => doctor.Appointments)
+                .HasForeignKey(appointment => appointment.DoctorId)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            // Prevent doctor double-booking
             builder.Entity<Appointment>()
-                .HasIndex(a => new
+                .HasIndex(appointment => new
                 {
-                    a.DoctorId,
-                    a.ScheduledDate,
-                    a.TimeSlot
+                    appointment.DoctorId,
+                    appointment.ScheduledDate,
+                    appointment.TimeSlot
                 })
                 .IsUnique();
 
-            // Health Record Relationships
             builder.Entity<HealthRecord>()
-                .HasOne(hr => hr.Appointment)
-                .WithOne(a => a.HealthRecord)
-                .HasForeignKey<HealthRecord>(hr => hr.AppointmentId)
+                .HasOne(healthRecord => healthRecord.Appointment)
+                .WithOne(appointment => appointment.HealthRecord)
+                .HasForeignKey<HealthRecord>(healthRecord => healthRecord.AppointmentId)
                 .OnDelete(DeleteBehavior.Restrict);
 
             builder.Entity<HealthRecord>()
-                .HasOne(hr => hr.Patient)
-                .WithMany(p => p.HealthRecords)
-                .HasForeignKey(hr => hr.PatientId)
+                .HasOne(healthRecord => healthRecord.Patient)
+                .WithMany(patient => patient.HealthRecords)
+                .HasForeignKey(healthRecord => healthRecord.PatientId)
                 .OnDelete(DeleteBehavior.Restrict);
 
             builder.Entity<HealthRecord>()
-                .HasOne(hr => hr.Doctor)
-                .WithMany(d => d.HealthRecords)
-                .HasForeignKey(hr => hr.DoctorId)
+                .HasOne(healthRecord => healthRecord.Doctor)
+                .WithMany(doctor => doctor.HealthRecords)
+                .HasForeignKey(healthRecord => healthRecord.DoctorId)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            // One Health Record per Appointment
             builder.Entity<HealthRecord>()
-                .HasIndex(hr => hr.AppointmentId)
+                .HasIndex(healthRecord => healthRecord.AppointmentId)
                 .IsUnique();
 
-            // Doctor Configuration
             builder.Entity<Doctor>()
-                .Property(d => d.ConsultationFee)
+                .Property(doctor => doctor.ConsultationFee)
                 .HasPrecision(10, 2);
 
-            // Seed Patients
+            builder.Entity<Notification>()
+                .Property(notification => notification.Message)
+                .HasMaxLength(500);
+
             builder.Entity<Patient>().HasData(
                 new Patient
                 {
@@ -93,7 +100,7 @@ namespace HealthAxis.API.Data
                     DateOfBirth = new DateOnly(1995, 5, 10),
                     Gender = Gender.Male,
                     PhoneNumber = "9876543210",
-                    Email = "anand@example.com",
+                    Email = "ayush.sharma@example.com",
                     InsuranceStatus = InsuranceStatus.Active,
                     InsuranceNumber = "INS1001",
                     IsActive = true
@@ -105,19 +112,19 @@ namespace HealthAxis.API.Data
                     DateOfBirth = new DateOnly(2000, 11, 5),
                     Gender = Gender.Female,
                     PhoneNumber = "9876543211",
-                    Email = "riya@example.com",
+                    Email = "riya.shukla@example.com",
                     InsuranceStatus = InsuranceStatus.Active,
                     InsuranceNumber = "INS1002",
                     IsActive = true
                 }
             );
 
-            // Seed Doctors
             builder.Entity<Doctor>().HasData(
                 new Doctor
                 {
                     DoctorId = 1,
                     FullName = "Arun Nair",
+                    Email = "arun.nair@healthaxis.com",
                     Specialisation = DoctorSpecialisation.GeneralPractitioner,
                     YearsOfExperience = 8,
                     ConsultationFee = 500.00m,
@@ -127,6 +134,7 @@ namespace HealthAxis.API.Data
                 {
                     DoctorId = 2,
                     FullName = "Rohan Menon",
+                    Email = "rohan.menon@healthaxis.com",
                     Specialisation = DoctorSpecialisation.Cardiologist,
                     YearsOfExperience = 12,
                     ConsultationFee = 1000.00m,
@@ -134,14 +142,13 @@ namespace HealthAxis.API.Data
                 }
             );
 
-            // Seed Appointments
             builder.Entity<Appointment>().HasData(
                 new Appointment
                 {
                     AppointmentId = 1,
                     PatientId = 1,
                     DoctorId = 1,
-                    ScheduledDate = new DateOnly(2026, 6, 20),
+                    ScheduledDate = new DateOnly(2026, 7, 20),
                     TimeSlot = AppointmentTimeSlot.TenAM,
                     Status = AppointmentStatus.Pending
                 }
