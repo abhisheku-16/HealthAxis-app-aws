@@ -137,12 +137,40 @@
           <div class="form-row">
             <label>Phone Number</label>
 
-            <input
-              *ngIf="editMode"
-              type="text"
-              name="phoneNumber"
-              [(ngModel)]="editForm.phoneNumber"
-              placeholder="Enter phone number">
+            <div *ngIf="editMode" class="ha-phone-input-row">
+              <select
+                name="phoneCountryCode"
+                class="ha-phone-country-select"
+                [(ngModel)]="editForm.phoneCountryCode"
+                (change)="onCountryCodeChange()">
+                <option
+                  *ngFor="let country of countryCodes"
+                  [ngValue]="country.code">
+                  {{ country.label }}
+                </option>
+              </select>
+
+              <input
+                type="text"
+                name="phoneNumber"
+                class="ha-phone-number-input"
+                maxlength="10"
+                [(ngModel)]="editForm.localPhoneNumber"
+                (input)="onPhoneNumberInput()"
+                placeholder="Enter 10 digit phone number">
+            </div>
+
+            <small
+              *ngIf="editMode && editForm.localPhoneNumber && !isPhoneValid()"
+              class="text-danger">
+              Phone number must contain exactly 10 digits.
+            </small>
+
+            <small
+              *ngIf="editMode && editForm.localPhoneNumber && isPhoneValid()"
+              class="text-muted">
+              Saved as {{ buildFullPhoneNumber() }}
+            </small>
 
             <div class="readonly-value" *ngIf="!editMode">
               {{ patient.phoneNumber }}

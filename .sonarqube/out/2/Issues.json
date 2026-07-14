@@ -1,0 +1,1879 @@
+{
+  "$schema": "http://json.schemastore.org/sarif-1.0.0",
+  "version": "1.0.0",
+  "runs": [
+    {
+      "tool": {
+        "name": "Microsoft (R) Visual C# Compiler",
+        "version": "5.6.0.0",
+        "fileVersion": "5.6.0-2.26270.133 (96856fd726ffd058fb3dfef0851dbafc7ef3b011)",
+        "semanticVersion": "5.6.0",
+        "language": "en-US"
+      },
+      "results": [
+        {
+          "ruleId": "S1192",
+          "level": "warning",
+          "message": "Define a constant instead of using this literal 'Doctors' 6 times.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/Migrations/20260711103901_InitialCreate.cs",
+                "region": {
+                  "startLine": 17,
+                  "startColumn": 23,
+                  "endLine": 17,
+                  "endColumn": 32
+                }
+              }
+            }
+          ],
+          "relatedLocations": [
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/Migrations/20260711103901_InitialCreate.cs",
+                "region": {
+                  "startLine": 110,
+                  "startColumn": 41,
+                  "endLine": 110,
+                  "endColumn": 50
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/Migrations/20260711103901_InitialCreate.cs",
+                "region": {
+                  "startLine": 147,
+                  "startColumn": 41,
+                  "endLine": 147,
+                  "endColumn": 50
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/Migrations/20260711103901_InitialCreate.cs",
+                "region": {
+                  "startLine": 159,
+                  "startColumn": 24,
+                  "endLine": 159,
+                  "endColumn": 33
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/Migrations/20260711103901_InitialCreate.cs",
+                "region": {
+                  "startLine": 194,
+                  "startColumn": 24,
+                  "endLine": 194,
+                  "endColumn": 33
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/Migrations/20260711103901_InitialCreate.cs",
+                "region": {
+                  "startLine": 243,
+                  "startColumn": 23,
+                  "endLine": 243,
+                  "endColumn": 32
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1,
+            "customProperties": {
+              "0": null,
+              "1": null,
+              "2": null,
+              "3": null,
+              "4": null
+            }
+          }
+        },
+        {
+          "ruleId": "S1192",
+          "level": "warning",
+          "message": "Define a constant instead of using this literal 'SqlServer:Identity' 6 times.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/Migrations/20260711103901_InitialCreate.cs",
+                "region": {
+                  "startLine": 21,
+                  "startColumn": 37,
+                  "endLine": 21,
+                  "endColumn": 57
+                }
+              }
+            }
+          ],
+          "relatedLocations": [
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/Migrations/20260711103901_InitialCreate.cs",
+                "region": {
+                  "startLine": 39,
+                  "startColumn": 37,
+                  "endLine": 39,
+                  "endColumn": 57
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/Migrations/20260711103901_InitialCreate.cs",
+                "region": {
+                  "startLine": 56,
+                  "startColumn": 37,
+                  "endLine": 56,
+                  "endColumn": 57
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/Migrations/20260711103901_InitialCreate.cs",
+                "region": {
+                  "startLine": 76,
+                  "startColumn": 37,
+                  "endLine": 76,
+                  "endColumn": 57
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/Migrations/20260711103901_InitialCreate.cs",
+                "region": {
+                  "startLine": 96,
+                  "startColumn": 37,
+                  "endLine": 96,
+                  "endColumn": 57
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/Migrations/20260711103901_InitialCreate.cs",
+                "region": {
+                  "startLine": 126,
+                  "startColumn": 37,
+                  "endLine": 126,
+                  "endColumn": 57
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1,
+            "customProperties": {
+              "0": null,
+              "1": null,
+              "2": null,
+              "3": null,
+              "4": null
+            }
+          }
+        },
+        {
+          "ruleId": "S1192",
+          "level": "warning",
+          "message": "Define a constant instead of using this literal 'datetime2' 4 times.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/Migrations/20260711103901_InitialCreate.cs",
+                "region": {
+                  "startLine": 44,
+                  "startColumn": 62,
+                  "endLine": 44,
+                  "endColumn": 73
+                }
+              }
+            }
+          ],
+          "relatedLocations": [
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/Migrations/20260711103901_InitialCreate.cs",
+                "region": {
+                  "startLine": 81,
+                  "startColumn": 64,
+                  "endLine": 81,
+                  "endColumn": 75
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/Migrations/20260711103901_InitialCreate.cs",
+                "region": {
+                  "startLine": 84,
+                  "startColumn": 75,
+                  "endLine": 84,
+                  "endColumn": 86
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/Migrations/20260711103901_InitialCreate.cs",
+                "region": {
+                  "startLine": 133,
+                  "startColumn": 62,
+                  "endLine": 133,
+                  "endColumn": 73
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1,
+            "customProperties": {
+              "0": null,
+              "1": null,
+              "2": null
+            }
+          }
+        },
+        {
+          "ruleId": "S1192",
+          "level": "warning",
+          "message": "Define a constant instead of using this literal 'Patients' 6 times.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/Migrations/20260711103901_InitialCreate.cs",
+                "region": {
+                  "startLine": 52,
+                  "startColumn": 23,
+                  "endLine": 52,
+                  "endColumn": 33
+                }
+              }
+            }
+          ],
+          "relatedLocations": [
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/Migrations/20260711103901_InitialCreate.cs",
+                "region": {
+                  "startLine": 116,
+                  "startColumn": 41,
+                  "endLine": 116,
+                  "endColumn": 51
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/Migrations/20260711103901_InitialCreate.cs",
+                "region": {
+                  "startLine": 153,
+                  "startColumn": 41,
+                  "endLine": 153,
+                  "endColumn": 51
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/Migrations/20260711103901_InitialCreate.cs",
+                "region": {
+                  "startLine": 168,
+                  "startColumn": 24,
+                  "endLine": 168,
+                  "endColumn": 34
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/Migrations/20260711103901_InitialCreate.cs",
+                "region": {
+                  "startLine": 216,
+                  "startColumn": 24,
+                  "endLine": 216,
+                  "endColumn": 34
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/Migrations/20260711103901_InitialCreate.cs",
+                "region": {
+                  "startLine": 246,
+                  "startColumn": 23,
+                  "endLine": 246,
+                  "endColumn": 33
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1,
+            "customProperties": {
+              "0": null,
+              "1": null,
+              "2": null,
+              "3": null,
+              "4": null
+            }
+          }
+        },
+        {
+          "ruleId": "S1192",
+          "level": "warning",
+          "message": "Define a constant instead of using this literal 'Appointments' 6 times.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/Migrations/20260711103901_InitialCreate.cs",
+                "region": {
+                  "startLine": 92,
+                  "startColumn": 23,
+                  "endLine": 92,
+                  "endColumn": 37
+                }
+              }
+            }
+          ],
+          "relatedLocations": [
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/Migrations/20260711103901_InitialCreate.cs",
+                "region": {
+                  "startLine": 141,
+                  "startColumn": 41,
+                  "endLine": 141,
+                  "endColumn": 55
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/Migrations/20260711103901_InitialCreate.cs",
+                "region": {
+                  "startLine": 177,
+                  "startColumn": 24,
+                  "endLine": 177,
+                  "endColumn": 38
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/Migrations/20260711103901_InitialCreate.cs",
+                "region": {
+                  "startLine": 183,
+                  "startColumn": 24,
+                  "endLine": 183,
+                  "endColumn": 38
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/Migrations/20260711103901_InitialCreate.cs",
+                "region": {
+                  "startLine": 189,
+                  "startColumn": 24,
+                  "endLine": 189,
+                  "endColumn": 38
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/Migrations/20260711103901_InitialCreate.cs",
+                "region": {
+                  "startLine": 240,
+                  "startColumn": 23,
+                  "endLine": 240,
+                  "endColumn": 37
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1,
+            "customProperties": {
+              "0": null,
+              "1": null,
+              "2": null,
+              "3": null,
+              "4": null
+            }
+          }
+        },
+        {
+          "ruleId": "S1192",
+          "level": "warning",
+          "message": "Define a constant instead of using this literal 'DoctorId' 6 times.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/Migrations/20260711103901_InitialCreate.cs",
+                "region": {
+                  "startLine": 111,
+                  "startColumn": 42,
+                  "endLine": 111,
+                  "endColumn": 52
+                }
+              }
+            }
+          ],
+          "relatedLocations": [
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/Migrations/20260711103901_InitialCreate.cs",
+                "region": {
+                  "startLine": 148,
+                  "startColumn": 42,
+                  "endLine": 148,
+                  "endColumn": 52
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/Migrations/20260711103901_InitialCreate.cs",
+                "region": {
+                  "startLine": 160,
+                  "startColumn": 34,
+                  "endLine": 160,
+                  "endColumn": 44
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/Migrations/20260711103901_InitialCreate.cs",
+                "region": {
+                  "startLine": 178,
+                  "startColumn": 73,
+                  "endLine": 178,
+                  "endColumn": 83
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/Migrations/20260711103901_InitialCreate.cs",
+                "region": {
+                  "startLine": 184,
+                  "startColumn": 34,
+                  "endLine": 184,
+                  "endColumn": 44
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/Migrations/20260711103901_InitialCreate.cs",
+                "region": {
+                  "startLine": 207,
+                  "startColumn": 25,
+                  "endLine": 207,
+                  "endColumn": 35
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1,
+            "customProperties": {
+              "0": null,
+              "1": null,
+              "2": null,
+              "3": null,
+              "4": null
+            }
+          }
+        },
+        {
+          "ruleId": "S1192",
+          "level": "warning",
+          "message": "Define a constant instead of using this literal 'PatientId' 6 times.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/Migrations/20260711103901_InitialCreate.cs",
+                "region": {
+                  "startLine": 117,
+                  "startColumn": 42,
+                  "endLine": 117,
+                  "endColumn": 53
+                }
+              }
+            }
+          ],
+          "relatedLocations": [
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/Migrations/20260711103901_InitialCreate.cs",
+                "region": {
+                  "startLine": 154,
+                  "startColumn": 42,
+                  "endLine": 154,
+                  "endColumn": 53
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/Migrations/20260711103901_InitialCreate.cs",
+                "region": {
+                  "startLine": 169,
+                  "startColumn": 34,
+                  "endLine": 169,
+                  "endColumn": 45
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/Migrations/20260711103901_InitialCreate.cs",
+                "region": {
+                  "startLine": 178,
+                  "startColumn": 85,
+                  "endLine": 178,
+                  "endColumn": 96
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/Migrations/20260711103901_InitialCreate.cs",
+                "region": {
+                  "startLine": 190,
+                  "startColumn": 25,
+                  "endLine": 190,
+                  "endColumn": 36
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/Migrations/20260711103901_InitialCreate.cs",
+                "region": {
+                  "startLine": 212,
+                  "startColumn": 25,
+                  "endLine": 212,
+                  "endColumn": 36
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1,
+            "customProperties": {
+              "0": null,
+              "1": null,
+              "2": null,
+              "3": null,
+              "4": null
+            }
+          }
+        },
+        {
+          "ruleId": "S1192",
+          "level": "warning",
+          "message": "Define a constant instead of using this literal 'HealthRecords' 5 times.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/Migrations/20260711103901_InitialCreate.cs",
+                "region": {
+                  "startLine": 122,
+                  "startColumn": 23,
+                  "endLine": 122,
+                  "endColumn": 38
+                }
+              }
+            }
+          ],
+          "relatedLocations": [
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/Migrations/20260711103901_InitialCreate.cs",
+                "region": {
+                  "startLine": 200,
+                  "startColumn": 24,
+                  "endLine": 200,
+                  "endColumn": 39
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/Migrations/20260711103901_InitialCreate.cs",
+                "region": {
+                  "startLine": 206,
+                  "startColumn": 24,
+                  "endLine": 206,
+                  "endColumn": 39
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/Migrations/20260711103901_InitialCreate.cs",
+                "region": {
+                  "startLine": 211,
+                  "startColumn": 24,
+                  "endLine": 211,
+                  "endColumn": 39
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/Migrations/20260711103901_InitialCreate.cs",
+                "region": {
+                  "startLine": 231,
+                  "startColumn": 23,
+                  "endLine": 231,
+                  "endColumn": 38
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1,
+            "customProperties": {
+              "0": null,
+              "1": null,
+              "2": null,
+              "3": null
+            }
+          }
+        },
+        {
+          "ruleId": "S1192",
+          "level": "warning",
+          "message": "Define a constant instead of using this literal 'Email' 5 times.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/Migrations/20260711103901_InitialCreate.cs",
+                "region": {
+                  "startLine": 160,
+                  "startColumn": 65,
+                  "endLine": 160,
+                  "endColumn": 72
+                }
+              }
+            }
+          ],
+          "relatedLocations": [
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/Migrations/20260711103901_InitialCreate.cs",
+                "region": {
+                  "startLine": 169,
+                  "startColumn": 62,
+                  "endLine": 169,
+                  "endColumn": 69
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/Migrations/20260711103901_InitialCreate.cs",
+                "region": {
+                  "startLine": 195,
+                  "startColumn": 25,
+                  "endLine": 195,
+                  "endColumn": 32
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/Migrations/20260711103901_InitialCreate.cs",
+                "region": {
+                  "startLine": 217,
+                  "startColumn": 25,
+                  "endLine": 217,
+                  "endColumn": 32
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/Migrations/20260711103901_InitialCreate.cs",
+                "region": {
+                  "startLine": 223,
+                  "startColumn": 25,
+                  "endLine": 223,
+                  "endColumn": 32
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1,
+            "customProperties": {
+              "0": null,
+              "1": null,
+              "2": null,
+              "3": null
+            }
+          }
+        },
+        {
+          "ruleId": "S1192",
+          "level": "warning",
+          "message": "Define a constant instead of using this literal 'Patient' 6 times.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/Controllers/AppointmentController.cs",
+                "region": {
+                  "startLine": 42,
+                  "startColumn": 31,
+                  "endLine": 42,
+                  "endColumn": 40
+                }
+              }
+            }
+          ],
+          "relatedLocations": [
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/Controllers/AppointmentController.cs",
+                "region": {
+                  "startLine": 61,
+                  "startColumn": 31,
+                  "endLine": 61,
+                  "endColumn": 40
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/Controllers/AppointmentController.cs",
+                "region": {
+                  "startLine": 127,
+                  "startColumn": 35,
+                  "endLine": 127,
+                  "endColumn": 44
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/Controllers/AppointmentController.cs",
+                "region": {
+                  "startLine": 176,
+                  "startColumn": 35,
+                  "endLine": 176,
+                  "endColumn": 44
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/Controllers/AppointmentController.cs",
+                "region": {
+                  "startLine": 262,
+                  "startColumn": 31,
+                  "endLine": 262,
+                  "endColumn": 40
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/Controllers/AppointmentController.cs",
+                "region": {
+                  "startLine": 295,
+                  "startColumn": 35,
+                  "endLine": 295,
+                  "endColumn": 44
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1,
+            "customProperties": {
+              "0": null,
+              "1": null,
+              "2": null,
+              "3": null,
+              "4": null
+            }
+          }
+        },
+        {
+          "ruleId": "S4136",
+          "level": "warning",
+          "message": "All 'ExistsSamePatientSameDoctorSameDateAsync' method overloads should be adjacent.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/Repositories/Interface/IAppointmentRepository.cs",
+                "region": {
+                  "startLine": 14,
+                  "startColumn": 20,
+                  "endLine": 14,
+                  "endColumn": 60
+                }
+              }
+            }
+          ],
+          "relatedLocations": [
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/Repositories/Interface/IAppointmentRepository.cs",
+                "region": {
+                  "startLine": 18,
+                  "startColumn": 20,
+                  "endLine": 18,
+                  "endColumn": 60
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1,
+            "customProperties": {
+              "0": "Non-adjacent overload"
+            }
+          }
+        },
+        {
+          "ruleId": "S4136",
+          "level": "warning",
+          "message": "All 'ExistsSamePatientSameSlotSameDateAsync' method overloads should be adjacent.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/Repositories/Interface/IAppointmentRepository.cs",
+                "region": {
+                  "startLine": 15,
+                  "startColumn": 20,
+                  "endLine": 15,
+                  "endColumn": 58
+                }
+              }
+            }
+          ],
+          "relatedLocations": [
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/Repositories/Interface/IAppointmentRepository.cs",
+                "region": {
+                  "startLine": 20,
+                  "startColumn": 20,
+                  "endLine": 20,
+                  "endColumn": 58
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1,
+            "customProperties": {
+              "0": "Non-adjacent overload"
+            }
+          }
+        },
+        {
+          "ruleId": "S4136",
+          "level": "warning",
+          "message": "All 'ExistsSameDoctorSameSlotSameDateAsync' method overloads should be adjacent.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/Repositories/Interface/IAppointmentRepository.cs",
+                "region": {
+                  "startLine": 16,
+                  "startColumn": 20,
+                  "endLine": 16,
+                  "endColumn": 57
+                }
+              }
+            }
+          ],
+          "relatedLocations": [
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/Repositories/Interface/IAppointmentRepository.cs",
+                "region": {
+                  "startLine": 22,
+                  "startColumn": 20,
+                  "endLine": 22,
+                  "endColumn": 57
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1,
+            "customProperties": {
+              "0": "Non-adjacent overload"
+            }
+          }
+        },
+        {
+          "ruleId": "S4136",
+          "level": "warning",
+          "message": "All 'ExistsSamePatientSameDoctorSameDateAsync' method overloads should be adjacent.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/Repositories/Implementation/AppointmentRepository.cs",
+                "region": {
+                  "startLine": 75,
+                  "startColumn": 33,
+                  "endLine": 75,
+                  "endColumn": 73
+                }
+              }
+            }
+          ],
+          "relatedLocations": [
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/Repositories/Implementation/AppointmentRepository.cs",
+                "region": {
+                  "startLine": 121,
+                  "startColumn": 33,
+                  "endLine": 121,
+                  "endColumn": 73
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1,
+            "customProperties": {
+              "0": "Non-adjacent overload"
+            }
+          }
+        },
+        {
+          "ruleId": "S4136",
+          "level": "warning",
+          "message": "All 'ExistsSamePatientSameSlotSameDateAsync' method overloads should be adjacent.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/Repositories/Implementation/AppointmentRepository.cs",
+                "region": {
+                  "startLine": 87,
+                  "startColumn": 33,
+                  "endLine": 87,
+                  "endColumn": 71
+                }
+              }
+            }
+          ],
+          "relatedLocations": [
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/Repositories/Implementation/AppointmentRepository.cs",
+                "region": {
+                  "startLine": 135,
+                  "startColumn": 33,
+                  "endLine": 135,
+                  "endColumn": 71
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1,
+            "customProperties": {
+              "0": "Non-adjacent overload"
+            }
+          }
+        },
+        {
+          "ruleId": "S4136",
+          "level": "warning",
+          "message": "All 'ExistsSameDoctorSameSlotSameDateAsync' method overloads should be adjacent.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/Repositories/Implementation/AppointmentRepository.cs",
+                "region": {
+                  "startLine": 104,
+                  "startColumn": 33,
+                  "endLine": 104,
+                  "endColumn": 70
+                }
+              }
+            }
+          ],
+          "relatedLocations": [
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/Repositories/Implementation/AppointmentRepository.cs",
+                "region": {
+                  "startLine": 149,
+                  "startColumn": 33,
+                  "endLine": 149,
+                  "endColumn": 70
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1,
+            "customProperties": {
+              "0": "Non-adjacent overload"
+            }
+          }
+        },
+        {
+          "ruleId": "S6667",
+          "level": "warning",
+          "message": "Logging in a catch clause should pass the caught exception as a parameter.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/BackgroundServices/NotificationCleanupService.cs",
+                "region": {
+                  "startLine": 37,
+                  "startColumn": 17,
+                  "endLine": 37,
+                  "endColumn": 93
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "S6667",
+          "level": "warning",
+          "message": "Logging in a catch clause should pass the caught exception as a parameter.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/BackgroundServices/AppointmentMaintenanceService.cs",
+                "region": {
+                  "startLine": 44,
+                  "startColumn": 17,
+                  "endLine": 44,
+                  "endColumn": 96
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA1873",
+          "level": "note",
+          "message": "Evaluation of this argument may be expensive and unnecessary if logging is disabled",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/Middleware/RequestLoggingMiddleware.cs",
+                "region": {
+                  "startLine": 18,
+                  "startColumn": 13,
+                  "endLine": 21,
+                  "endColumn": 38
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA1873",
+          "level": "note",
+          "message": "Evaluation of this argument may be expensive and unnecessary if logging is disabled",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/Middleware/RequestLoggingMiddleware.cs",
+                "region": {
+                  "startLine": 25,
+                  "startColumn": 13,
+                  "endLine": 27,
+                  "endColumn": 45
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA1873",
+          "level": "note",
+          "message": "Evaluation of this argument may be expensive and unnecessary if logging is disabled",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/Messaging/RabbitMqPublisher.cs",
+                "region": {
+                  "startLine": 27,
+                  "startColumn": 13,
+                  "endLine": 29,
+                  "endColumn": 39
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA1873",
+          "level": "note",
+          "message": "Evaluation of this argument may be expensive and unnecessary if logging is disabled",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/Consumers/AppointmentBookedConsumer.cs",
+                "region": {
+                  "startLine": 43,
+                  "startColumn": 13,
+                  "endLine": 47,
+                  "endColumn": 48
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA1873",
+          "level": "note",
+          "message": "Evaluation of this argument may be expensive and unnecessary if logging is disabled",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/BackgroundServices/AppointmentMaintenanceService.cs",
+                "region": {
+                  "startLine": 89,
+                  "startColumn": 17,
+                  "endLine": 91,
+                  "endColumn": 40
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA1873",
+          "level": "note",
+          "message": "Evaluation of this argument may be expensive and unnecessary if logging is disabled",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/BackgroundServices/NotificationCleanupService.cs",
+                "region": {
+                  "startLine": 59,
+                  "startColumn": 17,
+                  "endLine": 62,
+                  "endColumn": 32
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA1873",
+          "level": "note",
+          "message": "Evaluation of this argument may be expensive and unnecessary if logging is disabled",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/BackgroundServices/NotificationCleanupService.cs",
+                "region": {
+                  "startLine": 71,
+                  "startColumn": 13,
+                  "endLine": 75,
+                  "endColumn": 28
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "S6667",
+          "level": "warning",
+          "message": "Logging in a catch clause should pass the caught exception as a parameter.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/BackgroundServices/HeartbeatService.cs",
+                "region": {
+                  "startLine": 31,
+                  "startColumn": 17,
+                  "endLine": 31,
+                  "endColumn": 83
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA1873",
+          "level": "note",
+          "message": "Evaluation of this argument may be expensive and unnecessary if logging is disabled",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/BackgroundServices/HeartbeatService.cs",
+                "region": {
+                  "startLine": 22,
+                  "startColumn": 21,
+                  "endLine": 24,
+                  "endColumn": 44
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA1873",
+          "level": "note",
+          "message": "Evaluation of this argument may be expensive and unnecessary if logging is disabled",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/BackgroundServices/AppointmentMaintenanceService.cs",
+                "region": {
+                  "startLine": 120,
+                  "startColumn": 17,
+                  "endLine": 122,
+                  "endColumn": 27
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA1873",
+          "level": "note",
+          "message": "Evaluation of this argument may be expensive and unnecessary if logging is disabled",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/BackgroundServices/AppointmentMaintenanceService.cs",
+                "region": {
+                  "startLine": 148,
+                  "startColumn": 13,
+                  "endLine": 151,
+                  "endColumn": 23
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "S927",
+          "level": "warning",
+          "message": "Rename parameter 'builder' to 'modelBuilder' to match the base class declaration.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/Data/AppDbContext.cs",
+                "region": {
+                  "startLine": 26,
+                  "startColumn": 62,
+                  "endLine": 26,
+                  "endColumn": 69
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA1873",
+          "level": "note",
+          "message": "Evaluation of this argument may be expensive and unnecessary if logging is disabled",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/BackgroundServices/AppointmentMaintenanceService.cs",
+                "region": {
+                  "startLine": 211,
+                  "startColumn": 21,
+                  "endLine": 213,
+                  "endColumn": 34
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA1873",
+          "level": "note",
+          "message": "Evaluation of this argument may be expensive and unnecessary if logging is disabled",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/BackgroundServices/AppointmentMaintenanceService.cs",
+                "region": {
+                  "startLine": 179,
+                  "startColumn": 17,
+                  "endLine": 182,
+                  "endColumn": 57
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA1873",
+          "level": "note",
+          "message": "Evaluation of this argument may be expensive and unnecessary if logging is disabled",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/BackgroundServices/AppointmentMaintenanceService.cs",
+                "region": {
+                  "startLine": 191,
+                  "startColumn": 13,
+                  "endLine": 195,
+                  "endColumn": 53
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA1873",
+          "level": "note",
+          "message": "Evaluation of this argument may be expensive and unnecessary if logging is disabled",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/Services/Implementation/DoctorService.cs",
+                "region": {
+                  "startLine": 142,
+                  "startColumn": 17,
+                  "endLine": 146,
+                  "endColumn": 30
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA1873",
+          "level": "note",
+          "message": "Evaluation of this argument may be expensive and unnecessary if logging is disabled",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/Services/Implementation/DoctorService.cs",
+                "region": {
+                  "startLine": 151,
+                  "startColumn": 13,
+                  "endLine": 155,
+                  "endColumn": 26
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA1873",
+          "level": "note",
+          "message": "Evaluation of this argument may be expensive and unnecessary if logging is disabled",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/Services/Implementation/DoctorService.cs",
+                "region": {
+                  "startLine": 182,
+                  "startColumn": 13,
+                  "endLine": 187,
+                  "endColumn": 56
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA1873",
+          "level": "note",
+          "message": "Evaluation of this argument may be expensive and unnecessary if logging is disabled",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/Services/Implementation/AppointmentService.cs",
+                "region": {
+                  "startLine": 132,
+                  "startColumn": 13,
+                  "endLine": 138,
+                  "endColumn": 38
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA1873",
+          "level": "note",
+          "message": "Evaluation of this argument may be expensive and unnecessary if logging is disabled",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/Services/Implementation/AppointmentService.cs",
+                "region": {
+                  "startLine": 140,
+                  "startColumn": 13,
+                  "endLine": 144,
+                  "endColumn": 38
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "S6960",
+          "level": "warning",
+          "message": "This controller has multiple responsibilities and could be split into 2 smaller controllers.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/Controllers/DoctorController.cs",
+                "region": {
+                  "startLine": 11,
+                  "startColumn": 18,
+                  "endLine": 11,
+                  "endColumn": 35
+                }
+              }
+            }
+          ],
+          "relatedLocations": [
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/Controllers/DoctorController.cs",
+                "region": {
+                  "startLine": 121,
+                  "startColumn": 42,
+                  "endLine": 121,
+                  "endColumn": 59
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/Controllers/DoctorController.cs",
+                "region": {
+                  "startLine": 156,
+                  "startColumn": 22,
+                  "endLine": 156,
+                  "endColumn": 45
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/Controllers/DoctorController.cs",
+                "region": {
+                  "startLine": 111,
+                  "startColumn": 42,
+                  "endLine": 111,
+                  "endColumn": 50
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/Controllers/DoctorController.cs",
+                "region": {
+                  "startLine": 68,
+                  "startColumn": 42,
+                  "endLine": 68,
+                  "endColumn": 48
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/Controllers/DoctorController.cs",
+                "region": {
+                  "startLine": 149,
+                  "startColumn": 42,
+                  "endLine": 149,
+                  "endColumn": 52
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/Controllers/DoctorController.cs",
+                "region": {
+                  "startLine": 25,
+                  "startColumn": 42,
+                  "endLine": 25,
+                  "endColumn": 48
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/Controllers/DoctorController.cs",
+                "region": {
+                  "startLine": 96,
+                  "startColumn": 13,
+                  "endLine": 96,
+                  "endColumn": 28
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/Controllers/DoctorController.cs",
+                "region": {
+                  "startLine": 38,
+                  "startColumn": 42,
+                  "endLine": 38,
+                  "endColumn": 49
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/Controllers/DoctorController.cs",
+                "region": {
+                  "startLine": 55,
+                  "startColumn": 13,
+                  "endLine": 55,
+                  "endColumn": 32
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/Controllers/DoctorController.cs",
+                "region": {
+                  "startLine": 83,
+                  "startColumn": 42,
+                  "endLine": 83,
+                  "endColumn": 48
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1,
+            "customProperties": {
+              "0": "May belong to responsibility #1.",
+              "1": "May belong to responsibility #1.",
+              "2": "May belong to responsibility #2.",
+              "3": "May belong to responsibility #2.",
+              "4": "May belong to responsibility #2.",
+              "5": "May belong to responsibility #2.",
+              "6": "May belong to responsibility #2.",
+              "7": "May belong to responsibility #2.",
+              "8": "May belong to responsibility #2.",
+              "9": "May belong to responsibility #2."
+            }
+          }
+        },
+        {
+          "ruleId": "CA1873",
+          "level": "note",
+          "message": "Evaluation of this argument may be expensive and unnecessary if logging is disabled",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/Services/Implementation/AppointmentService.cs",
+                "region": {
+                  "startLine": 510,
+                  "startColumn": 13,
+                  "endLine": 514,
+                  "endColumn": 26
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA1861",
+          "level": "note",
+          "message": "Prefer 'static readonly' fields over constant array arguments if the called method is called repeatedly and is not mutating the passed array",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/Migrations/20260711103901_InitialCreate.cs",
+                "region": {
+                  "startLine": 160,
+                  "startColumn": 26,
+                  "endLine": 160,
+                  "endColumn": 137
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1,
+            "customProperties": {
+              "paramName": "columns"
+            }
+          }
+        },
+        {
+          "ruleId": "CA1861",
+          "level": "note",
+          "message": "Prefer 'static readonly' fields over constant array arguments if the called method is called repeatedly and is not mutating the passed array",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/Migrations/20260711103901_InitialCreate.cs",
+                "region": {
+                  "startLine": 169,
+                  "startColumn": 26,
+                  "endLine": 169,
+                  "endColumn": 158
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1,
+            "customProperties": {
+              "paramName": "columns"
+            }
+          }
+        },
+        {
+          "ruleId": "CA1861",
+          "level": "note",
+          "message": "Prefer 'static readonly' fields over constant array arguments if the called method is called repeatedly and is not mutating the passed array",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/Migrations/20260711103901_InitialCreate.cs",
+                "region": {
+                  "startLine": 178,
+                  "startColumn": 26,
+                  "endLine": 178,
+                  "endColumn": 137
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1,
+            "customProperties": {
+              "paramName": "columns"
+            }
+          }
+        },
+        {
+          "ruleId": "CA1861",
+          "level": "note",
+          "message": "Prefer 'static readonly' fields over constant array arguments if the called method is called repeatedly and is not mutating the passed array",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/Migrations/20260711103901_InitialCreate.cs",
+                "region": {
+                  "startLine": 184,
+                  "startColumn": 26,
+                  "endLine": 184,
+                  "endColumn": 75
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1,
+            "customProperties": {
+              "paramName": "columns"
+            }
+          }
+        }
+      ],
+      "rules": {
+        "CA1861": {
+          "id": "CA1861",
+          "shortDescription": "Avoid constant arrays as arguments",
+          "fullDescription": "Constant arrays passed as arguments are not reused when called repeatedly, which implies a new array is created each time. Consider extracting them to 'static readonly' fields to improve performance if the passed array is not mutated within the called method.",
+          "defaultLevel": "note",
+          "helpUri": "https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1861",
+          "properties": {
+            "category": "Performance",
+            "isEnabledByDefault": true,
+            "tags": [
+              "Telemetry",
+              "EnabledRuleInAggressiveMode"
+            ]
+          }
+        },
+        "CA1873": {
+          "id": "CA1873",
+          "shortDescription": "Avoid potentially expensive logging",
+          "fullDescription": "In many situations, logging is disabled or set to a log level that results in an unnecessary evaluation for this argument.",
+          "defaultLevel": "note",
+          "helpUri": "https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1873",
+          "properties": {
+            "category": "Performance",
+            "isEnabledByDefault": true,
+            "tags": [
+              "Telemetry",
+              "EnabledRuleInAggressiveMode"
+            ]
+          }
+        },
+        "S1192": {
+          "id": "S1192",
+          "shortDescription": "String literals should not be duplicated",
+          "fullDescription": "Duplicated string literals make the process of refactoring complex and error-prone, as any change would need to be propagated on all occurrences.",
+          "defaultLevel": "warning",
+          "helpUri": "https://rules.sonarsource.com/csharp/RSPEC-1192",
+          "properties": {
+            "category": "Minor Code Smell",
+            "isEnabledByDefault": false,
+            "tags": [
+              "C#",
+              "MainSourceScope",
+              "SonarWay"
+            ]
+          }
+        },
+        "S4136": {
+          "id": "S4136",
+          "shortDescription": "Method overloads should be grouped together",
+          "fullDescription": "For clarity, all overloads of the same method should be grouped together. That lets both users and maintainers quickly understand all the current available options.",
+          "defaultLevel": "warning",
+          "helpUri": "https://rules.sonarsource.com/csharp/RSPEC-4136",
+          "properties": {
+            "category": "Minor Code Smell",
+            "isEnabledByDefault": true,
+            "tags": [
+              "C#",
+              "MainSourceScope",
+              "TestSourceScope",
+              "SonarWay"
+            ]
+          }
+        },
+        "S6667": {
+          "id": "S6667",
+          "shortDescription": "Logging in a catch clause should pass the caught exception as a parameter.",
+          "fullDescription": "This rule raises an issue on logging calls inside a catch clause that does not pass the raised Exception.",
+          "defaultLevel": "warning",
+          "helpUri": "https://rules.sonarsource.com/csharp/RSPEC-6667",
+          "properties": {
+            "category": "Minor Code Smell",
+            "isEnabledByDefault": true,
+            "tags": [
+              "C#",
+              "MainSourceScope",
+              "SonarWay"
+            ]
+          }
+        },
+        "S6960": {
+          "id": "S6960",
+          "shortDescription": "Controllers should not have mixed responsibilities",
+          "fullDescription": "ASP.NET controllers should not have mixed responsibilities. Following the Single Responsibility Principle (SRP), they should be kept lean and focused on a single, separate concern. In short, they should have a single reason to change.",
+          "defaultLevel": "warning",
+          "helpUri": "https://rules.sonarsource.com/csharp/RSPEC-6960",
+          "properties": {
+            "category": "Major Code Smell",
+            "isEnabledByDefault": true,
+            "tags": [
+              "C#",
+              "MainSourceScope",
+              "SonarWay"
+            ]
+          }
+        },
+        "S927": {
+          "id": "S927",
+          "shortDescription": "Parameter names should match base declaration and other partial definitions",
+          "fullDescription": "Parameters are part of the method signature and its identity.",
+          "defaultLevel": "warning",
+          "helpUri": "https://rules.sonarsource.com/csharp/RSPEC-927",
+          "properties": {
+            "category": "Critical Code Smell",
+            "isEnabledByDefault": true,
+            "tags": [
+              "C#",
+              "MainSourceScope",
+              "TestSourceScope",
+              "SonarWay"
+            ]
+          }
+        }
+      }
+    }
+  ]
+}

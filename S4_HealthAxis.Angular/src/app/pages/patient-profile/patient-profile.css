@@ -431,3 +431,39 @@
     width: 100%;
   }
 }
+
+.ha-phone-input-row {
+  display: grid;
+  grid-template-columns: 160px minmax(0, 1fr);
+  gap: 10px;
+  width: 100%;
+}
+
+.ha-phone-country-select {
+  width: 100%;
+  min-width: 0;
+}
+
+.ha-phone-number-input {
+  width: 100% !important;
+  max-width: none !important;
+  min-width: 0;
+}
+
+/* Make sure existing form input styles do not shrink the phone field */
+.ha-phone-input-row input.ha-phone-number-input {
+  width: 100% !important;
+  max-width: none !important;
+}
+
+/* Mobile view */
+@media (max-width: 576px) {
+  .ha-phone-input-row {
+    grid-template-columns: 1fr;
+  }
+
+  .ha-phone-country-select,
+  .ha-phone-number-input {
+    width: 100% !important;
+  }
+}

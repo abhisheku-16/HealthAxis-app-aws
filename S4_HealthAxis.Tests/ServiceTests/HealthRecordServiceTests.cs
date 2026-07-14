@@ -34,24 +34,22 @@ namespace S4_HealthAxis.Tests.ServiceTests
         [Fact]
         public async Task GetByIdAsync_ShouldReturnNull_WhenRecordDoesNotExist()
         {
-            // Arrange
             _healthRecordRepositoryMock
                 .Setup(x => x.GetByIdAsync(1))
                 .ReturnsAsync((HealthRecord?)null);
 
-            // Act
             var result = await _service.GetByIdAsync(1);
 
-            // Assert
             result.Should().BeNull();
 
-            _healthRecordRepositoryMock.Verify(x => x.GetByIdAsync(1), Times.Once);
+            _healthRecordRepositoryMock.Verify(
+                x => x.GetByIdAsync(1),
+                Times.Once);
         }
 
         [Fact]
         public async Task GetByIdAsync_ShouldReturnMappedDto_WhenRecordExists()
         {
-            // Arrange
             var record = BuildHealthRecord(
                 healthRecordId: 1,
                 appointmentId: 100,
@@ -62,10 +60,8 @@ namespace S4_HealthAxis.Tests.ServiceTests
                 .Setup(x => x.GetByIdAsync(1))
                 .ReturnsAsync(record);
 
-            // Act
             var result = await _service.GetByIdAsync(1);
 
-            // Assert
             result.Should().NotBeNull();
             result!.HealthRecordId.Should().Be(1);
             result.AppointmentId.Should().Be(100);
@@ -77,13 +73,14 @@ namespace S4_HealthAxis.Tests.ServiceTests
             result.Prescription.Should().Be("Paracetamol");
             result.Notes.Should().Be("Rest for 2 days");
 
-            _healthRecordRepositoryMock.Verify(x => x.GetByIdAsync(1), Times.Once);
+            _healthRecordRepositoryMock.Verify(
+                x => x.GetByIdAsync(1),
+                Times.Once);
         }
 
         [Fact]
         public async Task GetByIdAsync_ShouldMapEmptyDoctorDetails_WhenDoctorNavigationIsNull()
         {
-            // Arrange
             var record = BuildHealthRecord(
                 healthRecordId: 1,
                 appointmentId: 100,
@@ -96,10 +93,8 @@ namespace S4_HealthAxis.Tests.ServiceTests
                 .Setup(x => x.GetByIdAsync(1))
                 .ReturnsAsync(record);
 
-            // Act
             var result = await _service.GetByIdAsync(1);
 
-            // Assert
             result.Should().NotBeNull();
             result!.DoctorName.Should().BeEmpty();
             result.DoctorSpecialisation.Should().Be(0);
@@ -108,24 +103,22 @@ namespace S4_HealthAxis.Tests.ServiceTests
         [Fact]
         public async Task GetByAppointmentIdAsync_ShouldReturnNull_WhenRecordDoesNotExist()
         {
-            // Arrange
             _healthRecordRepositoryMock
                 .Setup(x => x.GetByAppointmentIdAsync(100))
                 .ReturnsAsync((HealthRecord?)null);
 
-            // Act
             var result = await _service.GetByAppointmentIdAsync(100);
 
-            // Assert
             result.Should().BeNull();
 
-            _healthRecordRepositoryMock.Verify(x => x.GetByAppointmentIdAsync(100), Times.Once);
+            _healthRecordRepositoryMock.Verify(
+                x => x.GetByAppointmentIdAsync(100),
+                Times.Once);
         }
 
         [Fact]
         public async Task GetByAppointmentIdAsync_ShouldReturnMappedDto_WhenRecordExists()
         {
-            // Arrange
             var record = BuildHealthRecord(
                 healthRecordId: 1,
                 appointmentId: 100,
@@ -136,41 +129,39 @@ namespace S4_HealthAxis.Tests.ServiceTests
                 .Setup(x => x.GetByAppointmentIdAsync(100))
                 .ReturnsAsync(record);
 
-            // Act
             var result = await _service.GetByAppointmentIdAsync(100);
 
-            // Assert
             result.Should().NotBeNull();
             result!.HealthRecordId.Should().Be(1);
             result.AppointmentId.Should().Be(100);
             result.DoctorName.Should().Be("Doctor 20");
 
-            _healthRecordRepositoryMock.Verify(x => x.GetByAppointmentIdAsync(100), Times.Once);
+            _healthRecordRepositoryMock.Verify(
+                x => x.GetByAppointmentIdAsync(100),
+                Times.Once);
         }
 
         [Fact]
         public async Task GetByPatientIdAsync_ShouldThrowKeyNotFoundException_WhenPatientDoesNotExist()
         {
-            // Arrange
             _patientRepositoryMock
                 .Setup(x => x.GetByIdAsync(10))
                 .ReturnsAsync((Patient?)null);
 
-            // Act
             var act = async () => await _service.GetByPatientIdAsync(10);
 
-            // Assert
             await act.Should()
                 .ThrowAsync<KeyNotFoundException>()
                 .WithMessage("Patient with Id 10 not found.");
 
-            _healthRecordRepositoryMock.Verify(x => x.GetByPatientIdAsync(It.IsAny<int>()), Times.Never);
+            _healthRecordRepositoryMock.Verify(
+                x => x.GetByPatientIdAsync(It.IsAny<int>()),
+                Times.Never);
         }
 
         [Fact]
         public async Task GetByPatientIdAsync_ShouldReturnMappedRecords_WhenPatientExists()
         {
-            // Arrange
             var patient = BuildPatient(10);
 
             var records = new List<HealthRecord>
@@ -187,10 +178,8 @@ namespace S4_HealthAxis.Tests.ServiceTests
                 .Setup(x => x.GetByPatientIdAsync(10))
                 .ReturnsAsync(records);
 
-            // Act
             var result = (await _service.GetByPatientIdAsync(10)).ToList();
 
-            // Assert
             result.Should().HaveCount(2);
 
             result[0].HealthRecordId.Should().Be(1);
@@ -199,8 +188,13 @@ namespace S4_HealthAxis.Tests.ServiceTests
             result[1].HealthRecordId.Should().Be(2);
             result[1].DoctorName.Should().Be("Doctor 21");
 
-            _patientRepositoryMock.Verify(x => x.GetByIdAsync(10), Times.Once);
-            _healthRecordRepositoryMock.Verify(x => x.GetByPatientIdAsync(10), Times.Once);
+            _patientRepositoryMock.Verify(
+                x => x.GetByIdAsync(10),
+                Times.Once);
+
+            _healthRecordRepositoryMock.Verify(
+                x => x.GetByPatientIdAsync(10),
+                Times.Once);
         }
 
         [Theory]
@@ -224,7 +218,6 @@ namespace S4_HealthAxis.Tests.ServiceTests
             string? prescription,
             string expectedMessage)
         {
-            // Arrange
             var dto = new CreateHealthRecordDto
             {
                 AppointmentId = appointmentId,
@@ -235,38 +228,43 @@ namespace S4_HealthAxis.Tests.ServiceTests
                 Notes = "Notes"
             };
 
-            // Act
             var act = async () => await _service.CreateAsync(dto);
 
-            // Assert
             await act.Should()
                 .ThrowAsync<ArgumentException>()
                 .WithMessage(expectedMessage);
 
-            _appointmentRepositoryMock.Verify(x => x.GetByIdAsync(It.IsAny<int>()), Times.Never);
-            _healthRecordRepositoryMock.Verify(x => x.AddAsync(It.IsAny<HealthRecord>()), Times.Never);
+            _appointmentRepositoryMock.Verify(
+                x => x.GetByIdAsync(It.IsAny<int>()),
+                Times.Never);
+
+            _healthRecordRepositoryMock.Verify(
+                x => x.AddAsync(It.IsAny<HealthRecord>()),
+                Times.Never);
         }
 
         [Fact]
         public async Task CreateAsync_ShouldThrowKeyNotFoundException_WhenAppointmentDoesNotExist()
         {
-            // Arrange
             var dto = BuildValidCreateDto();
 
             _appointmentRepositoryMock
                 .Setup(x => x.GetByIdAsync(dto.AppointmentId))
                 .ReturnsAsync((Appointment?)null);
 
-            // Act
             var act = async () => await _service.CreateAsync(dto);
 
-            // Assert
             await act.Should()
                 .ThrowAsync<KeyNotFoundException>()
                 .WithMessage("Appointment not found.");
 
-            _healthRecordRepositoryMock.Verify(x => x.GetByAppointmentIdAsync(It.IsAny<int>()), Times.Never);
-            _healthRecordRepositoryMock.Verify(x => x.AddAsync(It.IsAny<HealthRecord>()), Times.Never);
+            _healthRecordRepositoryMock.Verify(
+                x => x.GetByAppointmentIdAsync(It.IsAny<int>()),
+                Times.Never);
+
+            _healthRecordRepositoryMock.Verify(
+                x => x.AddAsync(It.IsAny<HealthRecord>()),
+                Times.Never);
         }
 
         [Theory]
@@ -276,7 +274,6 @@ namespace S4_HealthAxis.Tests.ServiceTests
         public async Task CreateAsync_ShouldThrowInvalidOperationException_WhenAppointmentIsNotCompleted(
             AppointmentStatus status)
         {
-            // Arrange
             var dto = BuildValidCreateDto();
 
             var appointment = BuildAppointment(
@@ -289,22 +286,24 @@ namespace S4_HealthAxis.Tests.ServiceTests
                 .Setup(x => x.GetByIdAsync(dto.AppointmentId))
                 .ReturnsAsync(appointment);
 
-            // Act
             var act = async () => await _service.CreateAsync(dto);
 
-            // Assert
             await act.Should()
                 .ThrowAsync<InvalidOperationException>()
                 .WithMessage("Health record can only be created for completed appointments.");
 
-            _healthRecordRepositoryMock.Verify(x => x.GetByAppointmentIdAsync(It.IsAny<int>()), Times.Never);
-            _healthRecordRepositoryMock.Verify(x => x.AddAsync(It.IsAny<HealthRecord>()), Times.Never);
+            _healthRecordRepositoryMock.Verify(
+                x => x.GetByAppointmentIdAsync(It.IsAny<int>()),
+                Times.Never);
+
+            _healthRecordRepositoryMock.Verify(
+                x => x.AddAsync(It.IsAny<HealthRecord>()),
+                Times.Never);
         }
 
         [Fact]
         public async Task CreateAsync_ShouldThrowInvalidOperationException_WhenRecordAlreadyExistsForAppointment()
         {
-            // Arrange
             var dto = BuildValidCreateDto();
 
             var appointment = BuildAppointment(
@@ -327,23 +326,28 @@ namespace S4_HealthAxis.Tests.ServiceTests
                 .Setup(x => x.GetByAppointmentIdAsync(dto.AppointmentId))
                 .ReturnsAsync(existingRecord);
 
-            // Act
             var act = async () => await _service.CreateAsync(dto);
 
-            // Assert
             await act.Should()
                 .ThrowAsync<InvalidOperationException>()
                 .WithMessage("A health record already exists for this appointment.");
 
-            _patientRepositoryMock.Verify(x => x.GetByIdAsync(It.IsAny<int>()), Times.Never);
-            _doctorRepositoryMock.Verify(x => x.GetByIdAsync(It.IsAny<int>()), Times.Never);
-            _healthRecordRepositoryMock.Verify(x => x.AddAsync(It.IsAny<HealthRecord>()), Times.Never);
+            _patientRepositoryMock.Verify(
+                x => x.GetByIdAsync(It.IsAny<int>()),
+                Times.Never);
+
+            _doctorRepositoryMock.Verify(
+                x => x.GetByIdAsync(It.IsAny<int>()),
+                Times.Never);
+
+            _healthRecordRepositoryMock.Verify(
+                x => x.AddAsync(It.IsAny<HealthRecord>()),
+                Times.Never);
         }
 
         [Fact]
         public async Task CreateAsync_ShouldThrowKeyNotFoundException_WhenPatientDoesNotExist()
         {
-            // Arrange
             var dto = BuildValidCreateDto();
 
             var appointment = BuildAppointment(
@@ -364,22 +368,24 @@ namespace S4_HealthAxis.Tests.ServiceTests
                 .Setup(x => x.GetByIdAsync(dto.PatientId))
                 .ReturnsAsync((Patient?)null);
 
-            // Act
             var act = async () => await _service.CreateAsync(dto);
 
-            // Assert
             await act.Should()
                 .ThrowAsync<KeyNotFoundException>()
                 .WithMessage("Patient not found.");
 
-            _doctorRepositoryMock.Verify(x => x.GetByIdAsync(It.IsAny<int>()), Times.Never);
-            _healthRecordRepositoryMock.Verify(x => x.AddAsync(It.IsAny<HealthRecord>()), Times.Never);
+            _doctorRepositoryMock.Verify(
+                x => x.GetByIdAsync(It.IsAny<int>()),
+                Times.Never);
+
+            _healthRecordRepositoryMock.Verify(
+                x => x.AddAsync(It.IsAny<HealthRecord>()),
+                Times.Never);
         }
 
         [Fact]
         public async Task CreateAsync_ShouldThrowKeyNotFoundException_WhenDoctorDoesNotExist()
         {
-            // Arrange
             var dto = BuildValidCreateDto();
 
             var appointment = BuildAppointment(
@@ -404,21 +410,20 @@ namespace S4_HealthAxis.Tests.ServiceTests
                 .Setup(x => x.GetByIdAsync(dto.DoctorId))
                 .ReturnsAsync((Doctor?)null);
 
-            // Act
             var act = async () => await _service.CreateAsync(dto);
 
-            // Assert
             await act.Should()
                 .ThrowAsync<KeyNotFoundException>()
                 .WithMessage("Doctor not found.");
 
-            _healthRecordRepositoryMock.Verify(x => x.AddAsync(It.IsAny<HealthRecord>()), Times.Never);
+            _healthRecordRepositoryMock.Verify(
+                x => x.AddAsync(It.IsAny<HealthRecord>()),
+                Times.Never);
         }
 
         [Fact]
         public async Task CreateAsync_ShouldThrowInvalidOperationException_WhenPatientDoesNotMatchAppointment()
         {
-            // Arrange
             var dto = BuildValidCreateDto();
 
             var appointment = BuildAppointment(
@@ -429,21 +434,20 @@ namespace S4_HealthAxis.Tests.ServiceTests
 
             SetupCreateDependencies(dto, appointment);
 
-            // Act
             var act = async () => await _service.CreateAsync(dto);
 
-            // Assert
             await act.Should()
                 .ThrowAsync<InvalidOperationException>()
                 .WithMessage("Patient does not match appointment.");
 
-            _healthRecordRepositoryMock.Verify(x => x.AddAsync(It.IsAny<HealthRecord>()), Times.Never);
+            _healthRecordRepositoryMock.Verify(
+                x => x.AddAsync(It.IsAny<HealthRecord>()),
+                Times.Never);
         }
 
         [Fact]
         public async Task CreateAsync_ShouldThrowInvalidOperationException_WhenDoctorDoesNotMatchAppointment()
         {
-            // Arrange
             var dto = BuildValidCreateDto();
 
             var appointment = BuildAppointment(
@@ -454,21 +458,20 @@ namespace S4_HealthAxis.Tests.ServiceTests
 
             SetupCreateDependencies(dto, appointment);
 
-            // Act
             var act = async () => await _service.CreateAsync(dto);
 
-            // Assert
             await act.Should()
                 .ThrowAsync<InvalidOperationException>()
                 .WithMessage("Doctor does not match appointment.");
 
-            _healthRecordRepositoryMock.Verify(x => x.AddAsync(It.IsAny<HealthRecord>()), Times.Never);
+            _healthRecordRepositoryMock.Verify(
+                x => x.AddAsync(It.IsAny<HealthRecord>()),
+                Times.Never);
         }
 
         [Fact]
-        public async Task CreateAsync_ShouldCreateHealthRecord_WhenRequestIsValid_AndCreatedRecordIsReturned()
+        public async Task CreateAsync_ShouldCreateHealthRecord_WhenRequestIsValid()
         {
-            // Arrange
             var dto = BuildValidCreateDto();
             dto.Diagnosis = " Fever ";
             dto.Prescription = " Paracetamol ";
@@ -505,10 +508,8 @@ namespace S4_HealthAxis.Tests.ServiceTests
                     return capturedRecord;
                 });
 
-            // Act
             var result = await _service.CreateAsync(dto);
 
-            // Assert
             capturedRecord.Should().NotBeNull();
             capturedRecord!.AppointmentId.Should().Be(dto.AppointmentId);
             capturedRecord.PatientId.Should().Be(dto.PatientId);
@@ -528,15 +529,22 @@ namespace S4_HealthAxis.Tests.ServiceTests
             result.Prescription.Should().Be("Paracetamol");
             result.Notes.Should().Be("Take rest");
 
-            _healthRecordRepositoryMock.Verify(x => x.AddAsync(It.IsAny<HealthRecord>()), Times.Once);
-            _healthRecordRepositoryMock.Verify(x => x.SaveChangesAsync(), Times.Once);
-            _healthRecordRepositoryMock.Verify(x => x.GetByIdAsync(777), Times.Once);
+            _healthRecordRepositoryMock.Verify(
+                x => x.AddAsync(It.IsAny<HealthRecord>()),
+                Times.Once);
+
+            _healthRecordRepositoryMock.Verify(
+                x => x.SaveChangesAsync(),
+                Times.Once);
+
+            _healthRecordRepositoryMock.Verify(
+                x => x.GetByIdAsync(777),
+                Times.Once);
         }
 
         [Fact]
         public async Task CreateAsync_ShouldCreateHealthRecord_WithNullNotes()
         {
-            // Arrange
             var dto = BuildValidCreateDto();
             dto.Notes = null;
 
@@ -567,10 +575,8 @@ namespace S4_HealthAxis.Tests.ServiceTests
                 .Setup(x => x.GetByIdAsync(778))
                 .ReturnsAsync(() => capturedRecord);
 
-            // Act
             var result = await _service.CreateAsync(dto);
 
-            // Assert
             capturedRecord.Should().NotBeNull();
             capturedRecord!.Notes.Should().BeNull();
             result.Notes.Should().BeNull();
@@ -579,7 +585,6 @@ namespace S4_HealthAxis.Tests.ServiceTests
         [Fact]
         public async Task CreateAsync_ShouldReturnFallbackRecord_WhenRepositoryDoesNotReturnCreatedRecord()
         {
-            // Arrange
             var dto = BuildValidCreateDto();
 
             var appointment = BuildAppointment(
@@ -603,10 +608,8 @@ namespace S4_HealthAxis.Tests.ServiceTests
                 .Setup(x => x.GetByIdAsync(888))
                 .ReturnsAsync((HealthRecord?)null);
 
-            // Act
             var result = await _service.CreateAsync(dto);
 
-            // Assert
             result.HealthRecordId.Should().Be(888);
             result.DoctorName.Should().BeEmpty();
             result.DoctorSpecialisation.Should().Be(0);
@@ -626,7 +629,6 @@ namespace S4_HealthAxis.Tests.ServiceTests
             string? prescription,
             string expectedMessage)
         {
-            // Arrange
             var dto = new UpdateHealthRecordDto
             {
                 Diagnosis = diagnosis,
@@ -634,43 +636,44 @@ namespace S4_HealthAxis.Tests.ServiceTests
                 Notes = "Notes"
             };
 
-            // Act
             var act = async () => await _service.UpdateAsync(1, dto);
 
-            // Assert
             await act.Should()
                 .ThrowAsync<ArgumentException>()
                 .WithMessage(expectedMessage);
 
-            _healthRecordRepositoryMock.Verify(x => x.GetByIdAsync(It.IsAny<int>()), Times.Never);
+            _healthRecordRepositoryMock.Verify(
+                x => x.GetByIdAsync(It.IsAny<int>()),
+                Times.Never);
         }
 
         [Fact]
         public async Task UpdateAsync_ShouldThrowKeyNotFoundException_WhenRecordDoesNotExist()
         {
-            // Arrange
             var dto = BuildValidUpdateDto();
 
             _healthRecordRepositoryMock
                 .Setup(x => x.GetByIdAsync(1))
                 .ReturnsAsync((HealthRecord?)null);
 
-            // Act
             var act = async () => await _service.UpdateAsync(1, dto);
 
-            // Assert
             await act.Should()
                 .ThrowAsync<KeyNotFoundException>()
                 .WithMessage("Health record 1 not found.");
 
-            _healthRecordRepositoryMock.Verify(x => x.UpdateAsync(It.IsAny<HealthRecord>()), Times.Never);
-            _healthRecordRepositoryMock.Verify(x => x.SaveChangesAsync(), Times.Never);
+            _healthRecordRepositoryMock.Verify(
+                x => x.UpdateAsync(It.IsAny<HealthRecord>()),
+                Times.Never);
+
+            _healthRecordRepositoryMock.Verify(
+                x => x.SaveChangesAsync(),
+                Times.Never);
         }
 
         [Fact]
         public async Task UpdateAsync_ShouldUpdateRecord_WhenRequestIsValid()
         {
-            // Arrange
             var record = BuildHealthRecord(1, 100, 10, 20);
 
             var dto = new UpdateHealthRecordDto
@@ -692,23 +695,28 @@ namespace S4_HealthAxis.Tests.ServiceTests
                 .Setup(x => x.SaveChangesAsync())
                 .Returns(Task.CompletedTask);
 
-            // Act
             await _service.UpdateAsync(1, dto);
 
-            // Assert
             record.Diagnosis.Should().Be("Updated Diagnosis");
             record.Prescription.Should().Be("Updated Prescription");
             record.Notes.Should().Be("Updated Notes");
 
-            _healthRecordRepositoryMock.Verify(x => x.GetByIdAsync(1), Times.Once);
-            _healthRecordRepositoryMock.Verify(x => x.UpdateAsync(record), Times.Once);
-            _healthRecordRepositoryMock.Verify(x => x.SaveChangesAsync(), Times.Once);
+            _healthRecordRepositoryMock.Verify(
+                x => x.GetByIdAsync(1),
+                Times.Once);
+
+            _healthRecordRepositoryMock.Verify(
+                x => x.UpdateAsync(record),
+                Times.Once);
+
+            _healthRecordRepositoryMock.Verify(
+                x => x.SaveChangesAsync(),
+                Times.Once);
         }
 
         [Fact]
         public async Task UpdateAsync_ShouldSetNotesToNull_WhenNotesIsNull()
         {
-            // Arrange
             var record = BuildHealthRecord(1, 100, 10, 20);
 
             var dto = new UpdateHealthRecordDto
@@ -730,17 +738,14 @@ namespace S4_HealthAxis.Tests.ServiceTests
                 .Setup(x => x.SaveChangesAsync())
                 .Returns(Task.CompletedTask);
 
-            // Act
             await _service.UpdateAsync(1, dto);
 
-            // Assert
             record.Notes.Should().BeNull();
         }
 
         [Fact]
         public async Task UpdateAsync_ShouldTrimNotes_WhenNotesHasWhitespace()
         {
-            // Arrange
             var record = BuildHealthRecord(1, 100, 10, 20);
 
             var dto = new UpdateHealthRecordDto
@@ -762,10 +767,8 @@ namespace S4_HealthAxis.Tests.ServiceTests
                 .Setup(x => x.SaveChangesAsync())
                 .Returns(Task.CompletedTask);
 
-            // Act
             await _service.UpdateAsync(1, dto);
 
-            // Assert
             record.Notes.Should().Be("Clean notes");
         }
 
@@ -891,4 +894,3 @@ namespace S4_HealthAxis.Tests.ServiceTests
         }
     }
 }
-

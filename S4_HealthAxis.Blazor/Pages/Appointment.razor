@@ -15,7 +15,7 @@
 
 <div class="d-flex justify-content-between align-items-center mb-4">
     <div>
-        <Appointment />
+        @* <Appointment /> *@
         <h3 class="mb-1 fw-bold text-dark">Appointment Dashboard</h3>
         <p class="text-muted mb-0">Monitor schedule health, reschedule bookings, and cancel appointments.</p>
     </div>
@@ -546,12 +546,42 @@
             _loading = true;
             _pageError = null;
 
-            _appointments = await AppointmentService.GetAllAsync() ?? new();
-            var allPatients = await PatientService.GetAllAsync() ?? new();
-            var allDoctors = await DoctorService.GetAllAsync() ?? new();
+            try
+            {
+                _appointments = await AppointmentService.GetAllAsync() ?? new();
+            }
+            catch (Exception ex)
+            {
+                _appointments = new();
+                _pageError = $"Failed to load appointments: {ex.Message}";
+                return;
+            }
 
-            _activePatients = allPatients.Where(p => p.IsActive).ToList();
-            _activeDoctors = allDoctors.Where(d => d.IsActive).ToList();
+            try
+            {
+                var allPatients = await PatientService.GetAllAsync() ?? new();
+
+                _activePatients = allPatients
+                    .Where(p => p.IsActive)
+                    .ToList();
+            }
+            catch
+            {
+                _activePatients = new();
+            }
+
+            try
+            {
+                var allDoctors = await DoctorService.GetAllAsync() ?? new();
+
+                _activeDoctors = allDoctors
+                    .Where(d => d.IsActive)
+                    .ToList();
+            }
+            catch
+            {
+                _activeDoctors = new();
+            }
 
             EnsureValidPage();
             CalculateAnalytics();
@@ -848,4 +878,3 @@
         }
     };
 }
-

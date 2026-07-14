@@ -5,6 +5,12 @@ import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../core/services/auth.service';
 import { RegisterPatientRequest } from '../../shared/models/auth.models';
 
+interface CountryCodeOption {
+  country: string;
+  code: string;
+  label: string;
+}
+
 @Component({
   selector: 'app-register',
   imports: [
@@ -22,6 +28,17 @@ export class Register {
 
   showPassword = false;
   showConfirmPassword = false;
+
+  countryCodes: CountryCodeOption[] = [
+    { country: 'India', code: '+91', label: 'India (+91)' },
+    { country: 'USA', code: '+1', label: 'USA (+1)' },
+    { country: 'UK', code: '+44', label: 'UK (+44)' },
+    { country: 'Japan', code: '+81', label: 'Japan (+81)' },
+    { country: 'France', code: '+33', label: 'France (+33)' }
+  ];
+
+  selectedPhoneCountryCode = '+91';
+  localPhoneNumber = '';
 
   form: RegisterPatientRequest = {
     fullName: '',
@@ -61,6 +78,28 @@ export class Register {
     this.showConfirmPassword = !this.showConfirmPassword;
   }
 
+  onPhoneNumberInput(): void {
+    this.localPhoneNumber = this.localPhoneNumber
+      .replace(/\D/g, '')
+      .slice(0, 10);
+
+    this.form.phoneNumber = this.buildFullPhoneNumber();
+  }
+
+  onCountryCodeChange(): void {
+    this.form.phoneNumber = this.buildFullPhoneNumber();
+  }
+
+  buildFullPhoneNumber(): string {
+    const localNumber = this.localPhoneNumber.trim();
+
+    if (!localNumber) {
+      return '';
+    }
+
+    return `${this.selectedPhoneCountryCode} ${localNumber}`;
+  }
+
   isValidFullName(fullName: string): boolean {
     const trimmedName = fullName.trim();
 
@@ -89,7 +128,7 @@ export class Register {
   }
 
   get isPhoneValid(): boolean {
-    return this.isTenDigitPhoneNumber(this.form.phoneNumber);
+    return this.isTenDigitPhoneNumber(this.localPhoneNumber);
   }
 
   get passwordStrengthScore(): number {
@@ -204,6 +243,8 @@ export class Register {
     this.touched.password = true;
     this.touched.confirmPassword = true;
 
+    this.form.phoneNumber = this.buildFullPhoneNumber();
+
     if (!this.canContinueToStepTwo) {
       this.errorMessage =
         'Please fix the highlighted fields before continuing.';
@@ -225,6 +266,8 @@ export class Register {
     this.touched.dateOfBirth = true;
     this.touched.gender = true;
 
+    this.form.phoneNumber = this.buildFullPhoneNumber();
+
     if (!this.canSubmit) {
       this.errorMessage =
         'Please complete all required patient details correctly.';
@@ -236,7 +279,7 @@ export class Register {
     const request: RegisterPatientRequest = {
       fullName: this.form.fullName.trim(),
       email: this.form.email.trim().toLowerCase(),
-      phoneNumber: this.form.phoneNumber.trim(),
+      phoneNumber: this.buildFullPhoneNumber(),
       password: this.form.password,
       confirmPassword: this.form.confirmPassword,
       dateOfBirth: this.form.dateOfBirth,
@@ -368,4 +411,3 @@ export class Register {
     );
   }
 }
-

@@ -1,842 +1,1299 @@
-﻿//using System.IdentityModel.Tokens.Jwt;
-//using System.Security.Claims;
-//using System.Security.Cryptography;
-//using System.Text;
-//using FluentAssertions;
-//using Microsoft.Extensions.Configuration;
-//using Moq;
-//using S4_HealthAxis.Shared.DTOs.Auth;
-//using S4_HealthAxis.Shared.Enums;
-//using S4_HealthAxisApi.Models;
-//using S4_HealthAxisApi.Repository.Interface;
-//using S4_HealthAxisApi.Services.Implementation;
-//using Xunit;
-
-//namespace S4_HealthAxis.Tests.ServiceTests
-//{
-//    public class AuthServiceTests
-//    {
-//        private readonly Mock<IUserRepository> _userRepositoryMock;
-//        private readonly Mock<IPatientRepository> _patientRepositoryMock;
-//        private readonly IConfiguration _configuration;
-//        private readonly AuthService _service;
-
-//        public AuthServiceTests()
-//        {
-//            _userRepositoryMock = new Mock<IUserRepository>();
-//            _patientRepositoryMock = new Mock<IPatientRepository>();
-
-//            _configuration = BuildConfiguration();
-
-//            _service = new AuthService(
-//                _userRepositoryMock.Object,
-//                _patientRepositoryMock.Object,
-//                _configuration);
-//        }
-
-//        [Fact]
-//        public async Task RegisterAsync_ShouldReturnFailure_WhenPasswordsDoNotMatch()
-//        {
-//            var request = new RegisterDto
-//            {
-//                Email = "admin@test.com",
-//                Password = "Password@123",
-//                ConfirmPassword = "DifferentPassword@123",
-//                Role = UserRole.Admin
-//            };
-
-//            var result = await _service.RegisterAsync(request);
-
-//            result.Success.Should().BeFalse();
-//            result.Message.Should().Be("Passwords do not match.");
-//            result.Data.Should().BeNull();
-
-//            _userRepositoryMock.Verify(x => x.EmailExistsAsync(It.IsAny<string>()), Times.Never);
-//            _userRepositoryMock.Verify(x => x.AddAsync(It.IsAny<User>()), Times.Never);
-//            _userRepositoryMock.Verify(x => x.SaveChangesAsync(), Times.Never);
-//        }
-
-//        [Fact]
-//        public async Task RegisterAsync_ShouldReturnFailure_WhenEmailAlreadyExists()
-//        {
-//            var request = new RegisterDto
-//            {
-//                Email = " ADMIN@Test.com ",
-//                Password = "Password@123",
-//                ConfirmPassword = "Password@123",
-//                Role = UserRole.Admin
-//            };
-
-//            _userRepositoryMock
-//                .Setup(x => x.EmailExistsAsync("admin@test.com"))
-//                .ReturnsAsync(true);
-
-//            var result = await _service.RegisterAsync(request);
-
-//            result.Success.Should().BeFalse();
-//            result.Message.Should().Be("Email already exists.");
-//            result.Data.Should().BeNull();
-
-//            _userRepositoryMock.Verify(x => x.EmailExistsAsync("admin@test.com"), Times.Once);
-//            _userRepositoryMock.Verify(x => x.AddAsync(It.IsAny<User>()), Times.Never);
-//            _userRepositoryMock.Verify(x => x.SaveChangesAsync(), Times.Never);
-//        }
-
-//        [Fact]
-//        public async Task RegisterAsync_ShouldRegisterUserSuccessfully_WhenRequestIsValid()
-//        {
-//            var request = new RegisterDto
-//            {
-//                Email = "  ADMIN@Test.com  ",
-//                Password = "Password@123",
-//                ConfirmPassword = "Password@123",
-//                Role = UserRole.Admin
-//            };
-
-//            User? capturedUser = null;
-
-//            _userRepositoryMock
-//                .Setup(x => x.EmailExistsAsync("admin@test.com"))
-//                .ReturnsAsync(false);
-
-//            _userRepositoryMock
-//                .Setup(x => x.AddAsync(It.IsAny<User>()))
-//                .Callback<User>(u =>
-//                {
-//                    capturedUser = u;
-//                    u.UserId = 101;
-//                })
-//                .Returns(Task.CompletedTask);
-
-//            _userRepositoryMock
-//                .Setup(x => x.SaveChangesAsync())
-//                .Returns(Task.CompletedTask);
-
-//            var result = await _service.RegisterAsync(request);
-
-//            result.Success.Should().BeTrue();
-//            result.Message.Should().Be("User registered successfully.");
-//            result.Data.Should().NotBeNull();
-
-//            capturedUser.Should().NotBeNull();
-//            capturedUser!.Email.Should().Be("admin@test.com");
-//            capturedUser.Role.Should().Be(UserRole.Admin);
-//            capturedUser.PasswordHash.Should().Be(ComputeSha256Base64(request.Password));
-//            capturedUser.RefreshToken.Should().NotBeNullOrWhiteSpace();
-//            capturedUser.RefreshTokenExpiryTime.Should().NotBeNull();
-//            capturedUser.RefreshTokenExpiryTime.Should().BeAfter(DateTime.UtcNow);
-//            capturedUser.CreatedDate.Should().BeCloseTo(DateTime.UtcNow, TimeSpan.FromSeconds(10));
-//            capturedUser.MustChangePassword.Should().BeFalse();
-
-//            result.Data!.Email.Should().Be("admin@test.com");
-//            result.Data.Role.Should().Be("Admin");
-//            result.Data.RefreshToken.Should().Be(capturedUser.RefreshToken);
-//            result.Data.AccessToken.Should().NotBeNullOrWhiteSpace();
-//            result.Data.MustChangePassword.Should().BeFalse();
-
-//            AssertJwtContainsExpectedClaims(
-//                result.Data.AccessToken,
-//                expectedUserId: 101,
-//                expectedEmail: "admin@test.com",
-//                expectedRole: "Admin");
-
-//            _userRepositoryMock.Verify(x => x.EmailExistsAsync("admin@test.com"), Times.Once);
-//            _userRepositoryMock.Verify(x => x.AddAsync(It.IsAny<User>()), Times.Once);
-//            _userRepositoryMock.Verify(x => x.SaveChangesAsync(), Times.Once);
-//        }
-
-//        [Fact]
-//        public async Task RegisterPatientAsync_ShouldReturnFailure_WhenPasswordsDoNotMatch()
-//        {
-//            var request = BuildRegisterPatientDto();
-//            request.ConfirmPassword = "Mismatch@123";
-
-//            var result = await _service.RegisterPatientAsync(request);
-
-//            result.Success.Should().BeFalse();
-//            result.Message.Should().Be("Passwords do not match.");
-//            result.Data.Should().BeNull();
-
-//            _userRepositoryMock.Verify(x => x.EmailExistsAsync(It.IsAny<string>()), Times.Never);
-//            _patientRepositoryMock.Verify(x => x.AddAsync(It.IsAny<Patient>()), Times.Never);
-//            _userRepositoryMock.Verify(x => x.AddAsync(It.IsAny<User>()), Times.Never);
-//        }
-
-//        [Fact]
-//        public async Task RegisterPatientAsync_ShouldReturnFailure_WhenEmailAlreadyExists()
-//        {
-//            var request = BuildRegisterPatientDto();
-//            request.Email = " RAHUL@Test.com ";
-
-//            _userRepositoryMock
-//                .Setup(x => x.EmailExistsAsync("rahul@test.com"))
-//                .ReturnsAsync(true);
-
-//            var result = await _service.RegisterPatientAsync(request);
-
-//            result.Success.Should().BeFalse();
-//            result.Message.Should().Be("Email already exists.");
-//            result.Data.Should().BeNull();
-
-//            _userRepositoryMock.Verify(x => x.EmailExistsAsync("rahul@test.com"), Times.Once);
-//            _patientRepositoryMock.Verify(x => x.AddAsync(It.IsAny<Patient>()), Times.Never);
-//            _userRepositoryMock.Verify(x => x.AddAsync(It.IsAny<User>()), Times.Never);
-//        }
-
-//        [Fact]
-//        public async Task RegisterPatientAsync_ShouldRegisterPatientAndUserSuccessfully_WhenRequestIsValid()
-//        {
-//            var request = BuildRegisterPatientDto();
-//            request.FullName = "  Rahul Sharma  ";
-//            request.PhoneNumber = " 9999999999 ";
-//            request.Email = "  RAHUL@Test.com ";
-
-//            Patient? capturedPatient = null;
-//            User? capturedUser = null;
-
-//            _userRepositoryMock
-//                .Setup(x => x.EmailExistsAsync("rahul@test.com"))
-//                .ReturnsAsync(false);
-
-//            _patientRepositoryMock
-//                .Setup(x => x.AddAsync(It.IsAny<Patient>()))
-//                .Callback<Patient>(p =>
-//                {
-//                    capturedPatient = p;
-//                    p.PatientId = 500;
-//                })
-//                .Returns(Task.CompletedTask);
-
-//            _patientRepositoryMock
-//                .Setup(x => x.SaveChangesAsync())
-//                .Returns(Task.CompletedTask);
-
-//            _userRepositoryMock
-//                .Setup(x => x.AddAsync(It.IsAny<User>()))
-//                .Callback<User>(u =>
-//                {
-//                    capturedUser = u;
-//                    u.UserId = 600;
-//                })
-//                .Returns(Task.CompletedTask);
-
-//            _userRepositoryMock
-//                .Setup(x => x.SaveChangesAsync())
-//                .Returns(Task.CompletedTask);
-
-//            var result = await _service.RegisterPatientAsync(request);
-
-//            result.Success.Should().BeTrue();
-//            result.Message.Should().Be("Patient registered successfully.");
-//            result.Data.Should().NotBeNull();
-
-//            capturedPatient.Should().NotBeNull();
-//            capturedPatient!.FullName.Should().Be("Rahul Sharma");
-//            capturedPatient.DateOfBirth.Should().Be(new DateOnly(1995, 5, 20));
-//            capturedPatient.Gender.Should().Be(Gender.Male);
-//            capturedPatient.PhoneNumber.Should().Be("9999999999");
-//            capturedPatient.Email.Should().Be("rahul@test.com");
-//            capturedPatient.InsuranceNumber.Should().Be("INS-001");
-//            capturedPatient.IsActive.Should().BeTrue();
-
-//            capturedUser.Should().NotBeNull();
-//            capturedUser!.Email.Should().Be("rahul@test.com");
-//            capturedUser.PasswordHash.Should().Be(ComputeSha256Base64(request.Password));
-//            capturedUser.Role.Should().Be(UserRole.Patient);
-//            capturedUser.ReferenceId.Should().Be(500);
-//            capturedUser.RefreshToken.Should().NotBeNullOrWhiteSpace();
-//            capturedUser.RefreshTokenExpiryTime.Should().NotBeNull();
-//            capturedUser.MustChangePassword.Should().BeFalse();
-
-//            result.Data!.Email.Should().Be("rahul@test.com");
-//            result.Data.Role.Should().Be("Patient");
-//            result.Data.ReferenceId.Should().Be(500);
-//            result.Data.AccessToken.Should().NotBeNullOrWhiteSpace();
-//            result.Data.RefreshToken.Should().Be(capturedUser.RefreshToken);
-//            result.Data.MustChangePassword.Should().BeFalse();
-
-//            AssertJwtContainsExpectedClaims(
-//                result.Data.AccessToken,
-//                expectedUserId: 600,
-//                expectedEmail: "rahul@test.com",
-//                expectedRole: "Patient");
-
-//            _userRepositoryMock.Verify(x => x.EmailExistsAsync("rahul@test.com"), Times.Once);
-//            _patientRepositoryMock.Verify(x => x.AddAsync(It.IsAny<Patient>()), Times.Once);
-//            _patientRepositoryMock.Verify(x => x.SaveChangesAsync(), Times.Once);
-//            _userRepositoryMock.Verify(x => x.AddAsync(It.IsAny<User>()), Times.Once);
-//            _userRepositoryMock.Verify(x => x.SaveChangesAsync(), Times.Once);
-//        }
-
-//        [Fact]
-//        public async Task LoginAsync_ShouldReturnFailure_WhenUserDoesNotExist()
-//        {
-//            var request = new LoginDto
-//            {
-//                Email = " missing@test.com ",
-//                Password = "Password@123"
-//            };
-
-//            _userRepositoryMock
-//                .Setup(x => x.GetByEmailAsync("missing@test.com"))
-//                .ReturnsAsync((User?)null);
-
-//            var result = await _service.LoginAsync(request);
-
-//            result.Success.Should().BeFalse();
-//            result.Message.Should().Be("Invalid email or password.");
-//            result.Data.Should().BeNull();
-
-//            _userRepositoryMock.Verify(x => x.GetByEmailAsync("missing@test.com"), Times.Once);
-//            _userRepositoryMock.Verify(x => x.UpdateAsync(It.IsAny<User>()), Times.Never);
-//            _userRepositoryMock.Verify(x => x.SaveChangesAsync(), Times.Never);
-//        }
-
-//        [Fact]
-//        public async Task LoginAsync_ShouldReturnFailure_WhenPasswordIsIncorrect()
-//        {
-//            var request = new LoginDto
-//            {
-//                Email = "admin@test.com",
-//                Password = "WrongPassword"
-//            };
-
-//            var user = BuildUser(
-//                userId: 1,
-//                email: "admin@test.com",
-//                password: "CorrectPassword",
-//                role: UserRole.Admin,
-//                referenceId: null);
-
-//            _userRepositoryMock
-//                .Setup(x => x.GetByEmailAsync("admin@test.com"))
-//                .ReturnsAsync(user);
-
-//            var result = await _service.LoginAsync(request);
-
-//            result.Success.Should().BeFalse();
-//            result.Message.Should().Be("Invalid email or password.");
-//            result.Data.Should().BeNull();
-
-//            _userRepositoryMock.Verify(x => x.GetByEmailAsync("admin@test.com"), Times.Once);
-//            _userRepositoryMock.Verify(x => x.UpdateAsync(It.IsAny<User>()), Times.Never);
-//            _userRepositoryMock.Verify(x => x.SaveChangesAsync(), Times.Never);
-//        }
-
-//        [Fact]
-//        public async Task LoginAsync_ShouldReturnSuccessAndUpdateRefreshToken_WhenCredentialsAreValid()
-//        {
-//            var request = new LoginDto
-//            {
-//                Email = "  ADMIN@Test.com ",
-//                Password = "Password@123"
-//            };
-
-//            var user = BuildUser(
-//                userId: 99,
-//                email: "admin@test.com",
-//                password: "Password@123",
-//                role: UserRole.Admin,
-//                referenceId: null);
-
-//            _userRepositoryMock
-//                .Setup(x => x.GetByEmailAsync("admin@test.com"))
-//                .ReturnsAsync(user);
-
-//            _userRepositoryMock
-//                .Setup(x => x.UpdateAsync(user))
-//                .Returns(Task.CompletedTask);
-
-//            _userRepositoryMock
-//                .Setup(x => x.SaveChangesAsync())
-//                .Returns(Task.CompletedTask);
-
-//            var result = await _service.LoginAsync(request);
-
-//            result.Success.Should().BeTrue();
-//            result.Message.Should().Be("Login successful.");
-//            result.Data.Should().NotBeNull();
-
-//            user.RefreshToken.Should().NotBeNullOrWhiteSpace();
-//            user.RefreshTokenExpiryTime.Should().NotBeNull();
-//            user.RefreshTokenExpiryTime.Should().BeAfter(DateTime.UtcNow);
-
-//            result.Data!.Email.Should().Be("admin@test.com");
-//            result.Data.Role.Should().Be("Admin");
-//            result.Data.AccessToken.Should().NotBeNullOrWhiteSpace();
-//            result.Data.RefreshToken.Should().Be(user.RefreshToken);
-
-//            AssertJwtContainsExpectedClaims(
-//                result.Data.AccessToken,
-//                expectedUserId: 99,
-//                expectedEmail: "admin@test.com",
-//                expectedRole: "Admin");
-
-//            _userRepositoryMock.Verify(x => x.GetByEmailAsync("admin@test.com"), Times.Once);
-//            _userRepositoryMock.Verify(x => x.UpdateAsync(user), Times.Once);
-//            _userRepositoryMock.Verify(x => x.SaveChangesAsync(), Times.Once);
-//        }
-
-//        [Fact]
-//        public async Task LoginAsync_ShouldReturnMustChangePassword_WhenDoctorRequiresPasswordChange()
-//        {
-//            var request = new LoginDto
-//            {
-//                Email = "doctor@test.com",
-//                Password = "Password@123"
-//            };
-
-//            var user = BuildUser(
-//                userId: 22,
-//                email: "doctor@test.com",
-//                password: "Password@123",
-//                role: UserRole.Doctor,
-//                referenceId: 10,
-//                mustChangePassword: true);
-
-//            _userRepositoryMock
-//                .Setup(x => x.GetByEmailAsync("doctor@test.com"))
-//                .ReturnsAsync(user);
-
-//            _userRepositoryMock
-//                .Setup(x => x.UpdateAsync(user))
-//                .Returns(Task.CompletedTask);
-
-//            _userRepositoryMock
-//                .Setup(x => x.SaveChangesAsync())
-//                .Returns(Task.CompletedTask);
-
-//            var result = await _service.LoginAsync(request);
-
-//            result.Success.Should().BeTrue();
-//            result.Data.Should().NotBeNull();
-//            result.Data!.Role.Should().Be("Doctor");
-//            result.Data.ReferenceId.Should().Be(10);
-//            result.Data.MustChangePassword.Should().BeTrue();
-
-//            AssertJwtContainsExpectedClaims(
-//                result.Data.AccessToken,
-//                expectedUserId: 22,
-//                expectedEmail: "doctor@test.com",
-//                expectedRole: "Doctor");
-//        }
-
-//        [Fact]
-//        public async Task RefreshTokenAsync_ShouldReturnFailure_WhenRefreshTokenIsInvalid()
-//        {
-//            var request = new RefreshTokenDto
-//            {
-//                RefreshToken = "invalid-refresh-token"
-//            };
-
-//            _userRepositoryMock
-//                .Setup(x => x.GetByRefreshTokenAsync(request.RefreshToken))
-//                .ReturnsAsync((User?)null);
-
-//            var result = await _service.RefreshTokenAsync(request);
-
-//            result.Success.Should().BeFalse();
-//            result.Message.Should().Be("Invalid refresh token.");
-//            result.Data.Should().BeNull();
-
-//            _userRepositoryMock.Verify(x => x.GetByRefreshTokenAsync(request.RefreshToken), Times.Once);
-//            _userRepositoryMock.Verify(x => x.UpdateAsync(It.IsAny<User>()), Times.Never);
-//            _userRepositoryMock.Verify(x => x.SaveChangesAsync(), Times.Never);
-//        }
-
-//        [Fact]
-//        public async Task RefreshTokenAsync_ShouldReturnFailure_WhenRefreshTokenHasExpired()
-//        {
-//            var request = new RefreshTokenDto
-//            {
-//                RefreshToken = "expired-refresh-token"
-//            };
-
-//            var user = BuildUser(
-//                userId: 10,
-//                email: "user@test.com",
-//                password: "Password@123",
-//                role: UserRole.Patient,
-//                referenceId: 1);
-
-//            user.RefreshToken = "expired-refresh-token";
-//            user.RefreshTokenExpiryTime = DateTime.UtcNow.AddMinutes(-1);
-
-//            _userRepositoryMock
-//                .Setup(x => x.GetByRefreshTokenAsync(request.RefreshToken))
-//                .ReturnsAsync(user);
-
-//            var result = await _service.RefreshTokenAsync(request);
-
-//            result.Success.Should().BeFalse();
-//            result.Message.Should().Be("Refresh token has expired.");
-//            result.Data.Should().BeNull();
-
-//            _userRepositoryMock.Verify(x => x.UpdateAsync(It.IsAny<User>()), Times.Never);
-//            _userRepositoryMock.Verify(x => x.SaveChangesAsync(), Times.Never);
-//        }
-
-//        [Fact]
-//        public async Task RefreshTokenAsync_ShouldReturnFailure_WhenRefreshTokenExpiryIsNull()
-//        {
-//            var request = new RefreshTokenDto
-//            {
-//                RefreshToken = "token-without-expiry"
-//            };
-
-//            var user = BuildUser(
-//                userId: 10,
-//                email: "user@test.com",
-//                password: "Password@123",
-//                role: UserRole.Patient,
-//                referenceId: 1);
-
-//            user.RefreshToken = "token-without-expiry";
-//            user.RefreshTokenExpiryTime = null;
-
-//            _userRepositoryMock
-//                .Setup(x => x.GetByRefreshTokenAsync(request.RefreshToken))
-//                .ReturnsAsync(user);
-
-//            var result = await _service.RefreshTokenAsync(request);
-
-//            result.Success.Should().BeFalse();
-//            result.Message.Should().Be("Refresh token has expired.");
-//            result.Data.Should().BeNull();
-
-//            _userRepositoryMock.Verify(x => x.UpdateAsync(It.IsAny<User>()), Times.Never);
-//            _userRepositoryMock.Verify(x => x.SaveChangesAsync(), Times.Never);
-//        }
-
-//        [Fact]
-//        public async Task RefreshTokenAsync_ShouldReturnSuccessAndRotateRefreshToken_WhenTokenIsValid()
-//        {
-//            var request = new RefreshTokenDto
-//            {
-//                RefreshToken = "valid-refresh-token"
-//            };
-
-//            var user = BuildUser(
-//                userId: 77,
-//                email: "doctor@test.com",
-//                password: "Password@123",
-//                role: UserRole.Doctor,
-//                referenceId: 44);
-
-//            user.RefreshToken = "valid-refresh-token";
-//            user.RefreshTokenExpiryTime = DateTime.UtcNow.AddDays(2);
-
-//            var oldRefreshToken = user.RefreshToken;
-
-//            _userRepositoryMock
-//                .Setup(x => x.GetByRefreshTokenAsync(request.RefreshToken))
-//                .ReturnsAsync(user);
-
-//            _userRepositoryMock
-//                .Setup(x => x.UpdateAsync(user))
-//                .Returns(Task.CompletedTask);
-
-//            _userRepositoryMock
-//                .Setup(x => x.SaveChangesAsync())
-//                .Returns(Task.CompletedTask);
-
-//            var result = await _service.RefreshTokenAsync(request);
-
-//            result.Success.Should().BeTrue();
-//            result.Message.Should().Be("Token refreshed successfully.");
-//            result.Data.Should().NotBeNull();
-
-//            user.RefreshToken.Should().NotBeNullOrWhiteSpace();
-//            user.RefreshToken.Should().NotBe(oldRefreshToken);
-//            user.RefreshTokenExpiryTime.Should().NotBeNull();
-//            user.RefreshTokenExpiryTime.Should().BeAfter(DateTime.UtcNow);
-
-//            result.Data!.Email.Should().Be("doctor@test.com");
-//            result.Data.Role.Should().Be("Doctor");
-//            result.Data.ReferenceId.Should().Be(44);
-//            result.Data.AccessToken.Should().NotBeNullOrWhiteSpace();
-//            result.Data.RefreshToken.Should().Be(user.RefreshToken);
-
-//            AssertJwtContainsExpectedClaims(
-//                result.Data.AccessToken,
-//                expectedUserId: 77,
-//                expectedEmail: "doctor@test.com",
-//                expectedRole: "Doctor");
-
-//            _userRepositoryMock.Verify(x => x.GetByRefreshTokenAsync(request.RefreshToken), Times.Once);
-//            _userRepositoryMock.Verify(x => x.UpdateAsync(user), Times.Once);
-//            _userRepositoryMock.Verify(x => x.SaveChangesAsync(), Times.Once);
-//        }
-
-//        [Fact]
-//        public async Task ChangePasswordAsync_ShouldReturnFailure_WhenEmailIsMissing()
-//        {
-//            var result = await _service.ChangePasswordAsync("", BuildValidChangePasswordDto());
-
-//            result.Success.Should().BeFalse();
-//            result.Message.Should().Be("Invalid authenticated user.");
-//        }
-
-//        [Fact]
-//        public async Task ChangePasswordAsync_ShouldReturnFailure_WhenCurrentPasswordIsMissing()
-//        {
-//            var request = BuildValidChangePasswordDto();
-//            request.CurrentPassword = "";
-
-//            var result = await _service.ChangePasswordAsync("user@test.com", request);
-
-//            result.Success.Should().BeFalse();
-//            result.Message.Should().Be("Current password is required.");
-//        }
-
-//        [Fact]
-//        public async Task ChangePasswordAsync_ShouldReturnFailure_WhenNewPasswordIsMissing()
-//        {
-//            var request = BuildValidChangePasswordDto();
-//            request.NewPassword = "";
-
-//            var result = await _service.ChangePasswordAsync("user@test.com", request);
-
-//            result.Success.Should().BeFalse();
-//            result.Message.Should().Be("New password is required.");
-//        }
-
-//        [Fact]
-//        public async Task ChangePasswordAsync_ShouldReturnFailure_WhenConfirmPasswordIsMissing()
-//        {
-//            var request = BuildValidChangePasswordDto();
-//            request.ConfirmNewPassword = "";
-
-//            var result = await _service.ChangePasswordAsync("user@test.com", request);
-
-//            result.Success.Should().BeFalse();
-//            result.Message.Should().Be("Confirm password is required.");
-//        }
-
-//        [Fact]
-//        public async Task ChangePasswordAsync_ShouldReturnFailure_WhenNewAndConfirmPasswordDoNotMatch()
-//        {
-//            var request = BuildValidChangePasswordDto();
-//            request.ConfirmNewPassword = "Different@123";
-
-//            var result = await _service.ChangePasswordAsync("user@test.com", request);
-
-//            result.Success.Should().BeFalse();
-//            result.Message.Should().Be("New password and confirm password do not match.");
-//        }
-
-//        [Fact]
-//        public async Task ChangePasswordAsync_ShouldReturnFailure_WhenNewPasswordSameAsCurrentPassword()
-//        {
-//            var request = BuildValidChangePasswordDto();
-//            request.NewPassword = "OldPassword@123";
-//            request.ConfirmNewPassword = "OldPassword@123";
-
-//            var result = await _service.ChangePasswordAsync("user@test.com", request);
-
-//            result.Success.Should().BeFalse();
-//            result.Message.Should().Be("New password cannot be the same as current password.");
-//        }
-
-//        [Theory]
-//        [InlineData("Short1@", "Password must be at least 8 characters long.")]
-//        [InlineData("password@123", "Password must contain at least one uppercase letter.")]
-//        [InlineData("PASSWORD@123", "Password must contain at least one lowercase letter.")]
-//        [InlineData("Password@", "Password must contain at least one number.")]
-//        [InlineData("Password123", "Password must contain at least one special character.")]
-//        public async Task ChangePasswordAsync_ShouldReturnFailure_WhenPasswordStrengthInvalid(
-//            string newPassword,
-//            string expectedMessage)
-//        {
-//            var request = BuildValidChangePasswordDto();
-//            request.NewPassword = newPassword;
-//            request.ConfirmNewPassword = newPassword;
-
-//            var result = await _service.ChangePasswordAsync("user@test.com", request);
-
-//            result.Success.Should().BeFalse();
-//            result.Message.Should().Be(expectedMessage);
-//        }
-
-//        [Fact]
-//        public async Task ChangePasswordAsync_ShouldReturnFailure_WhenUserNotFound()
-//        {
-//            var request = BuildValidChangePasswordDto();
-
-//            _userRepositoryMock
-//                .Setup(x => x.GetByEmailAsync("user@test.com"))
-//                .ReturnsAsync((User?)null);
-
-//            var result = await _service.ChangePasswordAsync(" USER@Test.com ", request);
-
-//            result.Success.Should().BeFalse();
-//            result.Message.Should().Be("User account not found.");
-
-//            _userRepositoryMock.Verify(x => x.GetByEmailAsync("user@test.com"), Times.Once);
-//        }
-
-//        [Fact]
-//        public async Task ChangePasswordAsync_ShouldReturnFailure_WhenCurrentPasswordIsIncorrect()
-//        {
-//            var request = BuildValidChangePasswordDto();
-
-//            var user = BuildUser(
-//                userId: 1,
-//                email: "user@test.com",
-//                password: "ActualOld@123",
-//                role: UserRole.Doctor,
-//                referenceId: 10,
-//                mustChangePassword: true);
-
-//            _userRepositoryMock
-//                .Setup(x => x.GetByEmailAsync("user@test.com"))
-//                .ReturnsAsync(user);
-
-//            var result = await _service.ChangePasswordAsync("user@test.com", request);
-
-//            result.Success.Should().BeFalse();
-//            result.Message.Should().Be("Current password is incorrect.");
-
-//            _userRepositoryMock.Verify(x => x.UpdateAsync(It.IsAny<User>()), Times.Never);
-//            _userRepositoryMock.Verify(x => x.SaveChangesAsync(), Times.Never);
-//        }
-
-//        [Fact]
-//        public async Task ChangePasswordAsync_ShouldUpdatePassword_WhenRequestIsValid()
-//        {
-//            var request = BuildValidChangePasswordDto();
-
-//            var user = BuildUser(
-//                userId: 1,
-//                email: "user@test.com",
-//                password: "OldPassword@123",
-//                role: UserRole.Doctor,
-//                referenceId: 10,
-//                mustChangePassword: true);
-
-//            _userRepositoryMock
-//                .Setup(x => x.GetByEmailAsync("user@test.com"))
-//                .ReturnsAsync(user);
-
-//            _userRepositoryMock
-//                .Setup(x => x.UpdateAsync(user))
-//                .Returns(Task.CompletedTask);
-
-//            _userRepositoryMock
-//                .Setup(x => x.SaveChangesAsync())
-//                .Returns(Task.CompletedTask);
-
-//            var result = await _service.ChangePasswordAsync(" USER@Test.com ", request);
-
-//            result.Success.Should().BeTrue();
-//            result.Message.Should().Be("Password changed successfully.");
-
-//            user.PasswordHash.Should().Be(ComputeSha256Base64("NewPassword@123"));
-//            user.MustChangePassword.Should().BeFalse();
-
-//            _userRepositoryMock.Verify(x => x.GetByEmailAsync("user@test.com"), Times.Once);
-//            _userRepositoryMock.Verify(x => x.UpdateAsync(user), Times.Once);
-//            _userRepositoryMock.Verify(x => x.SaveChangesAsync(), Times.Once);
-//        }
-
-//        private static RegisterPatientDto BuildRegisterPatientDto()
-//        {
-//            return new RegisterPatientDto
-//            {
-//                FullName = "Rahul Sharma",
-//                DateOfBirth = new DateOnly(1995, 5, 20),
-//                Gender = Gender.Male,
-//                PhoneNumber = "9999999999",
-//                Email = "rahul@test.com",
-//                InsuranceNumber = "INS-001",
-//                Password = "Password@123",
-//                ConfirmPassword = "Password@123"
-//            };
-//        }
-
-//        private static ChangePasswordDto BuildValidChangePasswordDto()
-//        {
-//            return new ChangePasswordDto
-//            {
-//                CurrentPassword = "OldPassword@123",
-//                NewPassword = "NewPassword@123",
-//                ConfirmNewPassword = "NewPassword@123"
-//            };
-//        }
-
-//        private static User BuildUser(
-//            int userId,
-//            string email,
-//            string password,
-//            UserRole role,
-//            int? referenceId,
-//            bool mustChangePassword = false)
-//        {
-//            return new User
-//            {
-//                UserId = userId,
-//                Email = email,
-//                PasswordHash = ComputeSha256Base64(password),
-//                Role = role,
-//                ReferenceId = referenceId,
-//                CreatedDate = DateTime.UtcNow,
-//                MustChangePassword = mustChangePassword
-//            };
-//        }
-
-//        private static IConfiguration BuildConfiguration()
-//        {
-//            var settings = new Dictionary<string, string?>
-//            {
-//                ["Jwt:Key"] = "this-is-a-very-secure-test-key-for-jwt-token-generation-123456789",
-//                ["Jwt:Issuer"] = "S3HealthAxisTestIssuer",
-//                ["Jwt:Audience"] = "S3HealthAxisTestAudience",
-//                ["Jwt:AccessTokenExpirationMinutes"] = "60"
-//            };
-
-//            return new ConfigurationBuilder()
-//                .AddInMemoryCollection(settings)
-//                .Build();
-//        }
-
-//        private static string ComputeSha256Base64(string password)
-//        {
-//            using var sha256 = SHA256.Create();
-
-//            var bytes = Encoding.UTF8.GetBytes(password);
-//            var hash = sha256.ComputeHash(bytes);
-
-//            return Convert.ToBase64String(hash);
-//        }
-
-//        private static void AssertJwtContainsExpectedClaims(
-//            string token,
-//            int expectedUserId,
-//            string expectedEmail,
-//            string expectedRole)
-//        {
-//            var handler = new JwtSecurityTokenHandler();
-//            var jwt = handler.ReadJwtToken(token);
-
-//            jwt.Should().NotBeNull();
-//            jwt.Issuer.Should().Be("S3HealthAxisTestIssuer");
-//            jwt.Audiences.Should().Contain("S3HealthAxisTestAudience");
-
-//            jwt.Claims.First(x => x.Type == JwtRegisteredClaimNames.Sub).Value
-//                .Should().Be(expectedUserId.ToString());
-
-//            jwt.Claims.First(x => x.Type == JwtRegisteredClaimNames.Email).Value
-//                .Should().Be(expectedEmail);
-
-//            jwt.Claims.First(x => x.Type == ClaimTypes.NameIdentifier).Value
-//                .Should().Be(expectedUserId.ToString());
-
-//            jwt.Claims.First(x => x.Type == ClaimTypes.Role).Value
-//                .Should().Be(expectedRole);
-
-//            jwt.Claims.Should().Contain(x => x.Type == JwtRegisteredClaimNames.Jti);
-//            jwt.Claims.Should().Contain(x => x.Type == "ReferenceId");
-//            jwt.Claims.Should().Contain(x => x.Type == "MustChangePassword");
-//        }
-//    }
-//}
+﻿using FluentAssertions;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Configuration;
+using Moq;
+using S4_HealthAxis.Shared.DTOs.Auth;
+using S4_HealthAxis.Shared.Enums;
+using S4_HealthAxisApi.Models;
+using S4_HealthAxisApi.Repository.Interface;
+using S4_HealthAxisApi.Services.Implementation;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using Xunit;
+
+namespace S4_HealthAxis.Tests.ServiceTests
+{
+    public class AuthServiceTests
+    {
+        private readonly Mock<IUserRepository> _userRepositoryMock;
+        private readonly Mock<IPatientRepository> _patientRepositoryMock;
+        private readonly Mock<IPasswordHasher<User>> _passwordHasherMock;
+        private readonly IConfiguration _configuration;
+        private readonly AuthService _service;
+
+        public AuthServiceTests()
+        {
+            _userRepositoryMock = new Mock<IUserRepository>(MockBehavior.Strict);
+            _patientRepositoryMock = new Mock<IPatientRepository>(MockBehavior.Strict);
+            _passwordHasherMock = new Mock<IPasswordHasher<User>>(MockBehavior.Strict);
+
+            _configuration = BuildConfiguration();
+
+            _service = new AuthService(
+                _userRepositoryMock.Object,
+                _patientRepositoryMock.Object,
+                _configuration,
+                _passwordHasherMock.Object);
+        }
+
+        #region RegisterAsync
+
+        [Fact]
+        public async Task RegisterAsync_ShouldReturnFailure_WhenPasswordsDoNotMatch()
+        {
+            var request = BuildRegisterDto();
+            request.Password = "Password@123";
+            request.ConfirmPassword = "Different@123";
+
+            var result = await _service.RegisterAsync(request);
+
+            result.Success.Should().BeFalse();
+            result.Message.Should().Be("Passwords do not match.");
+            result.Data.Should().BeNull();
+
+            _userRepositoryMock.Verify(
+                repository => repository.EmailExistsAsync(It.IsAny<string>()),
+                Times.Never);
+
+            _userRepositoryMock.Verify(
+                repository => repository.AddAsync(It.IsAny<User>()),
+                Times.Never);
+        }
+
+        [Fact]
+        public async Task RegisterAsync_ShouldReturnFailure_WhenEmailAlreadyExists()
+        {
+            var request = BuildRegisterDto();
+            request.Email = "  Existing.User@HealthAxis.COM  ";
+
+            _userRepositoryMock
+                .Setup(repository => repository.EmailExistsAsync("existing.user@healthaxis.com"))
+                .ReturnsAsync(true);
+
+            var result = await _service.RegisterAsync(request);
+
+            result.Success.Should().BeFalse();
+            result.Message.Should().Be("Email already exists.");
+            result.Data.Should().BeNull();
+
+            _userRepositoryMock.Verify(
+                repository => repository.EmailExistsAsync("existing.user@healthaxis.com"),
+                Times.Once);
+
+            _userRepositoryMock.Verify(
+                repository => repository.AddAsync(It.IsAny<User>()),
+                Times.Never);
+
+            _userRepositoryMock.Verify(
+                repository => repository.SaveChangesAsync(),
+                Times.Never);
+        }
+
+        [Fact]
+        public async Task RegisterAsync_ShouldCreateUserAndReturnAuthResponse_WhenRequestIsValid()
+        {
+            var request = BuildRegisterDto();
+            request.Email = "  New.User@HealthAxis.COM  ";
+            request.Role = UserRole.Admin;
+
+            User? capturedUser = null;
+
+            _userRepositoryMock
+                .Setup(repository => repository.EmailExistsAsync("new.user@healthaxis.com"))
+                .ReturnsAsync(false);
+
+            _passwordHasherMock
+                .Setup(hasher => hasher.HashPassword(It.IsAny<User>(), request.Password))
+                .Returns("hashed-password");
+
+            _userRepositoryMock
+                .Setup(repository => repository.AddAsync(It.IsAny<User>()))
+                .Callback<User>(user =>
+                {
+                    capturedUser = user;
+                    user.UserId = 101;
+                })
+                .Returns(Task.CompletedTask);
+
+            _userRepositoryMock
+                .Setup(repository => repository.SaveChangesAsync())
+                .Returns(Task.CompletedTask);
+
+            var result = await _service.RegisterAsync(request);
+
+            result.Success.Should().BeTrue();
+            result.Message.Should().Be("User registered successfully.");
+            result.Data.Should().NotBeNull();
+
+            capturedUser.Should().NotBeNull();
+            capturedUser!.Email.Should().Be("new.user@healthaxis.com");
+            capturedUser.Role.Should().Be(UserRole.Admin);
+            capturedUser.PasswordHash.Should().Be("hashed-password");
+            capturedUser.MustChangePassword.Should().BeFalse();
+            capturedUser.CreatedDate.Should().BeCloseTo(DateTime.UtcNow, TimeSpan.FromSeconds(10));
+            capturedUser.RefreshToken.Should().NotBeNullOrWhiteSpace();
+            capturedUser.RefreshTokenExpiryTime.Should().NotBeNull();
+            capturedUser.RefreshTokenExpiryTime!.Value.Should().BeAfter(DateTime.UtcNow.AddDays(6));
+
+            result.Data!.Email.Should().Be("new.user@healthaxis.com");
+            result.Data.Role.Should().Be(UserRole.Admin.ToString());
+            result.Data.AccessToken.Should().NotBeNullOrWhiteSpace();
+            result.Data.RefreshToken.Should().Be(capturedUser.RefreshToken);
+            result.Data.ReferenceId.Should().Be(capturedUser.ReferenceId);
+            result.Data.MustChangePassword.Should().BeFalse();
+
+            var claims = ReadClaims(result.Data.AccessToken);
+            claims.Should().ContainKey(ClaimTypes.Role);
+            claims[ClaimTypes.Role].Should().Be(UserRole.Admin.ToString());
+            claims.Should().ContainKey(JwtRegisteredClaimNames.Email);
+            claims[JwtRegisteredClaimNames.Email].Should().Be("new.user@healthaxis.com");
+
+            _userRepositoryMock.Verify(
+                repository => repository.EmailExistsAsync("new.user@healthaxis.com"),
+                Times.Once);
+
+            _passwordHasherMock.Verify(
+                hasher => hasher.HashPassword(It.IsAny<User>(), request.Password),
+                Times.Once);
+
+            _userRepositoryMock.Verify(
+                repository => repository.AddAsync(It.IsAny<User>()),
+                Times.Once);
+
+            _userRepositoryMock.Verify(
+                repository => repository.SaveChangesAsync(),
+                Times.Once);
+        }
+
+        [Fact]
+        public async Task RegisterAsync_ShouldPropagateException_WhenEmailExistsCheckFails()
+        {
+            var request = BuildRegisterDto();
+
+            _userRepositoryMock
+                .Setup(repository => repository.EmailExistsAsync(request.Email.ToLower()))
+                .ThrowsAsync(new InvalidOperationException("Email check failed."));
+
+            var act = async () => await _service.RegisterAsync(request);
+
+            await act.Should()
+                .ThrowAsync<InvalidOperationException>()
+                .WithMessage("Email check failed.");
+        }
+
+        [Fact]
+        public async Task RegisterAsync_ShouldNotSave_WhenAddUserFails()
+        {
+            var request = BuildRegisterDto();
+
+            _userRepositoryMock
+                .Setup(repository => repository.EmailExistsAsync(request.Email.ToLower()))
+                .ReturnsAsync(false);
+
+            _passwordHasherMock
+                .Setup(hasher => hasher.HashPassword(It.IsAny<User>(), request.Password))
+                .Returns("hashed-password");
+
+            _userRepositoryMock
+                .Setup(repository => repository.AddAsync(It.IsAny<User>()))
+                .ThrowsAsync(new InvalidOperationException("User add failed."));
+
+            var act = async () => await _service.RegisterAsync(request);
+
+            await act.Should()
+                .ThrowAsync<InvalidOperationException>()
+                .WithMessage("User add failed.");
+
+            _userRepositoryMock.Verify(
+                repository => repository.SaveChangesAsync(),
+                Times.Never);
+        }
+
+        [Fact]
+        public async Task RegisterAsync_ShouldPropagateException_WhenSaveFails()
+        {
+            var request = BuildRegisterDto();
+
+            _userRepositoryMock
+                .Setup(repository => repository.EmailExistsAsync(request.Email.ToLower()))
+                .ReturnsAsync(false);
+
+            _passwordHasherMock
+                .Setup(hasher => hasher.HashPassword(It.IsAny<User>(), request.Password))
+                .Returns("hashed-password");
+
+            _userRepositoryMock
+                .Setup(repository => repository.AddAsync(It.IsAny<User>()))
+                .Returns(Task.CompletedTask);
+
+            _userRepositoryMock
+                .Setup(repository => repository.SaveChangesAsync())
+                .ThrowsAsync(new InvalidOperationException("User save failed."));
+
+            var act = async () => await _service.RegisterAsync(request);
+
+            await act.Should()
+                .ThrowAsync<InvalidOperationException>()
+                .WithMessage("User save failed.");
+        }
+
+        #endregion
+
+        #region RegisterPatientAsync
+
+        [Fact]
+        public async Task RegisterPatientAsync_ShouldReturnFailure_WhenPasswordsDoNotMatch()
+        {
+            var request = BuildRegisterPatientDto();
+            request.Password = "Password@123";
+            request.ConfirmPassword = "Different@123";
+
+            var result = await _service.RegisterPatientAsync(request);
+
+            result.Success.Should().BeFalse();
+            result.Message.Should().Be("Passwords do not match.");
+            result.Data.Should().BeNull();
+
+            _userRepositoryMock.Verify(
+                repository => repository.EmailExistsAsync(It.IsAny<string>()),
+                Times.Never);
+
+            _patientRepositoryMock.Verify(
+                repository => repository.AddAsync(It.IsAny<Patient>()),
+                Times.Never);
+        }
+
+        [Fact]
+        public async Task RegisterPatientAsync_ShouldReturnFailure_WhenEmailAlreadyExists()
+        {
+            var request = BuildRegisterPatientDto();
+            request.Email = "  Patient.User@HealthAxis.COM  ";
+
+            _userRepositoryMock
+                .Setup(repository => repository.EmailExistsAsync("patient.user@healthaxis.com"))
+                .ReturnsAsync(true);
+
+            var result = await _service.RegisterPatientAsync(request);
+
+            result.Success.Should().BeFalse();
+            result.Message.Should().Be("Email already exists.");
+            result.Data.Should().BeNull();
+
+            _userRepositoryMock.Verify(
+                repository => repository.EmailExistsAsync("patient.user@healthaxis.com"),
+                Times.Once);
+
+            _patientRepositoryMock.Verify(
+                repository => repository.AddAsync(It.IsAny<Patient>()),
+                Times.Never);
+
+            _userRepositoryMock.Verify(
+                repository => repository.AddAsync(It.IsAny<User>()),
+                Times.Never);
+        }
+
+        [Fact]
+        public async Task RegisterPatientAsync_ShouldCreatePatientAndUser_WhenRequestIsValid()
+        {
+            var request = BuildRegisterPatientDto();
+            request.FullName = "  Patient One  ";
+            request.Email = "  New.Patient@HealthAxis.COM  ";
+            request.PhoneNumber = "  9876543210  ";
+
+            Patient? capturedPatient = null;
+            User? capturedUser = null;
+
+            _userRepositoryMock
+                .Setup(repository => repository.EmailExistsAsync("new.patient@healthaxis.com"))
+                .ReturnsAsync(false);
+
+            _patientRepositoryMock
+                .Setup(repository => repository.AddAsync(It.IsAny<Patient>()))
+                .Callback<Patient>(patient =>
+                {
+                    capturedPatient = patient;
+                    patient.PatientId = 501;
+                })
+                .Returns(Task.CompletedTask);
+
+            _patientRepositoryMock
+                .Setup(repository => repository.SaveChangesAsync())
+                .Returns(Task.CompletedTask);
+
+            _passwordHasherMock
+                .Setup(hasher => hasher.HashPassword(It.IsAny<User>(), request.Password))
+                .Returns("patient-hashed-password");
+
+            _userRepositoryMock
+                .Setup(repository => repository.AddAsync(It.IsAny<User>()))
+                .Callback<User>(user =>
+                {
+                    capturedUser = user;
+                    user.UserId = 601;
+                })
+                .Returns(Task.CompletedTask);
+
+            _userRepositoryMock
+                .Setup(repository => repository.SaveChangesAsync())
+                .Returns(Task.CompletedTask);
+
+            var result = await _service.RegisterPatientAsync(request);
+
+            result.Success.Should().BeTrue();
+            result.Message.Should().Be("Patient registered successfully.");
+            result.Data.Should().NotBeNull();
+
+            capturedPatient.Should().NotBeNull();
+            capturedPatient!.PatientId.Should().Be(501);
+            capturedPatient.FullName.Should().Be("Patient One");
+            capturedPatient.Email.Should().Be("new.patient@healthaxis.com");
+            capturedPatient.PhoneNumber.Should().Be("9876543210");
+            capturedPatient.IsActive.Should().BeTrue();
+
+            capturedUser.Should().NotBeNull();
+            capturedUser!.Email.Should().Be("new.patient@healthaxis.com");
+            capturedUser.Role.Should().Be(UserRole.Patient);
+            capturedUser.ReferenceId.Should().Be(501);
+            capturedUser.PasswordHash.Should().Be("patient-hashed-password");
+            capturedUser.MustChangePassword.Should().BeFalse();
+            capturedUser.RefreshToken.Should().NotBeNullOrWhiteSpace();
+            capturedUser.RefreshTokenExpiryTime.Should().NotBeNull();
+
+            result.Data!.Email.Should().Be("new.patient@healthaxis.com");
+            result.Data.Role.Should().Be(UserRole.Patient.ToString());
+            result.Data.ReferenceId.Should().Be(501);
+            result.Data.AccessToken.Should().NotBeNullOrWhiteSpace();
+            result.Data.RefreshToken.Should().Be(capturedUser.RefreshToken);
+
+            _patientRepositoryMock.Verify(
+                repository => repository.AddAsync(It.IsAny<Patient>()),
+                Times.Once);
+
+            _patientRepositoryMock.Verify(
+                repository => repository.SaveChangesAsync(),
+                Times.Once);
+
+            _userRepositoryMock.Verify(
+                repository => repository.AddAsync(It.IsAny<User>()),
+                Times.Once);
+
+            _userRepositoryMock.Verify(
+                repository => repository.SaveChangesAsync(),
+                Times.Once);
+        }
+
+        [Fact]
+        public async Task RegisterPatientAsync_ShouldNotCreateUser_WhenPatientAddFails()
+        {
+            var request = BuildRegisterPatientDto();
+
+            _userRepositoryMock
+                .Setup(repository => repository.EmailExistsAsync(request.Email.ToLower()))
+                .ReturnsAsync(false);
+
+            _patientRepositoryMock
+                .Setup(repository => repository.AddAsync(It.IsAny<Patient>()))
+                .ThrowsAsync(new InvalidOperationException("Patient add failed."));
+
+            var act = async () => await _service.RegisterPatientAsync(request);
+
+            await act.Should()
+                .ThrowAsync<InvalidOperationException>()
+                .WithMessage("Patient add failed.");
+
+            _userRepositoryMock.Verify(
+                repository => repository.AddAsync(It.IsAny<User>()),
+                Times.Never);
+        }
+
+        [Fact]
+        public async Task RegisterPatientAsync_ShouldNotCreateUser_WhenPatientSaveFails()
+        {
+            var request = BuildRegisterPatientDto();
+
+            _userRepositoryMock
+                .Setup(repository => repository.EmailExistsAsync(request.Email.ToLower()))
+                .ReturnsAsync(false);
+
+            _patientRepositoryMock
+                .Setup(repository => repository.AddAsync(It.IsAny<Patient>()))
+                .Returns(Task.CompletedTask);
+
+            _patientRepositoryMock
+                .Setup(repository => repository.SaveChangesAsync())
+                .ThrowsAsync(new InvalidOperationException("Patient save failed."));
+
+            var act = async () => await _service.RegisterPatientAsync(request);
+
+            await act.Should()
+                .ThrowAsync<InvalidOperationException>()
+                .WithMessage("Patient save failed.");
+
+            _userRepositoryMock.Verify(
+                repository => repository.AddAsync(It.IsAny<User>()),
+                Times.Never);
+        }
+
+        [Fact]
+        public async Task RegisterPatientAsync_ShouldPropagateException_WhenUserSaveFails()
+        {
+            var request = BuildRegisterPatientDto();
+
+            _userRepositoryMock
+                .Setup(repository => repository.EmailExistsAsync(request.Email.ToLower()))
+                .ReturnsAsync(false);
+
+            _patientRepositoryMock
+                .Setup(repository => repository.AddAsync(It.IsAny<Patient>()))
+                .Callback<Patient>(patient => patient.PatientId = 501)
+                .Returns(Task.CompletedTask);
+
+            _patientRepositoryMock
+                .Setup(repository => repository.SaveChangesAsync())
+                .Returns(Task.CompletedTask);
+
+            _passwordHasherMock
+                .Setup(hasher => hasher.HashPassword(It.IsAny<User>(), request.Password))
+                .Returns("hashed-password");
+
+            _userRepositoryMock
+                .Setup(repository => repository.AddAsync(It.IsAny<User>()))
+                .Returns(Task.CompletedTask);
+
+            _userRepositoryMock
+                .Setup(repository => repository.SaveChangesAsync())
+                .ThrowsAsync(new InvalidOperationException("User save failed."));
+
+            var act = async () => await _service.RegisterPatientAsync(request);
+
+            await act.Should()
+                .ThrowAsync<InvalidOperationException>()
+                .WithMessage("User save failed.");
+        }
+
+        #endregion
+
+        #region LoginAsync
+
+        [Fact]
+        public async Task LoginAsync_ShouldReturnFailure_WhenUserDoesNotExist()
+        {
+            var request = new LoginDto
+            {
+                Email = "  Missing.User@HealthAxis.COM  ",
+                Password = "Password@123"
+            };
+
+            _userRepositoryMock
+                .Setup(repository => repository.GetByEmailAsync("missing.user@healthaxis.com"))
+                .ReturnsAsync((User?)null);
+
+            var result = await _service.LoginAsync(request);
+
+            result.Success.Should().BeFalse();
+            result.Message.Should().Be("Invalid email or password.");
+            result.Data.Should().BeNull();
+
+            _passwordHasherMock.Verify(
+                hasher => hasher.VerifyHashedPassword(
+                    It.IsAny<User>(),
+                    It.IsAny<string>(),
+                    It.IsAny<string>()),
+                Times.Never);
+
+            _userRepositoryMock.Verify(
+                repository => repository.UpdateAsync(It.IsAny<User>()),
+                Times.Never);
+        }
+
+        [Fact]
+        public async Task LoginAsync_ShouldReturnFailure_WhenPasswordVerificationFails()
+        {
+            var request = new LoginDto
+            {
+                Email = "doctor@healthaxis.com",
+                Password = "WrongPassword"
+            };
+
+            var user = BuildUser(10, "doctor@healthaxis.com", UserRole.Doctor, 3);
+
+            _userRepositoryMock
+                .Setup(repository => repository.GetByEmailAsync("doctor@healthaxis.com"))
+                .ReturnsAsync(user);
+
+            _passwordHasherMock
+                .Setup(hasher => hasher.VerifyHashedPassword(
+                    user,
+                    user.PasswordHash,
+                    request.Password))
+                .Returns(PasswordVerificationResult.Failed);
+
+            var result = await _service.LoginAsync(request);
+
+            result.Success.Should().BeFalse();
+            result.Message.Should().Be("Invalid email or password.");
+            result.Data.Should().BeNull();
+
+            _userRepositoryMock.Verify(
+                repository => repository.UpdateAsync(It.IsAny<User>()),
+                Times.Never);
+
+            _userRepositoryMock.Verify(
+                repository => repository.SaveChangesAsync(),
+                Times.Never);
+        }
+
+        [Theory]
+        [InlineData(PasswordVerificationResult.Success)]
+        [InlineData(PasswordVerificationResult.SuccessRehashNeeded)]
+        public async Task LoginAsync_ShouldReturnAuthResponse_WhenPasswordVerificationSucceeds(
+            PasswordVerificationResult verificationResult)
+        {
+            var request = new LoginDto
+            {
+                Email = "  Doctor@HealthAxis.COM  ",
+                Password = "Password@123"
+            };
+
+            var user = BuildUser(10, "doctor@healthaxis.com", UserRole.Doctor, 3);
+            user.MustChangePassword = true;
+
+            _userRepositoryMock
+                .Setup(repository => repository.GetByEmailAsync("doctor@healthaxis.com"))
+                .ReturnsAsync(user);
+
+            _passwordHasherMock
+                .Setup(hasher => hasher.VerifyHashedPassword(
+                    user,
+                    user.PasswordHash,
+                    request.Password))
+                .Returns(verificationResult);
+
+            _userRepositoryMock
+                .Setup(repository => repository.UpdateAsync(user))
+                .Returns(Task.CompletedTask);
+
+            _userRepositoryMock
+                .Setup(repository => repository.SaveChangesAsync())
+                .Returns(Task.CompletedTask);
+
+            var result = await _service.LoginAsync(request);
+
+            result.Success.Should().BeTrue();
+            result.Message.Should().Be("Login successful.");
+            result.Data.Should().NotBeNull();
+
+            result.Data!.Email.Should().Be("doctor@healthaxis.com");
+            result.Data.Role.Should().Be(UserRole.Doctor.ToString());
+            result.Data.ReferenceId.Should().Be(3);
+            result.Data.MustChangePassword.Should().BeTrue();
+            result.Data.AccessToken.Should().NotBeNullOrWhiteSpace();
+            result.Data.RefreshToken.Should().Be(user.RefreshToken);
+
+            user.RefreshToken.Should().NotBeNullOrWhiteSpace();
+            user.RefreshTokenExpiryTime.Should().NotBeNull();
+            user.RefreshTokenExpiryTime!.Value.Should().BeAfter(DateTime.UtcNow.AddDays(6));
+
+            var claims = ReadClaims(result.Data.AccessToken);
+            claims[ClaimTypes.Role].Should().Be(UserRole.Doctor.ToString());
+            claims["ReferenceId"].Should().Be("3");
+            claims["MustChangePassword"].Should().Be("True");
+
+            _userRepositoryMock.Verify(
+                repository => repository.UpdateAsync(user),
+                Times.Once);
+
+            _userRepositoryMock.Verify(
+                repository => repository.SaveChangesAsync(),
+                Times.Once);
+        }
+
+        [Fact]
+        public async Task LoginAsync_ShouldPropagateException_WhenLookupFails()
+        {
+            var request = new LoginDto
+            {
+                Email = "doctor@healthaxis.com",
+                Password = "Password@123"
+            };
+
+            _userRepositoryMock
+                .Setup(repository => repository.GetByEmailAsync("doctor@healthaxis.com"))
+                .ThrowsAsync(new InvalidOperationException("Login lookup failed."));
+
+            var act = async () => await _service.LoginAsync(request);
+
+            await act.Should()
+                .ThrowAsync<InvalidOperationException>()
+                .WithMessage("Login lookup failed.");
+        }
+
+        [Fact]
+        public async Task LoginAsync_ShouldPropagateException_WhenUpdateFails()
+        {
+            var request = new LoginDto
+            {
+                Email = "doctor@healthaxis.com",
+                Password = "Password@123"
+            };
+
+            var user = BuildUser(10, "doctor@healthaxis.com", UserRole.Doctor, 3);
+
+            _userRepositoryMock
+                .Setup(repository => repository.GetByEmailAsync("doctor@healthaxis.com"))
+                .ReturnsAsync(user);
+
+            _passwordHasherMock
+                .Setup(hasher => hasher.VerifyHashedPassword(
+                    user,
+                    user.PasswordHash,
+                    request.Password))
+                .Returns(PasswordVerificationResult.Success);
+
+            _userRepositoryMock
+                .Setup(repository => repository.UpdateAsync(user))
+                .ThrowsAsync(new InvalidOperationException("Login update failed."));
+
+            var act = async () => await _service.LoginAsync(request);
+
+            await act.Should()
+                .ThrowAsync<InvalidOperationException>()
+                .WithMessage("Login update failed.");
+
+            _userRepositoryMock.Verify(
+                repository => repository.SaveChangesAsync(),
+                Times.Never);
+        }
+
+        [Fact]
+        public async Task LoginAsync_ShouldPropagateException_WhenSaveFails()
+        {
+            var request = new LoginDto
+            {
+                Email = "doctor@healthaxis.com",
+                Password = "Password@123"
+            };
+
+            var user = BuildUser(10, "doctor@healthaxis.com", UserRole.Doctor, 3);
+
+            _userRepositoryMock
+                .Setup(repository => repository.GetByEmailAsync("doctor@healthaxis.com"))
+                .ReturnsAsync(user);
+
+            _passwordHasherMock
+                .Setup(hasher => hasher.VerifyHashedPassword(
+                    user,
+                    user.PasswordHash,
+                    request.Password))
+                .Returns(PasswordVerificationResult.Success);
+
+            _userRepositoryMock
+                .Setup(repository => repository.UpdateAsync(user))
+                .Returns(Task.CompletedTask);
+
+            _userRepositoryMock
+                .Setup(repository => repository.SaveChangesAsync())
+                .ThrowsAsync(new InvalidOperationException("Login save failed."));
+
+            var act = async () => await _service.LoginAsync(request);
+
+            await act.Should()
+                .ThrowAsync<InvalidOperationException>()
+                .WithMessage("Login save failed.");
+        }
+
+        #endregion
+
+        #region RefreshTokenAsync
+
+        [Fact]
+        public async Task RefreshTokenAsync_ShouldReturnFailure_WhenRefreshTokenIsInvalid()
+        {
+            var request = new RefreshTokenDto
+            {
+                RefreshToken = "invalid-token"
+            };
+
+            _userRepositoryMock
+                .Setup(repository => repository.GetByRefreshTokenAsync(request.RefreshToken))
+                .ReturnsAsync((User?)null);
+
+            var result = await _service.RefreshTokenAsync(request);
+
+            result.Success.Should().BeFalse();
+            result.Message.Should().Be("Invalid refresh token.");
+            result.Data.Should().BeNull();
+
+            _userRepositoryMock.Verify(
+                repository => repository.UpdateAsync(It.IsAny<User>()),
+                Times.Never);
+        }
+
+        [Fact]
+        public async Task RefreshTokenAsync_ShouldReturnFailure_WhenRefreshTokenExpiryIsNull()
+        {
+            var request = new RefreshTokenDto
+            {
+                RefreshToken = "existing-refresh-token"
+            };
+
+            var user = BuildUser(1, "admin@healthaxis.com", UserRole.Admin, null);
+            user.RefreshToken = request.RefreshToken;
+            user.RefreshTokenExpiryTime = null;
+
+            _userRepositoryMock
+                .Setup(repository => repository.GetByRefreshTokenAsync(request.RefreshToken))
+                .ReturnsAsync(user);
+
+            var result = await _service.RefreshTokenAsync(request);
+
+            result.Success.Should().BeFalse();
+            result.Message.Should().Be("Refresh token has expired.");
+            result.Data.Should().BeNull();
+
+            _userRepositoryMock.Verify(
+                repository => repository.UpdateAsync(It.IsAny<User>()),
+                Times.Never);
+        }
+
+        [Fact]
+        public async Task RefreshTokenAsync_ShouldReturnFailure_WhenRefreshTokenIsExpired()
+        {
+            var request = new RefreshTokenDto
+            {
+                RefreshToken = "existing-refresh-token"
+            };
+
+            var user = BuildUser(1, "admin@healthaxis.com", UserRole.Admin, null);
+            user.RefreshToken = request.RefreshToken;
+            user.RefreshTokenExpiryTime = DateTime.UtcNow.AddMinutes(-1);
+
+            _userRepositoryMock
+                .Setup(repository => repository.GetByRefreshTokenAsync(request.RefreshToken))
+                .ReturnsAsync(user);
+
+            var result = await _service.RefreshTokenAsync(request);
+
+            result.Success.Should().BeFalse();
+            result.Message.Should().Be("Refresh token has expired.");
+            result.Data.Should().BeNull();
+
+            _userRepositoryMock.Verify(
+                repository => repository.UpdateAsync(It.IsAny<User>()),
+                Times.Never);
+        }
+
+        [Fact]
+        public async Task RefreshTokenAsync_ShouldReturnNewTokens_WhenRefreshTokenIsValid()
+        {
+            var request = new RefreshTokenDto
+            {
+                RefreshToken = "existing-refresh-token"
+            };
+
+            var user = BuildUser(1, "admin@healthaxis.com", UserRole.Admin, null);
+            user.RefreshToken = request.RefreshToken;
+            user.RefreshTokenExpiryTime = DateTime.UtcNow.AddDays(1);
+
+            _userRepositoryMock
+                .Setup(repository => repository.GetByRefreshTokenAsync(request.RefreshToken))
+                .ReturnsAsync(user);
+
+            _userRepositoryMock
+                .Setup(repository => repository.UpdateAsync(user))
+                .Returns(Task.CompletedTask);
+
+            _userRepositoryMock
+                .Setup(repository => repository.SaveChangesAsync())
+                .Returns(Task.CompletedTask);
+
+            var result = await _service.RefreshTokenAsync(request);
+
+            result.Success.Should().BeTrue();
+            result.Message.Should().Be("Token refreshed successfully.");
+            result.Data.Should().NotBeNull();
+
+            result.Data!.AccessToken.Should().NotBeNullOrWhiteSpace();
+            result.Data.RefreshToken.Should().NotBe(request.RefreshToken);
+            result.Data.RefreshToken.Should().Be(user.RefreshToken);
+            result.Data.Email.Should().Be("admin@healthaxis.com");
+            result.Data.Role.Should().Be(UserRole.Admin.ToString());
+
+            user.RefreshTokenExpiryTime.Should().NotBeNull();
+            user.RefreshTokenExpiryTime!.Value.Should().BeAfter(DateTime.UtcNow.AddDays(6));
+
+            _userRepositoryMock.Verify(
+                repository => repository.UpdateAsync(user),
+                Times.Once);
+
+            _userRepositoryMock.Verify(
+                repository => repository.SaveChangesAsync(),
+                Times.Once);
+        }
+
+        [Fact]
+        public async Task RefreshTokenAsync_ShouldPropagateException_WhenLookupFails()
+        {
+            var request = new RefreshTokenDto
+            {
+                RefreshToken = "existing-refresh-token"
+            };
+
+            _userRepositoryMock
+                .Setup(repository => repository.GetByRefreshTokenAsync(request.RefreshToken))
+                .ThrowsAsync(new InvalidOperationException("Refresh lookup failed."));
+
+            var act = async () => await _service.RefreshTokenAsync(request);
+
+            await act.Should()
+                .ThrowAsync<InvalidOperationException>()
+                .WithMessage("Refresh lookup failed.");
+        }
+
+        [Fact]
+        public async Task RefreshTokenAsync_ShouldPropagateException_WhenSaveFails()
+        {
+            var request = new RefreshTokenDto
+            {
+                RefreshToken = "existing-refresh-token"
+            };
+
+            var user = BuildUser(1, "admin@healthaxis.com", UserRole.Admin, null);
+            user.RefreshToken = request.RefreshToken;
+            user.RefreshTokenExpiryTime = DateTime.UtcNow.AddDays(1);
+
+            _userRepositoryMock
+                .Setup(repository => repository.GetByRefreshTokenAsync(request.RefreshToken))
+                .ReturnsAsync(user);
+
+            _userRepositoryMock
+                .Setup(repository => repository.UpdateAsync(user))
+                .Returns(Task.CompletedTask);
+
+            _userRepositoryMock
+                .Setup(repository => repository.SaveChangesAsync())
+                .ThrowsAsync(new InvalidOperationException("Refresh save failed."));
+
+            var act = async () => await _service.RefreshTokenAsync(request);
+
+            await act.Should()
+                .ThrowAsync<InvalidOperationException>()
+                .WithMessage("Refresh save failed.");
+        }
+
+        #endregion
+
+        #region ChangePasswordAsync Validation
+
+        [Theory]
+        [InlineData(null)]
+        [InlineData("")]
+        [InlineData(" ")]
+        [InlineData("   ")]
+        public async Task ChangePasswordAsync_ShouldReturnFailure_WhenEmailIsInvalid(string? email)
+        {
+            var request = BuildValidChangePasswordDto();
+
+            var result = await _service.ChangePasswordAsync(email!, request);
+
+            result.Success.Should().BeFalse();
+            result.Message.Should().Be("Invalid authenticated user.");
+
+            _userRepositoryMock.Verify(
+                repository => repository.GetByEmailAsync(It.IsAny<string>()),
+                Times.Never);
+        }
+
+        [Theory]
+        [InlineData(null)]
+        [InlineData("")]
+        [InlineData(" ")]
+        [InlineData("   ")]
+        public async Task ChangePasswordAsync_ShouldReturnFailure_WhenCurrentPasswordIsMissing(string? currentPassword)
+        {
+            var request = BuildValidChangePasswordDto();
+            request.CurrentPassword = currentPassword!;
+
+            var result = await _service.ChangePasswordAsync("user@healthaxis.com", request);
+
+            result.Success.Should().BeFalse();
+            result.Message.Should().Be("Current password is required.");
+        }
+
+        [Theory]
+        [InlineData(null)]
+        [InlineData("")]
+        [InlineData(" ")]
+        [InlineData("   ")]
+        public async Task ChangePasswordAsync_ShouldReturnFailure_WhenNewPasswordIsMissing(string? newPassword)
+        {
+            var request = BuildValidChangePasswordDto();
+            request.NewPassword = newPassword!;
+
+            var result = await _service.ChangePasswordAsync("user@healthaxis.com", request);
+
+            result.Success.Should().BeFalse();
+            result.Message.Should().Be("New password is required.");
+        }
+
+        [Theory]
+        [InlineData(null)]
+        [InlineData("")]
+        [InlineData(" ")]
+        [InlineData("   ")]
+        public async Task ChangePasswordAsync_ShouldReturnFailure_WhenConfirmPasswordIsMissing(string? confirmPassword)
+        {
+            var request = BuildValidChangePasswordDto();
+            request.ConfirmNewPassword = confirmPassword!;
+
+            var result = await _service.ChangePasswordAsync("user@healthaxis.com", request);
+
+            result.Success.Should().BeFalse();
+            result.Message.Should().Be("Confirm password is required.");
+        }
+
+        [Fact]
+        public async Task ChangePasswordAsync_ShouldReturnFailure_WhenNewAndConfirmPasswordsDoNotMatch()
+        {
+            var request = BuildValidChangePasswordDto();
+            request.NewPassword = "NewPassword@123";
+            request.ConfirmNewPassword = "Different@123";
+
+            var result = await _service.ChangePasswordAsync("user@healthaxis.com", request);
+
+            result.Success.Should().BeFalse();
+            result.Message.Should().Be("New password and confirm password do not match.");
+        }
+
+        [Fact]
+        public async Task ChangePasswordAsync_ShouldReturnFailure_WhenNewPasswordEqualsCurrentPassword()
+        {
+            var request = BuildValidChangePasswordDto();
+            request.CurrentPassword = "SamePassword@123";
+            request.NewPassword = "SamePassword@123";
+            request.ConfirmNewPassword = "SamePassword@123";
+
+            var result = await _service.ChangePasswordAsync("user@healthaxis.com", request);
+
+            result.Success.Should().BeFalse();
+            result.Message.Should().Be("New password cannot be the same as current password.");
+        }
+
+        [Theory]
+        [InlineData("Short1!", "Password must be at least 8 characters long.")]
+        [InlineData("lowercase1!", "Password must contain at least one uppercase letter.")]
+        [InlineData("UPPERCASE1!", "Password must contain at least one lowercase letter.")]
+        [InlineData("NoNumber!", "Password must contain at least one number.")]
+        [InlineData("NoSpecial1", "Password must contain at least one special character.")]
+        public async Task ChangePasswordAsync_ShouldReturnFailure_WhenPasswordStrengthIsInvalid(
+            string newPassword,
+            string expectedMessage)
+        {
+            var request = BuildValidChangePasswordDto();
+            request.NewPassword = newPassword;
+            request.ConfirmNewPassword = newPassword;
+
+            var result = await _service.ChangePasswordAsync("user@healthaxis.com", request);
+
+            result.Success.Should().BeFalse();
+            result.Message.Should().Be(expectedMessage);
+
+            _userRepositoryMock.Verify(
+                repository => repository.GetByEmailAsync(It.IsAny<string>()),
+                Times.Never);
+        }
+
+        #endregion
+
+        #region ChangePasswordAsync Success And Failure
+
+        [Fact]
+        public async Task ChangePasswordAsync_ShouldReturnFailure_WhenUserDoesNotExist()
+        {
+            var request = BuildValidChangePasswordDto();
+
+            _userRepositoryMock
+                .Setup(repository => repository.GetByEmailAsync("user@healthaxis.com"))
+                .ReturnsAsync((User?)null);
+
+            var result = await _service.ChangePasswordAsync("  User@HealthAxis.COM  ", request);
+
+            result.Success.Should().BeFalse();
+            result.Message.Should().Be("User account not found.");
+
+            _userRepositoryMock.Verify(
+                repository => repository.GetByEmailAsync("user@healthaxis.com"),
+                Times.Once);
+        }
+
+        [Fact]
+        public async Task ChangePasswordAsync_ShouldReturnFailure_WhenCurrentPasswordIsIncorrect()
+        {
+            var request = BuildValidChangePasswordDto();
+
+            var user = BuildUser(1, "user@healthaxis.com", UserRole.Doctor, 3);
+
+            _userRepositoryMock
+                .Setup(repository => repository.GetByEmailAsync("user@healthaxis.com"))
+                .ReturnsAsync(user);
+
+            _passwordHasherMock
+                .Setup(hasher => hasher.VerifyHashedPassword(
+                    user,
+                    user.PasswordHash,
+                    request.CurrentPassword))
+                .Returns(PasswordVerificationResult.Failed);
+
+            var result = await _service.ChangePasswordAsync("user@healthaxis.com", request);
+
+            result.Success.Should().BeFalse();
+            result.Message.Should().Be("Current password is incorrect.");
+
+            _passwordHasherMock.Verify(
+                hasher => hasher.HashPassword(It.IsAny<User>(), It.IsAny<string>()),
+                Times.Never);
+
+            _userRepositoryMock.Verify(
+                repository => repository.UpdateAsync(It.IsAny<User>()),
+                Times.Never);
+        }
+
+        [Theory]
+        [InlineData(PasswordVerificationResult.Success)]
+        [InlineData(PasswordVerificationResult.SuccessRehashNeeded)]
+        public async Task ChangePasswordAsync_ShouldUpdatePassword_WhenRequestIsValid(
+            PasswordVerificationResult verificationResult)
+        {
+            var request = BuildValidChangePasswordDto();
+
+            var user = BuildUser(1, "user@healthaxis.com", UserRole.Doctor, 3);
+            user.MustChangePassword = true;
+
+            _userRepositoryMock
+                .Setup(repository => repository.GetByEmailAsync("user@healthaxis.com"))
+                .ReturnsAsync(user);
+
+            _passwordHasherMock
+                .Setup(hasher => hasher.VerifyHashedPassword(
+                    user,
+                    user.PasswordHash,
+                    request.CurrentPassword))
+                .Returns(verificationResult);
+
+            _passwordHasherMock
+                .Setup(hasher => hasher.HashPassword(user, request.NewPassword))
+                .Returns("new-hashed-password");
+
+            _userRepositoryMock
+                .Setup(repository => repository.UpdateAsync(user))
+                .Returns(Task.CompletedTask);
+
+            _userRepositoryMock
+                .Setup(repository => repository.SaveChangesAsync())
+                .Returns(Task.CompletedTask);
+
+            var result = await _service.ChangePasswordAsync("  User@HealthAxis.COM  ", request);
+
+            result.Success.Should().BeTrue();
+            result.Message.Should().Be("Password changed successfully.");
+
+            user.PasswordHash.Should().Be("new-hashed-password");
+            user.MustChangePassword.Should().BeFalse();
+
+            _userRepositoryMock.Verify(
+                repository => repository.GetByEmailAsync("user@healthaxis.com"),
+                Times.Once);
+
+            _passwordHasherMock.Verify(
+                hasher => hasher.VerifyHashedPassword(user, "old-hashed-password", request.CurrentPassword),
+                Times.Once);
+
+            _passwordHasherMock.Verify(
+                hasher => hasher.HashPassword(user, request.NewPassword),
+                Times.Once);
+
+            _userRepositoryMock.Verify(
+                repository => repository.UpdateAsync(user),
+                Times.Once);
+
+            _userRepositoryMock.Verify(
+                repository => repository.SaveChangesAsync(),
+                Times.Once);
+        }
+
+        [Fact]
+        public async Task ChangePasswordAsync_ShouldPropagateException_WhenLookupFails()
+        {
+            var request = BuildValidChangePasswordDto();
+
+            _userRepositoryMock
+                .Setup(repository => repository.GetByEmailAsync("user@healthaxis.com"))
+                .ThrowsAsync(new InvalidOperationException("User lookup failed."));
+
+            var act = async () => await _service.ChangePasswordAsync("user@healthaxis.com", request);
+
+            await act.Should()
+                .ThrowAsync<InvalidOperationException>()
+                .WithMessage("User lookup failed.");
+        }
+
+        [Fact]
+        public async Task ChangePasswordAsync_ShouldPropagateException_WhenUpdateFails()
+        {
+            var request = BuildValidChangePasswordDto();
+
+            var user = BuildUser(1, "user@healthaxis.com", UserRole.Doctor, 3);
+
+            _userRepositoryMock
+                .Setup(repository => repository.GetByEmailAsync("user@healthaxis.com"))
+                .ReturnsAsync(user);
+
+            _passwordHasherMock
+                .Setup(hasher => hasher.VerifyHashedPassword(user, user.PasswordHash, request.CurrentPassword))
+                .Returns(PasswordVerificationResult.Success);
+
+            _passwordHasherMock
+                .Setup(hasher => hasher.HashPassword(user, request.NewPassword))
+                .Returns("new-hashed-password");
+
+            _userRepositoryMock
+                .Setup(repository => repository.UpdateAsync(user))
+                .ThrowsAsync(new InvalidOperationException("Password update failed."));
+
+            var act = async () => await _service.ChangePasswordAsync("user@healthaxis.com", request);
+
+            await act.Should()
+                .ThrowAsync<InvalidOperationException>()
+                .WithMessage("Password update failed.");
+
+            _userRepositoryMock.Verify(
+                repository => repository.SaveChangesAsync(),
+                Times.Never);
+        }
+
+        [Fact]
+        public async Task ChangePasswordAsync_ShouldPropagateException_WhenSaveFails()
+        {
+            var request = BuildValidChangePasswordDto();
+
+            var user = BuildUser(1, "user@healthaxis.com", UserRole.Doctor, 3);
+
+            _userRepositoryMock
+                .Setup(repository => repository.GetByEmailAsync("user@healthaxis.com"))
+                .ReturnsAsync(user);
+
+            _passwordHasherMock
+                .Setup(hasher => hasher.VerifyHashedPassword(user, user.PasswordHash, request.CurrentPassword))
+                .Returns(PasswordVerificationResult.Success);
+
+            _passwordHasherMock
+                .Setup(hasher => hasher.HashPassword(user, request.NewPassword))
+                .Returns("new-hashed-password");
+
+            _userRepositoryMock
+                .Setup(repository => repository.UpdateAsync(user))
+                .Returns(Task.CompletedTask);
+
+            _userRepositoryMock
+                .Setup(repository => repository.SaveChangesAsync())
+                .ThrowsAsync(new InvalidOperationException("Password save failed."));
+
+            var act = async () => await _service.ChangePasswordAsync("user@healthaxis.com", request);
+
+            await act.Should()
+                .ThrowAsync<InvalidOperationException>()
+                .WithMessage("Password save failed.");
+        }
+
+        #endregion
+
+        #region Helpers
+
+        private static IConfiguration BuildConfiguration()
+        {
+            var values = new Dictionary<string, string?>
+            {
+                ["Jwt:Key"] = "ThisIsAReallyLongJwtSigningKeyForUnitTests1234567890",
+                ["Jwt:Issuer"] = "HealthAxis.Tests",
+                ["Jwt:Audience"] = "HealthAxis.TestClients",
+                ["Jwt:AccessTokenExpirationMinutes"] = "60"
+            };
+
+            return new ConfigurationBuilder()
+                .AddInMemoryCollection(values)
+                .Build();
+        }
+
+        private static RegisterDto BuildRegisterDto()
+        {
+            return new RegisterDto
+            {
+                Email = "new.user@healthaxis.com",
+                Password = "Password@123",
+                ConfirmPassword = "Password@123",
+                Role = UserRole.Admin,
+                ReferenceId = null
+            };
+        }
+
+        private static RegisterPatientDto BuildRegisterPatientDto()
+        {
+            return new RegisterPatientDto
+            {
+                FullName = "Patient User",
+                Email = "new.patient@healthaxis.com",
+                Password = "Password@123",
+                ConfirmPassword = "Password@123",
+                DateOfBirth = new DateOnly(1995, 5, 10),
+                Gender = Gender.Male,
+                PhoneNumber = "9876543210",
+                InsuranceNumber = "INS1001"
+            };
+        }
+
+        private static ChangePasswordDto BuildValidChangePasswordDto()
+        {
+            return new ChangePasswordDto
+            {
+                CurrentPassword = "OldPassword@123",
+                NewPassword = "NewPassword@123",
+                ConfirmNewPassword = "NewPassword@123"
+            };
+        }
+
+        private static User BuildUser(
+            int userId,
+            string email,
+            UserRole role,
+            int? referenceId)
+        {
+            return new User
+            {
+                UserId = userId,
+                Email = email,
+                PasswordHash = "old-hashed-password",
+                Role = role,
+                ReferenceId = referenceId,
+                CreatedDate = DateTime.UtcNow.AddDays(-1),
+                MustChangePassword = false,
+                RefreshToken = "old-refresh-token",
+                RefreshTokenExpiryTime = DateTime.UtcNow.AddDays(1)
+            };
+        }
+
+        private static Dictionary<string, string> ReadClaims(string accessToken)
+        {
+            var token = new JwtSecurityTokenHandler()
+                .ReadJwtToken(accessToken);
+
+            return token.Claims
+                .GroupBy(claim => claim.Type)
+                .ToDictionary(
+                    group => group.Key,
+                    group => group.First().Value);
+        }
+
+        #endregion
+    }
+}
+

@@ -17,20 +17,55 @@ using S4_HealthAxisApi.Services.Interface;
 using Serilog;
 using System.Text;
 using System.Text.Json;
+using Elastic.Ingest.Elasticsearch;
+using Elastic.Ingest.Elasticsearch.DataStreams;
+using Elastic.Serilog.Sinks;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Host.UseSerilog((context, services, configuration) =>
 {
+    var elasticSection = context.Configuration.GetSection("ElasticSearch");
+
+    var elasticEnabled =
+        bool.TryParse(elasticSection["Enabled"], out var enabled) &&
+        enabled;
+
+    var elasticUri = elasticSection["Uri"];
+    var dataStreamDataset =
+        elasticSection["DataStreamDataset"] ?? "healthaxis-api";
+
+    var dataStreamNamespace =
+        elasticSection["DataStreamNamespace"] ?? "local";
+
     configuration
         .ReadFrom.Configuration(context.Configuration)
         .ReadFrom.Services(services)
         .Enrich.FromLogContext()
+        .Enrich.WithProperty("Application", "S4_HealthAxisApi")
         .WriteTo.Console()
         .WriteTo.File(
             "logs/healthaxis-.log",
             rollingInterval: RollingInterval.Day,
             retainedFileCountLimit: 7);
+
+    if (elasticEnabled &&
+        !string.IsNullOrWhiteSpace(elasticUri))
+    {
+        configuration.WriteTo.Elasticsearch(
+            new[] { new Uri(elasticUri) },
+            options =>
+            {
+                options.DataStream =
+                    new DataStreamName(
+                        "logs",
+                        dataStreamDataset,
+                        dataStreamNamespace);
+
+                options.BootstrapMethod =
+                    BootstrapMethod.Silent;
+            });
+    }
 });
 
 #region Controllers
@@ -187,6 +222,7 @@ builder.Services.AddScoped<IRabbitMqPublisher, RabbitMqPublisher>();
 
 builder.Services.AddHostedService<HeartbeatService>();
 builder.Services.AddHostedService<NotificationCleanupService>();
+builder.Services.AddHostedService<AppointmentMaintenanceService>();
 
 #endregion
 

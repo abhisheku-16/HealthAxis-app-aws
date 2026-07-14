@@ -1,4 +1,5 @@
-﻿using Moq;
+﻿using FluentAssertions;
+using Moq;
 using S4_HealthAxis.Shared.Enums;
 using S4_HealthAxisApi.Models;
 using S4_HealthAxisApi.Repository.Interface;
@@ -9,239 +10,815 @@ namespace S4_HealthAxis.Tests.ServiceTests
 {
     public class AdminServiceTests
     {
-        private readonly Mock<IAdminRepository> _repositoryMock;
+        private readonly Mock<IAdminRepository> _adminRepositoryMock;
         private readonly AdminService _service;
 
         public AdminServiceTests()
         {
-            _repositoryMock = new Mock<IAdminRepository>();
-            _service = new AdminService(_repositoryMock.Object);
+            _adminRepositoryMock =
+                new Mock<IAdminRepository>(MockBehavior.Strict);
+
+            _service =
+                new AdminService(_adminRepositoryMock.Object);
         }
 
-        [Fact]
-        public async Task GetDashboardAsync_ShouldReturnDashboardCounts()
-        {
-            // Arrange
-            _repositoryMock.Setup(r => r.CountPatientsAsync()).ReturnsAsync(100);
-            _repositoryMock.Setup(r => r.CountActivePatientsAsync()).ReturnsAsync(80);
-            _repositoryMock.Setup(r => r.CountDoctorsAsync()).ReturnsAsync(20);
-            _repositoryMock.Setup(r => r.CountActiveDoctorsAsync()).ReturnsAsync(15);
-            _repositoryMock.Setup(r => r.CountTodayAppointmentsAsync()).ReturnsAsync(12);
-            _repositoryMock.Setup(r => r.CountPendingAppointmentsAsync()).ReturnsAsync(5);
-            _repositoryMock.Setup(r => r.CountCompletedAppointmentsAsync()).ReturnsAsync(7);
+        #region GetDashboardAsync
 
-            // Act
+        [Fact]
+        public async Task GetDashboardAsync_ShouldReturnDashboardCounts_WhenRepositoryReturnsValues()
+        {
+            _adminRepositoryMock
+                .Setup(repository => repository.CountPatientsAsync())
+                .ReturnsAsync(100);
+
+            _adminRepositoryMock
+                .Setup(repository => repository.CountActivePatientsAsync())
+                .ReturnsAsync(85);
+
+            _adminRepositoryMock
+                .Setup(repository => repository.CountDoctorsAsync())
+                .ReturnsAsync(20);
+
+            _adminRepositoryMock
+                .Setup(repository => repository.CountActiveDoctorsAsync())
+                .ReturnsAsync(18);
+
+            _adminRepositoryMock
+                .Setup(repository => repository.CountTodayAppointmentsAsync())
+                .ReturnsAsync(12);
+
+            _adminRepositoryMock
+                .Setup(repository => repository.CountPendingAppointmentsAsync())
+                .ReturnsAsync(7);
+
+            _adminRepositoryMock
+                .Setup(repository => repository.CountCompletedAppointmentsAsync())
+                .ReturnsAsync(5);
+
             var result = await _service.GetDashboardAsync();
 
-            // Assert
-            Assert.NotNull(result);
-            Assert.Equal(100, result.TotalPatients);
-            Assert.Equal(80, result.ActivePatients);
-            Assert.Equal(20, result.TotalDoctors);
-            Assert.Equal(15, result.ActiveDoctors);
-            Assert.Equal(12, result.TodayAppointments);
-            Assert.Equal(5, result.PendingAppointments);
-            Assert.Equal(7, result.CompletedAppointments);
+            result.TotalPatients.Should().Be(100);
+            result.ActivePatients.Should().Be(85);
+            result.TotalDoctors.Should().Be(20);
+            result.ActiveDoctors.Should().Be(18);
+            result.TodayAppointments.Should().Be(12);
+            result.PendingAppointments.Should().Be(7);
+            result.CompletedAppointments.Should().Be(5);
 
-            _repositoryMock.Verify(r => r.CountPatientsAsync(), Times.Once);
-            _repositoryMock.Verify(r => r.CountActivePatientsAsync(), Times.Once);
-            _repositoryMock.Verify(r => r.CountDoctorsAsync(), Times.Once);
-            _repositoryMock.Verify(r => r.CountActiveDoctorsAsync(), Times.Once);
-            _repositoryMock.Verify(r => r.CountTodayAppointmentsAsync(), Times.Once);
-            _repositoryMock.Verify(r => r.CountPendingAppointmentsAsync(), Times.Once);
-            _repositoryMock.Verify(r => r.CountCompletedAppointmentsAsync(), Times.Once);
+            _adminRepositoryMock.Verify(
+                repository => repository.CountPatientsAsync(),
+                Times.Once);
+
+            _adminRepositoryMock.Verify(
+                repository => repository.CountActivePatientsAsync(),
+                Times.Once);
+
+            _adminRepositoryMock.Verify(
+                repository => repository.CountDoctorsAsync(),
+                Times.Once);
+
+            _adminRepositoryMock.Verify(
+                repository => repository.CountActiveDoctorsAsync(),
+                Times.Once);
+
+            _adminRepositoryMock.Verify(
+                repository => repository.CountTodayAppointmentsAsync(),
+                Times.Once);
+
+            _adminRepositoryMock.Verify(
+                repository => repository.CountPendingAppointmentsAsync(),
+                Times.Once);
+
+            _adminRepositoryMock.Verify(
+                repository => repository.CountCompletedAppointmentsAsync(),
+                Times.Once);
+
+            _adminRepositoryMock.VerifyNoOtherCalls();
         }
 
         [Fact]
-        public async Task GetStatisticsAsync_ShouldReturnStatisticsCounts()
+        public async Task GetDashboardAsync_ShouldReturnZeroCounts_WhenRepositoryReturnsZero()
         {
-            // Arrange
-            _repositoryMock.Setup(r => r.CountPatientsAsync()).ReturnsAsync(45);
-            _repositoryMock.Setup(r => r.CountDoctorsAsync()).ReturnsAsync(10);
-            _repositoryMock.Setup(r => r.CountTodayAppointmentsAsync()).ReturnsAsync(8);
-            _repositoryMock.Setup(r => r.CountHealthRecordsAsync()).ReturnsAsync(30);
+            _adminRepositoryMock
+                .Setup(repository => repository.CountPatientsAsync())
+                .ReturnsAsync(0);
 
-            // Act
+            _adminRepositoryMock
+                .Setup(repository => repository.CountActivePatientsAsync())
+                .ReturnsAsync(0);
+
+            _adminRepositoryMock
+                .Setup(repository => repository.CountDoctorsAsync())
+                .ReturnsAsync(0);
+
+            _adminRepositoryMock
+                .Setup(repository => repository.CountActiveDoctorsAsync())
+                .ReturnsAsync(0);
+
+            _adminRepositoryMock
+                .Setup(repository => repository.CountTodayAppointmentsAsync())
+                .ReturnsAsync(0);
+
+            _adminRepositoryMock
+                .Setup(repository => repository.CountPendingAppointmentsAsync())
+                .ReturnsAsync(0);
+
+            _adminRepositoryMock
+                .Setup(repository => repository.CountCompletedAppointmentsAsync())
+                .ReturnsAsync(0);
+
+            var result = await _service.GetDashboardAsync();
+
+            result.TotalPatients.Should().Be(0);
+            result.ActivePatients.Should().Be(0);
+            result.TotalDoctors.Should().Be(0);
+            result.ActiveDoctors.Should().Be(0);
+            result.TodayAppointments.Should().Be(0);
+            result.PendingAppointments.Should().Be(0);
+            result.CompletedAppointments.Should().Be(0);
+
+            _adminRepositoryMock.Verify(
+                repository => repository.CountPatientsAsync(),
+                Times.Once);
+
+            _adminRepositoryMock.Verify(
+                repository => repository.CountActivePatientsAsync(),
+                Times.Once);
+
+            _adminRepositoryMock.Verify(
+                repository => repository.CountDoctorsAsync(),
+                Times.Once);
+
+            _adminRepositoryMock.Verify(
+                repository => repository.CountActiveDoctorsAsync(),
+                Times.Once);
+
+            _adminRepositoryMock.Verify(
+                repository => repository.CountTodayAppointmentsAsync(),
+                Times.Once);
+
+            _adminRepositoryMock.Verify(
+                repository => repository.CountPendingAppointmentsAsync(),
+                Times.Once);
+
+            _adminRepositoryMock.Verify(
+                repository => repository.CountCompletedAppointmentsAsync(),
+                Times.Once);
+
+            _adminRepositoryMock.VerifyNoOtherCalls();
+        }
+
+        [Fact]
+        public async Task GetDashboardAsync_ShouldPropagateException_WhenFirstRepositoryCallFails()
+        {
+            _adminRepositoryMock
+                .Setup(repository => repository.CountPatientsAsync())
+                .ThrowsAsync(new InvalidOperationException("Count patients failed."));
+
+            var act = async () => await _service.GetDashboardAsync();
+
+            await act.Should()
+                .ThrowAsync<InvalidOperationException>()
+                .WithMessage("Count patients failed.");
+
+            _adminRepositoryMock.Verify(
+                repository => repository.CountPatientsAsync(),
+                Times.Once);
+
+            _adminRepositoryMock.VerifyNoOtherCalls();
+        }
+
+        [Fact]
+        public async Task GetDashboardAsync_ShouldPropagateException_WhenMiddleRepositoryCallFails()
+        {
+            _adminRepositoryMock
+                .Setup(repository => repository.CountPatientsAsync())
+                .ReturnsAsync(100);
+
+            _adminRepositoryMock
+                .Setup(repository => repository.CountActivePatientsAsync())
+                .ReturnsAsync(90);
+
+            _adminRepositoryMock
+                .Setup(repository => repository.CountDoctorsAsync())
+                .ThrowsAsync(new InvalidOperationException("Count doctors failed."));
+
+            var act = async () => await _service.GetDashboardAsync();
+
+            await act.Should()
+                .ThrowAsync<InvalidOperationException>()
+                .WithMessage("Count doctors failed.");
+
+            _adminRepositoryMock.Verify(
+                repository => repository.CountPatientsAsync(),
+                Times.Once);
+
+            _adminRepositoryMock.Verify(
+                repository => repository.CountActivePatientsAsync(),
+                Times.Once);
+
+            _adminRepositoryMock.Verify(
+                repository => repository.CountDoctorsAsync(),
+                Times.Once);
+
+            _adminRepositoryMock.VerifyNoOtherCalls();
+        }
+
+        [Fact]
+        public async Task GetDashboardAsync_ShouldPropagateException_WhenLastRepositoryCallFails()
+        {
+            _adminRepositoryMock
+                .Setup(repository => repository.CountPatientsAsync())
+                .ReturnsAsync(100);
+
+            _adminRepositoryMock
+                .Setup(repository => repository.CountActivePatientsAsync())
+                .ReturnsAsync(90);
+
+            _adminRepositoryMock
+                .Setup(repository => repository.CountDoctorsAsync())
+                .ReturnsAsync(20);
+
+            _adminRepositoryMock
+                .Setup(repository => repository.CountActiveDoctorsAsync())
+                .ReturnsAsync(18);
+
+            _adminRepositoryMock
+                .Setup(repository => repository.CountTodayAppointmentsAsync())
+                .ReturnsAsync(12);
+
+            _adminRepositoryMock
+                .Setup(repository => repository.CountPendingAppointmentsAsync())
+                .ReturnsAsync(6);
+
+            _adminRepositoryMock
+                .Setup(repository => repository.CountCompletedAppointmentsAsync())
+                .ThrowsAsync(new InvalidOperationException("Count completed appointments failed."));
+
+            var act = async () => await _service.GetDashboardAsync();
+
+            await act.Should()
+                .ThrowAsync<InvalidOperationException>()
+                .WithMessage("Count completed appointments failed.");
+
+            _adminRepositoryMock.Verify(
+                repository => repository.CountPatientsAsync(),
+                Times.Once);
+
+            _adminRepositoryMock.Verify(
+                repository => repository.CountActivePatientsAsync(),
+                Times.Once);
+
+            _adminRepositoryMock.Verify(
+                repository => repository.CountDoctorsAsync(),
+                Times.Once);
+
+            _adminRepositoryMock.Verify(
+                repository => repository.CountActiveDoctorsAsync(),
+                Times.Once);
+
+            _adminRepositoryMock.Verify(
+                repository => repository.CountTodayAppointmentsAsync(),
+                Times.Once);
+
+            _adminRepositoryMock.Verify(
+                repository => repository.CountPendingAppointmentsAsync(),
+                Times.Once);
+
+            _adminRepositoryMock.Verify(
+                repository => repository.CountCompletedAppointmentsAsync(),
+                Times.Once);
+
+            _adminRepositoryMock.VerifyNoOtherCalls();
+        }
+
+        #endregion
+
+        #region GetStatisticsAsync
+
+        [Fact]
+        public async Task GetStatisticsAsync_ShouldReturnStatisticsCounts_WhenRepositoryReturnsValues()
+        {
+            _adminRepositoryMock
+                .Setup(repository => repository.CountPatientsAsync())
+                .ReturnsAsync(120);
+
+            _adminRepositoryMock
+                .Setup(repository => repository.CountDoctorsAsync())
+                .ReturnsAsync(25);
+
+            _adminRepositoryMock
+                .Setup(repository => repository.CountTodayAppointmentsAsync())
+                .ReturnsAsync(14);
+
+            _adminRepositoryMock
+                .Setup(repository => repository.CountHealthRecordsAsync())
+                .ReturnsAsync(300);
+
             var result = await _service.GetStatisticsAsync();
 
-            // Assert
-            Assert.NotNull(result);
-            Assert.Equal(45, result.Patients);
-            Assert.Equal(10, result.Doctors);
-            Assert.Equal(8, result.Appointments);
-            Assert.Equal(30, result.HealthRecords);
+            result.Patients.Should().Be(120);
+            result.Doctors.Should().Be(25);
+            result.Appointments.Should().Be(14);
+            result.HealthRecords.Should().Be(300);
 
-            _repositoryMock.Verify(r => r.CountPatientsAsync(), Times.Once);
-            _repositoryMock.Verify(r => r.CountDoctorsAsync(), Times.Once);
-            _repositoryMock.Verify(r => r.CountTodayAppointmentsAsync(), Times.Once);
-            _repositoryMock.Verify(r => r.CountHealthRecordsAsync(), Times.Once);
+            _adminRepositoryMock.Verify(
+                repository => repository.CountPatientsAsync(),
+                Times.Once);
+
+            _adminRepositoryMock.Verify(
+                repository => repository.CountDoctorsAsync(),
+                Times.Once);
+
+            _adminRepositoryMock.Verify(
+                repository => repository.CountTodayAppointmentsAsync(),
+                Times.Once);
+
+            _adminRepositoryMock.Verify(
+                repository => repository.CountHealthRecordsAsync(),
+                Times.Once);
+
+            _adminRepositoryMock.VerifyNoOtherCalls();
         }
 
         [Fact]
-        public async Task GetUsersAsync_ShouldReturnMappedUsersWithActiveStatus()
+        public async Task GetStatisticsAsync_ShouldReturnZeroCounts_WhenRepositoryReturnsZero()
         {
-            // Arrange
+            _adminRepositoryMock
+                .Setup(repository => repository.CountPatientsAsync())
+                .ReturnsAsync(0);
+
+            _adminRepositoryMock
+                .Setup(repository => repository.CountDoctorsAsync())
+                .ReturnsAsync(0);
+
+            _adminRepositoryMock
+                .Setup(repository => repository.CountTodayAppointmentsAsync())
+                .ReturnsAsync(0);
+
+            _adminRepositoryMock
+                .Setup(repository => repository.CountHealthRecordsAsync())
+                .ReturnsAsync(0);
+
+            var result = await _service.GetStatisticsAsync();
+
+            result.Patients.Should().Be(0);
+            result.Doctors.Should().Be(0);
+            result.Appointments.Should().Be(0);
+            result.HealthRecords.Should().Be(0);
+
+            _adminRepositoryMock.Verify(
+                repository => repository.CountPatientsAsync(),
+                Times.Once);
+
+            _adminRepositoryMock.Verify(
+                repository => repository.CountDoctorsAsync(),
+                Times.Once);
+
+            _adminRepositoryMock.Verify(
+                repository => repository.CountTodayAppointmentsAsync(),
+                Times.Once);
+
+            _adminRepositoryMock.Verify(
+                repository => repository.CountHealthRecordsAsync(),
+                Times.Once);
+
+            _adminRepositoryMock.VerifyNoOtherCalls();
+        }
+
+        [Fact]
+        public async Task GetStatisticsAsync_ShouldPropagateException_WhenRepositoryThrows()
+        {
+            _adminRepositoryMock
+                .Setup(repository => repository.CountPatientsAsync())
+                .ReturnsAsync(10);
+
+            _adminRepositoryMock
+                .Setup(repository => repository.CountDoctorsAsync())
+                .ThrowsAsync(new InvalidOperationException("Count doctors failed."));
+
+            var act = async () => await _service.GetStatisticsAsync();
+
+            await act.Should()
+                .ThrowAsync<InvalidOperationException>()
+                .WithMessage("Count doctors failed.");
+
+            _adminRepositoryMock.Verify(
+                repository => repository.CountPatientsAsync(),
+                Times.Once);
+
+            _adminRepositoryMock.Verify(
+                repository => repository.CountDoctorsAsync(),
+                Times.Once);
+
+            _adminRepositoryMock.VerifyNoOtherCalls();
+        }
+
+        [Fact]
+        public async Task GetStatisticsAsync_ShouldPropagateException_WhenHealthRecordCountFails()
+        {
+            _adminRepositoryMock
+                .Setup(repository => repository.CountPatientsAsync())
+                .ReturnsAsync(10);
+
+            _adminRepositoryMock
+                .Setup(repository => repository.CountDoctorsAsync())
+                .ReturnsAsync(5);
+
+            _adminRepositoryMock
+                .Setup(repository => repository.CountTodayAppointmentsAsync())
+                .ReturnsAsync(3);
+
+            _adminRepositoryMock
+                .Setup(repository => repository.CountHealthRecordsAsync())
+                .ThrowsAsync(new InvalidOperationException("Count health records failed."));
+
+            var act = async () => await _service.GetStatisticsAsync();
+
+            await act.Should()
+                .ThrowAsync<InvalidOperationException>()
+                .WithMessage("Count health records failed.");
+
+            _adminRepositoryMock.Verify(
+                repository => repository.CountPatientsAsync(),
+                Times.Once);
+
+            _adminRepositoryMock.Verify(
+                repository => repository.CountDoctorsAsync(),
+                Times.Once);
+
+            _adminRepositoryMock.Verify(
+                repository => repository.CountTodayAppointmentsAsync(),
+                Times.Once);
+
+            _adminRepositoryMock.Verify(
+                repository => repository.CountHealthRecordsAsync(),
+                Times.Once);
+
+            _adminRepositoryMock.VerifyNoOtherCalls();
+        }
+
+        #endregion
+
+        #region GetUsersAsync
+
+        [Fact]
+        public async Task GetUsersAsync_ShouldReturnMappedUsers_WhenUsersExist()
+        {
             var users = new List<User>
             {
-                new User
-                {
-                    UserId = 1,
-                    Email = "admin@test.com",
-                    Role = UserRole.Admin
-                },
-                new User
-                {
-                    UserId = 2,
-                    Email = "doctor@test.com",
-                    Role = UserRole.Doctor
-                },
-                new User
-                {
-                    UserId = 3,
-                    Email = "patient@test.com",
-                    Role = UserRole.Patient
-                }
+                BuildUser(1, "admin@healthaxis.com", UserRole.Admin),
+                BuildUser(2, "doctor@healthaxis.com", UserRole.Doctor),
+                BuildUser(3, "patient@healthaxis.com", UserRole.Patient)
             };
 
-            _repositoryMock.Setup(r => r.GetUsersAsync())
+            _adminRepositoryMock
+                .Setup(repository => repository.GetUsersAsync())
                 .ReturnsAsync(users);
 
-            _repositoryMock.Setup(r => r.ResolveUserActiveStatusAsync("admin@test.com", "Admin"))
+            _adminRepositoryMock
+                .Setup(repository => repository.ResolveUserActiveStatusAsync("admin@healthaxis.com", "Admin"))
                 .ReturnsAsync(true);
 
-            _repositoryMock.Setup(r => r.ResolveUserActiveStatusAsync("doctor@test.com", "Doctor"))
+            _adminRepositoryMock
+                .Setup(repository => repository.ResolveUserActiveStatusAsync("doctor@healthaxis.com", "Doctor"))
                 .ReturnsAsync(false);
 
-            _repositoryMock.Setup(r => r.ResolveUserActiveStatusAsync("patient@test.com", "Patient"))
+            _adminRepositoryMock
+                .Setup(repository => repository.ResolveUserActiveStatusAsync("patient@healthaxis.com", "Patient"))
                 .ReturnsAsync(true);
 
-            // Act
             var result = (await _service.GetUsersAsync()).ToList();
 
-            // Assert
-            Assert.NotNull(result);
-            Assert.Equal(3, result.Count);
+            result.Should().HaveCount(3);
 
-            Assert.Equal(1, result[0].UserId);
-            Assert.Equal("admin@test.com", result[0].Email);
-            Assert.Equal("Admin", result[0].Role);
-            Assert.True(result[0].IsActive);
+            result[0].UserId.Should().Be(1);
+            result[0].Email.Should().Be("admin@healthaxis.com");
+            result[0].Role.Should().Be("Admin");
+            result[0].IsActive.Should().BeTrue();
 
-            Assert.Equal(2, result[1].UserId);
-            Assert.Equal("doctor@test.com", result[1].Email);
-            Assert.Equal("Doctor", result[1].Role);
-            Assert.False(result[1].IsActive);
+            result[1].UserId.Should().Be(2);
+            result[1].Email.Should().Be("doctor@healthaxis.com");
+            result[1].Role.Should().Be("Doctor");
+            result[1].IsActive.Should().BeFalse();
 
-            Assert.Equal(3, result[2].UserId);
-            Assert.Equal("patient@test.com", result[2].Email);
-            Assert.Equal("Patient", result[2].Role);
-            Assert.True(result[2].IsActive);
+            result[2].UserId.Should().Be(3);
+            result[2].Email.Should().Be("patient@healthaxis.com");
+            result[2].Role.Should().Be("Patient");
+            result[2].IsActive.Should().BeTrue();
 
-            _repositoryMock.Verify(r => r.GetUsersAsync(), Times.Once);
-            _repositoryMock.Verify(r => r.ResolveUserActiveStatusAsync("admin@test.com", "Admin"), Times.Once);
-            _repositoryMock.Verify(r => r.ResolveUserActiveStatusAsync("doctor@test.com", "Doctor"), Times.Once);
-            _repositoryMock.Verify(r => r.ResolveUserActiveStatusAsync("patient@test.com", "Patient"), Times.Once);
+            _adminRepositoryMock.Verify(
+                repository => repository.GetUsersAsync(),
+                Times.Once);
+
+            _adminRepositoryMock.Verify(
+                repository => repository.ResolveUserActiveStatusAsync("admin@healthaxis.com", "Admin"),
+                Times.Once);
+
+            _adminRepositoryMock.Verify(
+                repository => repository.ResolveUserActiveStatusAsync("doctor@healthaxis.com", "Doctor"),
+                Times.Once);
+
+            _adminRepositoryMock.Verify(
+                repository => repository.ResolveUserActiveStatusAsync("patient@healthaxis.com", "Patient"),
+                Times.Once);
+
+            _adminRepositoryMock.VerifyNoOtherCalls();
         }
 
         [Fact]
-        public async Task GetUsersAsync_WhenNoUsers_ShouldReturnEmptyList()
+        public async Task GetUsersAsync_ShouldReturnEmptyCollection_WhenRepositoryReturnsNoUsers()
         {
-            // Arrange
-            _repositoryMock.Setup(r => r.GetUsersAsync())
+            _adminRepositoryMock
+                .Setup(repository => repository.GetUsersAsync())
                 .ReturnsAsync(new List<User>());
 
-            // Act
             var result = (await _service.GetUsersAsync()).ToList();
 
-            // Assert
-            Assert.NotNull(result);
-            Assert.Empty(result);
+            result.Should().BeEmpty();
 
-            _repositoryMock.Verify(r => r.GetUsersAsync(), Times.Once);
-            _repositoryMock.Verify(
-                r => r.ResolveUserActiveStatusAsync(It.IsAny<string>(), It.IsAny<string>()),
+            _adminRepositoryMock.Verify(
+                repository => repository.GetUsersAsync(),
+                Times.Once);
+
+            _adminRepositoryMock.Verify(
+                repository => repository.ResolveUserActiveStatusAsync(
+                    It.IsAny<string>(),
+                    It.IsAny<string>()),
                 Times.Never);
+
+            _adminRepositoryMock.VerifyNoOtherCalls();
         }
 
         [Fact]
-        public async Task GetUserByIdAsync_WhenUserExists_ShouldReturnMappedUser()
+        public async Task GetUsersAsync_ShouldPreserveRepositoryOrder()
         {
-            // Arrange
-            var user = new User
+            var users = new List<User>
             {
-                UserId = 10,
-                Email = "doctor@test.com",
-                Role = UserRole.Doctor
+                BuildUser(3, "third@healthaxis.com", UserRole.Patient),
+                BuildUser(1, "first@healthaxis.com", UserRole.Admin),
+                BuildUser(2, "second@healthaxis.com", UserRole.Doctor)
             };
 
-            _repositoryMock.Setup(r => r.GetUserByIdAsync(10))
-                .ReturnsAsync(user);
+            _adminRepositoryMock
+                .Setup(repository => repository.GetUsersAsync())
+                .ReturnsAsync(users);
 
-            _repositoryMock.Setup(r => r.ResolveUserActiveStatusAsync("doctor@test.com", "Doctor"))
+            _adminRepositoryMock
+                .Setup(repository => repository.ResolveUserActiveStatusAsync(It.IsAny<string>(), It.IsAny<string>()))
                 .ReturnsAsync(true);
 
-            // Act
-            var result = await _service.GetUserByIdAsync(10);
+            var result = (await _service.GetUsersAsync()).ToList();
 
-            // Assert
-            Assert.NotNull(result);
-            Assert.Equal(10, result.UserId);
-            Assert.Equal("doctor@test.com", result.Email);
-            Assert.Equal("Doctor", result.Role);
-            Assert.True(result.IsActive);
+            result.Select(user => user.UserId)
+                .Should()
+                .Equal(3, 1, 2);
 
-            _repositoryMock.Verify(r => r.GetUserByIdAsync(10), Times.Once);
-            _repositoryMock.Verify(r => r.ResolveUserActiveStatusAsync("doctor@test.com", "Doctor"), Times.Once);
+            _adminRepositoryMock.Verify(
+                repository => repository.GetUsersAsync(),
+                Times.Once);
+
+            _adminRepositoryMock.Verify(
+                repository => repository.ResolveUserActiveStatusAsync(It.IsAny<string>(), It.IsAny<string>()),
+                Times.Exactly(3));
+
+            _adminRepositoryMock.VerifyNoOtherCalls();
         }
 
         [Fact]
-        public async Task GetUserByIdAsync_WhenUserDoesNotExist_ShouldReturnNull()
+        public async Task GetUsersAsync_ShouldCallResolveActiveStatusForEveryUser()
         {
-            // Arrange
-            _repositoryMock.Setup(r => r.GetUserByIdAsync(99))
-                .ReturnsAsync((User?)null);
-
-            // Act
-            var result = await _service.GetUserByIdAsync(99);
-
-            // Assert
-            Assert.Null(result);
-
-            _repositoryMock.Verify(r => r.GetUserByIdAsync(99), Times.Once);
-            _repositoryMock.Verify(
-                r => r.ResolveUserActiveStatusAsync(It.IsAny<string>(), It.IsAny<string>()),
-                Times.Never);
-        }
-
-        [Fact]
-        public async Task GetUserByIdAsync_WhenPatientUserExists_ShouldReturnPatientRoleAndInactiveStatus()
-        {
-            // Arrange
-            var user = new User
+            var users = new List<User>
             {
-                UserId = 20,
-                Email = "patient@test.com",
-                Role = UserRole.Patient
+                BuildUser(1, "one@healthaxis.com", UserRole.Admin),
+                BuildUser(2, "two@healthaxis.com", UserRole.Doctor),
+                BuildUser(3, "three@healthaxis.com", UserRole.Patient),
+                BuildUser(4, "four@healthaxis.com", UserRole.Patient)
             };
 
-            _repositoryMock.Setup(r => r.GetUserByIdAsync(20))
+            _adminRepositoryMock
+                .Setup(repository => repository.GetUsersAsync())
+                .ReturnsAsync(users);
+
+            _adminRepositoryMock
+                .Setup(repository => repository.ResolveUserActiveStatusAsync(It.IsAny<string>(), It.IsAny<string>()))
+                .ReturnsAsync(true);
+
+            var result = (await _service.GetUsersAsync()).ToList();
+
+            result.Should().HaveCount(4);
+            result.Should().OnlyContain(user => user.IsActive);
+
+            _adminRepositoryMock.Verify(
+                repository => repository.GetUsersAsync(),
+                Times.Once);
+
+            _adminRepositoryMock.Verify(
+                repository => repository.ResolveUserActiveStatusAsync(It.IsAny<string>(), It.IsAny<string>()),
+                Times.Exactly(4));
+
+            _adminRepositoryMock.VerifyNoOtherCalls();
+        }
+
+        [Fact]
+        public async Task GetUsersAsync_ShouldPropagateException_WhenGetUsersFails()
+        {
+            _adminRepositoryMock
+                .Setup(repository => repository.GetUsersAsync())
+                .ThrowsAsync(new InvalidOperationException("Get users failed."));
+
+            var act = async () => await _service.GetUsersAsync();
+
+            await act.Should()
+                .ThrowAsync<InvalidOperationException>()
+                .WithMessage("Get users failed.");
+
+            _adminRepositoryMock.Verify(
+                repository => repository.GetUsersAsync(),
+                Times.Once);
+
+            _adminRepositoryMock.VerifyNoOtherCalls();
+        }
+
+        [Fact]
+        public async Task GetUsersAsync_ShouldPropagateException_WhenResolveUserActiveStatusFails()
+        {
+            var users = new List<User>
+            {
+                BuildUser(1, "admin@healthaxis.com", UserRole.Admin),
+                BuildUser(2, "doctor@healthaxis.com", UserRole.Doctor)
+            };
+
+            _adminRepositoryMock
+                .Setup(repository => repository.GetUsersAsync())
+                .ReturnsAsync(users);
+
+            _adminRepositoryMock
+                .Setup(repository => repository.ResolveUserActiveStatusAsync("admin@healthaxis.com", "Admin"))
+                .ReturnsAsync(true);
+
+            _adminRepositoryMock
+                .Setup(repository => repository.ResolveUserActiveStatusAsync("doctor@healthaxis.com", "Doctor"))
+                .ThrowsAsync(new InvalidOperationException("Resolve active status failed."));
+
+            var act = async () => await _service.GetUsersAsync();
+
+            await act.Should()
+                .ThrowAsync<InvalidOperationException>()
+                .WithMessage("Resolve active status failed.");
+
+            _adminRepositoryMock.Verify(
+                repository => repository.GetUsersAsync(),
+                Times.Once);
+
+            _adminRepositoryMock.Verify(
+                repository => repository.ResolveUserActiveStatusAsync("admin@healthaxis.com", "Admin"),
+                Times.Once);
+
+            _adminRepositoryMock.Verify(
+                repository => repository.ResolveUserActiveStatusAsync("doctor@healthaxis.com", "Doctor"),
+                Times.Once);
+
+            _adminRepositoryMock.VerifyNoOtherCalls();
+        }
+
+        #endregion
+
+        #region GetUserByIdAsync
+
+        [Fact]
+        public async Task GetUserByIdAsync_ShouldReturnNull_WhenUserDoesNotExist()
+        {
+            _adminRepositoryMock
+                .Setup(repository => repository.GetUserByIdAsync(404))
+                .ReturnsAsync((User?)null);
+
+            var result = await _service.GetUserByIdAsync(404);
+
+            result.Should().BeNull();
+
+            _adminRepositoryMock.Verify(
+                repository => repository.GetUserByIdAsync(404),
+                Times.Once);
+
+            _adminRepositoryMock.Verify(
+                repository => repository.ResolveUserActiveStatusAsync(
+                    It.IsAny<string>(),
+                    It.IsAny<string>()),
+                Times.Never);
+
+            _adminRepositoryMock.VerifyNoOtherCalls();
+        }
+
+        [Theory]
+        [InlineData(UserRole.Admin, "Admin", true)]
+        [InlineData(UserRole.Doctor, "Doctor", false)]
+        [InlineData(UserRole.Patient, "Patient", true)]
+        public async Task GetUserByIdAsync_ShouldReturnMappedUser_WhenUserExists(
+            UserRole role,
+            string expectedRoleText,
+            bool expectedActiveStatus)
+        {
+            var user = BuildUser(10, "user@healthaxis.com", role);
+
+            _adminRepositoryMock
+                .Setup(repository => repository.GetUserByIdAsync(10))
                 .ReturnsAsync(user);
 
-            _repositoryMock.Setup(r => r.ResolveUserActiveStatusAsync("patient@test.com", "Patient"))
-                .ReturnsAsync(false);
+            _adminRepositoryMock
+                .Setup(repository => repository.ResolveUserActiveStatusAsync("user@healthaxis.com", expectedRoleText))
+                .ReturnsAsync(expectedActiveStatus);
 
-            // Act
-            var result = await _service.GetUserByIdAsync(20);
+            var result = await _service.GetUserByIdAsync(10);
 
-            // Assert
-            Assert.NotNull(result);
-            Assert.Equal(20, result.UserId);
-            Assert.Equal("patient@test.com", result.Email);
-            Assert.Equal("Patient", result.Role);
-            Assert.False(result.IsActive);
+            result.Should().NotBeNull();
+            result!.UserId.Should().Be(10);
+            result.Email.Should().Be("user@healthaxis.com");
+            result.Role.Should().Be(expectedRoleText);
+            result.IsActive.Should().Be(expectedActiveStatus);
 
-            _repositoryMock.Verify(r => r.GetUserByIdAsync(20), Times.Once);
-            _repositoryMock.Verify(r => r.ResolveUserActiveStatusAsync("patient@test.com", "Patient"), Times.Once);
+            _adminRepositoryMock.Verify(
+                repository => repository.GetUserByIdAsync(10),
+                Times.Once);
+
+            _adminRepositoryMock.Verify(
+                repository => repository.ResolveUserActiveStatusAsync("user@healthaxis.com", expectedRoleText),
+                Times.Once);
+
+            _adminRepositoryMock.VerifyNoOtherCalls();
         }
+
+        [Fact]
+        public async Task GetUserByIdAsync_ShouldPropagateException_WhenGetUserFails()
+        {
+            _adminRepositoryMock
+                .Setup(repository => repository.GetUserByIdAsync(10))
+                .ThrowsAsync(new InvalidOperationException("Get user by id failed."));
+
+            var act = async () => await _service.GetUserByIdAsync(10);
+
+            await act.Should()
+                .ThrowAsync<InvalidOperationException>()
+                .WithMessage("Get user by id failed.");
+
+            _adminRepositoryMock.Verify(
+                repository => repository.GetUserByIdAsync(10),
+                Times.Once);
+
+            _adminRepositoryMock.VerifyNoOtherCalls();
+        }
+
+        [Fact]
+        public async Task GetUserByIdAsync_ShouldPropagateException_WhenResolveActiveStatusFails()
+        {
+            var user = BuildUser(10, "doctor@healthaxis.com", UserRole.Doctor);
+
+            _adminRepositoryMock
+                .Setup(repository => repository.GetUserByIdAsync(10))
+                .ReturnsAsync(user);
+
+            _adminRepositoryMock
+                .Setup(repository => repository.ResolveUserActiveStatusAsync("doctor@healthaxis.com", "Doctor"))
+                .ThrowsAsync(new InvalidOperationException("Resolve single user active status failed."));
+
+            var act = async () => await _service.GetUserByIdAsync(10);
+
+            await act.Should()
+                .ThrowAsync<InvalidOperationException>()
+                .WithMessage("Resolve single user active status failed.");
+
+            _adminRepositoryMock.Verify(
+                repository => repository.GetUserByIdAsync(10),
+                Times.Once);
+
+            _adminRepositoryMock.Verify(
+                repository => repository.ResolveUserActiveStatusAsync("doctor@healthaxis.com", "Doctor"),
+                Times.Once);
+
+            _adminRepositoryMock.VerifyNoOtherCalls();
+        }
+
+        #endregion
+
+        #region Helpers
+
+        private static User BuildUser(
+            int userId,
+            string email,
+            UserRole role)
+        {
+            return new User
+            {
+                UserId = userId,
+                Email = email,
+                Role = role,
+                PasswordHash = "hashed-password",
+                CreatedDate = DateTime.UtcNow.AddDays(-1),
+                MustChangePassword = false,
+                ReferenceId = role == UserRole.Admin ? null : userId
+            };
+        }
+
+        #endregion
     }
 }

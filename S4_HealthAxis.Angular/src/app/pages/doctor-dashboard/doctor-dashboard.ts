@@ -67,10 +67,10 @@ export class DoctorDashboard implements OnInit {
       return;
     }
 
-    this.loadTodaySchedule();
+    this.loadUpcomingSchedule();
   }
 
-  loadTodaySchedule(): void {
+  loadUpcomingSchedule(): void {
     if (!this.doctorId) {
       this.loading = false;
       this.errorMessage = 'Unable to identify doctor account. Please login again.';
@@ -81,7 +81,7 @@ export class DoctorDashboard implements OnInit {
     this.errorMessage = '';
     this.successMessage = '';
 
-    this.doctorDashboardService.getTodaySchedule(this.doctorId).subscribe({
+    this.doctorDashboardService.getUpcomingSchedule(this.doctorId).subscribe({
       next: (schedule) => {
         this.schedule = this.sortSchedule(schedule ?? []);
         this.loading = false;
@@ -99,7 +99,7 @@ export class DoctorDashboard implements OnInit {
           return;
         }
 
-        this.errorMessage = 'Could not load today’s schedule. Please try again.';
+        this.errorMessage = 'Could not load upcoming schedule. Please try again.';
       }
     });
   }
@@ -113,7 +113,7 @@ export class DoctorDashboard implements OnInit {
       next: () => {
         this.actionLoading = false;
         this.successMessage = 'Appointment confirmed successfully.';
-        this.loadTodaySchedule();
+        this.loadUpcomingSchedule();
       },
       error: (error) => {
         this.actionLoading = false;
@@ -147,7 +147,7 @@ export class DoctorDashboard implements OnInit {
       next: () => {
         this.actionLoading = false;
         this.successMessage = 'Appointment marked as completed. You can now add a health record.';
-        this.loadTodaySchedule();
+        this.loadUpcomingSchedule();
       },
       error: (error) => {
         this.actionLoading = false;
@@ -300,7 +300,7 @@ export class DoctorDashboard implements OnInit {
         };
 
         this.selectedAppointment = undefined;
-        this.loadTodaySchedule();
+        this.loadUpcomingSchedule();
       },
       error: (error) => {
         this.savingHealthRecord = false;
@@ -515,4 +515,3 @@ export class DoctorDashboard implements OnInit {
     });
   }
 }
-

@@ -17,6 +17,12 @@ import {
   AppointmentTimeSlot
 } from '../../shared/models/patient-dashboard.models';
 
+interface CountryCodeOption {
+  country: string;
+  code: string;
+  label: string;
+}
+
 @Component({
   selector: 'app-patient-profile',
   standalone: true,
@@ -46,10 +52,20 @@ export class PatientProfile implements OnInit {
   showSaveConfirmModal = false;
   pendingUpdateRequest?: UpdatePatientProfileRequest;
 
+  countryCodes: CountryCodeOption[] = [
+    { country: 'India', code: '+91', label: 'India (+91)' },
+    { country: 'USA', code: '+1', label: 'USA (+1)' },
+    { country: 'UK', code: '+44', label: 'UK (+44)' },
+    { country: 'Japan', code: '+81', label: 'Japan (+81)' },
+    { country: 'France', code: '+33', label: 'France (+33)' }
+  ];
+
   editForm = {
     fullName: '',
     dateOfBirth: '',
     gender: 1,
+    phoneCountryCode: '+91',
+    localPhoneNumber: '',
     phoneNumber: '',
     insuranceNumber: ''
   };
@@ -135,10 +151,14 @@ export class PatientProfile implements OnInit {
   }
 
   populateEditForm(patient: PatientProfileDetails): void {
+    const parsedPhoneNumber = this.parsePhoneNumber(patient.phoneNumber);
+
     this.editForm = {
       fullName: patient.fullName,
       dateOfBirth: patient.dateOfBirth,
       gender: Number(patient.gender),
+      phoneCountryCode: parsedPhoneNumber.countryCode,
+      localPhoneNumber: parsedPhoneNumber.localNumber,
       phoneNumber: patient.phoneNumber,
       insuranceNumber: patient.insuranceNumber ?? patient.insuranceId ?? ''
     };
@@ -191,8 +211,15 @@ export class PatientProfile implements OnInit {
       return;
     }
 
-    if (!this.editForm.phoneNumber.trim()) {
+    this.editForm.phoneNumber = this.buildFullPhoneNumber();
+
+    if (!this.editForm.localPhoneNumber.trim()) {
       this.errorMessage = 'Phone number is required.';
+      return;
+    }
+
+    if (!this.isPhoneValid()) {
+      this.errorMessage = 'Phone number must contain exactly 10 digits.';
       return;
     }
 
@@ -200,7 +227,7 @@ export class PatientProfile implements OnInit {
       fullName: this.editForm.fullName.trim(),
       dateOfBirth: this.editForm.dateOfBirth,
       gender: Number(this.editForm.gender),
-      phoneNumber: this.editForm.phoneNumber.trim(),
+      phoneNumber: this.buildFullPhoneNumber(),
       email: this.patient.email,
       insuranceNumber: this.editForm.insuranceNumber.trim() || undefined
     };
@@ -259,6 +286,39 @@ export class PatientProfile implements OnInit {
         this.errorMessage = 'Could not update profile. Please try again.';
       }
     });
+  }
+
+  onPhoneNumberInput(): void {
+    this.editForm.localPhoneNumber = this.editForm.localPhoneNumber
+      .replace(/\D/g, '')
+      .slice(0, 10);
+
+    this.editForm.phoneNumber = this.buildFullPhoneNumber();
+  }
+
+  onCountryCodeChange(): void {
+    this.editForm.phoneNumber = this.buildFullPhoneNumber();
+  }
+
+  buildFullPhoneNumber(): string {
+    const localNumber = this.editForm.localPhoneNumber.trim();
+
+    if (!localNumber) {
+      return '';
+    }
+
+    return `${this.editForm.phoneCountryCode} ${localNumber}`;
+  }
+
+  isPhoneValid(): boolean {
+    const normalizedPhoneNumber = this.editForm.localPhoneNumber.trim();
+
+    return (
+      normalizedPhoneNumber.length === 10 &&
+      [...normalizedPhoneNumber].every(character =>
+        character >= '0' && character <= '9'
+      )
+    );
   }
 
   isValidFullName(fullName: string): boolean {
@@ -436,4 +496,33 @@ export class PatientProfile implements OnInit {
         return `Slot ${timeSlot}`;
     }
   }
+
+  private parsePhoneNumber(phoneNumber: string): {
+    countryCode: string;
+    localNumber: string;
+  } {
+    const normalizedPhoneNumber = phoneNumber?.trim() ?? '';
+
+    const matchedCountry = this.countryCodes.find(country =>
+      normalizedPhoneNumber.startsWith(`${country.code} `)
+    );
+
+    if (matchedCountry) {
+      return {
+        countryCode: matchedCountry.code,
+        localNumber: normalizedPhoneNumber
+          .replace(`${matchedCountry.code} `, '')
+          .replace(/\D/g, '')
+          .slice(0, 10)
+      };
+    }
+
+    return {
+      countryCode: '+91',
+      localNumber: normalizedPhoneNumber
+        .replace(/\D/g, '')
+        .slice(0, 10)
+    };
+  }
 }
+

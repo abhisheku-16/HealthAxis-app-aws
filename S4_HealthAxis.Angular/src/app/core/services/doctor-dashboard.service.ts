@@ -24,6 +24,12 @@ export class DoctorDashboardService {
     );
   }
 
+  getUpcomingSchedule(doctorId: number): Observable<DoctorScheduleItem[]> {
+    return this.http.get<DoctorScheduleItem[]>(
+      `${this.apiBaseUrl}/appointments/doctor/${doctorId}/upcoming`
+    );
+  }
+
   getWeekSchedule(
     doctorId: number,
     startDate: string,
@@ -92,4 +98,3 @@ export class DoctorDashboardService {
     );
   }
 }
-
