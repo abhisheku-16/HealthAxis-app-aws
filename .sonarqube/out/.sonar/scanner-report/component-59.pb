@@ -1,1 +1,0 @@
-; 2webX#hr'S4_HealthAxis.Blazor/wwwroot/index.html

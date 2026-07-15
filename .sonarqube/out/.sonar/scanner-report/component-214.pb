@@ -1,1 +1,0 @@
-Ö 2tsXshrFS4_HealthAxis.Angular/src/app/pages/patient-history/patient-history.ts

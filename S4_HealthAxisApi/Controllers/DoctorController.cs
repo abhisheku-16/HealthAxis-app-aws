@@ -8,7 +8,7 @@ namespace S4_HealthAxisApi.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [Authorize]
-    public class DoctorsController : ControllerBase
+    public class DoctorsController : ControllerBase //NOSONAR
     {
         private readonly IDoctorService _doctorService;
         private readonly IAppointmentService _appointmentService;

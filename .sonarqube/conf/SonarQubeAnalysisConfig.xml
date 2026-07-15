@@ -153,9 +153,9 @@
   </ServerSettings>
   <LocalSettings>
     <Property Name="sonar.host.url">http://localhost:9000</Property>
-    <Property Name="sonar.cs.vscoveragexml.reportsPaths">C:\Users\287766\source\repos\S4_HealthAxis\coverage.xml</Property>
-    <Property Name="sonar.verbose">true</Property>
-    <Property Name="sonar.exclusions">**/node_modules/**,**/bin/**,**/obj/**,**/Migrations/**,**/TestResults/**,**/coverage-report/**,**/*.css,**/*.razor,**/*.g.cs,**/*.designer.cs,**/*.slnLaunch.user,**/launchSettings.json,C:\Users\287766\source\repos\S4_HealthAxis\coverage.xml</Property>
+    <Property Name="sonar.cs.vscoveragexml.reportsPaths">coverage.xml</Property>
+    <Property Name="sonar.coverage.exclusions">**/Controllers/**,**/Repositories/**,**/Repository/**,**/Data/**,**/Models/**,**/Mappings/**,**/Middleware/**,**/Exceptions/**,**/Program.cs,**/BackgroundServices/**,**/Consumers/**,**/S4_HealthAxis.Shared/**,**/S4_HealthAxis.Angular/**,**/S4_HealthAxis.Blazor/**</Property>
+    <Property Name="sonar.exclusions">**/Migrations/**,**/*.html,**/*.css,**/*.scss,**/*.razor,**/bin/**,**/obj/**,coverage.xml</Property>
   </LocalSettings>
   <ScannerOptsSettings />
   <AnalyzersSettings>

@@ -2,7 +2,7 @@
 {
     public sealed class HeartbeatService : BackgroundService
     {
-        private static readonly TimeSpan HeartbeatInterval = TimeSpan.FromSeconds(10);
+        private static readonly TimeSpan HeartbeatInterval = TimeSpan.FromSeconds(600);
 
         private readonly ILogger<HeartbeatService> _logger;
 

@@ -7,7 +7,8 @@ namespace S4_HealthAxisApi.BackgroundServices
 {
     public sealed class AppointmentMaintenanceService : BackgroundService
     {
-        private static readonly TimeSpan MaintenanceInterval = TimeSpan.FromHours(24);
+        private static readonly TimeSpan MaintenanceInterval =
+            TimeSpan.FromHours(24);
 
         private const string PendingAutoCancellationReason =
             "Automatically cancelled because the appointment date has passed.";
@@ -26,9 +27,11 @@ namespace S4_HealthAxisApi.BackgroundServices
             _serviceScopeFactory = serviceScopeFactory;
         }
 
-        protected override async Task ExecuteAsync(CancellationToken stoppingToken)
+        protected override async Task ExecuteAsync(
+            CancellationToken stoppingToken)
         {
-            _logger.LogInformation("AppointmentMaintenanceService started.");
+            _logger.LogInformation(
+                "AppointmentMaintenanceService started.");
 
             try
             {
@@ -36,30 +39,40 @@ namespace S4_HealthAxisApi.BackgroundServices
                 {
                     await RunMaintenanceAsync(stoppingToken);
 
-                    await Task.Delay(MaintenanceInterval, stoppingToken);
+                    await Task.Delay(
+                        MaintenanceInterval,
+                        stoppingToken);
                 }
             }
-            catch (OperationCanceledException) when (stoppingToken.IsCancellationRequested)
+            catch (OperationCanceledException ex)
+                when (stoppingToken.IsCancellationRequested)
             {
-                _logger.LogInformation("AppointmentMaintenanceService cancellation requested.");
+                _logger.LogInformation(
+                    ex,
+                    "AppointmentMaintenanceService cancellation requested.");
             }
             finally
             {
-                _logger.LogInformation("AppointmentMaintenanceService stopped.");
+                _logger.LogInformation(
+                    "AppointmentMaintenanceService stopped.");
             }
         }
 
-        private async Task RunMaintenanceAsync(CancellationToken cancellationToken)
+        private async Task RunMaintenanceAsync(
+            CancellationToken cancellationToken)
         {
             try
             {
-                using var scope = _serviceScopeFactory.CreateScope();
+                using var scope =
+                    _serviceScopeFactory.CreateScope();
 
                 var dbContext =
-                    scope.ServiceProvider.GetRequiredService<HealthAxisDbContext>();
+                    scope.ServiceProvider
+                        .GetRequiredService<HealthAxisDbContext>();
 
                 var cache =
-                    scope.ServiceProvider.GetRequiredService<IDistributedCache>();
+                    scope.ServiceProvider
+                        .GetRequiredService<IDistributedCache>();
 
                 var today =
                     DateOnly.FromDateTime(DateTime.Today);
@@ -86,16 +99,22 @@ namespace S4_HealthAxisApi.BackgroundServices
                         cancellationToken);
                 }
 
-                _logger.LogInformation(
-                    "Appointment maintenance completed at {Timestamp}.",
-                    DateTimeOffset.Now);
+                if (_logger.IsEnabled(LogLevel.Information))
+                {
+                    _logger.LogInformation(
+                        "Appointment maintenance completed at {Timestamp}.",
+                        DateTimeOffset.Now);
+                }
             }
             catch (Exception ex)
             {
-                _logger.LogError(
-                    ex,
-                    "Appointment maintenance failed at {Timestamp}.",
-                    DateTimeOffset.Now);
+                if (_logger.IsEnabled(LogLevel.Error))
+                {
+                    _logger.LogError(
+                        ex,
+                        "Appointment maintenance failed at {Timestamp}.",
+                        DateTimeOffset.Now);
+                }
             }
         }
 
@@ -104,22 +123,27 @@ namespace S4_HealthAxisApi.BackgroundServices
             DateOnly today,
             CancellationToken cancellationToken)
         {
-            var affectedCacheKeys = new HashSet<string>();
+            var affectedCacheKeys =
+                new HashSet<string>();
 
-            var overdueAppointments = await dbContext.Appointments
-                .Where(appointment =>
-                    appointment.ScheduledDate < today &&
-                    (
-                        appointment.Status == AppointmentStatus.Pending ||
-                        appointment.Status == AppointmentStatus.Confirmed
-                    ))
-                .ToListAsync(cancellationToken);
+            var overdueAppointments =
+                await dbContext.Appointments
+                    .Where(appointment =>
+                        appointment.ScheduledDate < today &&
+                        (
+                            appointment.Status == AppointmentStatus.Pending ||
+                            appointment.Status == AppointmentStatus.Confirmed
+                        ))
+                    .ToListAsync(cancellationToken);
 
             if (overdueAppointments.Count == 0)
             {
-                _logger.LogInformation(
-                    "Auto-cancel overdue appointments completed. No overdue pending or confirmed appointments found before {Today}.",
-                    today);
+                if (_logger.IsEnabled(LogLevel.Information))
+                {
+                    _logger.LogInformation(
+                        "Auto-cancel overdue appointments completed. No overdue pending or confirmed appointments found before {Today}.",
+                        today);
+                }
 
                 return affectedCacheKeys;
             }
@@ -128,13 +152,19 @@ namespace S4_HealthAxisApi.BackgroundServices
             {
                 if (appointment.Status == AppointmentStatus.Pending)
                 {
-                    appointment.Status = AppointmentStatus.Cancelled;
-                    appointment.CancellationReason = PendingAutoCancellationReason;
+                    appointment.Status =
+                        AppointmentStatus.Cancelled;
+
+                    appointment.CancellationReason =
+                        PendingAutoCancellationReason;
                 }
                 else if (appointment.Status == AppointmentStatus.Confirmed)
                 {
-                    appointment.Status = AppointmentStatus.Cancelled;
-                    appointment.CancellationReason = ConfirmedAutoCancellationReason;
+                    appointment.Status =
+                        AppointmentStatus.Cancelled;
+
+                    appointment.CancellationReason =
+                        ConfirmedAutoCancellationReason;
                 }
 
                 affectedCacheKeys.Add(
@@ -145,10 +175,13 @@ namespace S4_HealthAxisApi.BackgroundServices
 
             await dbContext.SaveChangesAsync(cancellationToken);
 
-            _logger.LogInformation(
-                "Auto-cancel overdue appointments completed. Cancelled {AppointmentCount} appointment(s) before {Today}.",
-                overdueAppointments.Count,
-                today);
+            if (_logger.IsEnabled(LogLevel.Information))
+            {
+                _logger.LogInformation(
+                    "Auto-cancel overdue appointments completed. Cancelled {AppointmentCount} appointment(s) before {Today}.",
+                    overdueAppointments.Count,
+                    today);
+            }
 
             return affectedCacheKeys;
         }
@@ -167,32 +200,46 @@ namespace S4_HealthAxisApi.BackgroundServices
             var targetMonthEndExclusive =
                 targetMonthStart.AddMonths(1);
 
-            var oldCancelledAppointments = await dbContext.Appointments
-                .Where(appointment =>
-                    appointment.Status == AppointmentStatus.Cancelled &&
-                    appointment.ScheduledDate >= targetMonthStart &&
-                    appointment.ScheduledDate < targetMonthEndExclusive)
-                .ToListAsync(cancellationToken);
+            var oldCancelledAppointments =
+                await dbContext.Appointments
+                    .Where(appointment =>
+                        appointment.Status == AppointmentStatus.Cancelled &&
+                        appointment.ScheduledDate >= targetMonthStart &&
+                        appointment.ScheduledDate < targetMonthEndExclusive)
+                    .ToListAsync(cancellationToken);
 
             if (oldCancelledAppointments.Count == 0)
             {
-                _logger.LogInformation(
-                    "Monthly cancelled appointment cleanup completed. No cancelled appointments found from {TargetMonthStart} to {TargetMonthEnd}.",
-                    targetMonthStart,
-                    targetMonthEndExclusive.AddDays(-1));
+                if (_logger.IsEnabled(LogLevel.Information))
+                {
+                    var targetMonthEnd =
+                        targetMonthEndExclusive.AddDays(-1);
+
+                    _logger.LogInformation(
+                        "Monthly cancelled appointment cleanup completed. No cancelled appointments found from {TargetMonthStart} to {TargetMonthEnd}.",
+                        targetMonthStart,
+                        targetMonthEnd);
+                }
 
                 return;
             }
 
-            dbContext.Appointments.RemoveRange(oldCancelledAppointments);
+            dbContext.Appointments.RemoveRange(
+                oldCancelledAppointments);
 
             await dbContext.SaveChangesAsync(cancellationToken);
 
-            _logger.LogInformation(
-                "Monthly cancelled appointment cleanup completed. Deleted {AppointmentCount} cancelled appointment(s) from {TargetMonthStart} to {TargetMonthEnd}.",
-                oldCancelledAppointments.Count,
-                targetMonthStart,
-                targetMonthEndExclusive.AddDays(-1));
+            if (_logger.IsEnabled(LogLevel.Information))
+            {
+                var targetMonthEnd =
+                    targetMonthEndExclusive.AddDays(-1);
+
+                _logger.LogInformation(
+                    "Monthly cancelled appointment cleanup completed. Deleted {AppointmentCount} cancelled appointment(s) from {TargetMonthStart} to {TargetMonthEnd}.",
+                    oldCancelledAppointments.Count,
+                    targetMonthStart,
+                    targetMonthEnd);
+            }
         }
 
         private async Task InvalidateAvailabilityCachesAsync(
@@ -208,16 +255,22 @@ namespace S4_HealthAxisApi.BackgroundServices
                         cacheKey,
                         cancellationToken);
 
-                    _logger.LogInformation(
-                        "Doctor availability cache invalidated by appointment maintenance. CacheKey {CacheKey}.",
-                        cacheKey);
+                    if (_logger.IsEnabled(LogLevel.Information))
+                    {
+                        _logger.LogInformation(
+                            "Doctor availability cache invalidated by appointment maintenance. CacheKey {CacheKey}.",
+                            cacheKey);
+                    }
                 }
                 catch (Exception ex)
                 {
-                    _logger.LogWarning(
-                        ex,
-                        "Failed to invalidate doctor availability cache during appointment maintenance. CacheKey {CacheKey}.",
-                        cacheKey);
+                    if (_logger.IsEnabled(LogLevel.Warning))
+                    {
+                        _logger.LogWarning(
+                            ex,
+                            "Failed to invalidate doctor availability cache during appointment maintenance. CacheKey {CacheKey}.",
+                            cacheKey);
+                    }
                 }
             }
         }
@@ -229,11 +282,15 @@ namespace S4_HealthAxisApi.BackgroundServices
             return $"doctors:{doctorId}:availability:{date:yyyy-MM-dd}";
         }
 
-        public override async Task StopAsync(CancellationToken cancellationToken)
+        public override async Task StopAsync(
+            CancellationToken cancellationToken)
         {
-            _logger.LogInformation("AppointmentMaintenanceService is shutting down gracefully.");
+            _logger.LogInformation(
+                "AppointmentMaintenanceService is shutting down gracefully.");
 
             await base.StopAsync(cancellationToken);
         }
     }
 }
+
+

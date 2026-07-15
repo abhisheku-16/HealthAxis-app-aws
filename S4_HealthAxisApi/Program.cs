@@ -1,3 +1,6 @@
+using Elastic.Ingest.Elasticsearch;
+using Elastic.Ingest.Elasticsearch.DataStreams;
+using Elastic.Serilog.Sinks;
 using HealthAxis.API.Data;
 using MassTransit;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -7,7 +10,6 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi;
 using S4_HealthAxisApi.BackgroundServices;
 using S4_HealthAxisApi.Consumers;
-using S4_HealthAxisApi.Messaging;
 using S4_HealthAxisApi.Middleware;
 using S4_HealthAxisApi.Models;
 using S4_HealthAxisApi.Repository.Implementation;
@@ -17,37 +19,43 @@ using S4_HealthAxisApi.Services.Interface;
 using Serilog;
 using System.Text;
 using System.Text.Json;
-using Elastic.Ingest.Elasticsearch;
-using Elastic.Ingest.Elasticsearch.DataStreams;
-using Elastic.Serilog.Sinks;
 
 var builder = WebApplication.CreateBuilder(args);
 
+#region Serilog And Elasticsearch Logging
+
 builder.Host.UseSerilog((context, services, configuration) =>
 {
-    var elasticSection = context.Configuration.GetSection("ElasticSearch");
+    var elasticSection =
+        context.Configuration.GetSection("ElasticSearch");
 
     var elasticEnabled =
         bool.TryParse(elasticSection["Enabled"], out var enabled) &&
         enabled;
 
-    var elasticUri = elasticSection["Uri"];
+    var elasticUri =
+        elasticSection["Uri"];
+
     var dataStreamDataset =
         elasticSection["DataStreamDataset"] ?? "healthaxis-api";
 
     var dataStreamNamespace =
         elasticSection["DataStreamNamespace"] ?? "local";
 
+    const string outputTemplate =
+        "{Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz} [{Level:u3}] {Message:lj}{NewLine}{Exception}";
+
     configuration
         .ReadFrom.Configuration(context.Configuration)
         .ReadFrom.Services(services)
         .Enrich.FromLogContext()
         .Enrich.WithProperty("Application", "S4_HealthAxisApi")
-        .WriteTo.Console()
+        .WriteTo.Console(outputTemplate: outputTemplate)
         .WriteTo.File(
             "logs/healthaxis-.log",
             rollingInterval: RollingInterval.Day,
-            retainedFileCountLimit: 7);
+            retainedFileCountLimit: 7,
+            outputTemplate: outputTemplate);
 
     if (elasticEnabled &&
         !string.IsNullOrWhiteSpace(elasticUri))
@@ -68,9 +76,12 @@ builder.Host.UseSerilog((context, services, configuration) =>
     }
 });
 
+#endregion
+
 #region Controllers
 
-builder.Services.AddControllers()
+builder.Services
+    .AddControllers()
     .AddJsonOptions(options =>
     {
         options.JsonSerializerOptions.PropertyNamingPolicy =
@@ -103,7 +114,8 @@ builder.Services.AddSwaggerGen(options =>
             Type = SecuritySchemeType.Http,
             Scheme = "bearer",
             BearerFormat = "JWT",
-            Description = "Enter JWT token.\n\nExample: Bearer eyJhbGciOiJIUzI1NiIs..."
+            Description =
+                "Enter JWT token.\n\nExample: Bearer eyJhbGciOiJIUzI1NiIs..."
         });
 
     options.AddSecurityRequirement(document =>
@@ -135,18 +147,20 @@ builder.Services.AddStackExchangeRedisCache(options =>
         builder.Configuration.GetSection("Garnet")["ConnectionString"];
 
     options.InstanceName =
-        builder.Configuration.GetSection("Garnet")["InstanceName"] ?? "HealthAxis:";
+        builder.Configuration.GetSection("Garnet")["InstanceName"] ??
+        "HealthAxis:";
 });
 
 #endregion
 
 #region JWT Authentication
 
-builder.Services.AddAuthentication(
-    JwtBearerDefaults.AuthenticationScheme)
+builder.Services
+    .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
-        var jwt = builder.Configuration.GetSection("Jwt");
+        var jwt =
+            builder.Configuration.GetSection("Jwt");
 
         options.TokenValidationParameters =
             new TokenValidationParameters
@@ -184,8 +198,7 @@ builder.Services.AddCors(options =>
             policy
                 .WithOrigins(
                     "https://localhost:7206",
-                    "http://localhost:4200"
-                )
+                    "http://localhost:4200")
                 .AllowAnyHeader()
                 .AllowAnyMethod();
         });
@@ -214,7 +227,6 @@ builder.Services.AddScoped<IHealthRecordService, HealthRecordService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IAdminService, AdminService>();
 builder.Services.AddScoped<IUserService, UserService>();
-builder.Services.AddScoped<IRabbitMqPublisher, RabbitMqPublisher>();
 
 #endregion
 
@@ -240,10 +252,13 @@ builder.Services.AddMassTransit(options =>
             host.Password("guest");
         });
 
-        cfg.ReceiveEndpoint("appointment-booked-queue", endpoint =>
-        {
-            endpoint.ConfigureConsumer<AppointmentBookedConsumer>(context);
-        });
+        cfg.ReceiveEndpoint(
+            "appointment-booked-queue",
+            endpoint =>
+            {
+                endpoint.ConfigureConsumer<AppointmentBookedConsumer>(
+                    context);
+            });
     });
 });
 
@@ -251,7 +266,7 @@ builder.Services.AddMassTransit(options =>
 
 var app = builder.Build();
 
-#region Middleware
+#region Middleware Pipeline
 
 if (app.Environment.IsDevelopment())
 {
@@ -284,4 +299,4 @@ app.MapControllers();
 #endregion
 
 await app.RunAsync();
-
+    

@@ -128,7 +128,8 @@ namespace S4_HealthAxisApi.Services.Implementation
                 throw new KeyNotFoundException("Doctor not found.");
             }
 
-            var cacheKey = BuildAvailabilityCacheKey(doctorId, date);
+            var cacheKey =
+                BuildAvailabilityCacheKey(doctorId, date);
 
             var cachedAvailability =
                 await _cache.GetStringAsync(cacheKey);
@@ -140,16 +141,40 @@ namespace S4_HealthAxisApi.Services.Implementation
                     ?? [];
 
                 _logger.LogInformation(
-                    "Doctor availability cache hit. DoctorId {DoctorId}, Date {Date}, CacheKey {CacheKey}.",
+                    """
+                    ====================================
+                    GARNET CACHE HIT
+                    ====================================
+
+                    Doctor Id  : {DoctorId}
+                    Date       : {Date:yyyy-MM-dd}
+                    Cache Key  : {CacheKey}
+                    Slot Count : {SlotCount}
+
+                    ====================================
+                    """,
                     doctorId,
                     date,
-                    cacheKey);
+                    cacheKey,
+                    cachedSlots.Count);
 
                 return cachedSlots;
             }
 
             _logger.LogInformation(
-                "Doctor availability cache miss. DoctorId {DoctorId}, Date {Date}, CacheKey {CacheKey}.",
+                """
+                ====================================
+                GARNET CACHE MISS
+                ====================================
+
+                Doctor Id : {DoctorId}
+                Date      : {Date:yyyy-MM-dd}
+                Cache Key : {CacheKey}
+
+                Querying database for booked slots...
+
+                ====================================
+                """,
                 doctorId,
                 date,
                 cacheKey);
@@ -176,14 +201,28 @@ namespace S4_HealthAxisApi.Services.Implementation
                 serializedAvailability,
                 new DistributedCacheEntryOptions
                 {
-                    AbsoluteExpirationRelativeToNow = AvailabilityCacheDuration
+                    AbsoluteExpirationRelativeToNow =
+                        AvailabilityCacheDuration
                 });
 
             _logger.LogInformation(
-                "Doctor availability cached. DoctorId {DoctorId}, Date {Date}, CacheKey {CacheKey}, TTLMinutes {TTLMinutes}.",
+                """
+                ====================================
+                GARNET CACHE STORED
+                ====================================
+
+                Doctor Id   : {DoctorId}
+                Date        : {Date:yyyy-MM-dd}
+                Cache Key   : {CacheKey}
+                Slot Count  : {SlotCount}
+                TTL Minutes : {TTLMinutes}
+
+                ====================================
+                """,
                 doctorId,
                 date,
                 cacheKey,
+                availableSlots.Count,
                 AvailabilityCacheDuration.TotalMinutes);
 
             return availableSlots;
@@ -225,7 +264,9 @@ namespace S4_HealthAxisApi.Services.Implementation
             };
 
             user.PasswordHash =
-                _passwordHasher.HashPassword(user, temporaryPassword);
+                _passwordHasher.HashPassword(
+                    user,
+                    temporaryPassword);
 
             await _userService.CreateAsync(user);
             await _userService.SaveChangesAsync();
@@ -297,7 +338,8 @@ namespace S4_HealthAxisApi.Services.Implementation
                 throw new ArgumentException("Invalid doctor specialisation.");
             }
 
-            if (dto.YearsOfExperience < 0 || dto.YearsOfExperience > 60)
+            if (dto.YearsOfExperience < 0 ||
+                dto.YearsOfExperience > 60)
             {
                 throw new ArgumentException(
                     "Experience must be between 0 and 60 years.");
@@ -322,7 +364,8 @@ namespace S4_HealthAxisApi.Services.Implementation
                 throw new ArgumentException("Invalid doctor specialisation.");
             }
 
-            if (dto.YearsOfExperience < 0 || dto.YearsOfExperience > 60)
+            if (dto.YearsOfExperience < 0 ||
+                dto.YearsOfExperience > 60)
             {
                 throw new ArgumentException(
                     "Experience must be between 0 and 60 years.");

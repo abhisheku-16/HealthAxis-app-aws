@@ -1,50 +1,51 @@
-﻿using HealthAxis.API.Data;
-using MassTransit;
+﻿using MassTransit;
 using S4_HealthAxisApi.Events;
-using S4_HealthAxisApi.Models;
 
 namespace S4_HealthAxisApi.Consumers
 {
-    public class AppointmentBookedConsumer : IConsumer<AppointmentBookedEvent>
+    public class AppointmentBookedConsumer :
+        IConsumer<AppointmentBookedEvent>
     {
-        private readonly HealthAxisDbContext _dbContext;
         private readonly ILogger<AppointmentBookedConsumer> _logger;
 
         public AppointmentBookedConsumer(
-            HealthAxisDbContext dbContext,
             ILogger<AppointmentBookedConsumer> logger)
         {
-            _dbContext = dbContext;
             _logger = logger;
         }
 
-        public async Task Consume(ConsumeContext<AppointmentBookedEvent> context)
+        public Task Consume(
+            ConsumeContext<AppointmentBookedEvent> context)
         {
-            var appointmentEvent = context.Message;
-
-            var notification = new Notification
-            {
-                DoctorId = appointmentEvent.DoctorId,
-                AppointmentId = appointmentEvent.AppointmentId,
-                Message =
-                    $"New appointment booked for {appointmentEvent.PatientName}. " +
-                    $"Appointment #{appointmentEvent.AppointmentId} is scheduled on " +
-                    $"{appointmentEvent.ScheduledDate:dd MMM yyyy} at {appointmentEvent.TimeSlot}.",
-                IsRead = false,
-                CreatedOn = DateTime.UtcNow
-            };
-
-            await _dbContext.Notifications.AddAsync(
-                notification,
-                context.CancellationToken);
-
-            await _dbContext.SaveChangesAsync(context.CancellationToken);
+            var message =
+                context.Message;
 
             _logger.LogInformation(
-                "Notification created successfully from AppointmentBookedEvent. NotificationId {NotificationId}, DoctorId {DoctorId}, AppointmentId {AppointmentId}.",
-                notification.NotificationId,
-                appointmentEvent.DoctorId,
-                appointmentEvent.AppointmentId);
+                """
+                ====================================
+                APPOINTMENT EVENT RECEIVED
+                ====================================
+
+                Event Type    : {EventType}
+                AppointmentId : {AppointmentId}
+                Patient       : {PatientName}
+                Doctor Id     : {DoctorId}
+                Date          : {ScheduledDate:yyyy-MM-dd}
+                Time Slot     : {TimeSlot}
+                Message Id    : {MessageId}
+
+                ====================================
+                """,
+                nameof(AppointmentBookedEvent),
+                message.AppointmentId,
+                message.PatientName,
+                message.DoctorId,
+                message.ScheduledDate,
+                message.TimeSlot,
+                context.MessageId?.ToString() ?? "N/A");
+
+            return Task.CompletedTask;
         }
     }
 }
+

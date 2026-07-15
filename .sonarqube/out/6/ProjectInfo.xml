@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ProjectInfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.sonarsource.com/msbuild/integration/2015/1">
+  <ProjectName>S4_HealthAxis.Blazor</ProjectName>
+  <ProjectLanguage>C#</ProjectLanguage>
+  <ProjectType>Product</ProjectType>
+  <ProjectGuid>bb7cac44-79bd-b8d3-a8de-f965cae35f0d</ProjectGuid>
+  <FullPath>C:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Blazor\S4_HealthAxis.Blazor.csproj</FullPath>
+  <IsExcluded>false</IsExcluded>
+  <AnalysisResultFiles>
+    <AnalysisResultFile Id="FilesToAnalyze" Location="C:\Users\287766\source\repos\S4_HealthAxisApp\.sonarqube\conf\6\FilesToAnalyze.txt" />
+  </AnalysisResultFiles>
+  <AnalysisSettings>
+    <Property Name="sonar.cs.roslyn.reportFilePaths">C:\Users\287766\source\repos\S4_HealthAxisApp\.sonarqube\out\6\Issues.json</Property>
+    <Property Name="sonar.cs.analyzer.projectOutPaths">C:\Users\287766\source\repos\S4_HealthAxisApp\.sonarqube\out\6</Property>
+    <Property Name="sonar.cs.scanner.telemetry">C:\Users\287766\source\repos\S4_HealthAxisApp\.sonarqube\out\6\Telemetry.json</Property>
+  </AnalysisSettings>
+  <Configuration>Debug</Configuration>
+  <Platform>AnyCPU</Platform>
+  <TargetFramework>net10.0</TargetFramework>
+</ProjectInfo>
