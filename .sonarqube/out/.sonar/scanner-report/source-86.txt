@@ -1,0 +1,10 @@
+using S4_HealthAxis.Shared.DTOs.Auth; // Points to your new shared project
+
+namespace S4_HealthAxis.Blazor.Services
+{
+    public interface IAuthService
+    {
+        Task<bool> LoginAsync(LoginDto request);
+        Task LogoutAsync();
+    }
+}

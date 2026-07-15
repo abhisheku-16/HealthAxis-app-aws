@@ -1,0 +1,1003 @@
+using Moq;
+using S4_HealthAxis.Shared.Enums;
+using S4_HealthAxisApi.Models;
+using S4_HealthAxisApi.Repository.Interface;
+using S4_HealthAxisApi.Services.Implementation;
+using Xunit;
+
+namespace S4_HealthAxis.Tests.ServiceTests
+{
+    public class UserServiceTests
+    {
+        private readonly Mock<IUserRepository> _userRepositoryMock;
+        private readonly UserService _service;
+
+        public UserServiceTests()
+        {
+            _userRepositoryMock =
+                new Mock<IUserRepository>(MockBehavior.Strict);
+
+            _service = new UserService(
+                _userRepositoryMock.Object);
+        }
+
+        #region GetByEmailAsync Tests
+
+        [Fact]
+        public async Task GetByEmailAsync_WhenUserExists_ReturnsUser()
+        {
+            // Arrange
+            const string email = "admin@healthaxis.com";
+
+            var expectedUser = CreateUser(
+                userId: 1,
+                email: email,
+                role: UserRole.Admin);
+
+            _userRepositoryMock
+                .Setup(repository =>
+                    repository.GetByEmailAsync(email))
+                .ReturnsAsync(expectedUser);
+
+            // Act
+            var result =
+                await _service.GetByEmailAsync(email);
+
+            // Assert
+            Assert.NotNull(result);
+            Assert.Same(expectedUser, result);
+            Assert.Equal(expectedUser.UserId, result.UserId);
+            Assert.Equal(expectedUser.Email, result.Email);
+            Assert.Equal(expectedUser.Role, result.Role);
+
+            _userRepositoryMock.Verify(
+                repository =>
+                    repository.GetByEmailAsync(email),
+                Times.Once);
+
+            _userRepositoryMock.VerifyNoOtherCalls();
+        }
+
+        [Theory]
+        [InlineData("admin@healthaxis.com", UserRole.Admin)]
+        [InlineData("doctor@healthaxis.com", UserRole.Doctor)]
+        [InlineData("patient@healthaxis.com", UserRole.Patient)]
+        public async Task GetByEmailAsync_ForEverySupportedRole_ReturnsMatchingUser(
+            string email,
+            UserRole role)
+        {
+            // Arrange
+            var expectedUser = CreateUser(
+                userId: (int)role,
+                email: email,
+                role: role);
+
+            _userRepositoryMock
+                .Setup(repository =>
+                    repository.GetByEmailAsync(email))
+                .ReturnsAsync(expectedUser);
+
+            // Act
+            var result =
+                await _service.GetByEmailAsync(email);
+
+            // Assert
+            Assert.NotNull(result);
+            Assert.Same(expectedUser, result);
+            Assert.Equal(email, result.Email);
+            Assert.Equal(role, result.Role);
+
+            _userRepositoryMock.Verify(
+                repository =>
+                    repository.GetByEmailAsync(email),
+                Times.Once);
+
+            _userRepositoryMock.VerifyNoOtherCalls();
+        }
+
+        [Fact]
+        public async Task GetByEmailAsync_WhenUserDoesNotExist_ReturnsNull()
+        {
+            // Arrange
+            const string email = "missing@healthaxis.com";
+
+            _userRepositoryMock
+                .Setup(repository =>
+                    repository.GetByEmailAsync(email))
+                .ReturnsAsync((User?)null);
+
+            // Act
+            var result =
+                await _service.GetByEmailAsync(email);
+
+            // Assert
+            Assert.Null(result);
+
+            _userRepositoryMock.Verify(
+                repository =>
+                    repository.GetByEmailAsync(email),
+                Times.Once);
+
+            _userRepositoryMock.VerifyNoOtherCalls();
+        }
+
+        [Fact]
+        public async Task GetByEmailAsync_ForwardsEmailWithoutChangingIt()
+        {
+            // Arrange
+            const string email =
+                "  Doctor.User@HealthAxis.COM  ";
+
+            _userRepositoryMock
+                .Setup(repository =>
+                    repository.GetByEmailAsync(email))
+                .ReturnsAsync((User?)null);
+
+            // Act
+            await _service.GetByEmailAsync(email);
+
+            // Assert
+            _userRepositoryMock.Verify(
+                repository =>
+                    repository.GetByEmailAsync(
+                        "  Doctor.User@HealthAxis.COM  "),
+                Times.Once);
+
+            _userRepositoryMock.VerifyNoOtherCalls();
+        }
+
+        [Fact]
+        public async Task GetByEmailAsync_WhenEmailIsEmpty_ForwardsEmptyEmail()
+        {
+            // Arrange
+            const string email = "";
+
+            _userRepositoryMock
+                .Setup(repository =>
+                    repository.GetByEmailAsync(email))
+                .ReturnsAsync((User?)null);
+
+            // Act
+            var result =
+                await _service.GetByEmailAsync(email);
+
+            // Assert
+            Assert.Null(result);
+
+            _userRepositoryMock.Verify(
+                repository =>
+                    repository.GetByEmailAsync(string.Empty),
+                Times.Once);
+
+            _userRepositoryMock.VerifyNoOtherCalls();
+        }
+
+        [Fact]
+        public async Task GetByEmailAsync_WhenRepositoryThrows_PropagatesException()
+        {
+            // Arrange
+            const string email = "admin@healthaxis.com";
+            const string errorMessage =
+                "Database lookup failed.";
+
+            _userRepositoryMock
+                .Setup(repository =>
+                    repository.GetByEmailAsync(email))
+                .ThrowsAsync(
+                    new InvalidOperationException(errorMessage));
+
+            // Act
+            var exception =
+                await Assert.ThrowsAsync<InvalidOperationException>(
+                    () => _service.GetByEmailAsync(email));
+
+            // Assert
+            Assert.Equal(errorMessage, exception.Message);
+
+            _userRepositoryMock.Verify(
+                repository =>
+                    repository.GetByEmailAsync(email),
+                Times.Once);
+
+            _userRepositoryMock.VerifyNoOtherCalls();
+        }
+
+        #endregion
+
+        #region GetByRefreshTokenAsync Tests
+
+        [Fact]
+        public async Task GetByRefreshTokenAsync_WhenUserExists_ReturnsUser()
+        {
+            // Arrange
+            const string refreshToken =
+                "valid-refresh-token";
+
+            var expectedUser = CreateUser(
+                userId: 2,
+                email: "doctor@healthaxis.com",
+                role: UserRole.Doctor);
+
+            expectedUser.RefreshToken = refreshToken;
+
+            _userRepositoryMock
+                .Setup(repository =>
+                    repository.GetByRefreshTokenAsync(
+                        refreshToken))
+                .ReturnsAsync(expectedUser);
+
+            // Act
+            var result =
+                await _service.GetByRefreshTokenAsync(
+                    refreshToken);
+
+            // Assert
+            Assert.NotNull(result);
+            Assert.Same(expectedUser, result);
+            Assert.Equal(refreshToken, result.RefreshToken);
+
+            _userRepositoryMock.Verify(
+                repository =>
+                    repository.GetByRefreshTokenAsync(
+                        refreshToken),
+                Times.Once);
+
+            _userRepositoryMock.VerifyNoOtherCalls();
+        }
+
+        [Fact]
+        public async Task GetByRefreshTokenAsync_WhenTokenDoesNotExist_ReturnsNull()
+        {
+            // Arrange
+            const string refreshToken =
+                "unknown-refresh-token";
+
+            _userRepositoryMock
+                .Setup(repository =>
+                    repository.GetByRefreshTokenAsync(
+                        refreshToken))
+                .ReturnsAsync((User?)null);
+
+            // Act
+            var result =
+                await _service.GetByRefreshTokenAsync(
+                    refreshToken);
+
+            // Assert
+            Assert.Null(result);
+
+            _userRepositoryMock.Verify(
+                repository =>
+                    repository.GetByRefreshTokenAsync(
+                        refreshToken),
+                Times.Once);
+
+            _userRepositoryMock.VerifyNoOtherCalls();
+        }
+
+        [Fact]
+        public async Task GetByRefreshTokenAsync_ForwardsTokenWithoutChangingIt()
+        {
+            // Arrange
+            const string refreshToken =
+                "  token-with-leading-and-trailing-space  ";
+
+            _userRepositoryMock
+                .Setup(repository =>
+                    repository.GetByRefreshTokenAsync(
+                        refreshToken))
+                .ReturnsAsync((User?)null);
+
+            // Act
+            await _service.GetByRefreshTokenAsync(
+                refreshToken);
+
+            // Assert
+            _userRepositoryMock.Verify(
+                repository =>
+                    repository.GetByRefreshTokenAsync(
+                        "  token-with-leading-and-trailing-space  "),
+                Times.Once);
+
+            _userRepositoryMock.VerifyNoOtherCalls();
+        }
+
+        [Fact]
+        public async Task GetByRefreshTokenAsync_WhenTokenIsEmpty_ForwardsEmptyToken()
+        {
+            // Arrange
+            const string refreshToken = "";
+
+            _userRepositoryMock
+                .Setup(repository =>
+                    repository.GetByRefreshTokenAsync(
+                        refreshToken))
+                .ReturnsAsync((User?)null);
+
+            // Act
+            var result =
+                await _service.GetByRefreshTokenAsync(
+                    refreshToken);
+
+            // Assert
+            Assert.Null(result);
+
+            _userRepositoryMock.Verify(
+                repository =>
+                    repository.GetByRefreshTokenAsync(
+                        string.Empty),
+                Times.Once);
+
+            _userRepositoryMock.VerifyNoOtherCalls();
+        }
+
+        [Fact]
+        public async Task GetByRefreshTokenAsync_WhenRepositoryThrows_PropagatesException()
+        {
+            // Arrange
+            const string refreshToken =
+                "valid-refresh-token";
+
+            const string errorMessage =
+                "Refresh token lookup failed.";
+
+            _userRepositoryMock
+                .Setup(repository =>
+                    repository.GetByRefreshTokenAsync(
+                        refreshToken))
+                .ThrowsAsync(
+                    new InvalidOperationException(errorMessage));
+
+            // Act
+            var exception =
+                await Assert.ThrowsAsync<InvalidOperationException>(
+                    () => _service.GetByRefreshTokenAsync(
+                        refreshToken));
+
+            // Assert
+            Assert.Equal(errorMessage, exception.Message);
+
+            _userRepositoryMock.Verify(
+                repository =>
+                    repository.GetByRefreshTokenAsync(
+                        refreshToken),
+                Times.Once);
+
+            _userRepositoryMock.VerifyNoOtherCalls();
+        }
+
+        #endregion
+
+        #region EmailExistsAsync Tests
+
+        [Fact]
+        public async Task EmailExistsAsync_WhenEmailExists_ReturnsTrue()
+        {
+            // Arrange
+            const string email =
+                "existing@healthaxis.com";
+
+            _userRepositoryMock
+                .Setup(repository =>
+                    repository.EmailExistsAsync(email))
+                .ReturnsAsync(true);
+
+            // Act
+            var result =
+                await _service.EmailExistsAsync(email);
+
+            // Assert
+            Assert.True(result);
+
+            _userRepositoryMock.Verify(
+                repository =>
+                    repository.EmailExistsAsync(email),
+                Times.Once);
+
+            _userRepositoryMock.VerifyNoOtherCalls();
+        }
+
+        [Fact]
+        public async Task EmailExistsAsync_WhenEmailDoesNotExist_ReturnsFalse()
+        {
+            // Arrange
+            const string email =
+                "new@healthaxis.com";
+
+            _userRepositoryMock
+                .Setup(repository =>
+                    repository.EmailExistsAsync(email))
+                .ReturnsAsync(false);
+
+            // Act
+            var result =
+                await _service.EmailExistsAsync(email);
+
+            // Assert
+            Assert.False(result);
+
+            _userRepositoryMock.Verify(
+                repository =>
+                    repository.EmailExistsAsync(email),
+                Times.Once);
+
+            _userRepositoryMock.VerifyNoOtherCalls();
+        }
+
+        [Theory]
+        [InlineData("admin@healthaxis.com")]
+        [InlineData("doctor@healthaxis.com")]
+        [InlineData("patient@healthaxis.com")]
+        [InlineData("UPPERCASE@HEALTHAXIS.COM")]
+        [InlineData("  spaced@healthaxis.com  ")]
+        [InlineData("")]
+        public async Task EmailExistsAsync_ForwardsProvidedEmailExactly(
+            string email)
+        {
+            // Arrange
+            _userRepositoryMock
+                .Setup(repository =>
+                    repository.EmailExistsAsync(email))
+                .ReturnsAsync(false);
+
+            // Act
+            await _service.EmailExistsAsync(email);
+
+            // Assert
+            _userRepositoryMock.Verify(
+                repository =>
+                    repository.EmailExistsAsync(email),
+                Times.Once);
+
+            _userRepositoryMock.VerifyNoOtherCalls();
+        }
+
+        [Fact]
+        public async Task EmailExistsAsync_WhenRepositoryThrows_PropagatesException()
+        {
+            // Arrange
+            const string email =
+                "admin@healthaxis.com";
+
+            const string errorMessage =
+                "Email existence check failed.";
+
+            _userRepositoryMock
+                .Setup(repository =>
+                    repository.EmailExistsAsync(email))
+                .ThrowsAsync(
+                    new InvalidOperationException(errorMessage));
+
+            // Act
+            var exception =
+                await Assert.ThrowsAsync<InvalidOperationException>(
+                    () => _service.EmailExistsAsync(email));
+
+            // Assert
+            Assert.Equal(errorMessage, exception.Message);
+
+            _userRepositoryMock.Verify(
+                repository =>
+                    repository.EmailExistsAsync(email),
+                Times.Once);
+
+            _userRepositoryMock.VerifyNoOtherCalls();
+        }
+
+        #endregion
+
+        #region CreateAsync Tests
+
+        [Theory]
+        [InlineData(UserRole.Admin)]
+        [InlineData(UserRole.Doctor)]
+        [InlineData(UserRole.Patient)]
+        public async Task CreateAsync_ForEverySupportedRole_ForwardsExactUser(
+            UserRole role)
+        {
+            // Arrange
+            var user = CreateUser(
+                userId: 0,
+                email: $"{role.ToString().ToLower()}@healthaxis.com",
+                role: role);
+
+            _userRepositoryMock
+                .Setup(repository =>
+                    repository.AddAsync(user))
+                .Returns(Task.CompletedTask);
+
+            // Act
+            await _service.CreateAsync(user);
+
+            // Assert
+            _userRepositoryMock.Verify(
+                repository =>
+                    repository.AddAsync(
+                        It.Is<User>(actual =>
+                            ReferenceEquals(actual, user) &&
+                            actual.Email == user.Email &&
+                            actual.Role == role)),
+                Times.Once);
+
+            _userRepositoryMock.VerifyNoOtherCalls();
+        }
+
+        [Fact]
+        public async Task CreateAsync_ForwardsSameUserInstance()
+        {
+            // Arrange
+            var user = CreateUser(
+                userId: 0,
+                email: "patient@healthaxis.com",
+                role: UserRole.Patient);
+
+            _userRepositoryMock
+                .Setup(repository =>
+                    repository.AddAsync(
+                        It.Is<User>(actual =>
+                            ReferenceEquals(actual, user))))
+                .Returns(Task.CompletedTask);
+
+            // Act
+            await _service.CreateAsync(user);
+
+            // Assert
+            _userRepositoryMock.Verify(
+                repository =>
+                    repository.AddAsync(
+                        It.Is<User>(actual =>
+                            ReferenceEquals(actual, user))),
+                Times.Once);
+
+            _userRepositoryMock.VerifyNoOtherCalls();
+        }
+
+        [Fact]
+        public async Task CreateAsync_DoesNotAutomaticallySaveChanges()
+        {
+            // Arrange
+            var user = CreateUser(
+                userId: 0,
+                email: "patient@healthaxis.com",
+                role: UserRole.Patient);
+
+            _userRepositoryMock
+                .Setup(repository =>
+                    repository.AddAsync(user))
+                .Returns(Task.CompletedTask);
+
+            // Act
+            await _service.CreateAsync(user);
+
+            // Assert
+            _userRepositoryMock.Verify(
+                repository =>
+                    repository.AddAsync(user),
+                Times.Once);
+
+            _userRepositoryMock.Verify(
+                repository =>
+                    repository.SaveChangesAsync(),
+                Times.Never);
+
+            _userRepositoryMock.VerifyNoOtherCalls();
+        }
+
+        [Fact]
+        public async Task CreateAsync_WhenRepositoryThrows_PropagatesException()
+        {
+            // Arrange
+            var user = CreateUser(
+                userId: 0,
+                email: "duplicate@healthaxis.com",
+                role: UserRole.Patient);
+
+            const string errorMessage =
+                "Unable to add user.";
+
+            _userRepositoryMock
+                .Setup(repository =>
+                    repository.AddAsync(user))
+                .ThrowsAsync(
+                    new InvalidOperationException(errorMessage));
+
+            // Act
+            var exception =
+                await Assert.ThrowsAsync<InvalidOperationException>(
+                    () => _service.CreateAsync(user));
+
+            // Assert
+            Assert.Equal(errorMessage, exception.Message);
+
+            _userRepositoryMock.Verify(
+                repository =>
+                    repository.AddAsync(user),
+                Times.Once);
+
+            _userRepositoryMock.Verify(
+                repository =>
+                    repository.SaveChangesAsync(),
+                Times.Never);
+
+            _userRepositoryMock.VerifyNoOtherCalls();
+        }
+
+        #endregion
+
+        #region UpdateAsync Tests
+
+        [Theory]
+        [InlineData(UserRole.Admin)]
+        [InlineData(UserRole.Doctor)]
+        [InlineData(UserRole.Patient)]
+        public async Task UpdateAsync_ForEverySupportedRole_ForwardsExactUser(
+            UserRole role)
+        {
+            // Arrange
+            var user = CreateUser(
+                userId: (int)role,
+                email: $"{role.ToString().ToLower()}@healthaxis.com",
+                role: role);
+
+            _userRepositoryMock
+                .Setup(repository =>
+                    repository.UpdateAsync(user))
+                .Returns(Task.CompletedTask);
+
+            // Act
+            await _service.UpdateAsync(user);
+
+            // Assert
+            _userRepositoryMock.Verify(
+                repository =>
+                    repository.UpdateAsync(
+                        It.Is<User>(actual =>
+                            ReferenceEquals(actual, user) &&
+                            actual.UserId == user.UserId &&
+                            actual.Role == role)),
+                Times.Once);
+
+            _userRepositoryMock.VerifyNoOtherCalls();
+        }
+
+        [Fact]
+        public async Task UpdateAsync_ForwardsSameUserInstance()
+        {
+            // Arrange
+            var user = CreateUser(
+                userId: 3,
+                email: "patient@healthaxis.com",
+                role: UserRole.Patient);
+
+            user.MustChangePassword = true;
+
+            _userRepositoryMock
+                .Setup(repository =>
+                    repository.UpdateAsync(
+                        It.Is<User>(actual =>
+                            ReferenceEquals(actual, user))))
+                .Returns(Task.CompletedTask);
+
+            // Act
+            await _service.UpdateAsync(user);
+
+            // Assert
+            _userRepositoryMock.Verify(
+                repository =>
+                    repository.UpdateAsync(
+                        It.Is<User>(actual =>
+                            ReferenceEquals(actual, user) &&
+                            actual.MustChangePassword)),
+                Times.Once);
+
+            _userRepositoryMock.VerifyNoOtherCalls();
+        }
+
+        [Fact]
+        public async Task UpdateAsync_DoesNotAutomaticallySaveChanges()
+        {
+            // Arrange
+            var user = CreateUser(
+                userId: 3,
+                email: "patient@healthaxis.com",
+                role: UserRole.Patient);
+
+            _userRepositoryMock
+                .Setup(repository =>
+                    repository.UpdateAsync(user))
+                .Returns(Task.CompletedTask);
+
+            // Act
+            await _service.UpdateAsync(user);
+
+            // Assert
+            _userRepositoryMock.Verify(
+                repository =>
+                    repository.UpdateAsync(user),
+                Times.Once);
+
+            _userRepositoryMock.Verify(
+                repository =>
+                    repository.SaveChangesAsync(),
+                Times.Never);
+
+            _userRepositoryMock.VerifyNoOtherCalls();
+        }
+
+        [Fact]
+        public async Task UpdateAsync_WhenRepositoryThrows_PropagatesException()
+        {
+            // Arrange
+            var user = CreateUser(
+                userId: 3,
+                email: "patient@healthaxis.com",
+                role: UserRole.Patient);
+
+            const string errorMessage =
+                "Unable to update user.";
+
+            _userRepositoryMock
+                .Setup(repository =>
+                    repository.UpdateAsync(user))
+                .ThrowsAsync(
+                    new InvalidOperationException(errorMessage));
+
+            // Act
+            var exception =
+                await Assert.ThrowsAsync<InvalidOperationException>(
+                    () => _service.UpdateAsync(user));
+
+            // Assert
+            Assert.Equal(errorMessage, exception.Message);
+
+            _userRepositoryMock.Verify(
+                repository =>
+                    repository.UpdateAsync(user),
+                Times.Once);
+
+            _userRepositoryMock.Verify(
+                repository =>
+                    repository.SaveChangesAsync(),
+                Times.Never);
+
+            _userRepositoryMock.VerifyNoOtherCalls();
+        }
+
+        #endregion
+
+        #region SaveChangesAsync Tests
+
+        [Fact]
+        public async Task SaveChangesAsync_CallsRepositorySaveChangesOnce()
+        {
+            // Arrange
+            _userRepositoryMock
+                .Setup(repository =>
+                    repository.SaveChangesAsync())
+                .Returns(Task.CompletedTask);
+
+            // Act
+            await _service.SaveChangesAsync();
+
+            // Assert
+            _userRepositoryMock.Verify(
+                repository =>
+                    repository.SaveChangesAsync(),
+                Times.Once);
+
+            _userRepositoryMock.VerifyNoOtherCalls();
+        }
+
+        [Fact]
+        public async Task SaveChangesAsync_DoesNotCallAnyOtherRepositoryMethod()
+        {
+            // Arrange
+            _userRepositoryMock
+                .Setup(repository =>
+                    repository.SaveChangesAsync())
+                .Returns(Task.CompletedTask);
+
+            // Act
+            await _service.SaveChangesAsync();
+
+            // Assert
+            _userRepositoryMock.Verify(
+                repository =>
+                    repository.SaveChangesAsync(),
+                Times.Once);
+
+            _userRepositoryMock.VerifyNoOtherCalls();
+        }
+
+        [Fact]
+        public async Task SaveChangesAsync_WhenRepositoryThrows_PropagatesException()
+        {
+            // Arrange
+            const string errorMessage =
+                "Database save failed.";
+
+            _userRepositoryMock
+                .Setup(repository =>
+                    repository.SaveChangesAsync())
+                .ThrowsAsync(
+                    new InvalidOperationException(errorMessage));
+
+            // Act
+            var exception =
+                await Assert.ThrowsAsync<InvalidOperationException>(
+                    () => _service.SaveChangesAsync());
+
+            // Assert
+            Assert.Equal(errorMessage, exception.Message);
+
+            _userRepositoryMock.Verify(
+                repository =>
+                    repository.SaveChangesAsync(),
+                Times.Once);
+
+            _userRepositoryMock.VerifyNoOtherCalls();
+        }
+
+        #endregion
+
+        #region Workflow Tests
+
+        [Fact]
+        public async Task CreateThenSaveChanges_CallsAddAndSaveInExpectedOrder()
+        {
+            // Arrange
+            var user = CreateUser(
+                userId: 0,
+                email: "new.patient@healthaxis.com",
+                role: UserRole.Patient);
+
+            var sequence =
+                new MockSequence();
+
+            _userRepositoryMock
+                .InSequence(sequence)
+                .Setup(repository =>
+                    repository.AddAsync(user))
+                .Returns(Task.CompletedTask);
+
+            _userRepositoryMock
+                .InSequence(sequence)
+                .Setup(repository =>
+                    repository.SaveChangesAsync())
+                .Returns(Task.CompletedTask);
+
+            // Act
+            await _service.CreateAsync(user);
+            await _service.SaveChangesAsync();
+
+            // Assert
+            _userRepositoryMock.Verify(
+                repository =>
+                    repository.AddAsync(user),
+                Times.Once);
+
+            _userRepositoryMock.Verify(
+                repository =>
+                    repository.SaveChangesAsync(),
+                Times.Once);
+
+            _userRepositoryMock.VerifyNoOtherCalls();
+        }
+
+        [Fact]
+        public async Task UpdateThenSaveChanges_CallsUpdateAndSaveInExpectedOrder()
+        {
+            // Arrange
+            var user = CreateUser(
+                userId: 3,
+                email: "patient@healthaxis.com",
+                role: UserRole.Patient);
+
+            var sequence =
+                new MockSequence();
+
+            _userRepositoryMock
+                .InSequence(sequence)
+                .Setup(repository =>
+                    repository.UpdateAsync(user))
+                .Returns(Task.CompletedTask);
+
+            _userRepositoryMock
+                .InSequence(sequence)
+                .Setup(repository =>
+                    repository.SaveChangesAsync())
+                .Returns(Task.CompletedTask);
+
+            // Act
+            await _service.UpdateAsync(user);
+            await _service.SaveChangesAsync();
+
+            // Assert
+            _userRepositoryMock.Verify(
+                repository =>
+                    repository.UpdateAsync(user),
+                Times.Once);
+
+            _userRepositoryMock.Verify(
+                repository =>
+                    repository.SaveChangesAsync(),
+                Times.Once);
+
+            _userRepositoryMock.VerifyNoOtherCalls();
+        }
+
+        [Fact]
+        public async Task CreateThenSaveChanges_WhenSaveFails_AddStillCompletes()
+        {
+            // Arrange
+            var user = CreateUser(
+                userId: 0,
+                email: "new.patient@healthaxis.com",
+                role: UserRole.Patient);
+
+            _userRepositoryMock
+                .Setup(repository =>
+                    repository.AddAsync(user))
+                .Returns(Task.CompletedTask);
+
+            _userRepositoryMock
+                .Setup(repository =>
+                    repository.SaveChangesAsync())
+                .ThrowsAsync(
+                    new InvalidOperationException(
+                        "Database save failed."));
+
+            // Act
+            await _service.CreateAsync(user);
+
+            var exception =
+                await Assert.ThrowsAsync<InvalidOperationException>(
+                    () => _service.SaveChangesAsync());
+
+            // Assert
+            Assert.Equal(
+                "Database save failed.",
+                exception.Message);
+
+            _userRepositoryMock.Verify(
+                repository =>
+                    repository.AddAsync(user),
+                Times.Once);
+
+            _userRepositoryMock.Verify(
+                repository =>
+                    repository.SaveChangesAsync(),
+                Times.Once);
+
+            _userRepositoryMock.VerifyNoOtherCalls();
+        }
+
+        #endregion
+
+        #region Test Helpers
+
+        private static User CreateUser(
+            int userId,
+            string email,
+            UserRole role)
+        {
+            return new User
+            {
+                UserId = userId,
+                Email = email,
+                PasswordHash = "secure-test-password-hash",
+                Role = role,
+                ReferenceId = role == UserRole.Admin
+                    ? null
+                    : userId,
+                CreatedDate = DateTime.UtcNow,
+                MustChangePassword = false,
+                RefreshToken = "test-refresh-token",
+                RefreshTokenExpiryTime =
+                    DateTime.UtcNow.AddDays(7)
+            };
+        }
+
+        #endregion
+    }
+}

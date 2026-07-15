@@ -149,10 +149,13 @@
     <Property Name="sonar.java.jvmframeworkconfig.activate">true</Property>
     <Property Name="sonar.updatecenter.url">https://downloads.sonarsource.com/sonarqube/update/update-center.properties</Property>
     <Property Name="sonar.core.id">147B411E-AZ5PHq6ekpK8xEY3MImo</Property>
-    <Property Name="sonar.core.startTime">14-07-2026 11:33:29</Property>
+    <Property Name="sonar.core.startTime">15-07-2026 09:17:58</Property>
   </ServerSettings>
   <LocalSettings>
     <Property Name="sonar.host.url">http://localhost:9000</Property>
+    <Property Name="sonar.cs.vscoveragexml.reportsPaths">C:\Users\287766\source\repos\S4_HealthAxis\coverage.xml</Property>
+    <Property Name="sonar.verbose">true</Property>
+    <Property Name="sonar.exclusions">**/node_modules/**,**/bin/**,**/obj/**,**/Migrations/**,**/TestResults/**,**/coverage-report/**,**/*.css,**/*.razor,**/*.g.cs,**/*.designer.cs,**/*.slnLaunch.user,**/launchSettings.json,C:\Users\287766\source\repos\S4_HealthAxis\coverage.xml</Property>
   </LocalSettings>
   <ScannerOptsSettings />
   <AnalyzersSettings>
