@@ -1,2 +1,1 @@
-â 2tsX
-hr@S4_HealthAxis.Angular/src/app/shared/components/footer/footer.ts
+â 2webXhrBS4_HealthAxis.Angular/src/app/shared/components/footer/footer.html

@@ -1,1 +1,1 @@
-ä 2tsXÉhr@S4_HealthAxis.Angular/src/app/shared/components/navbar/navbar.ts
+ä 2webX¥hrBS4_HealthAxis.Angular/src/app/shared/components/navbar/navbar.html

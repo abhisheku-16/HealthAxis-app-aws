@@ -4,39 +4,39 @@ kubernetesS1135(א¹‎רה30א¹‎רה3:$8e62d5a1-10ca-4d79-bbc1-d22378ec7980BO
 
 kubernetesS6893(א¹‎רה30א¹‎רה3:$8e62d5a1-10ca-4d79-bbc1-d22378ec7980B¡
 
-kubernetesS6418"
-randomnessSensibility3.0"8
-secretWords)api[_.-]?key,auth,credential,secret,token(א¹‎רה30א¹‎רה3:$8e62d5a1-10ca-4d79-bbc1-d22378ec7980U
+kubernetesS6418"8
+secretWords)api[_.-]?key,auth,credential,secret,token"
+randomnessSensibility3.0(א¹‎רה30א¹‎רה3:$8e62d5a1-10ca-4d79-bbc1-d22378ec7980U
 
-kubernetesS6892(א¹‎רה30א¹‎רה3:$8e62d5a1-10ca-4d79-bbc1-d22378ec7980BB|
+kubernetesS6892(א¹‎רה30א¹‎רה3:$8e62d5a1-10ca-4d79-bbc1-d22378ec7980BB|
 
 kubernetesS2068"1
 credentialWordspassword,passwd,pwd,passphrase(א¹‎רה30א¹‎רה3:$8e62d5a1-10ca-4d79-bbc1-d22378ec7980I
 
 kubernetesS6429(א¹‎רה30א¹‎רה3:$8e62d5a1-10ca-4d79-bbc1-d22378ec7980U
 
-kubernetesS6907(א¹‎רה30א¹‎רה3:$8e62d5a1-10ca-4d79-bbc1-d22378ec7980BBl
+kubernetesS6907(א¹‎רה30א¹‎רה3:$8e62d5a1-10ca-4d79-bbc1-d22378ec7980BBl
 
 kubernetesS6473"!
 ports22, 23, 3389, 5800, 5900(א¹‎רה30א¹‎רה3:$8e62d5a1-10ca-4d79-bbc1-d22378ec7980U
 
-kubernetesS6897(א¹‎רה30א¹‎רה3:$8e62d5a1-10ca-4d79-bbc1-d22378ec7980BBI
+kubernetesS6897(א¹‎רה30א¹‎רה3:$8e62d5a1-10ca-4d79-bbc1-d22378ec7980BBI
 
 kubernetesS5849(א¹‎רה30א¹‎רה3:$8e62d5a1-10ca-4d79-bbc1-d22378ec7980U
 
-kubernetesS6864(א¹‎רה30א¹‎רה3:$8e62d5a1-10ca-4d79-bbc1-d22378ec7980BBU
+kubernetesS6864(א¹‎רה30א¹‎רה3:$8e62d5a1-10ca-4d79-bbc1-d22378ec7980BBU
 
-kubernetesS6873(א¹‎רה30א¹‎רה3:$8e62d5a1-10ca-4d79-bbc1-d22378ec7980BBI
+kubernetesS6873(א¹‎רה30א¹‎רה3:$8e62d5a1-10ca-4d79-bbc1-d22378ec7980BBI
 
 kubernetesS5332(א¹‎רה30א¹‎רה3:$8e62d5a1-10ca-4d79-bbc1-d22378ec7980U
 
-kubernetesS6867(א¹‎רה30א¹‎רה3:$8e62d5a1-10ca-4d79-bbc1-d22378ec7980BBU
+kubernetesS6867(א¹‎רה30א¹‎רה3:$8e62d5a1-10ca-4d79-bbc1-d22378ec7980BBU
 
-kubernetesS6870(א¹‎רה30א¹‎רה3:$8e62d5a1-10ca-4d79-bbc1-d22378ec7980BBI
+kubernetesS6870(א¹‎רה30א¹‎רה3:$8e62d5a1-10ca-4d79-bbc1-d22378ec7980BBI
 
 kubernetesS6428(א¹‎רה30א¹‎רה3:$8e62d5a1-10ca-4d79-bbc1-d22378ec7980U
 
-kubernetesS6865(א¹‎רה30א¹‎רה3:$8e62d5a1-10ca-4d79-bbc1-d22378ec7980BBO
+kubernetesS6865(א¹‎רה30א¹‎רה3:$8e62d5a1-10ca-4d79-bbc1-d22378ec7980BBO
 
 kubernetesS6596(א¹‎רה30א¹‎רה3:$8e62d5a1-10ca-4d79-bbc1-d22378ec7980BI
 
@@ -51,24 +51,24 @@ kubernetesS1874(א¹‎רה30א¹‎רה3:$8e62d5a1-10ca-4d79-bbc1-d22378ec7980BI
 
 kubernetesS6431(א¹‎רה30א¹‎רה3:$8e62d5a1-10ca-4d79-bbc1-d22378ec7980K
 pythonS4830(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBQ
-pythonS6971(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBBK
+pythonS6971(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBBK
 pythonS7505(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBK
 pythonS6711(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBQ
-pythonS6903(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBBK
+pythonS6903(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBBK
 pythonS6799(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBK
 pythonS7512(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBK
 pythonS2201(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBK
 pythonS6395(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBQ
-pythonS6925(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBBK
+pythonS6925(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBBK
 pythonS3984(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBK
 pythonS1045(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBK
 pythonS2190(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBK
 pythonS2711(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBK
 pythonS6556(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBK
 pythonS5713(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bB¡
-pythonS6418"<
-credentialWords)api[_.-]?key,auth,credential,secret,token"
-randomnessSensibility3.0(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bK
+pythonS6418"
+randomnessSensibility3.0"<
+credentialWords)api[_.-]?key,auth,credential,secret,token(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bK
 pythonS3923(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBK
 pythonS2275(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBK
 pythonS5914(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBK
@@ -81,15 +81,15 @@ kubernetesS6431(א¹‎רה30א¹‎רה3:$8e62d5a1-10ca-4d79-bbc1-d22378ec7980K
 pythonS7493(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBK
 pythonS3862(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBK
 pythonS7506(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBQ
-pythonS7503(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBBK
+pythonS7503(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBBK
 pythonS6326(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBE
 pythonS4507(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bJ
 pythonS112(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBK
 pythonS7614(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBQ
-pythonS6741(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBBK
+pythonS6741(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBBK
 pythonS5807(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBK
 pythonS3985(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBW
-pythonS6709(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBBB[
+pythonS6709(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBBB[
 pythonPreIncrementDecrement(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBK
 pythonS5918(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBK
 pythonS6560(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBK
@@ -106,14 +106,14 @@ kubernetesS6431(א¹‎רה30א¹‎רה3:$8e62d5a1-10ca-4d79-bbc1-d22378ec7980K
 pythonS1763(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBK
 pythonS6397(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBK
 pythonS5644(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBQ
-pythonS6973(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBBK
+pythonS6973(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBBK
 pythonS4144(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBK
 pythonS7488(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBK
 pythonS6437(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBQ
-pythonS6887(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBBK
+pythonS6887(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBBK
 pythonS5754(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBK
 pythonS5642(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBW
-pythonS6900(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBBBK
+pythonS6900(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBBBK
 pythonS5799(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBK
 pythonS1607(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBE
 pythonS6304(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bK
@@ -149,7 +149,7 @@ kubernetesS6431(א¹‎רה30א¹‎רה3:$8e62d5a1-10ca-4d79-bbc1-d22378ec7980K
 pythonS5632(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBK
 pythonS7622(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBK
 pythonS5842(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBQ
-pythonS6919(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBBK
+pythonS6919(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBBK
 pythonS2755(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBE
 pythonS6302(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bK
 pythonS6730(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBK
@@ -159,7 +159,7 @@ kubernetesS6431(א¹‎רה30א¹‎רה3:$8e62d5a1-10ca-4d79-bbc1-d22378ec7980K
 pythonS5122(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bE
 pythonS6329(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bE
 pythonS5443(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bQ
-pythonS6729(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBBK
+pythonS6729(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBBK
 pythonS2772(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBK
 pythonS5781(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBK
 pythonS1656(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBK
@@ -170,19 +170,19 @@ kubernetesS6431(א¹‎רה30א¹‎רה3:$8e62d5a1-10ca-4d79-bbc1-d22378ec7980K
 pythonS2710"&
 classParameterNamescls,mcs,metacls(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBK
 pythonS3626(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBQ
-pythonS7617(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBBQ
-pythonS6894(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBBQ
-pythonS6883(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBB{
+pythonS7617(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBBQ
+pythonS6894(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBBQ
+pythonS6883(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBB{
 pythonS1481".
 regex%(_[a-zA-Z0-9_]*|dummy|unused|ignored)(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBQ
-pythonS6714(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBBK
+pythonS6714(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBBK
 pythonS5890(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBK
 pythonS7499(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBK
 pythonS5655(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBK
 pythonS6779(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBK
 pythonS5549(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBK
 pythonS1066(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBQ
-pythonS6982(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBBK
+pythonS6982(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBBK
 pythonS6662(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBE
 pythonS4502(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bK
 pythonS2208(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBp
@@ -190,19 +190,19 @@ kubernetesS6431(א¹‎רה30א¹‎רה3:$8e62d5a1-10ca-4d79-bbc1-d22378ec7980K
 ignoredDecoratorsabstractmethod(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBE
 pythonS5852(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bK
 pythonS6794(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBQ
-pythonS6734(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBBK
+pythonS6734(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBBK
 pythonS7516(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBK
 pythonS7501(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBJ
 pythonS935(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBK
 pythonS5707(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBQ
-pythonS7619(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBBK
+pythonS7619(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBBK
 pythonS5780(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBK
 pythonS2757(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBK
 pythonS5714(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBK
 pythonS6659(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bB
-pythonS905"
-reportOnStringsfalse"
-ignoredOperators<<,>>,|(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBK
+pythonS905"
+ignoredOperators<<,>>,|"
+reportOnStringsfalse(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBK
 pythonS7486(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBK
 pythonS5659(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBE
 pythonS5042(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bE
@@ -213,7 +213,7 @@ kubernetesS6431(א¹‎רה30א¹‎רה3:$8e62d5a1-10ca-4d79-bbc1-d22378ec7980K
 pythonS5717(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBK
 pythonS5706(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBE
 pythonS6265(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bQ
-pythonS7515(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBBK
+pythonS7515(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBBK
 pythonS5860(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBU
 pythonInequalityUsage(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBK
 pythonS7931(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBE
@@ -224,7 +224,7 @@ kubernetesS6431(א¹‎רה30א¹‎רה3:$8e62d5a1-10ca-4d79-bbc1-d22378ec7980K
 format^[_a-z][_a-z0-9]*$(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBK
 pythonS7519(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBK
 pythonS1700(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBQ
-pythonS6929(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBBK
+pythonS6929(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBBK
 pythonS5708(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBK
 pythonS5719(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBK
 pythonS6019(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBE
@@ -239,15 +239,15 @@ kubernetesS6431(א¹‎רה30א¹‎רה3:$8e62d5a1-10ca-4d79-bbc1-d22378ec7980K
 pythonBackticksUsage(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBE
 pythonS2077(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bE
 pythonS4790(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bQ
-pythonS7618(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBBU
+pythonS7618(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBBU
 pythonS107"	
 max13(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBK
 pythonS3358(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBK
 pythonS6546(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBK
 pythonS6243(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBE
 pythonS6327(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bQ
-pythonS6928(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBBQ
-pythonS7942(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBBK
+pythonS6928(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBBQ
+pythonS7942(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBBK
 pythonS5547(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBK
 pythonS5445(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBK
 pythonS6792(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBr
@@ -280,19 +280,19 @@ kubernetesS6431(א¹‎רה30א¹‎רה3:$8e62d5a1-10ca-4d79-bbc1-d22378ec7980K
 pythonS3776"
 	threshold15(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBK
 pythonS5542(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBQ
-pythonS7621(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBBK
+pythonS7621(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBBK
 pythonS6781(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBQ
-pythonS6974(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBBo
-pythonS1192"
-	threshold3"
-exclusionRegex (°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBK
+pythonS6974(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBBo
+pythonS1192"
+exclusionRegex "
+	threshold3(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBK
 pythonS6035(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBE
 pythonS2257(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bK
 pythonS7500(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBK
 pythonS5828(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBK
 pythonS2638(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBK
 pythonS6353(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBQ
-pythonS7497(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBBE
+pythonS7497(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBBE
 pythonS1313(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bK
 pythonS6537(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBh
 pythonS100"
@@ -316,7 +316,7 @@ kubernetesS6431(א¹‎רה30א¹‎רה3:$8e62d5a1-10ca-4d79-bbc1-d22378ec7980K
 pythonS2876(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBK
 pythonS6735(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBK
 pythonS5756(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBW
-pythonS6890(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBBBK
+pythonS6890(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBBBK
 pythonS1716(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBK
 pythonS6984(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBK
 pythonS7625(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBK
@@ -332,9 +332,9 @@ kubernetesS6431(א¹‎רה30א¹‎רה3:$8e62d5a1-10ca-4d79-bbc1-d22378ec7980K
 pythonS5332(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bK
 pythonS7620(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBK
 pythonS6911(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBQ
-pythonS7484(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBBE
+pythonS7484(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBBE
 pythonS6985(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bQ
-pythonS7613(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBBx
+pythonS7613(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBBx
 pythonS2068"1
 credentialWordspassword,passwd,pwd,passphrase(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bK
 pythonS7943(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBK
@@ -371,9 +371,9 @@ kubernetesS6431(א¹‎רה30א¹‎רה3:$8e62d5a1-10ca-4d79-bbc1-d22378ec7980K
 pythonS6468(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBE
 pythonS6249(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bX
 pythonExecStatementUsage(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBW
-pythonS6882(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBBBK
+pythonS6882(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBBBK
 pythonS6001(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBW
-pythonS6727(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBBBJ
+pythonS6727(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBBBJ
 pythonS108(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bBE
 pythonS6281(°ֹ‎רה30°ֹ‎רה3:$4a90c347-ece6-4c47-9a0b-0f89eecc441bH
 cssS4651(ֱָ‎רה30ֱָ‎רה3:$4a63e9f6-d674-4ec1-a72e-927ff1b5c7ccBu
@@ -396,9 +396,9 @@ kubernetesS6431(א¹‎רה30א¹‎רה3:$8e62d5a1-10ca-4d79-bbc1-d22378ec7980K
 ignorePseudoClasseslocal,global,export,import,deep(ֱָ‎רה30ֱָ‎רה3:$4a63e9f6-d674-4ec1-a72e-927ff1b5c7ccBG
 cssS125(ֱָ‎רה30ֱָ‎רה3:$4a63e9f6-d674-4ec1-a72e-927ff1b5c7ccBH
 cssS4653(ֱָ‎רה30ֱָ‎רה3:$4a63e9f6-d674-4ec1-a72e-927ff1b5c7ccB™
-cssS4654" 
-ignoreTypescomposes, /^mso-/"-
-ignoreSelectors/^:export.*/, /^:import.*/(ֱָ‎רה30ֱָ‎רה3:$4a63e9f6-d674-4ec1-a72e-927ff1b5c7ccBH
+cssS4654"-
+ignoreSelectors/^:export.*/, /^:import.*/" 
+ignoreTypescomposes, /^mso-/(ֱָ‎רה30ֱָ‎רה3:$4a63e9f6-d674-4ec1-a72e-927ff1b5c7ccBH
 cssS1128(ֱָ‎רה30ֱָ‎רה3:$4a63e9f6-d674-4ec1-a72e-927ff1b5c7ccBH
 cssS4658(ֱָ‎רה30ֱָ‎רה3:$4a63e9f6-d674-4ec1-a72e-927ff1b5c7ccBH
 cssS1116(ֱָ‎רה30ֱָ‎רה3:$4a63e9f6-d674-4ec1-a72e-927ff1b5c7ccBH
@@ -406,9 +406,9 @@ kubernetesS6431(א¹‎רה30א¹‎רה3:$8e62d5a1-10ca-4d79-bbc1-d22378ec7980K
 cssS4661(ֱָ‎רה30ֱָ‎רה3:$4a63e9f6-d674-4ec1-a72e-927ff1b5c7ccBH
 cssS4655(ֱָ‎רה30ֱָ‎רה3:$4a63e9f6-d674-4ec1-a72e-927ff1b5c7ccBH
 cssS4666(ֱָ‎רה30ֱָ‎רה3:$4a63e9f6-d674-4ec1-a72e-927ff1b5c7ccBƒ
-cssS4670"
-ignoreTypes/^(mat|md|fa)-/"
-ignorecustom-elements(ֱָ‎רה30ֱָ‎רה3:$4a63e9f6-d674-4ec1-a72e-927ff1b5c7ccBH
+cssS4670"
+ignorecustom-elements"
+ignoreTypes/^(mat|md|fa)-/(ֱָ‎רה30ֱָ‎רה3:$4a63e9f6-d674-4ec1-a72e-927ff1b5c7ccBH
 cssS4667(ֱָ‎רה30ֱָ‎רה3:$4a63e9f6-d674-4ec1-a72e-927ff1b5c7ccBa
 cssS4656"
 ignoreFallbackstrue(ֱָ‎רה30ֱָ‎רה3:$4a63e9f6-d674-4ec1-a72e-927ff1b5c7ccBJ
@@ -451,9 +451,9 @@ kubernetesS6431(א¹‎רה30א¹‎רה3:$8e62d5a1-10ca-4d79-bbc1-d22378ec7980K
 scalaS1066(ֱָ‎רה30ֱָ‎רה3:$17cd7f32-5204-4ed0-8574-44bf59513401BJ
 scalaS1862(ֱָ‎רה30ֱָ‎רה3:$17cd7f32-5204-4ed0-8574-44bf59513401BE
 kotlinS6474(¸נ‎רה30¸נ‎רה3:$51a1c5e2-9c45-44fc-948c-596a7e559cb5
-kotlinS6418"
-randomnessSensibility3.0"8
-secretWords)api[_.-]?key,auth,credential,secret,token(¸נ‎רה30¸נ‎רה3:$51a1c5e2-9c45-44fc-948c-596a7e559cb5K
+kotlinS6418"8
+secretWords)api[_.-]?key,auth,credential,secret,token"
+randomnessSensibility3.0(¸נ‎רה30¸נ‎רה3:$51a1c5e2-9c45-44fc-948c-596a7e559cb5K
 kotlinS1481(¸נ‎רה30¸נ‎רה3:$51a1c5e2-9c45-44fc-948c-596a7e559cb5BK
 kotlinS6626(¸נ‎רה30¸נ‎רה3:$51a1c5e2-9c45-44fc-948c-596a7e559cb5BK
 kotlinS1144(¸נ‎רה30¸נ‎רה3:$51a1c5e2-9c45-44fc-948c-596a7e559cb5BK
@@ -624,10 +624,10 @@ kubernetesS6431(א¹‎רה30א¹‎רה3:$8e62d5a1-10ca-4d79-bbc1-d22378ec7980K
 ipythonS5906(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBL
 ipythonS6779(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBL
 ipythonS5445(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBR
-ipythonS6925(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBBL
+ipythonS6925(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBBL
 ipythonS7506(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBR
-ipythonS6929(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBBX
-ipythonS6727(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBBBL
+ipythonS6929(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBBX
+ipythonS6727(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBBBL
 ipythonS5644(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBL
 ipythonS6972(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBL
 ipythonS1172(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBL
@@ -646,16 +646,16 @@ kubernetesS6431(א¹‎רה30א¹‎רה3:$8e62d5a1-10ca-4d79-bbc1-d22378ec7980K
 ipythonS7943(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBL
 ipythonS7488(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBK
 ipythonS930(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aB¢
-ipythonS6418"<
-credentialWords)api[_.-]?key,auth,credential,secret,token"
-randomnessSensibility3.0(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aV
+ipythonS6418"
+randomnessSensibility3.0"<
+credentialWords)api[_.-]?key,auth,credential,secret,token(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aV
 ipythonInequalityUsage(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBF
 ipythonS6319(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aL
 ipythonS6781(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBL
 ipythonS2711(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBR
-ipythonS7497(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBBL
+ipythonS7497(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBBL
 ipythonS5780(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBR
-ipythonS6894(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBBL
+ipythonS6894(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBBL
 ipythonS5724(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBi
 ipythonS100"
 format^[a-z_][a-z0-9_]*$(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBL
@@ -669,7 +669,7 @@ kubernetesS6431(א¹‎רה30א¹‎רה3:$8e62d5a1-10ca-4d79-bbc1-d22378ec7980K
 ipythonS5868(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBL
 ipythonS7622(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBF
 ipythonS6332(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aR
-ipythonS7515(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBBL
+ipythonS7515(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBBL
 ipythonS7502(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBL
 ipythonS2772(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBL
 ipythonS1515(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBF
@@ -682,7 +682,7 @@ kubernetesS6431(א¹‎רה30א¹‎רה3:$8e62d5a1-10ca-4d79-bbc1-d22378ec7980K
 ipythonS3626(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBL
 ipythonS6662(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBL
 ipythonS2115(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBX
-ipythonS6890(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBBBL
+ipythonS6890(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBBBL
 ipythonS2755(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBL
 ipythonS6794(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBL
 ipythonS1045(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBL
@@ -696,16 +696,16 @@ kubernetesS6431(א¹‎רה30א¹‎רה3:$8e62d5a1-10ca-4d79-bbc1-d22378ec7980K
 ipythonS5685(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBL
 ipythonS6711(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBF
 ipythonS3752(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173ap
-ipythonS1192"
-	threshold3"
-exclusionRegex (׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBL
+ipythonS1192"
+exclusionRegex "
+	threshold3(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBL
 ipythonS6262(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBL
 ipythonS7945(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBR
-ipythonS6971(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBBL
+ipythonS6971(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBBL
 ipythonS3981(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBL
 ipythonS6397(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBL
 ipythonS6984(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBR
-ipythonS6928(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBBL
+ipythonS6928(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBBL
 ipythonS6317(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBL
 ipythonS2159(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBL
 ipythonS6792(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBF
@@ -715,7 +715,7 @@ kubernetesS6431(א¹‎רה30א¹‎רה3:$8e62d5a1-10ca-4d79-bbc1-d22378ec7980K
 ipythonS6437(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBL
 ipythonS3699(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBL
 ipythonS6730(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBR
-ipythonS6974(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBBF
+ipythonS6974(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBBF
 ipythonS3330(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aL
 ipythonS7505(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBL
 ipythonS5860(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aB€
@@ -733,12 +733,12 @@ kubernetesS6431(א¹‎רה30א¹‎רה3:$8e62d5a1-10ca-4d79-bbc1-d22378ec7980K
 ipythonS7496(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBL
 ipythonS7491(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBL
 ipythonS7499(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBR
-ipythonS6714(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBBL
+ipythonS6714(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBBL
 ipythonS6553(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBL
 ipythonS5547(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBL
 ipythonS3403(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBF
 ipythonS6330(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aX
-ipythonS6900(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBBBL
+ipythonS6900(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBBBL
 ipythonS7614(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBF
 ipythonS2245(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aL
 ipythonS6918(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBL
@@ -749,7 +749,7 @@ kubernetesS6431(א¹‎רה30א¹‎רה3:$8e62d5a1-10ca-4d79-bbc1-d22378ec7980K
 ipythonS7931(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBi
 ipythonS116"
 format^[_a-z][_a-z0-9]*$(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBR
-ipythonS6973(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBBL
+ipythonS6973(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBBL
 ipythonS5712(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBL
 ipythonS1763(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBL
 ipythonS1110(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBF
@@ -768,15 +768,15 @@ kubernetesS6431(א¹‎רה30א¹‎רה3:$8e62d5a1-10ca-4d79-bbc1-d22378ec7980K
 ipythonS5843"
 maxComplexity20(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBF
 ipythonS5332(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aR
-ipythonS6729(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBBL
+ipythonS6729(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBBL
 ipythonS2823(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBL
 ipythonS5713(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBR
-ipythonS6734(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBBY
+ipythonS6734(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBBY
 ipythonExecStatementUsage(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBF
 ipythonS6304(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aL
 ipythonS2275(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBF
 ipythonS6303(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aX
-ipythonS6709(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBBBL
+ipythonS6709(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBBBL
 ipythonS6969(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBF
 ipythonS6249(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173ai
 ipythonS117"
@@ -789,7 +789,7 @@ kubernetesS6431(א¹‎רה30א¹‎רה3:$8e62d5a1-10ca-4d79-bbc1-d22378ec7980K
 ipythonS7490(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBL
 ipythonS1940(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBL
 ipythonS1751(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBR
-ipythonS6982(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBBL
+ipythonS6982(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBBL
 ipythonS6742(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBF
 ipythonS6985(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aL
 ipythonS6799(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBL
@@ -836,7 +836,7 @@ kubernetesS6431(א¹‎רה30א¹‎רה3:$8e62d5a1-10ca-4d79-bbc1-d22378ec7980K
 ipythonS108(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBL
 ipythonS5842(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBL
 ipythonS7516(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBR
-ipythonS7503(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBBL
+ipythonS7503(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBBL
 ipythonS5905(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBF
 ipythonS1313(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aL
 ipythonS7620(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBL
@@ -845,8 +845,8 @@ kubernetesS6431(א¹‎רה30א¹‎רה3:$8e62d5a1-10ca-4d79-bbc1-d22378ec7980K
 ipythonPreIncrementDecrement(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBL
 ipythonS6660(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBF
 ipythonS5122(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aX
-ipythonS6882(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBBBR
-ipythonS6887(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBBL
+ipythonS6882(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBBBR
+ipythonS6887(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBBL
 ipythonS4433(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBL
 ipythonS2053(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBL
 ipythonS7510(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBL
@@ -856,7 +856,7 @@ kubernetesS6431(א¹‎רה30א¹‎רה3:$8e62d5a1-10ca-4d79-bbc1-d22378ec7980K
 ipythonS2761(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBL
 ipythonS6328(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBL
 ipythonS6559(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBR
-ipythonS6883(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBBL
+ipythonS6883(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBBL
 ipythonS6035(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBL
 ipythonS5717(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBL
 ipythonS3457(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBL
@@ -867,20 +867,20 @@ kubernetesS6431(א¹‎רה30א¹‎רה3:$8e62d5a1-10ca-4d79-bbc1-d22378ec7980K
 ipythonS5756(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBL
 ipythonS1862(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBL
 ipythonS7632(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBR
-ipythonS7617(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBBL
+ipythonS7617(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBBL
 ipythonS1607(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBR
-ipythonS7619(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBBL
+ipythonS7619(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBBL
 ipythonS5527(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBR
-ipythonS6903(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBBL
+ipythonS6903(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBBL
 ipythonS7486(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBK
 ipythonS112(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBR
-ipythonS7618(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBBL
+ipythonS7618(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBBL
 ipythonS1244(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBL
 ipythonS2757(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBL
 ipythonS5914(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBL
 ipythonS1871(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBL
 ipythonS6979(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBR
-ipythonS7484(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBBL
+ipythonS7484(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBBL
 ipythonS5707(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBL
 ipythonS5915(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBL
 ipythonS5722(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBL
@@ -888,7 +888,7 @@ kubernetesS6431(א¹‎רה30א¹‎רה3:$8e62d5a1-10ca-4d79-bbc1-d22378ec7980K
 ipythonS2710"&
 classParameterNamescls,mcs,metacls(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBL
 ipythonS1700(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBR
-ipythonS7613(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBBL
+ipythonS7613(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBBL
 ipythonS5855(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBL
 ipythonS7483(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBL
 ipythonS5886(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBL
@@ -911,16 +911,16 @@ kubernetesS6431(א¹‎רה30א¹‎רה3:$8e62d5a1-10ca-4d79-bbc1-d22378ec7980K
 format^[a-z_][a-z0-9_]*$(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBL
 ipythonS5704(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBL
 ipythonS5890(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBR
-ipythonS7621(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBBL
+ipythonS7621(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBBL
 ipythonS6395(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBL
 ipythonS5709(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBF
 ipythonS6333(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aL
 ipythonS5632(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBR
-ipythonS7942(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBBL
+ipythonS7942(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBBL
 ipythonS6785(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBL
 ipythonS7489(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBF
 ipythonS6265(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aR
-ipythonS6741(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBBL
+ipythonS6741(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBBL
 ipythonS7500(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBq
 ipythonS5720"#
 ignoredDecoratorsabstractmethod(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBL
@@ -931,7 +931,7 @@ kubernetesS6431(א¹‎רה30א¹‎רה3:$8e62d5a1-10ca-4d79-bbc1-d22378ec7980K
 ipythonS3776"
 	threshold15(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBL
 ipythonS4426(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBR
-ipythonS6919(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBBL
+ipythonS6919(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBBL
 ipythonS3984(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBL
 ipythonS5899(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBL
 ipythonS5857(׀ט‎רה30׀ט‎רה3:$e88be00b-850f-41f7-8f65-0ef9f0d4173aBL
@@ -984,7 +984,7 @@ javascriptS3812(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BO
 
 javascriptS6637(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BU
 
-javascriptS6807(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BBO
+javascriptS6807(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BBO
 
 javascriptS5869(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BO
 
@@ -994,7 +994,7 @@ javascriptS2612(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0O
 
 javascriptS1472(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BU
 
-javascriptS6766(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BBO
+javascriptS6766(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BBO
 
 javascriptS3686(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BO
 
@@ -1008,7 +1008,7 @@ javascriptS2692(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BI
 
 javascriptS6270(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0U
 
-javascriptS6772(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BBO
+javascriptS6772(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BBO
 
 javascriptS3626(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BO
 
@@ -1026,7 +1026,7 @@ javascriptS5850(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BO
 
 javascriptS7757(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BU
 
-javascriptS7736(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BBO
+javascriptS7736(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BBO
 
 javascriptS2699(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BO
 
@@ -1044,9 +1044,9 @@ javascriptS3516(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BI
 
 javascriptS5852(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0U
 
-javascriptS6861(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BBU
+javascriptS6861(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BBU
 
-javascriptS7739(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BBO
+javascriptS7739(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BBO
 
 javascriptS6594(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BO
 
@@ -1064,9 +1064,9 @@ javascriptS3972(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BO
 
 javascriptS1533(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0B‡
 
-javascriptS5693"
-fileUploadSizeLimit8000000"
-standardSizeLimit2000000(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0O
+javascriptS5693"
+standardSizeLimit2000000"
+fileUploadSizeLimit8000000(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0O
 
 javascriptS6676(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BI
 
@@ -1078,11 +1078,11 @@ javascriptS1848(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BO
 
 javascriptS3504(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BU
 
-javascriptS6811(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BBO
+javascriptS6811(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BBO
 
 javascriptS2757(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BU
 
-javascriptS6746(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BBO
+javascriptS6746(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BBO
 
 javascriptS7766(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BO
 
@@ -1092,11 +1092,11 @@ javascriptS1135(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BO
 
 javascriptS5260(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BU
 
-javascriptS6788(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BBO
+javascriptS6788(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BBO
 
 javascriptS3699(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BU
 
-javascriptS7790(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BBO
+javascriptS7790(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BBO
 
 javascriptS7774(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BO
 
@@ -1108,7 +1108,7 @@ javascriptS3800(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BI
 
 javascriptS6330(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0U
 
-javascriptS6757(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BBO
+javascriptS6757(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BBO
 
 javascriptS7748(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BO
 
@@ -1124,24 +1124,24 @@ javascriptS5689(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0I
 
 javascriptS5122(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0U
 
-javascriptS6859(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BBO
+javascriptS6859(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BBO
 
 javascriptS5958(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BU
 
-javascriptS7725(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BBO
+javascriptS7725(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BBO
 
 javascriptS6836(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BO
 
 javascriptS5842(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BU
 
-javascriptS7781(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BBY
+javascriptS7781(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BBY
 
 javascriptS2004"
 max4(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BI
 
 javascriptS3330(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0U
 
-javascriptS7723(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BBO
+javascriptS7723(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BBO
 
 javascriptS2681(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BO
 
@@ -1183,13 +1183,13 @@ javascriptS2245(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0O
 
 javascriptS1186(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BU
 
-javascriptS6842(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BBO
+javascriptS6842(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BBO
 
 javascriptS6544(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BO
 
 javascriptS4624(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BU
 
-javascriptS6774(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BBO
+javascriptS6774(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BBO
 
 javascriptS1068(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BO
 
@@ -1209,7 +1209,7 @@ javascriptS3796(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BI
 
 javascriptS5247(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0U
 
-javascriptS6844(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BBO
+javascriptS6844(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BBO
 
 javascriptS3531(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0B`
 
@@ -1220,7 +1220,7 @@ javascriptS2737(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BO
 
 javascriptS6643(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BU
 
-javascriptS6791(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BBO
+javascriptS6791(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BBO
 
 javascriptS7726(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BO
 
@@ -1264,7 +1264,7 @@ javascriptS5856(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BO
 
 javascriptS6627(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BU
 
-javascriptS6852(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BBO
+javascriptS6852(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BBO
 
 javascriptS7761(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BI
 
@@ -1278,9 +1278,9 @@ javascriptS4140(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BO
 
 javascriptS1143(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BU
 
-javascriptS6848(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BBU
+javascriptS6848(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BBU
 
-javascriptS6822(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BBO
+javascriptS6822(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BBO
 
 javascriptS5876(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BO
 
@@ -1299,7 +1299,7 @@ javascriptS5527(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BO
 
 javascriptS6653(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BU
 
-javascriptS7767(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BBO
+javascriptS7767(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BBO
 
 javascriptS6440(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BO
 
@@ -1311,9 +1311,9 @@ javascriptS2688(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BO
 
 javascriptS5863(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BU
 
-javascriptS6748(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BBU
+javascriptS6748(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BBU
 
-javascriptS7737(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BBO
+javascriptS7737(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BBO
 
 javascriptS6080(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BO
 
@@ -1327,11 +1327,11 @@ javascriptS6281(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0O
 
 javascriptS1226(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BU
 
-javascriptS6793(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BBO
+javascriptS6793(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BBO
 
 javascriptS7744(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BU
 
-javascriptS6824(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BBO
+javascriptS6824(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BBO
 
 javascriptS6958(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BO
 
@@ -1347,7 +1347,7 @@ javascriptS6509(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BI
 
 javascriptS4721(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0U
 
-javascriptS6845(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BBI
+javascriptS6845(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BBI
 
 javascriptS4507(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0O
 
@@ -1359,12 +1359,12 @@ javascriptS2970(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BO
 
 javascriptS2137(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BU
 
-javascriptS7733(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BBd
+javascriptS7733(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BBd
 
 javascriptS6747"
-	whitelist (°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BBU
+	whitelist (°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BBU
 
-javascriptS7758(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BBN
+javascriptS7758(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BBN
 
 javascriptS125(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BO
 
@@ -1405,7 +1405,7 @@ javascriptS7776(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BO
 
 javascriptS2685(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BU
 
-javascriptS6847(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BBI
+javascriptS6847(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BBI
 
 javascriptS1523(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0O
 
@@ -1417,7 +1417,7 @@ javascriptS6661(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BI
 
 javascriptS6329(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0U
 
-javascriptS6761(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BBO
+javascriptS6761(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BBO
 
 javascriptS3984(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BO
 
@@ -1425,7 +1425,7 @@ javascriptS6442(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BO
 
 javascriptS5547(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BU
 
-javascriptS7773(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BBO
+javascriptS7773(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BBO
 
 javascriptS4043(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BI
 
@@ -1447,7 +1447,7 @@ javascriptS5732(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0O
 
 javascriptS7763(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BU
 
-javascriptS6789(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BBO
+javascriptS6789(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BBO
 
 javascriptS7718(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BO
 
@@ -1465,7 +1465,7 @@ javascriptS2990(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BO
 
 javascriptS2201(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BU
 
-javascriptS6843(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BBO
+javascriptS6843(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BBO
 
 javascriptS6666(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BO
 
@@ -1512,7 +1512,7 @@ javascriptS6325(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BO
 
 javascriptS4822(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BU
 
-javascriptS6821(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BBI
+javascriptS6821(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BBI
 
 javascriptS5734(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0O
 
@@ -1532,15 +1532,15 @@ javascriptS6478(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BO
 
 javascriptS7780(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BU
 
-javascriptS7732(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BBO
+javascriptS7732(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BBO
 
 javascriptS4138(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BO
 
 javascriptS6523(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0B¡
 
-javascriptS6418"
-randomnessSensibility5.0"8
-secretWords)api[_.-]?key,auth,credential,secret,token(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0O
+javascriptS6418"8
+secretWords)api[_.-]?key,auth,credential,secret,token"
+randomnessSensibility5.0(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0O
 
 javascriptS6439(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BI
 
@@ -1592,7 +1592,7 @@ javascriptS2589(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BO
 
 javascriptS7768(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BU
 
-javascriptS6850(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BBN
+javascriptS6850(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BBN
 
 javascriptS878(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BI
 
@@ -1613,7 +1613,7 @@ javascriptS6332(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0O
 
 javascriptS1126(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BU
 
-javascriptS6763(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BBO
+javascriptS6763(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BBO
 
 javascriptS7738(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BO
 
@@ -1623,15 +1623,15 @@ javascriptS1134(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BN
 
 javascriptS128(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BU
 
-javascriptS6790(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BBU
+javascriptS6790(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BBU
 
-javascriptS6851(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BBU
+javascriptS6851(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BBU
 
-javascriptS6840(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BBO
+javascriptS6840(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BBO
 
 javascriptS4143(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BU
 
-javascriptS6827(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BBO
+javascriptS6827(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BBO
 
 javascriptS4619(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BO
 
@@ -1701,13 +1701,13 @@ javascriptS6654(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BO
 
 javascriptS2703(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BU
 
-javascriptS6756(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BBO
+javascriptS6756(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BBO
 
 javascriptS6645(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BO
 
 javascriptS1764(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BU
 
-javascriptS6846(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BBO
+javascriptS6846(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BBO
 
 javascriptS4158(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BO
 
@@ -1715,7 +1715,7 @@ javascriptS6660(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BO
 
 javascriptS6557(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BU
 
-javascriptS6750(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BBO
+javascriptS6750(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BBO
 
 javascriptS6479(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BI
 
@@ -1723,15 +1723,15 @@ javascriptS4036(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0O
 
 javascriptS5254(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BU
 
-javascriptS7060(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BBO
+javascriptS7060(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BBO
 
 javascriptS5264(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BU
 
-javascriptS5973(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BBO
+javascriptS5973(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BBO
 
 javascriptS3001(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BU
 
-javascriptS6841(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BBO
+javascriptS6841(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BBO
 
 javascriptS3785(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BO
 
@@ -1739,7 +1739,7 @@ javascriptS4125(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BO
 
 javascriptS1199(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BU
 
-javascriptS7059(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BBI
+javascriptS7059(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BBI
 
 javascriptS5148(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0O
 
@@ -1748,14 +1748,14 @@ javascriptS1788(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0BO
 javascriptS6486(°ֹ‎רה30°ֹ‎רה3:$7f39eecd-8d25-4967-8838-0ec38320b2e0Bh
 dockerS6473"!
 ports22, 23, 3389, 5800, 5900(°ֹ‎רה30°ֹ‎רה3:$c654d7bd-4e98-4139-bae8-278f705a650cQ
-dockerS7019(°ֹ‎רה30°ֹ‎רה3:$c654d7bd-4e98-4139-bae8-278f705a650cBBU
+dockerS7019(°ֹ‎רה30°ֹ‎רה3:$c654d7bd-4e98-4139-bae8-278f705a650cBBU
 dockerS6471"
 
 safeImages (°ֹ‎רה30°ֹ‎רה3:$c654d7bd-4e98-4139-bae8-278f705a650cE
 dockerS4507(°ֹ‎רה30°ֹ‎רה3:$c654d7bd-4e98-4139-bae8-278f705a650cK
 dockerS6596(°ֹ‎רה30°ֹ‎רה3:$c654d7bd-4e98-4139-bae8-278f705a650cBE
 dockerS2612(°ֹ‎רה30°ֹ‎רה3:$c654d7bd-4e98-4139-bae8-278f705a650cQ
-dockerS7021(°ֹ‎רה30°ֹ‎רה3:$c654d7bd-4e98-4139-bae8-278f705a650cBBE
+dockerS7021(°ֹ‎רה30°ֹ‎רה3:$c654d7bd-4e98-4139-bae8-278f705a650cBBE
 dockerS6470(°ֹ‎רה30°ֹ‎רה3:$c654d7bd-4e98-4139-bae8-278f705a650c]
 dockerS7020"
 	maxLength120(°ֹ‎רה30°ֹ‎רה3:$c654d7bd-4e98-4139-bae8-278f705a650cBK
@@ -1768,8 +1768,8 @@ safeImages (°ֹ‎רה30°ֹ‎רה3:$c654d7bd-4e98-4139-bae8-278f705a650cE
 dockerS6504(°ֹ‎רה30°ֹ‎רה3:$c654d7bd-4e98-4139-bae8-278f705a650cK
 dockerS6574(°ֹ‎רה30°ֹ‎רה3:$c654d7bd-4e98-4139-bae8-278f705a650cBK
 dockerS6589(°ֹ‎רה30°ֹ‎רה3:$c654d7bd-4e98-4139-bae8-278f705a650cBQ
-dockerS7030(°ֹ‎רה30°ֹ‎רה3:$c654d7bd-4e98-4139-bae8-278f705a650cBBW
-dockerS7029(°ֹ‎רה30°ֹ‎רה3:$c654d7bd-4e98-4139-bae8-278f705a650cBBBK
+dockerS7030(°ֹ‎רה30°ֹ‎רה3:$c654d7bd-4e98-4139-bae8-278f705a650cBBW
+dockerS7029(°ֹ‎רה30°ֹ‎רה3:$c654d7bd-4e98-4139-bae8-278f705a650cBBBK
 dockerS6476(°ֹ‎רה30°ֹ‎רה3:$c654d7bd-4e98-4139-bae8-278f705a650cBE
 dockerS6431(°ֹ‎רה30°ֹ‎רה3:$c654d7bd-4e98-4139-bae8-278f705a650cE
 dockerS5332(°ֹ‎רה30°ֹ‎רה3:$c654d7bd-4e98-4139-bae8-278f705a650cK
@@ -1914,7 +1914,7 @@ safeImages (°ֹ‎רה30°ֹ‎רה3:$c654d7bd-4e98-4139-bae8-278f705a650cE
 javaS6208(€Ù‎רה30€Ù‎רה3:$c84c0cf7-b0f1-40bc-ab23-4c6eafc5100bBI
 javaS3984(€Ù‎רה30€Ù‎רה3:$c84c0cf7-b0f1-40bc-ab23-4c6eafc5100bBI
 javaS6246(€Ù‎רה30€Ù‎רה3:$c84c0cf7-b0f1-40bc-ab23-4c6eafc5100bBO
-javaS6829(€Ù‎רה30€Ù‎רה3:$c84c0cf7-b0f1-40bc-ab23-4c6eafc5100bBBI
+javaS6829(€Ù‎רה30€Ù‎רה3:$c84c0cf7-b0f1-40bc-ab23-4c6eafc5100bBBI
 javaS5853(€Ù‎רה30€Ù‎רה3:$c84c0cf7-b0f1-40bc-ab23-4c6eafc5100bBI
 javaS1163(€Ù‎רה30€Ù‎רה3:$c84c0cf7-b0f1-40bc-ab23-4c6eafc5100bBI
 javaS3024(€Ù‎רה30€Ù‎רה3:$c84c0cf7-b0f1-40bc-ab23-4c6eafc5100bBI
@@ -1930,7 +1930,7 @@ safeImages (°ֹ‎רה30°ֹ‎רה3:$c654d7bd-4e98-4139-bae8-278f705a650cE
 javaS5659(€Ù‎רה30€Ù‎רה3:$c84c0cf7-b0f1-40bc-ab23-4c6eafc5100bBg
 javaS117"
 format^[a-z][a-zA-Z0-9]*$(€Ù‎רה30€Ù‎רה3:$c84c0cf7-b0f1-40bc-ab23-4c6eafc5100bBO
-javaS6804(€Ù‎רה30€Ù‎רה3:$c84c0cf7-b0f1-40bc-ab23-4c6eafc5100bBBI
+javaS6804(€Ù‎רה30€Ù‎רה3:$c84c0cf7-b0f1-40bc-ab23-4c6eafc5100bBBI
 javaS2093(€Ù‎רה30€Ù‎רה3:$c84c0cf7-b0f1-40bc-ab23-4c6eafc5100bBI
 javaS5301(€Ù‎רה30€Ù‎רה3:$c84c0cf7-b0f1-40bc-ab23-4c6eafc5100bBI
 javaS1150(€Ù‎רה30€Ù‎רה3:$c84c0cf7-b0f1-40bc-ab23-4c6eafc5100bBI
@@ -2009,7 +2009,7 @@ safeImages (°ֹ‎רה30°ֹ‎רה3:$c654d7bd-4e98-4139-bae8-278f705a650cE
 javaS2116(€Ù‎רה30€Ù‎רה3:$c84c0cf7-b0f1-40bc-ab23-4c6eafc5100bBI
 javaS5833(€Ù‎רה30€Ù‎רה3:$c84c0cf7-b0f1-40bc-ab23-4c6eafc5100bBI
 javaS1217(€Ù‎רה30€Ù‎רה3:$c84c0cf7-b0f1-40bc-ab23-4c6eafc5100bBU
-javaS7178(€Ù‎רה30€Ù‎רה3:$c84c0cf7-b0f1-40bc-ab23-4c6eafc5100bBBBg
+javaS7178(€Ù‎רה30€Ù‎רה3:$c84c0cf7-b0f1-40bc-ab23-4c6eafc5100bBBBg
 javaS101"
 format^[A-Z][a-zA-Z0-9]*$(€Ù‎רה30€Ù‎רה3:$c84c0cf7-b0f1-40bc-ab23-4c6eafc5100bBI
 javaS2204(€Ù‎רה30€Ù‎רה3:$c84c0cf7-b0f1-40bc-ab23-4c6eafc5100bBI
@@ -2039,7 +2039,7 @@ safeImages (°ֹ‎רה30°ֹ‎רה3:$c654d7bd-4e98-4139-bae8-278f705a650cE
 javaS2274(€Ù‎רה30€Ù‎רה3:$c84c0cf7-b0f1-40bc-ab23-4c6eafc5100bBI
 javaS2589(€Ù‎רה30€Ù‎רה3:$c84c0cf7-b0f1-40bc-ab23-4c6eafc5100bBI
 javaS3981(€Ù‎רה30€Ù‎רה3:$c84c0cf7-b0f1-40bc-ab23-4c6eafc5100bBO
-javaS6831(€Ù‎רה30€Ù‎רה3:$c84c0cf7-b0f1-40bc-ab23-4c6eafc5100bBBC
+javaS6831(€Ù‎רה30€Ù‎רה3:$c84c0cf7-b0f1-40bc-ab23-4c6eafc5100bBBC
 javaS2257(€Ù‎רה30€Ù‎רה3:$c84c0cf7-b0f1-40bc-ab23-4c6eafc5100bI
 javaS6862(€Ù‎רה30€Ù‎רה3:$c84c0cf7-b0f1-40bc-ab23-4c6eafc5100bBI
 javaS4274(€Ù‎רה30€Ù‎רה3:$c84c0cf7-b0f1-40bc-ab23-4c6eafc5100bBI
@@ -2168,7 +2168,7 @@ safeImages (°ֹ‎רה30°ֹ‎רה3:$c654d7bd-4e98-4139-bae8-278f705a650cE
 javaS3065(€Ù‎רה30€Ù‎רה3:$c84c0cf7-b0f1-40bc-ab23-4c6eafc5100bBI
 javaS2447(€Ù‎רה30€Ù‎רה3:$c84c0cf7-b0f1-40bc-ab23-4c6eafc5100bBI
 javaS7629(€Ù‎רה30€Ù‎רה3:$c84c0cf7-b0f1-40bc-ab23-4c6eafc5100bBU
-javaS7186(€Ù‎רה30€Ù‎רה3:$c84c0cf7-b0f1-40bc-ab23-4c6eafc5100bBBBI
+javaS7186(€Ù‎רה30€Ù‎רה3:$c84c0cf7-b0f1-40bc-ab23-4c6eafc5100bBBBI
 javaS1181(€Ù‎רה30€Ù‎רה3:$c84c0cf7-b0f1-40bc-ab23-4c6eafc5100bBI
 javaS4524(€Ù‎רה30€Ù‎רה3:$c84c0cf7-b0f1-40bc-ab23-4c6eafc5100bBI
 javaS5876(€Ù‎רה30€Ù‎רה3:$c84c0cf7-b0f1-40bc-ab23-4c6eafc5100bBI
@@ -2182,18 +2182,18 @@ safeImages (°ֹ‎רה30°ֹ‎רה3:$c654d7bd-4e98-4139-bae8-278f705a650cE
 javaS6288(€Ù‎רה30€Ù‎רה3:$c84c0cf7-b0f1-40bc-ab23-4c6eafc5100bI
 javaS6019(€Ù‎רה30€Ù‎רה3:$c84c0cf7-b0f1-40bc-ab23-4c6eafc5100bBI
 javaS4973(€Ù‎רה30€Ù‎רה3:$c84c0cf7-b0f1-40bc-ab23-4c6eafc5100bBU
-javaS7190(€Ù‎רה30€Ù‎רה3:$c84c0cf7-b0f1-40bc-ab23-4c6eafc5100bBBBI
+javaS7190(€Ù‎רה30€Ù‎רה3:$c84c0cf7-b0f1-40bc-ab23-4c6eafc5100bBBBI
 javaS1117(€Ù‎רה30€Ù‎רה3:$c84c0cf7-b0f1-40bc-ab23-4c6eafc5100bBI
 javaS3864(€Ù‎רה30€Ù‎רה3:$c84c0cf7-b0f1-40bc-ab23-4c6eafc5100bBI
 javaS1133(€Ù‎רה30€Ù‎רה3:$c84c0cf7-b0f1-40bc-ab23-4c6eafc5100bBC
 javaS4036(€Ù‎רה30€Ù‎רה3:$c84c0cf7-b0f1-40bc-ab23-4c6eafc5100bI
 javaS1862(€Ù‎רה30€Ù‎רה3:$c84c0cf7-b0f1-40bc-ab23-4c6eafc5100bBC
 javaS2612(€Ù‎רה30€Ù‎רה3:$c84c0cf7-b0f1-40bc-ab23-4c6eafc5100b£
-javaS6541"
-noavThreshold7"
-locThreshold65"
-nestingThreshold3"
-cyclomaticThreshold15(€Ù‎רה30€Ù‎רה3:$c84c0cf7-b0f1-40bc-ab23-4c6eafc5100bBI
+javaS6541"
+cyclomaticThreshold15"
+nestingThreshold3"
+locThreshold65"
+noavThreshold7(€Ù‎רה30€Ù‎רה3:$c84c0cf7-b0f1-40bc-ab23-4c6eafc5100bBI
 javaS2060(€Ù‎רה30€Ù‎רה3:$c84c0cf7-b0f1-40bc-ab23-4c6eafc5100bBI
 javaS6901(€Ù‎רה30€Ù‎רה3:$c84c0cf7-b0f1-40bc-ab23-4c6eafc5100bBI
 javaS3416(€Ù‎רה30€Ù‎רה3:$c84c0cf7-b0f1-40bc-ab23-4c6eafc5100bBI
@@ -2206,12 +2206,12 @@ safeImages (°ֹ‎רה30°ֹ‎רה3:$c654d7bd-4e98-4139-bae8-278f705a650cE
 javaS125(€Ù‎רה30€Ù‎רה3:$c84c0cf7-b0f1-40bc-ab23-4c6eafc5100bBI
 javaS3751(€Ù‎רה30€Ù‎רה3:$c84c0cf7-b0f1-40bc-ab23-4c6eafc5100bBI
 javaS2134(€Ù‎רה30€Ù‎רה3:$c84c0cf7-b0f1-40bc-ab23-4c6eafc5100bB›
-javaS6418"
-randomnessSensibility5.0"8
-secretWords)api[_.-]?key,auth,credential,secret,token(€Ù‎רה30€Ù‎רה3:$c84c0cf7-b0f1-40bc-ab23-4c6eafc5100bI
+javaS6418"8
+secretWords)api[_.-]?key,auth,credential,secret,token"
+randomnessSensibility5.0(€Ù‎רה30€Ù‎רה3:$c84c0cf7-b0f1-40bc-ab23-4c6eafc5100bI
 javaS6856(€Ù‎רה30€Ù‎רה3:$c84c0cf7-b0f1-40bc-ab23-4c6eafc5100bBI
 javaS1171(€Ù‎רה30€Ù‎רה3:$c84c0cf7-b0f1-40bc-ab23-4c6eafc5100bBO
-javaS6813(€Ù‎רה30€Ù‎רה3:$c84c0cf7-b0f1-40bc-ab23-4c6eafc5100bBBI
+javaS6813(€Ù‎רה30€Ù‎רה3:$c84c0cf7-b0f1-40bc-ab23-4c6eafc5100bBBI
 javaS6207(€Ù‎רה30€Ù‎רה3:$c84c0cf7-b0f1-40bc-ab23-4c6eafc5100bBI
 javaS2445(€Ù‎רה30€Ù‎רה3:$c84c0cf7-b0f1-40bc-ab23-4c6eafc5100bBI
 javaS2583(€Ù‎רה30€Ù‎רה3:$c84c0cf7-b0f1-40bc-ab23-4c6eafc5100bBI
@@ -2284,7 +2284,7 @@ safeImages (°ֹ‎רה30°ֹ‎רה3:$c654d7bd-4e98-4139-bae8-278f705a650cE
 javaS6539"
 couplingThreshold20(€Ù‎רה30€Ù‎רה3:$c84c0cf7-b0f1-40bc-ab23-4c6eafc5100bBC
 javaS5804(€Ù‎רה30€Ù‎רה3:$c84c0cf7-b0f1-40bc-ab23-4c6eafc5100bU
-javaS7184(€Ù‎רה30€Ù‎רה3:$c84c0cf7-b0f1-40bc-ab23-4c6eafc5100bBBBI
+javaS7184(€Ù‎רה30€Ù‎רה3:$c84c0cf7-b0f1-40bc-ab23-4c6eafc5100bBBBI
 javaS1854(€Ù‎רה30€Ù‎רה3:$c84c0cf7-b0f1-40bc-ab23-4c6eafc5100bBI
 javaS2225(€Ù‎רה30€Ù‎רה3:$c84c0cf7-b0f1-40bc-ab23-4c6eafc5100bBI
 javaS5996(€Ù‎רה30€Ù‎רה3:$c84c0cf7-b0f1-40bc-ab23-4c6eafc5100bBI
@@ -2330,13 +2330,13 @@ safeImages (°ֹ‎רה30°ֹ‎רה3:$c654d7bd-4e98-4139-bae8-278f705a650cE
 javaS6810(€Ù‎רה30€Ù‎רה3:$c84c0cf7-b0f1-40bc-ab23-4c6eafc5100bBI
 javaS7475(€Ù‎רה30€Ù‎רה3:$c84c0cf7-b0f1-40bc-ab23-4c6eafc5100bBI
 javaS1905(€Ù‎רה30€Ù‎רה3:$c84c0cf7-b0f1-40bc-ab23-4c6eafc5100bBO
-javaS6806(€Ù‎רה30€Ù‎רה3:$c84c0cf7-b0f1-40bc-ab23-4c6eafc5100bBBI
+javaS6806(€Ù‎רה30€Ù‎רה3:$c84c0cf7-b0f1-40bc-ab23-4c6eafc5100bBBI
 javaS4830(€Ù‎רה30€Ù‎רה3:$c84c0cf7-b0f1-40bc-ab23-4c6eafc5100bBI
 javaS6878(€Ù‎רה30€Ù‎רה3:$c84c0cf7-b0f1-40bc-ab23-4c6eafc5100bBI
 javaS7477(€Ù‎רה30€Ù‎רה3:$c84c0cf7-b0f1-40bc-ab23-4c6eafc5100bBI
 javaS4925(€Ù‎רה30€Ù‎רה3:$c84c0cf7-b0f1-40bc-ab23-4c6eafc5100bBI
 javaS7479(€Ù‎רה30€Ù‎רה3:$c84c0cf7-b0f1-40bc-ab23-4c6eafc5100bBO
-javaS6818(€Ù‎רה30€Ù‎רה3:$c84c0cf7-b0f1-40bc-ab23-4c6eafc5100bBBI
+javaS6818(€Ù‎רה30€Ù‎רה3:$c84c0cf7-b0f1-40bc-ab23-4c6eafc5100bBBI
 javaS3972(€Ù‎רה30€Ù‎רה3:$c84c0cf7-b0f1-40bc-ab23-4c6eafc5100bBI
 javaS4275(€Ù‎רה30€Ù‎רה3:$c84c0cf7-b0f1-40bc-ab23-4c6eafc5100bBI
 javaS4684(€Ù‎רה30€Ù‎רה3:$c84c0cf7-b0f1-40bc-ab23-4c6eafc5100bBI
@@ -2409,7 +2409,7 @@ safeImages (°ֹ‎רה30°ֹ‎רה3:$c654d7bd-4e98-4139-bae8-278f705a650cE
 javaS4165(€Ù‎רה30€Ù‎רה3:$c84c0cf7-b0f1-40bc-ab23-4c6eafc5100bBI
 javaS1989(€Ù‎רה30€Ù‎רה3:$c84c0cf7-b0f1-40bc-ab23-4c6eafc5100bBI
 javaS3398(€Ù‎רה30€Ù‎רה3:$c84c0cf7-b0f1-40bc-ab23-4c6eafc5100bBO
-javaS7183(€Ù‎רה30€Ù‎רה3:$c84c0cf7-b0f1-40bc-ab23-4c6eafc5100bBBI
+javaS7183(€Ù‎רה30€Ù‎רה3:$c84c0cf7-b0f1-40bc-ab23-4c6eafc5100bBBI
 javaS2272(€Ù‎רה30€Ù‎רה3:$c84c0cf7-b0f1-40bc-ab23-4c6eafc5100bBI
 javaS2160(€Ù‎רה30€Ù‎רה3:$c84c0cf7-b0f1-40bc-ab23-4c6eafc5100bBI
 javaS2232(€Ù‎רה30€Ù‎רה3:$c84c0cf7-b0f1-40bc-ab23-4c6eafc5100bBI
@@ -2417,7 +2417,7 @@ safeImages (°ֹ‎רה30°ֹ‎רה3:$c654d7bd-4e98-4139-bae8-278f705a650cE
 javaS2438(€Ù‎רה30€Ù‎רה3:$c84c0cf7-b0f1-40bc-ab23-4c6eafc5100bBI
 javaS1186(€Ù‎רה30€Ù‎רה3:$c84c0cf7-b0f1-40bc-ab23-4c6eafc5100bBI
 javaS6068(€Ù‎רה30€Ù‎רה3:$c84c0cf7-b0f1-40bc-ab23-4c6eafc5100bBO
-javaS5973(€Ù‎רה30€Ù‎רה3:$c84c0cf7-b0f1-40bc-ab23-4c6eafc5100bBBI
+javaS5973(€Ù‎רה30€Ù‎רה3:$c84c0cf7-b0f1-40bc-ab23-4c6eafc5100bBBI
 javaS4838(€Ù‎רה30€Ù‎רה3:$c84c0cf7-b0f1-40bc-ab23-4c6eafc5100bBI
 javaS2200(€Ù‎רה30€Ù‎רה3:$c84c0cf7-b0f1-40bc-ab23-4c6eafc5100bBI
 javaS5777(€Ù‎רה30€Ù‎רה3:$c84c0cf7-b0f1-40bc-ab23-4c6eafc5100bBg
@@ -2462,19 +2462,19 @@ safeImages (°ֹ‎רה30°ֹ‎רה3:$c654d7bd-4e98-4139-bae8-278f705a650cE
 javaS2118(€Ù‎רה30€Ù‎רה3:$c84c0cf7-b0f1-40bc-ab23-4c6eafc5100bBi
 javaS2479"
 allowTabsInTextBlocksfalse(€Ù‎רה30€Ù‎רה3:$c84c0cf7-b0f1-40bc-ab23-4c6eafc5100bBU
-javaS7180(€Ù‎רה30€Ù‎רה3:$c84c0cf7-b0f1-40bc-ab23-4c6eafc5100bBBBH
+javaS7180(€Ù‎רה30€Ù‎רה3:$c84c0cf7-b0f1-40bc-ab23-4c6eafc5100bBBBH
 WebS6823(€Ù‎רה30€Ù‎רה3:$5cd3fabb-cf65-4180-96c9-8cbe8f1005d1B_
 WebTableHeaderHasIdOrScopeCheck(€Ù‎רה30€Ù‎רה3:$5cd3fabb-cf65-4180-96c9-8cbe8f1005d1BN
-WebS6824(€Ù‎רה30€Ù‎רה3:$5cd3fabb-cf65-4180-96c9-8cbe8f1005d1BBN
-WebS6852(€Ù‎רה30€Ù‎רה3:$5cd3fabb-cf65-4180-96c9-8cbe8f1005d1BBN
-WebS6843(€Ù‎רה30€Ù‎רה3:$5cd3fabb-cf65-4180-96c9-8cbe8f1005d1BBd
+WebS6824(€Ù‎רה30€Ù‎רה3:$5cd3fabb-cf65-4180-96c9-8cbe8f1005d1BBN
+WebS6852(€Ù‎רה30€Ù‎רה3:$5cd3fabb-cf65-4180-96c9-8cbe8f1005d1BBN
+WebS6843(€Ù‎רה30€Ù‎רה3:$5cd3fabb-cf65-4180-96c9-8cbe8f1005d1BBd
 Web!ItemTagNotWithinContainerTagCheck(€Ù‎רה30€Ù‎רה3:$5cd3fabb-cf65-4180-96c9-8cbe8f1005d1BH
 WebS7926(€Ù‎רה30€Ù‎רה3:$5cd3fabb-cf65-4180-96c9-8cbe8f1005d1BH
 WebS4084(€Ù‎רה30€Ù‎רה3:$5cd3fabb-cf65-4180-96c9-8cbe8f1005d1BN
-WebS6844(€Ù‎רה30€Ù‎רה3:$5cd3fabb-cf65-4180-96c9-8cbe8f1005d1BBN
-WebS6842(€Ù‎רה30€Ù‎רה3:$5cd3fabb-cf65-4180-96c9-8cbe8f1005d1BBN
-WebS6793(€Ù‎רה30€Ù‎רה3:$5cd3fabb-cf65-4180-96c9-8cbe8f1005d1BBN
-WebS6841(€Ù‎רה30€Ù‎רה3:$5cd3fabb-cf65-4180-96c9-8cbe8f1005d1BBY
+WebS6844(€Ù‎רה30€Ù‎רה3:$5cd3fabb-cf65-4180-96c9-8cbe8f1005d1BBN
+WebS6842(€Ù‎רה30€Ù‎רה3:$5cd3fabb-cf65-4180-96c9-8cbe8f1005d1BBN
+WebS6793(€Ù‎רה30€Ù‎רה3:$5cd3fabb-cf65-4180-96c9-8cbe8f1005d1BBN
+WebS6841(€Ù‎רה30€Ù‎רה3:$5cd3fabb-cf65-4180-96c9-8cbe8f1005d1BBY
 WebFrameWithoutTitleCheck(€Ù‎רה30€Ù‎רה3:$5cd3fabb-cf65-4180-96c9-8cbe8f1005d1BH
 WebS6819(€Ù‎רה30€Ù‎רה3:$5cd3fabb-cf65-4180-96c9-8cbe8f1005d1BU
 WebImgWithoutAltCheck(€Ù‎רה30€Ù‎רה3:$5cd3fabb-cf65-4180-96c9-8cbe8f1005d1BH
@@ -2486,41 +2486,41 @@ safeImages (°ֹ‎רה30°ֹ‎רה3:$c654d7bd-4e98-4139-bae8-278f705a650cE
 WebS5264(€Ù‎רה30€Ù‎רה3:$5cd3fabb-cf65-4180-96c9-8cbe8f1005d1BH
 WebS1135(€Ù‎רה30€Ù‎רה3:$5cd3fabb-cf65-4180-96c9-8cbe8f1005d1Bw
 WebS6822"'
-allowedRedundantRolesnav=navigation(€Ù‎רה30€Ù‎רה3:$5cd3fabb-cf65-4180-96c9-8cbe8f1005d1BBH
+allowedRedundantRolesnav=navigation(€Ù‎רה30€Ù‎רה3:$5cd3fabb-cf65-4180-96c9-8cbe8f1005d1BBH
 WebS6825(€Ù‎רה30€Ù‎רה3:$5cd3fabb-cf65-4180-96c9-8cbe8f1005d1BN
-WebS6850(€Ù‎רה30€Ù‎רה3:$5cd3fabb-cf65-4180-96c9-8cbe8f1005d1BBN
-WebS6840(€Ù‎רה30€Ù‎רה3:$5cd3fabb-cf65-4180-96c9-8cbe8f1005d1BBN
-WebS6821(€Ù‎רה30€Ù‎רה3:$5cd3fabb-cf65-4180-96c9-8cbe8f1005d1BBN
-WebS6807(€Ù‎רה30€Ù‎רה3:$5cd3fabb-cf65-4180-96c9-8cbe8f1005d1BBB
+WebS6850(€Ù‎רה30€Ù‎רה3:$5cd3fabb-cf65-4180-96c9-8cbe8f1005d1BBN
+WebS6840(€Ù‎רה30€Ù‎רה3:$5cd3fabb-cf65-4180-96c9-8cbe8f1005d1BBN
+WebS6821(€Ù‎רה30€Ù‎רה3:$5cd3fabb-cf65-4180-96c9-8cbe8f1005d1BBN
+WebS6807(€Ù‎רה30€Ù‎רה3:$5cd3fabb-cf65-4180-96c9-8cbe8f1005d1BBB
 WebS5725(€Ù‎רה30€Ù‎רה3:$5cd3fabb-cf65-4180-96c9-8cbe8f1005d1N
-WebS7930(€Ù‎רה30€Ù‎רה3:$5cd3fabb-cf65-4180-96c9-8cbe8f1005d1BBk
+WebS7930(€Ù‎רה30€Ù‎רה3:$5cd3fabb-cf65-4180-96c9-8cbe8f1005d1BBk
 Web(MouseEventWithoutKeyboardEquivalentCheck(€Ù‎רה30€Ù‎רה3:$5cd3fabb-cf65-4180-96c9-8cbe8f1005d1BN
-WebS6845(€Ù‎רה30€Ù‎רה3:$5cd3fabb-cf65-4180-96c9-8cbe8f1005d1BBN
-WebS6811(€Ù‎רה30€Ù‎רה3:$5cd3fabb-cf65-4180-96c9-8cbe8f1005d1BBX
+WebS6845(€Ù‎רה30€Ù‎רה3:$5cd3fabb-cf65-4180-96c9-8cbe8f1005d1BBN
+WebS6811(€Ù‎רה30€Ù‎רה3:$5cd3fabb-cf65-4180-96c9-8cbe8f1005d1BBX
 WebPageWithoutTitleCheck(€Ù‎רה30€Ù‎רה3:$5cd3fabb-cf65-4180-96c9-8cbe8f1005d1BH
 WebS5254(€Ù‎רה30€Ù‎רה3:$5cd3fabb-cf65-4180-96c9-8cbe8f1005d1BH
 WebS5257(€Ù‎רה30€Ù‎רה3:$5cd3fabb-cf65-4180-96c9-8cbe8f1005d1BN
-WebS6851(€Ù‎רה30€Ù‎רה3:$5cd3fabb-cf65-4180-96c9-8cbe8f1005d1BB]
+WebS6851(€Ù‎רה30€Ù‎רה3:$5cd3fabb-cf65-4180-96c9-8cbe8f1005d1BB]
 WebAvoidCommentedOutCodeCheck(€Ù‎רה30€Ù‎רה3:$5cd3fabb-cf65-4180-96c9-8cbe8f1005d1BH
 WebS5258(€Ù‎רה30€Ù‎רה3:$5cd3fabb-cf65-4180-96c9-8cbe8f1005d1BB
 WebS5247(€Ù‎רה30€Ù‎רה3:$5cd3fabb-cf65-4180-96c9-8cbe8f1005d1c
 Web FlashUsesBothObjectAndEmbedCheck(€Ù‎רה30€Ù‎רה3:$5cd3fabb-cf65-4180-96c9-8cbe8f1005d1BN
-WebS6846(€Ù‎רה30€Ù‎רה3:$5cd3fabb-cf65-4180-96c9-8cbe8f1005d1BBH
+WebS6846(€Ù‎רה30€Ù‎רה3:$5cd3fabb-cf65-4180-96c9-8cbe8f1005d1BBH
 WebS1827(€Ù‎רה30€Ù‎רה3:$5cd3fabb-cf65-4180-96c9-8cbe8f1005d1BH
 WebS5256(€Ù‎רה30€Ù‎רה3:$5cd3fabb-cf65-4180-96c9-8cbe8f1005d1BB
 WebS5148(€Ù‎רה30€Ù‎רה3:$5cd3fabb-cf65-4180-96c9-8cbe8f1005d1H
 WebS7927(€Ù‎רה30€Ù‎רה3:$5cd3fabb-cf65-4180-96c9-8cbe8f1005d1BN
-WebS6848(€Ù‎רה30€Ù‎רה3:$5cd3fabb-cf65-4180-96c9-8cbe8f1005d1BBN
-WebS6847(€Ù‎רה30€Ù‎רה3:$5cd3fabb-cf65-4180-96c9-8cbe8f1005d1BBN
-WebS6827(€Ù‎רה30€Ù‎רה3:$5cd3fabb-cf65-4180-96c9-8cbe8f1005d1BBH
+WebS6848(€Ù‎רה30€Ù‎רה3:$5cd3fabb-cf65-4180-96c9-8cbe8f1005d1BBN
+WebS6847(€Ù‎רה30€Ù‎רה3:$5cd3fabb-cf65-4180-96c9-8cbe8f1005d1BBN
+WebS6827(€Ù‎רה30€Ù‎רה3:$5cd3fabb-cf65-4180-96c9-8cbe8f1005d1BBH
 WebS7929(€Ù‎רה30€Ù‎רה3:$5cd3fabb-cf65-4180-96c9-8cbe8f1005d1B^
 WebUnsupportedTagsInHtml5Check(€Ù‎רה30€Ù‎רה3:$5cd3fabb-cf65-4180-96c9-8cbe8f1005d1BH
 WebS5260(€Ù‎רה30€Ù‎רה3:$5cd3fabb-cf65-4180-96c9-8cbe8f1005d1BH
 WebS5255(€Ù‎רה30€Ù‎רה3:$5cd3fabb-cf65-4180-96c9-8cbe8f1005d1BN
-xmlS3355(טא‎רה30טא‎רה3:$cf5ba76c-ae3d-40f1-b3a9-b94dd7f7cfe8BBu
+xmlS3355(טא‎רה30טא‎רה3:$cf5ba76c-ae3d-40f1-b3a9-b94dd7f7cfe8BBu
 xmlS2068"1
 credentialWordspassword,passwd,pwd,passphrase(טא‎רה30טא‎רה3:$cf5ba76c-ae3d-40f1-b3a9-b94dd7f7cfe8N
-xmlS3281(טא‎רה30טא‎רה3:$cf5ba76c-ae3d-40f1-b3a9-b94dd7f7cfe8BBH
+xmlS3281(טא‎רה30טא‎רה3:$cf5ba76c-ae3d-40f1-b3a9-b94dd7f7cfe8BBH
 xmlS1778(טא‎רה30טא‎רה3:$cf5ba76c-ae3d-40f1-b3a9-b94dd7f7cfe8BH
 xmlS3438(טא‎רה30טא‎רה3:$cf5ba76c-ae3d-40f1-b3a9-b94dd7f7cfe8BB
 xmlS5332(טא‎רה30טא‎רה3:$cf5ba76c-ae3d-40f1-b3a9-b94dd7f7cfe8B
@@ -2645,15 +2645,15 @@ safeImages (°ֹ‎רה30°ֹ‎רה3:$c654d7bd-4e98-4139-bae8-278f705a650cE
 csharpsquidS1862( ר‎רה30 ר‎רה3:$4029f521-9e1d-4de2-8976-aa0e2d9563b7BP
 csharpsquidS5547( ר‎רה30 ר‎רה3:$4029f521-9e1d-4de2-8976-aa0e2d9563b7BP
 csharpsquidS3600( ר‎רה30 ר‎רה3:$4029f521-9e1d-4de2-8976-aa0e2d9563b7B\
-csharpsquidS6967( ר‎רה30 ר‎רה3:$4029f521-9e1d-4de2-8976-aa0e2d9563b7BBBP
+csharpsquidS6967( ר‎רה30 ר‎רה3:$4029f521-9e1d-4de2-8976-aa0e2d9563b7BBBP
 csharpsquidS1939( ר‎רה30 ר‎רה3:$4029f521-9e1d-4de2-8976-aa0e2d9563b7BP
 csharpsquidS2291( ר‎רה30 ר‎רה3:$4029f521-9e1d-4de2-8976-aa0e2d9563b7BP
 csharpsquidS3010( ר‎רה30 ר‎רה3:$4029f521-9e1d-4de2-8976-aa0e2d9563b7BP
 csharpsquidS2376( ר‎רה30 ר‎רה3:$4029f521-9e1d-4de2-8976-aa0e2d9563b7BP
 csharpsquidS3244( ר‎רה30 ר‎רה3:$4029f521-9e1d-4de2-8976-aa0e2d9563b7By
-csharpsquidS3776"
-	threshold15"
-propertyThreshold3( ר‎רה30 ר‎רה3:$4029f521-9e1d-4de2-8976-aa0e2d9563b7BP
+csharpsquidS3776"
+propertyThreshold3"
+	threshold15( ר‎רה30 ר‎רה3:$4029f521-9e1d-4de2-8976-aa0e2d9563b7BP
 csharpsquidS4061( ר‎רה30 ר‎רה3:$4029f521-9e1d-4de2-8976-aa0e2d9563b7BP
 csharpsquidS3604( ר‎רה30 ר‎רה3:$4029f521-9e1d-4de2-8976-aa0e2d9563b7BP
 csharpsquidS1155( ר‎רה30 ר‎רה3:$4029f521-9e1d-4de2-8976-aa0e2d9563b7BP
@@ -2840,11 +2840,11 @@ safeImages (°ֹ‎רה30°ֹ‎רה3:$c654d7bd-4e98-4139-bae8-278f705a650cE
 csharpsquidS3877( ר‎רה30 ר‎רה3:$4029f521-9e1d-4de2-8976-aa0e2d9563b7BP
 csharpsquidS2955( ר‎רה30 ר‎רה3:$4029f521-9e1d-4de2-8976-aa0e2d9563b7BP
 csharpsquidS2629( ר‎רה30 ר‎רה3:$4029f521-9e1d-4de2-8976-aa0e2d9563b7B¬
-csharpsquidS6664"
-debugThreshold4"
+csharpsquidS6664"
+informationThreshold2"
+errorThreshold1"
 warningThreshold1"
-errorThreshold1"
-informationThreshold2( ר‎רה30 ר‎רה3:$4029f521-9e1d-4de2-8976-aa0e2d9563b7BP
+debugThreshold4( ר‎רה30 ר‎רה3:$4029f521-9e1d-4de2-8976-aa0e2d9563b7BP
 csharpsquidS3442( ר‎רה30 ר‎רה3:$4029f521-9e1d-4de2-8976-aa0e2d9563b7BP
 csharpsquidS4663( ר‎רה30 ר‎רה3:$4029f521-9e1d-4de2-8976-aa0e2d9563b7BP
 csharpsquidS2290( ר‎רה30 ר‎רה3:$4029f521-9e1d-4de2-8976-aa0e2d9563b7BP
@@ -2887,7 +2887,7 @@ safeImages (°ֹ‎רה30°ֹ‎רה3:$c654d7bd-4e98-4139-bae8-278f705a650cE
 csharpsquidS6934( ר‎רה30 ר‎רה3:$4029f521-9e1d-4de2-8976-aa0e2d9563b7BP
 csharpsquidS4433( ר‎רה30 ר‎רה3:$4029f521-9e1d-4de2-8976-aa0e2d9563b7BO
 csharpsquidS818( ר‎רה30 ר‎רה3:$4029f521-9e1d-4de2-8976-aa0e2d9563b7B\
-csharpsquidS6932( ר‎רה30 ר‎רה3:$4029f521-9e1d-4de2-8976-aa0e2d9563b7BBBn
+csharpsquidS6932( ר‎רה30 ר‎רה3:$4029f521-9e1d-4de2-8976-aa0e2d9563b7BBBn
 csharpsquidS110"
 filteredClasses "
 max5( ר‎רה30 ר‎רה3:$4029f521-9e1d-4de2-8976-aa0e2d9563b7Bj
@@ -2929,9 +2929,9 @@ safeImages (°ֹ‎רה30°ֹ‎רה3:$c654d7bd-4e98-4139-bae8-278f705a650cE
 csharpsquidS3169( ר‎רה30 ר‎רה3:$4029f521-9e1d-4de2-8976-aa0e2d9563b7BP
 csharpsquidS3869( ר‎רה30 ר‎רה3:$4029f521-9e1d-4de2-8976-aa0e2d9563b7BP
 csharpsquidS3358( ר‎רה30 ר‎רה3:$4029f521-9e1d-4de2-8976-aa0e2d9563b7B₪
-csharpsquidS6418"
-randomnessSensibility3"<
-secretWords-api[_\-]?key, auth, credential, secret, token( ר‎רה30 ר‎רה3:$4029f521-9e1d-4de2-8976-aa0e2d9563b7P
+csharpsquidS6418"<
+secretWords-api[_\-]?key, auth, credential, secret, token"
+randomnessSensibility3( ר‎רה30 ר‎רה3:$4029f521-9e1d-4de2-8976-aa0e2d9563b7P
 csharpsquidS1905( ר‎רה30 ר‎רה3:$4029f521-9e1d-4de2-8976-aa0e2d9563b7BP
 csharpsquidS3263( ר‎רה30 ר‎רה3:$4029f521-9e1d-4de2-8976-aa0e2d9563b7BP
 csharpsquidS4210( ר‎רה30 ר‎רה3:$4029f521-9e1d-4de2-8976-aa0e2d9563b7BP
@@ -2983,9 +2983,9 @@ safeImages (°ֹ‎רה30°ֹ‎רה3:$c654d7bd-4e98-4139-bae8-278f705a650cE
 format^[a-z][a-zA-Z0-9]*$(ˆ€‏רה30ˆ€‏רה3:$fe1f0d9d-a46d-432e-b22a-4732e02b1786BH
 phpS5808(ˆ€‏רה30ˆ€‏רה3:$fe1f0d9d-a46d-432e-b22a-4732e02b1786BH
 phpS1068(ˆ€‏רה30ˆ€‏רה3:$fe1f0d9d-a46d-432e-b22a-4732e02b1786B 
-phpS6418"
-randomnessSensibility5.0"8
-secretWords)api[_.-]?key,auth,credential,secret,token(ˆ€‏רה30ˆ€‏רה3:$fe1f0d9d-a46d-432e-b22a-4732e02b1786BH
+phpS6418"8
+secretWords)api[_.-]?key,auth,credential,secret,token"
+randomnessSensibility5.0(ˆ€‏רה30ˆ€‏רה3:$fe1f0d9d-a46d-432e-b22a-4732e02b1786BH
 phpS1045(ˆ€‏רה30ˆ€‏רה3:$fe1f0d9d-a46d-432e-b22a-4732e02b1786BH
 phpS6396(ˆ€‏רה30ˆ€‏רה3:$fe1f0d9d-a46d-432e-b22a-4732e02b1786BB
 phpS4828(ˆ€‏רה30ˆ€‏רה3:$fe1f0d9d-a46d-432e-b22a-4732e02b1786H
@@ -3018,7 +3018,7 @@ safeImages (°ֹ‎רה30°ֹ‎רה3:$c654d7bd-4e98-4139-bae8-278f705a650cE
 	threshold3"
 minimal_literal_length5(ˆ€‏רה30ˆ€‏רה3:$fe1f0d9d-a46d-432e-b22a-4732e02b1786BH
 phpS5361(ˆ€‏רה30ˆ€‏רה3:$fe1f0d9d-a46d-432e-b22a-4732e02b1786BN
-phpS2077(ˆ€‏רה30ˆ€‏רה3:$fe1f0d9d-a46d-432e-b22a-4732e02b1786BBH
+phpS2077(ˆ€‏רה30ˆ€‏רה3:$fe1f0d9d-a46d-432e-b22a-4732e02b1786BBH
 phpS2699(ˆ€‏רה30ˆ€‏רה3:$fe1f0d9d-a46d-432e-b22a-4732e02b1786BH
 phpS6343(ˆ€‏רה30ˆ€‏רה3:$fe1f0d9d-a46d-432e-b22a-4732e02b1786BH
 phpS1135(ˆ€‏רה30ˆ€‏רה3:$fe1f0d9d-a46d-432e-b22a-4732e02b1786BH
@@ -3061,9 +3061,9 @@ safeImages (°ֹ‎רה30°ֹ‎רה3:$c654d7bd-4e98-4139-bae8-278f705a650cE
 phpS4524(ˆ€‏רה30ˆ€‏רה3:$fe1f0d9d-a46d-432e-b22a-4732e02b1786BH
 phpS2115(ˆ€‏רה30ˆ€‏רה3:$fe1f0d9d-a46d-432e-b22a-4732e02b1786BH
 phpS1600(ˆ€‏רה30ˆ€‏רה3:$fe1f0d9d-a46d-432e-b22a-4732e02b1786B…
-phpS1448"
-countNonpublicMethodstrue"
-maximumMethodThreshold20(ˆ€‏רה30ˆ€‏רה3:$fe1f0d9d-a46d-432e-b22a-4732e02b1786BH
+phpS1448"
+maximumMethodThreshold20"
+countNonpublicMethodstrue(ˆ€‏רה30ˆ€‏רה3:$fe1f0d9d-a46d-432e-b22a-4732e02b1786BH
 phpS1110(ˆ€‏רה30ˆ€‏רה3:$fe1f0d9d-a46d-432e-b22a-4732e02b1786BH
 phpS5547(ˆ€‏רה30ˆ€‏רה3:$fe1f0d9d-a46d-432e-b22a-4732e02b1786BH
 phpS2755(ˆ€‏רה30ˆ€‏רה3:$fe1f0d9d-a46d-432e-b22a-4732e02b1786BH
@@ -3210,7 +3210,7 @@ typescriptS6638(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BO
 
 typescriptS6571(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BU
 
-typescriptS6772(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BBO
+typescriptS6772(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BBO
 
 typescriptS1534(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BO
 
@@ -3253,7 +3253,7 @@ typescriptS2310(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BO
 
 typescriptS2137(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BU
 
-typescriptS6761(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BBO
+typescriptS6761(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BBO
 
 typescriptS7776(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BI
 
@@ -3261,7 +3261,7 @@ typescriptS5689(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3O
 
 typescriptS7651(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BU
 
-typescriptS6859(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BBO
+typescriptS6859(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BBO
 
 typescriptS2990(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BI
 
@@ -3288,7 +3288,7 @@ typescriptS7769(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BO
 
 typescriptS7772(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BU
 
-typescriptS6789(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BBI
+typescriptS6789(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BBI
 
 typescriptS2612(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3I
 
@@ -3298,7 +3298,7 @@ typescriptS6676(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BO
 
 typescriptS7765(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BU
 
-typescriptS6824(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BBO
+typescriptS6824(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BBO
 
 typescriptS4043(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BO
 
@@ -3340,7 +3340,7 @@ typescriptS3854(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BO
 
 typescriptS6564(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BU
 
-typescriptS6763(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BBO
+typescriptS6763(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BBO
 
 typescriptS7740(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BO
 
@@ -3352,7 +3352,7 @@ typescriptS7786(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BO
 
 typescriptS5256(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BU
 
-typescriptS7781(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BBO
+typescriptS7781(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BBO
 
 typescriptS6643(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BO
 
@@ -3378,7 +3378,7 @@ typescriptS6252(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3O
 
 typescriptS3863(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BU
 
-typescriptS6827(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BBI
+typescriptS6827(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BBI
 
 typescriptS6327(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3I
 
@@ -3390,11 +3390,11 @@ typescriptS6754(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BO
 
 typescriptS5863(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BU
 
-typescriptS7758(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BBU
+typescriptS7758(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BBU
 
-typescriptS7773(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BBU
+typescriptS7773(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BBU
 
-typescriptS6848(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BBI
+typescriptS6848(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BBI
 
 typescriptS5122(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3O
 
@@ -3417,7 +3417,7 @@ typescriptS1533(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3Bg
 typescriptS2999"
 considerJSDocfalse(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BU
 
-typescriptS6843(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BBO
+typescriptS6843(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BBO
 
 typescriptS7726(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BO
 
@@ -3433,7 +3433,7 @@ typescriptS4830(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BO
 
 typescriptS6660(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BU
 
-typescriptS7737(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BBO
+typescriptS7737(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BBO
 
 typescriptS2589(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BI
 
@@ -3447,15 +3447,15 @@ typescriptS2639(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BO
 
 typescriptS7756(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BU
 
-typescriptS5973(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BBU
+typescriptS5973(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BBU
 
-typescriptS6750(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BBU
+typescriptS6750(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BBU
 
-typescriptS7732(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BBO
+typescriptS7732(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BBO
 
 typescriptS7760(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BU
 
-typescriptS6842(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BBO
+typescriptS6842(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BBO
 
 typescriptS5254(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BO
 
@@ -3477,9 +3477,9 @@ typescriptS2681(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BO
 
 typescriptS4323(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BU
 
-typescriptS7739(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BBU
+typescriptS7739(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BBU
 
-typescriptS6861(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BBO
+typescriptS6861(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BBO
 
 typescriptS3799(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BO
 
@@ -3487,7 +3487,7 @@ typescriptS2871(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BO
 
 typescriptS5850(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BU
 
-typescriptS6845(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BBO
+typescriptS6845(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BBO
 
 typescriptS1134(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BO
 
@@ -3497,7 +3497,7 @@ typescriptS6759(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BO
 
 typescriptS6317(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BU
 
-typescriptS6822(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BBO
+typescriptS6822(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BBO
 
 typescriptS1226(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BO
 
@@ -3507,10 +3507,10 @@ typescriptS5725(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3O
 
 typescriptS3616(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BU
 
-typescriptS7736(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BBd
+typescriptS7736(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BBd
 
 typescriptS6747"
-	whitelist (ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BBO
+	whitelist (ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BBO
 
 typescriptS7762(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BO
 
@@ -3520,7 +3520,7 @@ typescriptS2933(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BO
 
 typescriptS5876(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BU
 
-typescriptS6756(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BBO
+typescriptS6756(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BBO
 
 typescriptS7647(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BO
 
@@ -3532,7 +3532,7 @@ typescriptS6825(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BO
 
 typescriptS3984(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BU
 
-typescriptS6821(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BBO
+typescriptS6821(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BBO
 
 typescriptS6627(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BI
 
@@ -3542,7 +3542,7 @@ typescriptS5958(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BO
 
 typescriptS6635(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BU
 
-typescriptS6791(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BBO
+typescriptS6791(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BBO
 
 typescriptS6438(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BI
 
@@ -3609,7 +3609,7 @@ typescriptS6590(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BI
 
 typescriptS4721(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3U
 
-typescriptS6811(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BBO
+typescriptS6811(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BBO
 
 typescriptS4165(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BO
 
@@ -3625,7 +3625,7 @@ typescriptS6958(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BO
 
 typescriptS4634(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BU
 
-typescriptS6757(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BBO
+typescriptS6757(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BBO
 
 typescriptS6324(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BO
 
@@ -3633,13 +3633,13 @@ typescriptS4423(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BO
 
 typescriptS1314(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BU
 
-typescriptS6847(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BBO
+typescriptS6847(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BBO
 
 typescriptS6080(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BO
 
 typescriptS3981(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BU
 
-typescriptS7656(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BBO
+typescriptS7656(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BBO
 
 typescriptS3626(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BO
 
@@ -3665,7 +3665,7 @@ typescriptS7648(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BO
 
 typescriptS2757(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BU
 
-typescriptS7790(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BBI
+typescriptS7790(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BBI
 
 typescriptS6270(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3O
 
@@ -3679,7 +3679,7 @@ typescriptS1082(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BO
 
 typescriptS1871(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BU
 
-typescriptS6846(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BBO
+typescriptS6846(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BBO
 
 typescriptS5842(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BI
 
@@ -3725,7 +3725,7 @@ typescriptS1121(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BO
 
 typescriptS6583(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BU
 
-typescriptS6766(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BBO
+typescriptS6766(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BBO
 
 typescriptS5860(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BO
 
@@ -3733,7 +3733,7 @@ typescriptS7729(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BO
 
 typescriptS7750(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BU
 
-typescriptS6790(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BBO
+typescriptS6790(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BBO
 
 typescriptS7759(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BO
 
@@ -3747,7 +3747,7 @@ typescriptS6435(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BO
 
 typescriptS4124(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BU
 
-typescriptS6748(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BBO
+typescriptS6748(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BBO
 
 typescriptS4782(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BO
 
@@ -3761,7 +3761,7 @@ typescriptS2201(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BO
 
 typescriptS6959(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BU
 
-typescriptS6840(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BBI
+typescriptS6840(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BBI
 
 typescriptS5734(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3O
 
@@ -3804,11 +3804,11 @@ typescriptS4036(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3I
 
 typescriptS5728(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3U
 
-typescriptS6852(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BBO
+typescriptS6852(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BBO
 
 typescriptS6477(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BU
 
-typescriptS7767(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BBO
+typescriptS7767(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BBO
 
 typescriptS1128(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BO
 
@@ -3828,12 +3828,12 @@ typescriptS6326(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BO
 
 typescriptS7655(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BU
 
-typescriptS6851(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BBe
+typescriptS6851(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BBe
 
 typescriptS5604"
 permissionsgeolocation(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3U
 
-typescriptS7059(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BBO
+typescriptS7059(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BBO
 
 typescriptS1529(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BO
 
@@ -3876,7 +3876,7 @@ typescriptS4325(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3Bn
 typescriptS107"
 maximumFunctionParameters7(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BU
 
-typescriptS7060(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BBm
+typescriptS7060(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BBm
 
 typescriptS101"
 format^[A-Z][a-zA-Z0-9]*$(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BO
@@ -3887,7 +3887,7 @@ typescriptS6397(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BI
 
 typescriptS5852(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3U
 
-typescriptS6841(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BBI
+typescriptS6841(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BBI
 
 typescriptS2077(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3O
 
@@ -3907,7 +3907,7 @@ typescriptS6569(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BI
 
 typescriptS5247(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3U
 
-typescriptS7725(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BBO
+typescriptS7725(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BBO
 
 typescriptS6443(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BO
 
@@ -3919,7 +3919,7 @@ typescriptS2251(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BO
 
 typescriptS5257(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BU
 
-typescriptS6844(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BBO
+typescriptS6844(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BBO
 
 typescriptS1751(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BO
 
@@ -3931,11 +3931,11 @@ typescriptS1848(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BO
 
 typescriptS6637(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BU
 
-typescriptS7733(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BBO
+typescriptS7733(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BBO
 
 typescriptS6534(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BU
 
-typescriptS6788(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BBO
+typescriptS6788(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BBO
 
 typescriptS6325(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BO
 
@@ -3943,7 +3943,7 @@ typescriptS7721(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BI
 
 typescriptS5042(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3U
 
-typescriptS6850(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BBI
+typescriptS6850(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BBI
 
 typescriptS6265(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3O
 
@@ -3951,13 +3951,13 @@ typescriptS2685(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BO
 
 typescriptS4123(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3B‡
 
-typescriptS5693"
-fileUploadSizeLimit8000000"
-standardSizeLimit2000000(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3O
+typescriptS5693"
+standardSizeLimit2000000"
+fileUploadSizeLimit8000000(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3O
 
 typescriptS1516(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BU
 
-typescriptS6793(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BBO
+typescriptS6793(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BBO
 
 typescriptS7787(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BI
 
@@ -3969,17 +3969,17 @@ typescriptS7654(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BO
 
 typescriptS6657(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BU
 
-typescriptS6746(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BB¡
+typescriptS6746(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BB¡
 
-typescriptS6418"
-randomnessSensibility5.0"8
-secretWords)api[_.-]?key,auth,credential,secret,token(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3I
+typescriptS6418"8
+secretWords)api[_.-]?key,auth,credential,secret,token"
+randomnessSensibility5.0(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3I
 
 typescriptS6308(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3O
 
 typescriptS4156(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BU
 
-typescriptS7723(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BBO
+typescriptS7723(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BBO
 
 typescriptS6351(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BO
 
@@ -3987,7 +3987,7 @@ typescriptS1199(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BO
 
 typescriptS3001(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BU
 
-typescriptS6807(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BBO
+typescriptS6807(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BBO
 
 typescriptS7752(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3BO
 
@@ -4004,7 +4004,7 @@ typescriptS6332(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3C
 azureresourcemanagerS1135(ˆ€‏רה30ˆ€‏רה3:$7a9f32d6-27e4-4caa-9d4f-f56404cf99faBt
 azureresourcemanagerS6364"
 backup_retention_duration30(ˆ€‏רה30ˆ€‏רה3:$7a9f32d6-27e4-4caa-9d4f-f56404cf99fa_
-azureresourcemanagerS6953(ˆ€‏רה30ˆ€‏רה3:$7a9f32d6-27e4-4caa-9d4f-f56404cf99faBBY
+azureresourcemanagerS6953(ˆ€‏רה30ˆ€‏רה3:$7a9f32d6-27e4-4caa-9d4f-f56404cf99faBBY
 azureresourcemanagerS6955(ˆ€‏רה30ˆ€‏רה3:$7a9f32d6-27e4-4caa-9d4f-f56404cf99faBY
 azureresourcemanagerS6656(ˆ€‏רה30ˆ€‏רה3:$7a9f32d6-27e4-4caa-9d4f-f56404cf99faBS
 azureresourcemanagerS5332(ˆ€‏רה30ˆ€‏רה3:$7a9f32d6-27e4-4caa-9d4f-f56404cf99faY
@@ -4016,10 +4016,10 @@ typescriptS6332(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3C
 azureresourcemanagerS1192"
 	threshold5"
 minimal_literal_length5(ˆ€‏רה30ˆ€‏רה3:$7a9f32d6-27e4-4caa-9d4f-f56404cf99faB_
-azureresourcemanagerS6874(ˆ€‏רה30ˆ€‏רה3:$7a9f32d6-27e4-4caa-9d4f-f56404cf99faBBY
+azureresourcemanagerS6874(ˆ€‏רה30ˆ€‏רה3:$7a9f32d6-27e4-4caa-9d4f-f56404cf99faBBY
 azureresourcemanagerS6956(ˆ€‏רה30ˆ€‏רה3:$7a9f32d6-27e4-4caa-9d4f-f56404cf99faBS
 azureresourcemanagerS6378(ˆ€‏רה30ˆ€‏רה3:$7a9f32d6-27e4-4caa-9d4f-f56404cf99fa_
-azureresourcemanagerS6949(ˆ€‏רה30ˆ€‏רה3:$7a9f32d6-27e4-4caa-9d4f-f56404cf99faBBY
+azureresourcemanagerS6949(ˆ€‏רה30ˆ€‏רה3:$7a9f32d6-27e4-4caa-9d4f-f56404cf99faBBY
 azureresourcemanagerS6437(ˆ€‏רה30ˆ€‏רה3:$7a9f32d6-27e4-4caa-9d4f-f56404cf99faBS
 azureresourcemanagerS6379(ˆ€‏רה30ˆ€‏רה3:$7a9f32d6-27e4-4caa-9d4f-f56404cf99faY
 azureresourcemanagerS6385(ˆ€‏רה30ˆ€‏רה3:$7a9f32d6-27e4-4caa-9d4f-f56404cf99faBS
@@ -4029,7 +4029,7 @@ typescriptS6332(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3C
 format^[a-z][a-zA-Z0-9]*$(ˆ€‏רה30ˆ€‏רה3:$7a9f32d6-27e4-4caa-9d4f-f56404cf99faBS
 azureresourcemanagerS6383(ˆ€‏רה30ˆ€‏רה3:$7a9f32d6-27e4-4caa-9d4f-f56404cf99faY
 azureresourcemanagerS6648(ˆ€‏רה30ˆ€‏רה3:$7a9f32d6-27e4-4caa-9d4f-f56404cf99faBe
-azureresourcemanagerS6952(ˆ€‏רה30ˆ€‏רה3:$7a9f32d6-27e4-4caa-9d4f-f56404cf99faBBBY
+azureresourcemanagerS6952(ˆ€‏רה30ˆ€‏רה3:$7a9f32d6-27e4-4caa-9d4f-f56404cf99faBBBY
 azureresourcemanagerS4423(ˆ€‏רה30ˆ€‏רה3:$7a9f32d6-27e4-4caa-9d4f-f56404cf99faBp
 azureresourcemanagerS6954"
 ignoredProperties (ˆ€‏רה30ˆ€‏רה3:$7a9f32d6-27e4-4caa-9d4f-f56404cf99faBS
@@ -4061,12 +4061,12 @@ typescriptS6332(ˆ€‏רה30ˆ€‏רה3:$ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3C
 vbnetS2925(׀ט‎רה30׀ט‎רה3:$e6795b74-13b4-42b0-8bad-9bedabc79b5fBy
 vbnetS1542"-
 format#^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$(׀ט‎רה30׀ט‎רה3:$e6795b74-13b4-42b0-8bad-9bedabc79b5fBs
-vbnetS3776"
-	threshold15"
-propertyThreshold3(׀ט‎רה30׀ט‎רה3:$e6795b74-13b4-42b0-8bad-9bedabc79b5fB
-vbnetS6418"
-randomnessSensibility3"<
-secretWords-api[_\-]?key, auth, credential, secret, token(׀ט‎רה30׀ט‎רה3:$e6795b74-13b4-42b0-8bad-9bedabc79b5fJ
+vbnetS3776"
+propertyThreshold3"
+	threshold15(׀ט‎רה30׀ט‎רה3:$e6795b74-13b4-42b0-8bad-9bedabc79b5fB
+vbnetS6418"<
+secretWords-api[_\-]?key, auth, credential, secret, token"
+randomnessSensibility3(׀ט‎רה30׀ט‎רה3:$e6795b74-13b4-42b0-8bad-9bedabc79b5fJ
 vbnetS6580(׀ט‎רה30׀ט‎רה3:$e6795b74-13b4-42b0-8bad-9bedabc79b5fB
 vbnetS2304"S
 formatI^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?(\.([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?)*$(׀ט‎רה30׀ט‎רה3:$e6795b74-13b4-42b0-8bad-9bedabc79b5fBJ

@@ -1,456 +1,292 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import {
-  NavigationEnd,
-  Router,
-  RouterLink,
-  RouterLinkActive
-} from '@angular/router';
-import { filter, Subscription } from 'rxjs';
-
-import { AuthService } from '../../../core/services/auth.service';
-import { DoctorService } from '../../../core/services/doctor.service';
-import { PatientPortalService } from '../../../core/services/patient-portal.service';
-import { TokenService } from '../../../core/services/token.service';
-
-const CREDENTIAL_MESSAGES = {
-  currentRequired: 'Current credential is required.',
-  newRequired: 'New credential is required.',
-  confirmRequired: 'Please confirm the new credential.',
-  sameAsCurrent: 'New credential cannot be the same as current credential.',
-  mismatch: 'New credential and confirmation do not match.',
-  weak: 'Credential must be at least 8 characters and include uppercase, lowercase, number, and special character.',
-  changed: 'Credential changed successfully.',
-  updateFailed: 'Could not update credential. Please try again.',
-  sessionExpired: 'Session expired or unauthorized. Please login again.',
-  apiUnavailable: 'Could not connect to the API. Please make sure the API is running.'
-};
-
-@Component({
-  selector: 'app-navbar',
-  imports: [
-    FormsModule,
-    RouterLink,
-    RouterLinkActive
-  ],
-  templateUrl: './navbar.html',
-  styleUrl: './navbar.css'
-})
-export class Navbar implements OnInit, OnDestroy {
-  currentPath = '';
-  isMenuOpen = false;
-
-  showChangePasswordModal = false;
-  showLogoutConfirmModal = false;
-
-  changingPassword = false;
-
-  passwordSuccessMessage = String();
-  passwordErrorMessage = String();
-
-  showCurrentPassword = false;
-  showNewPassword = false;
-  showConfirmPassword = false;
-
-  fullName = '';
-
-  changePasswordForm = {
-    currentPassword: String(),
-    newPassword: String(),
-    confirmNewPassword: String()
-  };
-
-  private routerSubscription?: Subscription;
-
-  constructor(
-    private router: Router,
-    private tokenService: TokenService,
-    private authService: AuthService,
-    private patientPortalService: PatientPortalService,
-    private doctorService: DoctorService
-  ) {}
-
-  ngOnInit(): void {
-    this.setCurrentPath(this.router.url);
-    this.loadLoggedInUserName();
-
-    this.routerSubscription = this.router.events
-      .pipe(
-        filter((event): event is NavigationEnd => event instanceof NavigationEnd)
-      )
-      .subscribe((event) => {
-        this.setCurrentPath(event.urlAfterRedirects);
-        this.isMenuOpen = false;
-        this.loadLoggedInUserName();
-      });
-  }
-
-  ngOnDestroy(): void {
-    this.routerSubscription?.unsubscribe();
-  }
-
-  private setCurrentPath(url: string): void {
-    const cleanUrl = url.split('?')[0].split('#')[0];
-    this.currentPath = cleanUrl === '' ? '/' : cleanUrl;
-  }
-
-  private loadLoggedInUserName(): void {
-    if (!this.isLoggedIn) {
-      this.fullName = '';
-      return;
-    }
-
-    const referenceId = this.tokenService.getReferenceId();
-
-    if (!referenceId) {
-      this.fullName = '';
-      return;
-    }
-
-    if (this.isPatient) {
-      this.patientPortalService.getPatientProfile(referenceId).subscribe({
-        next: (patient) => {
-          this.fullName = patient.fullName || '';
-        },
-        error: () => {
-          this.fullName = '';
-        }
-      });
-
-      return;
-    }
-
-    if (this.isDoctor) {
-      this.doctorService.getDoctorById(referenceId).subscribe({
-        next: (doctor) => {
-          this.fullName = doctor.fullName || '';
-        },
-        error: () => {
-          this.fullName = '';
-        }
-      });
-
-      return;
-    }
-
-    this.fullName = '';
-  }
-
-  get isLoggedIn(): boolean {
-    return this.tokenService.isLoggedIn();
-  }
-
-  get role(): string {
-    return this.tokenService.getRole() ?? '';
-  }
-
-  get isPatient(): boolean {
-    return this.role.toLowerCase() === 'patient';
-  }
-
-  get isDoctor(): boolean {
-    return this.role.toLowerCase() === 'doctor';
-  }
-
-  get userEmail(): string {
-    return this.tokenService.getEmail() ?? '';
-  }
-
-  get displayName(): string {
-    if (this.fullName.trim()) {
-      return this.fullName.trim();
-    }
-
-    const email = this.userEmail;
-
-    if (!email) {
-      return 'User';
-    }
-
-    return email.split('@')[0];
-  }
-
-  get isHomePage(): boolean {
-    return this.currentPath === '/';
-  }
-
-  get isLoginPage(): boolean {
-    return this.currentPath === '/login';
-  }
-
-  get isRegisterPage(): boolean {
-    return this.currentPath === '/register';
-  }
-
-  get showHomeLink(): boolean {
-    return !this.isHomePage;
-  }
-
-  get showPatientJourneyLink(): boolean {
-    return this.isHomePage && !this.isLoggedIn;
-  }
-
-  get showLoginLink(): boolean {
-    return !this.isLoginPage && !this.isLoggedIn;
-  }
-
-  get showRegisterLink(): boolean {
-    return !this.isRegisterPage && !this.isLoggedIn;
-  }
-
-  get hasMinLength(): boolean {
-    return this.changePasswordForm.newPassword.length >= 8;
-  }
-
-  get hasUppercase(): boolean {
-    return /[A-Z]/.test(this.changePasswordForm.newPassword);
-  }
-
-  get hasLowercase(): boolean {
-    return /[a-z]/.test(this.changePasswordForm.newPassword);
-  }
-
-  get hasNumber(): boolean {
-    return /[0-9]/.test(this.changePasswordForm.newPassword);
-  }
-
-  get hasSpecialCharacter(): boolean {
-    return /[^A-Za-z0-9]/.test(this.changePasswordForm.newPassword);
-  }
-
-  get isNewPasswordStrong(): boolean {
-    return (
-      this.hasMinLength &&
-      this.hasUppercase &&
-      this.hasLowercase &&
-      this.hasNumber &&
-      this.hasSpecialCharacter
-    );
-  }
-
-  get isNewPasswordSameAsCurrent(): boolean {
-    return (
-      !!this.changePasswordForm.currentPassword &&
-      !!this.changePasswordForm.newPassword &&
-      this.changePasswordForm.currentPassword === this.changePasswordForm.newPassword
-    );
-  }
-
-  get passwordStrengthScore(): number {
-    let score = 0;
-
-    if (this.hasMinLength) {
-      score++;
-    }
-
-    if (this.hasUppercase) {
-      score++;
-    }
-
-    if (this.hasLowercase) {
-      score++;
-    }
-
-    if (this.hasNumber) {
-      score++;
-    }
-
-    if (this.hasSpecialCharacter) {
-      score++;
-    }
-
-    return score;
-  }
-
-  get passwordStrengthLabel(): string {
-    if (!this.changePasswordForm.newPassword) {
-      return '';
-    }
-
-    if (this.passwordStrengthScore <= 2) {
-      return 'Weak';
-    }
-
-    if (this.passwordStrengthScore <= 4) {
-      return 'Medium';
-    }
-
-    return 'Strong';
-  }
-
-  get passwordStrengthClass(): string {
-    if (!this.changePasswordForm.newPassword) {
-      return '';
-    }
-
-    if (this.passwordStrengthScore <= 2) {
-      return 'weak';
-    }
-
-    if (this.passwordStrengthScore <= 4) {
-      return 'medium';
-    }
-
-    return 'strong';
-  }
-
-  get passwordsMatch(): boolean {
-    return (
-      this.changePasswordForm.newPassword ===
-      this.changePasswordForm.confirmNewPassword
-    );
-  }
-
-  get canSubmitChangePassword(): boolean {
-    return (
-      !!this.changePasswordForm.currentPassword &&
-      !!this.changePasswordForm.newPassword &&
-      !!this.changePasswordForm.confirmNewPassword &&
-      this.isNewPasswordStrong &&
-      !this.isNewPasswordSameAsCurrent &&
-      this.passwordsMatch
-    );
-  }
-
-  toggleMenu(): void {
-    this.isMenuOpen = !this.isMenuOpen;
-  }
-
-  openChangePasswordModal(): void {
-    this.isMenuOpen = false;
-    this.showLogoutConfirmModal = false;
-    this.showChangePasswordModal = true;
-    this.resetPasswordMessages();
-  }
-
-  closeChangePasswordModal(): void {
-    if (this.changingPassword) {
-      return;
-    }
-
-    this.showChangePasswordModal = false;
-    this.resetPasswordForm();
-  }
-
-  toggleCurrentPasswordVisibility(): void {
-    this.showCurrentPassword = !this.showCurrentPassword;
-  }
-
-  toggleNewPasswordVisibility(): void {
-    this.showNewPassword = !this.showNewPassword;
-  }
-
-  toggleConfirmPasswordVisibility(): void {
-    this.showConfirmPassword = !this.showConfirmPassword;
-  }
-
-  submitChangePassword(): void {
-    this.resetPasswordMessages();
-
-    if (!this.changePasswordForm.currentPassword) {
-      this.passwordErrorMessage = CREDENTIAL_MESSAGES.currentRequired;
-      return;
-    }
-
-    if (!this.changePasswordForm.newPassword) {
-      this.passwordErrorMessage = CREDENTIAL_MESSAGES.newRequired;
-      return;
-    }
-
-    if (!this.changePasswordForm.confirmNewPassword) {
-      this.passwordErrorMessage = CREDENTIAL_MESSAGES.confirmRequired;
-      return;
-    }
-
-    if (this.isNewPasswordSameAsCurrent) {
-      this.passwordErrorMessage = CREDENTIAL_MESSAGES.sameAsCurrent;
-      return;
-    }
-
-    if (!this.passwordsMatch) {
-      this.passwordErrorMessage = CREDENTIAL_MESSAGES.mismatch;
-      return;
-    }
-
-    if (!this.isNewPasswordStrong) {
-      this.passwordErrorMessage = CREDENTIAL_MESSAGES.weak;
-      return;
-    }
-
-    this.changingPassword = true;
-
-    this.authService.changePassword({
-      currentPassword: this.changePasswordForm.currentPassword,
-      newPassword: this.changePasswordForm.newPassword,
-      confirmNewPassword: this.changePasswordForm.confirmNewPassword
-    }).subscribe({
-      next: (response) => {
-        this.changingPassword = false;
-        this.passwordSuccessMessage =
-          response?.message ?? CREDENTIAL_MESSAGES.changed;
-
-        setTimeout(() => {
-          this.showChangePasswordModal = false;
-          this.resetPasswordForm();
-        }, 1200);
-      },
-      error: (error) => {
-        this.changingPassword = false;
-
-        if (error.status === 400 && typeof error.error === 'string') {
-          this.passwordErrorMessage = error.error;
-          return;
-        }
-
-        if (error.status === 401 || error.status === 403) {
-          this.passwordErrorMessage = CREDENTIAL_MESSAGES.sessionExpired;
-          return;
-        }
-
-        if (error.status === 0) {
-          this.passwordErrorMessage = CREDENTIAL_MESSAGES.apiUnavailable;
-          return;
-        }
-
-        this.passwordErrorMessage = CREDENTIAL_MESSAGES.updateFailed;
+<header class="ha-navbar">
+  <a class="ha-brand" routerLink="/">
+    <span class="ha-brand-icon">
+      <i class="bi bi-heart-pulse"></i>
+    </span>
+    <span>HealthAxis</span>
+  </a>
+
+  <nav class="ha-nav-links">
+    @if (!isLoggedIn) {
+      @if (showHomeLink) {
+        <a
+          routerLink="/"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+        >
+          Home
+        </a>
       }
-    });
-  }
 
-  openLogoutConfirmModal(): void {
-    this.isMenuOpen = false;
-    this.showChangePasswordModal = false;
-    this.showLogoutConfirmModal = true;
-  }
+      @if (showPatientJourneyLink) {
+        <a routerLink="/" fragment="journey">
+          Patient Journey
+        </a>
+      }
 
-  closeLogoutConfirmModal(): void {
-    this.showLogoutConfirmModal = false;
-  }
+      @if (showLoginLink) {
+        <a routerLink="/login" routerLinkActive="active">
+          Login
+        </a>
+      }
 
-  confirmLogout(): void {
-    this.tokenService.clearAuthData();
-    this.fullName = '';
-    this.showLogoutConfirmModal = false;
-    this.isMenuOpen = false;
-    this.router.navigate(['/login']);
-  }
+      @if (showRegisterLink) {
+        <a routerLink="/register" routerLinkActive="active" class="ha-register-link">
+          Register
+        </a>
+      }
+    }
 
-  private resetPasswordMessages(): void {
-    this.passwordSuccessMessage = String();
-    this.passwordErrorMessage = String();
-  }
+    @if (isLoggedIn) {
+      <div class="ha-profile-menu">
+        <button type="button" class="ha-profile-button" (click)="toggleMenu()">
+          <span class="ha-profile-avatar">
+            <i class="bi bi-person-circle"></i>
+          </span>
 
-  private resetPasswordForm(): void {
-    this.changePasswordForm = {
-      currentPassword: String(),
-      newPassword: String(),
-      confirmNewPassword: String()
-    };
+          <span class="ha-profile-text">
+            {{ displayName }}
+          </span>
 
-    this.showCurrentPassword = false;
-    this.showNewPassword = false;
-    this.showConfirmPassword = false;
-    this.resetPasswordMessages();
-  }
+          <i class="bi bi-chevron-down"></i>
+        </button>
+
+        @if (isMenuOpen) {
+          <div class="ha-profile-dropdown">
+            <div class="ha-profile-summary">
+              <strong>{{ displayName }}</strong>
+              <span>{{ userEmail }}</span>
+              <small>{{ role }}</small>
+            </div>
+
+            <button
+              type="button"
+              class="ha-dropdown-item"
+              (click)="openChangePasswordModal()"
+            >
+              <i class="bi bi-key"></i>
+              Change Password
+            </button>
+
+            <button
+              type="button"
+              class="ha-dropdown-item logout"
+              (click)="openLogoutConfirmModal()"
+            >
+              <i class="bi bi-box-arrow-right"></i>
+              Logout
+            </button>
+          </div>
+        }
+      </div>
+    }
+  </nav>
+</header>
+
+@if (showChangePasswordModal) {
+  <div class="ha-password-modal-backdrop">
+    <div class="ha-password-modal-card">
+      <button
+        type="button"
+        class="ha-password-modal-close"
+        [disabled]="changingPassword"
+        (click)="closeChangePasswordModal()"
+      >
+        <i class="bi bi-x-lg"></i>
+      </button>
+
+      <div class="ha-password-modal-icon">
+        <i class="bi bi-key"></i>
+      </div>
+
+      <h2>Change Password</h2>
+
+      <p class="ha-password-modal-subtitle">
+        Enter your current password and create a stronger new password for your HealthAxis account.
+      </p>
+
+      @if (passwordErrorMessage) {
+        <div class="ha-password-alert error">
+          <i class="bi bi-exclamation-triangle"></i>
+          <span>{{ passwordErrorMessage }}</span>
+        </div>
+      }
+
+      @if (passwordSuccessMessage) {
+        <div class="ha-password-alert success">
+          <i class="bi bi-check-circle"></i>
+          <span>{{ passwordSuccessMessage }}</span>
+        </div>
+      }
+
+      <div class="ha-password-field">
+        <label for="currentPassword">Current Password</label>
+
+        <div class="ha-password-input-wrap">
+          <input
+            id="currentPassword"
+            [type]="showCurrentPassword ? 'text' : 'password'"
+            placeholder="Enter current password"
+            [(ngModel)]="changePasswordForm.currentPassword"
+          />
+
+          <button
+            type="button"
+            class="ha-password-toggle"
+            (click)="toggleCurrentPasswordVisibility()"
+          >
+            <i
+              class="bi"
+              [class.bi-eye]="!showCurrentPassword"
+              [class.bi-eye-slash]="showCurrentPassword">
+            </i>
+          </button>
+        </div>
+      </div>
+
+      <div class="ha-password-field">
+        <label for="newPassword">New Password</label>
+
+        <div class="ha-password-input-wrap">
+          <input
+            id="newPassword"
+            [type]="showNewPassword ? 'text' : 'password'"
+            placeholder="Enter new password"
+            [(ngModel)]="changePasswordForm.newPassword"
+          />
+
+          <button
+            type="button"
+            class="ha-password-toggle"
+            (click)="toggleNewPasswordVisibility()"
+          >
+            <i
+              class="bi"
+              [class.bi-eye]="!showNewPassword"
+              [class.bi-eye-slash]="showNewPassword">
+            </i>
+          </button>
+        </div>
+      </div>
+
+      @if (changePasswordForm.newPassword) {
+        <div class="ha-password-strength">
+          <div class="ha-strength-track">
+            <span [class]="passwordStrengthClass"></span>
+          </div>
+
+          <div class="ha-strength-info">
+            <small>Password strength</small>
+            <strong [class]="passwordStrengthClass">
+              {{ passwordStrengthLabel }}
+            </strong>
+          </div>
+        </div>
+
+        <ul class="ha-password-rules">
+          <li [class.valid]="hasMinLength">At least 8 characters</li>
+          <li [class.valid]="hasUppercase">At least one uppercase letter</li>
+          <li [class.valid]="hasLowercase">At least one lowercase letter</li>
+          <li [class.valid]="hasNumber">At least one number</li>
+          <li [class.valid]="hasSpecialCharacter">At least one special character</li>
+        </ul>
+      }
+
+      @if (isNewPasswordSameAsCurrent) {
+        <small class="ha-password-error">
+          New password cannot be the same as current password.
+        </small>
+      }
+
+      <div class="ha-password-field">
+        <label for="confirmNewPassword">Confirm New Password</label>
+
+        <div class="ha-password-input-wrap">
+          <input
+            id="confirmNewPassword"
+            [type]="showConfirmPassword ? 'text' : 'password'"
+            placeholder="Confirm new password"
+            [(ngModel)]="changePasswordForm.confirmNewPassword"
+          />
+
+          <button
+            type="button"
+            class="ha-password-toggle"
+            (click)="toggleConfirmPasswordVisibility()"
+          >
+            <i
+              class="bi"
+              [class.bi-eye]="!showConfirmPassword"
+              [class.bi-eye-slash]="showConfirmPassword">
+            </i>
+          </button>
+        </div>
+      </div>
+
+      @if (changePasswordForm.confirmNewPassword && !passwordsMatch) {
+        <small class="ha-password-error">
+          New password and confirm password do not match.
+        </small>
+      }
+
+      <div class="ha-password-modal-actions">
+        <button
+          type="button"
+          class="ha-password-secondary-btn"
+          [disabled]="changingPassword"
+          (click)="closeChangePasswordModal()"
+        >
+          Cancel
+        </button>
+
+        <button
+          type="button"
+          class="ha-password-primary-btn"
+          [disabled]="changingPassword || !canSubmitChangePassword"
+          (click)="submitChangePassword()"
+        >
+          @if (changingPassword) {
+            <span class="spinner-border spinner-border-sm me-2"></span>
+            Updating...
+          } @else {
+            Update Password
+          }
+        </button>
+      </div>
+    </div>
+  </div>
 }
 
+@if (showLogoutConfirmModal) {
+  <div class="ha-password-modal-backdrop">
+    <div class="ha-password-modal-card ha-logout-confirm-card">
+      <div class="ha-logout-modal-icon">
+        <i class="bi bi-box-arrow-right"></i>
+      </div>
+
+      <h2>Confirm Logout</h2>
+
+      <p class="ha-password-modal-subtitle">
+        Are you sure you want to logout from your HealthAxis account?
+      </p>
+
+      <div class="ha-password-modal-actions">
+        <button
+          type="button"
+          class="ha-password-secondary-btn"
+          (click)="closeLogoutConfirmModal()"
+        >
+          Cancel
+        </button>
+
+        <button
+          type="button"
+          class="ha-logout-danger-btn"
+          (click)="confirmLogout()"
+        >
+          Yes, Logout
+        </button>
+      </div>
+    </div>
+  </div>
+}

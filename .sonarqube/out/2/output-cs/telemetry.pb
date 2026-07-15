@@ -1,1 +1,1 @@
-uR^C:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Blazor\S4_HealthAxis.Blazor.csproj¢net10.0òCSharp14
+mRVC:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxisApi\S4_HealthAxisApi.csproj¢net10.0òCSharp14

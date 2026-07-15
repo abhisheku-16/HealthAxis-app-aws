@@ -31,14 +31,7 @@ cC:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Shared\DTOs\Patient
 
  
 
- &Š
-dC:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Shared\DTOs\Patient\PatientSummaryDto.cs
-
- "
-
- 
-
- ›
+ &›
 iC:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Shared\DTOs\Patient\PatientSearchResultDto.cs
 
  '
@@ -122,7 +115,14 @@ gC:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Shared\DTOs\HealthR
 
  #
 
- Ã
+ Š
+dC:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Shared\DTOs\Patient\PatientSummaryDto.cs
+
+ "
+
+ 
+
+ Ã
 mC:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Shared\DTOs\HealthRecord\CreateHealthRecordDto.cs
 
  &
@@ -173,24 +173,22 @@ bC:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Shared\DTOs\Doctor\
 
  $
 
- &½
-[C:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Shared\DTOs\Doctor\DoctorDto.cs
+ &¥
+[C:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Shared\DTOs\Auth\RegisterDto.cs
 
- 
+ 
 
- 
+
+
+ 
 
- 
+ 
 
-		 
+ %
 
- !
+ 
 
- $
-
- &
-
- §
+ §
 iC:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Shared\DTOs\Doctor\DoctorCreationResultDto.cs
 
  (
@@ -252,22 +250,24 @@ bC:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Shared\DTOs\Auth\Re
 
  %
 
-   &¥
-[C:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Shared\DTOs\Auth\RegisterDto.cs
+   &½
+[C:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Shared\DTOs\Doctor\DoctorDto.cs
 
- 
+ 
 
-
-
- 
+ 
 
- 
+ 
 
- %
+		 
 
- 
+ !
 
- y
+ $
+
+ &
+
+ y
 _C:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Shared\DTOs\Auth\RefreshTokenDto.cs
 
   
@@ -292,26 +292,16 @@ XC:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Shared\DTOs\Auth\Lo
 
  
 
-		 Ú
-lC:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Shared\DTOs\Appointment\DoctorScheduleItemDto.cs
+		 “
+aC:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Shared\DTOs\Auth\ChangePasswordDto.cs
 
- &
+ "
 
-  
+ %
 
- %
+ !
 
-		 
-
- 
-
- !
-
- 
-
- )
-
- #µ
+		 (µ
 _C:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Shared\DTOs\Auth\AuthResponseDto.cs
 
   
@@ -359,16 +349,7 @@ sC:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Shared\DTOs\Appoint
 
 
 
- “
-aC:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Shared\DTOs\Auth\ChangePasswordDto.cs
-
- "
-
- %
-
- !
-
-		 (©
+ ©
 kC:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Shared\DTOs\Appointment\CreateAppointmentDto.cs
 
  %
@@ -379,12 +360,70 @@ kC:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Shared\DTOs\Appoint
 
  %
 
- …
+  
+bC:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Shared\DTOs\Admin\UserManagementDto.cs
+
+ "
+
+ 
+
+ 
+
+		 
+
+ ¡
+cC:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Shared\DTOs\Admin\AdminStatisticsDto.cs
+
+ #
+
+ 
+
+ 
+
+		 
+
+  …
 kC:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Shared\DTOs\Appointment\CancelAppointmentDto.cs
 
  %
 
- (Ç
+ (Ú
+lC:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Shared\DTOs\Appointment\DoctorScheduleItemDto.cs
+
+ &
+
+  
+
+ %
+
+		 
+
+ 
+
+ !
+
+ 
+
+ )
+
+ #Ä
+bC:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Shared\DTOs\Admin\AdminDashboardDto.cs
+
+ "
+
+  
+
+ !
+
+		 
+
+  
+
+ $
+
+ &
+
+ (Ç
 eC:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Shared\DTOs\Appointment\AppointmentDto.cs
 
  
@@ -426,43 +465,4 @@ lC:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Shared\DTOs\Appoint
 
  
 
- ) 
-bC:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Shared\DTOs\Admin\UserManagementDto.cs
-
- "
-
- 
-
- 
-
-		 
-
- ¡
-cC:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Shared\DTOs\Admin\AdminStatisticsDto.cs
-
- #
-
- 
-
- 
-
-		 
-
-  Ä
-bC:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Shared\DTOs\Admin\AdminDashboardDto.cs
-
- "
-
-  
-
- !
-
-		 
-
-  
-
- $
-
- &
-
- (
+ )

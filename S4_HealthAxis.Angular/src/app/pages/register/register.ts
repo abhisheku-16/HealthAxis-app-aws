@@ -62,8 +62,8 @@ export class Register {
   };
 
   constructor(
-    private authService: AuthService,
-    private router: Router
+    private readonly authService: AuthService,
+    private readonly router: Router
   ) {}
 
   markTouched(field: keyof typeof this.touched): void {
@@ -146,7 +146,7 @@ export class Register {
       score++;
     }
 
-    if (/[0-9]/.test(this.form.password)) {
+    if (/[\d]/.test(this.form.password)) {
       score++;
     }
 

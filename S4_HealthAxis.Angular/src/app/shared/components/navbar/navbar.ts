@@ -63,11 +63,11 @@ export class Navbar implements OnInit, OnDestroy {
   private routerSubscription?: Subscription;
 
   constructor(
-    private router: Router,
-    private tokenService: TokenService,
-    private authService: AuthService,
-    private patientPortalService: PatientPortalService,
-    private doctorService: DoctorService
+    private readonly router: Router,
+    private readonly tokenService: TokenService,
+    private readonly authService: AuthService,
+    private readonly patientPortalService: PatientPortalService,
+    private readonly doctorService: DoctorService
   ) {}
 
   ngOnInit(): void {
@@ -211,7 +211,7 @@ export class Navbar implements OnInit, OnDestroy {
   }
 
   get hasNumber(): boolean {
-    return /[0-9]/.test(this.changePasswordForm.newPassword);
+    return /[\d]/.test(this.changePasswordForm.newPassword);
   }
 
   get hasSpecialCharacter(): boolean {

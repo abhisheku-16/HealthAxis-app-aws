@@ -1,4 +1,4 @@
-áñÄ£ö3S4_HealthAxis(:R
+¹ÊÀ¥ö3S4_HealthAxis(:R
 
 kubernetesD
 $8e62d5a1-10ca-4d79-bbc1-d22378ec7980	Sonar way
@@ -68,9 +68,10 @@ $ff2a7a0d-4ea3-4ddb-b1f5-ac6ebad365b3	Sonar wayts ˆ€şøä3B
 
 javascript
 
-javascriptöŠşøä3j(ababdd389f5b726e7001cc115c07885b3bad4c91²
+javascriptöŠşøä3j(06bfc750d8fb89573624ae6608fcb9403272eb6a²
 csy²
-json²
+json²
+js²
 html²
 ts8º
 pngº

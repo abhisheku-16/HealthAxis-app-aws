@@ -1,1 +1,1 @@
-× 2webXÒhrHS4_HealthAxis.Angular/src/app/pages/patient-profile/patient-profile.html
+× 2webXÒhrHS4_HealthAxis.Angular/src/app/pages/patient-profile/patient-profile.html

@@ -2613,193 +2613,7 @@ lC:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Shared\DTOs\Appoint
 ;. /
 }0 1
 } 
-} ù
-kC:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Shared\DTOs\Appointment\CreateAppointmentDto.cs
-	namespace 	
-S4_HealthAxis
- 
-. 
-Shared 
-. 
-DTOs #
-.# $
-Appointment$ /
-{ 
-public 
-
-class  
-CreateAppointmentDto %
-{ 
-public 
-int 
-	PatientId 
-{ 
-get "
-;" #
-set$ '
-;' (
-}) *
-public 
-int 
-DoctorId 
-{ 
-get !
-;! "
-set# &
-;& '
-}( )
-public 
-DateOnly 
-ScheduledDate %
-{& '
-get( +
-;+ ,
-set- 0
-;0 1
-}2 3
-public 
-int 
-TimeSlot 
-{ 
-get !
-;! "
-set# &
-;& '
-}( )
-}		 
-} „
-kC:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Shared\DTOs\Appointment\CancelAppointmentDto.cs
-	namespace 	
-S4_HealthAxis
- 
-. 
-Shared 
-. 
-DTOs #
-.# $
-Appointment$ /
-{ 
-public 
-
-class  
-CancelAppointmentDto %
-{ 
-public 
-string 
-CancellationReason (
-{) *
-get+ .
-;. /
-set0 3
-;3 4
-}5 6
-=7 8
-string9 ?
-.? @
-Empty@ E
-;E F
-} 
-} ×
-eC:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Shared\DTOs\Appointment\AppointmentDto.cs
-	namespace 	
-S4_HealthAxis
- 
-. 
-Shared 
-. 
-DTOs #
-.# $
-Appointment$ /
-{ 
-public 
-
-class 
-AppointmentDto 
-{ 
-public 
-int 
-AppointmentId  
-{! "
-get# &
-;& '
-set( +
-;+ ,
-}- .
-public 
-int 
-	PatientId 
-{ 
-get "
-;" #
-set$ '
-;' (
-}) *
-public 
-int 
-DoctorId 
-{ 
-get !
-;! "
-set# &
-;& '
-}( )
-public 
-DateOnly 
-ScheduledDate %
-{& '
-get( +
-;+ ,
-set- 0
-;0 1
-}2 3
-public		 
-int		 
-TimeSlot		 
-{		 
-get		 !
-;		! "
-set		# &
-;		& '
-}		( )
-public
-
- 
-int
-
- 
-Status
-
- 
-{
-
- 
-get
-
- 
-;
-
-  
-set
-
-! $
-;
-
-$ %
-}
-
-& '
-public 
-string 
-? 
-CancellationReason )
-{* +
-get, /
-;/ 0
-set1 4
-;4 5
-}6 7
-} 
-} Ê
+} Ê
 lC:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Shared\DTOs\Appointment\AppointmentDetailsDto.cs
 	namespace 	
 S4_HealthAxis
@@ -2928,7 +2742,61 @@ DoctorName		  
 ;4 5
 }6 7
 } 
-} ‚	
+} ù
+kC:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Shared\DTOs\Appointment\CreateAppointmentDto.cs
+	namespace 	
+S4_HealthAxis
+ 
+. 
+Shared 
+. 
+DTOs #
+.# $
+Appointment$ /
+{ 
+public 
+
+class  
+CreateAppointmentDto %
+{ 
+public 
+int 
+	PatientId 
+{ 
+get "
+;" #
+set$ '
+;' (
+}) *
+public 
+int 
+DoctorId 
+{ 
+get !
+;! "
+set# &
+;& '
+}( )
+public 
+DateOnly 
+ScheduledDate %
+{& '
+get( +
+;+ ,
+set- 0
+;0 1
+}2 3
+public 
+int 
+TimeSlot 
+{ 
+get !
+;! "
+set# &
+;& '
+}( )
+}		 
+} ‚	
 bC:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Shared\DTOs\Admin\UserManagementDto.cs
 	namespace 	
 S4_HealthAxis
@@ -3046,7 +2914,39 @@ cC:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Shared\DTOs\Admin\A
 ;+ ,
 }- .
 } 
-} Ü
+} „
+kC:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Shared\DTOs\Appointment\CancelAppointmentDto.cs
+	namespace 	
+S4_HealthAxis
+ 
+. 
+Shared 
+. 
+DTOs #
+.# $
+Appointment$ /
+{ 
+public 
+
+class  
+CancelAppointmentDto %
+{ 
+public 
+string 
+CancellationReason (
+{) *
+get+ .
+;. /
+set0 3
+;3 4
+}5 6
+=7 8
+string9 ?
+.? @
+Empty@ E
+;E F
+} 
+} Ü
 bC:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Shared\DTOs\Admin\AdminDashboardDto.cs
 	namespace 	
 S4_HealthAxis
@@ -3127,4 +3027,104 @@ bC:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Shared\DTOs\Admin\A
 ;3 4
 }5 6
 } 
-} 
+} ×
+eC:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Shared\DTOs\Appointment\AppointmentDto.cs
+	namespace 	
+S4_HealthAxis
+ 
+. 
+Shared 
+. 
+DTOs #
+.# $
+Appointment$ /
+{ 
+public 
+
+class 
+AppointmentDto 
+{ 
+public 
+int 
+AppointmentId  
+{! "
+get# &
+;& '
+set( +
+;+ ,
+}- .
+public 
+int 
+	PatientId 
+{ 
+get "
+;" #
+set$ '
+;' (
+}) *
+public 
+int 
+DoctorId 
+{ 
+get !
+;! "
+set# &
+;& '
+}( )
+public 
+DateOnly 
+ScheduledDate %
+{& '
+get( +
+;+ ,
+set- 0
+;0 1
+}2 3
+public		 
+int		 
+TimeSlot		 
+{		 
+get		 !
+;		! "
+set		# &
+;		& '
+}		( )
+public
+
+ 
+int
+
+ 
+Status
+
+ 
+{
+
+ 
+get
+
+ 
+;
+
+  
+set
+
+! $
+;
+
+$ %
+}
+
+& '
+public 
+string 
+? 
+CancellationReason )
+{* +
+get, /
+;/ 0
+set1 4
+;4 5
+}6 7
+} 
+} 

@@ -4,7 +4,7 @@
 "csharp.cs.target_framework.net10_04
 text.civendor_semaphore0!
 text.civendor_azurepipelines0 
-text.analyzed_files_count210T
+text.analyzed_files_count227T
 Odotnetenterprise.s4net.build.target_framework_moniker._netcoreapp_version_v10_046
 )dotnetenterprise.s4net.serverInfo.product	SQ_Server<
 5dotnetenterprise.s4net.params.sonar_exclusions.sourceCLI
@@ -26,7 +26,7 @@ $dotnetenterprise.s4net.begin.runtimenetcore5
 )javascript.runtime.node-executable-originembedded
 text.civendor_gitlab0
 text.civendor_travisci0%
-text.sensor_time_ms_community1318=
+text.sensor_time_ms_community5534=
 2dotnetenterprise.s4net.scannerEngine.bootstrappingEnabled:
 2dotnetenterprise.s4net.build.visual_studio_version18.0;
 2dotnetenterprise.s4net.endstep.coverage_conversionfalse@
@@ -40,7 +40,7 @@ Adotnetenterprise.s4net.build.sonar_properties_in_project_file.cntset:
 <dotnetenterprise.s4net.build.override_warnings_as_errors.cnttrue(
 #csharp.cs.language_version.csharp144Q
 Gdotnetenterprise.s4net.params.sonar_cs_vscoveragexml_reportspaths.valuerooted(
-!text.all_tracked_text_files_count232/
+!text.all_tracked_text_files_count249/
 #dotnetenterprise.s4net.jre.downloadCacheHit6
 ,dotnetenterprise.s4net.build.msbuild_version18.6.43
 (dotnetenterprise.s4net.jre.bootstrappingEnabled

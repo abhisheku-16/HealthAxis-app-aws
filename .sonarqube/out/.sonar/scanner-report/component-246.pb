@@ -1,1 +1,1 @@
-ö (2tsXhrES4_HealthAxis.Angular/src/app/shared/components/navbar/navbar.spec.ts
+ö (2tsXhr)S4_HealthAxis.Angular/src/app/app.spec.ts
