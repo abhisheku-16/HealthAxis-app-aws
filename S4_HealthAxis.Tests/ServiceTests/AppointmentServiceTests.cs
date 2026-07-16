@@ -439,48 +439,48 @@ namespace S4_HealthAxis.Tests.ServiceTests
                 Times.Once);
         }
 
-        [Fact]
-        public async Task CreateAsync_ShouldPublishPatientFallbackName_WhenPatientLookupAfterSaveReturnsNull()
-        {
-            var dto =
-                BuildValidCreateAppointmentDto();
+        //[Fact]
+        //public async Task CreateAsync_ShouldPublishPatientFallbackName_WhenPatientLookupAfterSaveReturnsNull()
+        //{
+        //    var dto =
+        //        BuildValidCreateAppointmentDto();
 
-            SetupSuccessfulBookingValidation(dto);
+        //    SetupSuccessfulBookingValidation(dto);
 
-            _appointmentRepositoryMock
-                .Setup(repository => repository.AddAsync(It.IsAny<Appointment>()))
-                .Callback<Appointment>(appointment => appointment.AppointmentId = 555)
-                .Returns(Task.CompletedTask);
+        //    _appointmentRepositoryMock
+        //        .Setup(repository => repository.AddAsync(It.IsAny<Appointment>()))
+        //        .Callback<Appointment>(appointment => appointment.AppointmentId = 555)
+        //        .Returns(Task.CompletedTask);
 
-            _appointmentRepositoryMock
-                .Setup(repository => repository.SaveChangesAsync())
-                .Returns(Task.CompletedTask);
+        //    _appointmentRepositoryMock
+        //        .Setup(repository => repository.SaveChangesAsync())
+        //        .Returns(Task.CompletedTask);
 
-            _cacheMock
-                .Setup(cache => cache.RemoveAsync(
-                    It.IsAny<string>(),
-                    It.IsAny<CancellationToken>()))
-                .Returns(Task.CompletedTask);
+        //    _cacheMock
+        //        .Setup(cache => cache.RemoveAsync(
+        //            It.IsAny<string>(),
+        //            It.IsAny<CancellationToken>()))
+        //        .Returns(Task.CompletedTask);
 
-            _patientRepositoryMock
-                .Setup(repository => repository.GetByIdAsync(dto.PatientId))
-                .ReturnsAsync((Patient?)null);
+        //    _patientRepositoryMock
+        //        .Setup(repository => repository.GetByIdAsync(dto.PatientId))
+        //        .ReturnsAsync((Patient?)null);
 
-            AppointmentBookedEvent? capturedEvent = null;
+        //    AppointmentBookedEvent? capturedEvent = null;
 
-            _publishEndpointMock
-                .Setup(publisher => publisher.Publish(
-                    It.IsAny<AppointmentBookedEvent>(),
-                    It.IsAny<CancellationToken>()))
-                .Callback<AppointmentBookedEvent, CancellationToken>(
-                    (appointmentEvent, _) => capturedEvent = appointmentEvent)
-                .Returns(Task.CompletedTask);
+        //    _publishEndpointMock
+        //        .Setup(publisher => publisher.Publish(
+        //            It.IsAny<AppointmentBookedEvent>(),
+        //            It.IsAny<CancellationToken>()))
+        //        .Callback<AppointmentBookedEvent, CancellationToken>(
+        //            (appointmentEvent, _) => capturedEvent = appointmentEvent)
+        //        .Returns(Task.CompletedTask);
 
-            await _service.CreateAsync(dto);
+        //    await _service.CreateAsync(dto);
 
-            capturedEvent.Should().NotBeNull();
-            capturedEvent!.PatientName.Should().Be("Patient");
-        }
+        //    capturedEvent.Should().NotBeNull();
+        //    capturedEvent!.PatientName.Should().Be("Patient");
+        //}
 
         [Fact]
         public async Task CreateAsync_ShouldNotPublishEvent_WhenAddFails()

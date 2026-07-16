@@ -2992,60 +2992,6 @@ bC:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Shared\DTOs\Admin\U
 ;' (
 }) *
 } 
-} æ
-cC:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Shared\DTOs\Admin\AdminStatisticsDto.cs
-	namespace 	
-S4_HealthAxis
- 
-. 
-Shared 
-. 
-DTOs #
-.# $
-Admin$ )
-{ 
-public 
-
-class 
-AdminStatisticsDto #
-{ 
-public 
-int 
-Patients 
-{ 
-get !
-;! "
-set# &
-;& '
-}( )
-public 
-int 
-Doctors 
-{ 
-get  
-;  !
-set" %
-;% &
-}' (
-public		 
-int		 
-Appointments		 
-{		  !
-get		" %
-;		% &
-set		' *
-;		* +
-}		, -
-public 
-int 
-HealthRecords  
-{! "
-get# &
-;& '
-set( +
-;+ ,
-}- .
-} 
 } Ü
 bC:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Shared\DTOs\Admin\AdminDashboardDto.cs
 	namespace 	
@@ -3127,4 +3073,58 @@ bC:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Shared\DTOs\Admin\A
 ;3 4
 }5 6
 } 
-} 
+} æ
+cC:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Shared\DTOs\Admin\AdminStatisticsDto.cs
+	namespace 	
+S4_HealthAxis
+ 
+. 
+Shared 
+. 
+DTOs #
+.# $
+Admin$ )
+{ 
+public 
+
+class 
+AdminStatisticsDto #
+{ 
+public 
+int 
+Patients 
+{ 
+get !
+;! "
+set# &
+;& '
+}( )
+public 
+int 
+Doctors 
+{ 
+get  
+;  !
+set" %
+;% &
+}' (
+public		 
+int		 
+Appointments		 
+{		  !
+get		" %
+;		% &
+set		' *
+;		* +
+}		, -
+public 
+int 
+HealthRecords  
+{! "
+get# &
+;& '
+set( +
+;+ ,
+}- .
+} 
+} 

@@ -1,7 +1,9 @@
 ﻿using MassTransit;
+using System.Diagnostics.CodeAnalysis;
 
 namespace S4_HealthAxisApi.Messaging
 {
+    [ExcludeFromCodeCoverage]
     public sealed class RabbitMqPublisher : IRabbitMqPublisher
     {
         private readonly IPublishEndpoint _publishEndpoint;

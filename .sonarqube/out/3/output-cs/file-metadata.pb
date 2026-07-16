@@ -6,8 +6,8 @@ yC:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Tests\obj\Debug\net
 lC:\Users\287766\.nuget\packages\microsoft.net.test.sdk\18.6.0\build\net8.0\Microsoft.NET.Test.Sdk.Program.csutf-8k
 bC:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Tests\ServiceTests\UserServiceTests.csutf-8n
 eC:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Tests\ServiceTests\PatientServiceTests.csutf-8s
-jC:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Tests\ServiceTests\HealthRecordServiceTests.csutf-8l
-cC:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Tests\ServiceTests\AdminServiceTests.csutf-8m
+jC:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Tests\ServiceTests\HealthRecordServiceTests.csutf-8m
 dC:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Tests\ServiceTests\DoctorServiceTests.csutf-8k
-bC:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Tests\ServiceTests\AuthServiceTests.csutf-8r
+bC:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Tests\ServiceTests\AuthServiceTests.csutf-8l
+cC:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Tests\ServiceTests\AdminServiceTests.csutf-8r
 iC:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Tests\ServiceTests\AppointmentServiceTests.csutf-8

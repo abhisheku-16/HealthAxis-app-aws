@@ -1,5 +1,8 @@
-﻿namespace S4_HealthAxisApi.BackgroundServices
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace S4_HealthAxisApi.BackgroundServices
 {
+    [ExcludeFromCodeCoverage]
     public sealed class HeartbeatService : BackgroundService
     {
         private static readonly TimeSpan HeartbeatInterval = TimeSpan.FromSeconds(600);

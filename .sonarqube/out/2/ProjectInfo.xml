@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ProjectInfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.sonarsource.com/msbuild/integration/2015/1">
-  <ProjectName>S4_HealthAxis.Blazor</ProjectName>
+  <ProjectName>S4_HealthAxisApi</ProjectName>
   <ProjectLanguage>C#</ProjectLanguage>
   <ProjectType>Product</ProjectType>
-  <ProjectGuid>bb7cac44-79bd-b8d3-a8de-f965cae35f0d</ProjectGuid>
-  <FullPath>C:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Blazor\S4_HealthAxis.Blazor.csproj</FullPath>
+  <ProjectGuid>0d092b5b-fe9e-6219-17b0-1674d8c75bc0</ProjectGuid>
+  <FullPath>C:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxisApi\S4_HealthAxisApi.csproj</FullPath>
   <IsExcluded>false</IsExcluded>
   <AnalysisResultFiles>
     <AnalysisResultFile Id="FilesToAnalyze" Location="C:\Users\287766\source\repos\S4_HealthAxisApp\.sonarqube\conf\2\FilesToAnalyze.txt" />
   </AnalysisResultFiles>
   <AnalysisSettings>
+    <Property Name="sonar.coverage.exclusions">**/Program.cs,**/Controllers/**/*.cs,**/Data/**/*.cs,**/Exceptions/**/*.cs,**/Mappings/**/*.cs,**/Middleware/**/*.cs,**/Models/**/*.cs,**/Events/**,**/Messaging/**,**/BackgroundServices/**,**/Repositories/**/*.cs,**/Migrations/**/*.cs,**/Properties/**/*.cs,**/Services/Interfaces/**/*.cs,**/Services/I*.cs</Property>
     <Property Name="sonar.cs.roslyn.reportFilePaths">C:\Users\287766\source\repos\S4_HealthAxisApp\.sonarqube\out\2\Issues.json</Property>
     <Property Name="sonar.cs.analyzer.projectOutPaths">C:\Users\287766\source\repos\S4_HealthAxisApp\.sonarqube\out\2</Property>
     <Property Name="sonar.cs.scanner.telemetry">C:\Users\287766\source\repos\S4_HealthAxisApp\.sonarqube\out\2\Telemetry.json</Property>

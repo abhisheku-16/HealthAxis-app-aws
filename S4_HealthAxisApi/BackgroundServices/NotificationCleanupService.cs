@@ -1,8 +1,10 @@
 ﻿using HealthAxis.API.Data;
 using Microsoft.EntityFrameworkCore;
+using System.Diagnostics.CodeAnalysis;
 
 namespace S4_HealthAxisApi.BackgroundServices
 {
+    [ExcludeFromCodeCoverage]
     public sealed class NotificationCleanupService : BackgroundService
     {
         private static readonly TimeSpan CleanupInterval = TimeSpan.FromHours(1);

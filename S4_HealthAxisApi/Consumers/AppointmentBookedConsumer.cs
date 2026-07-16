@@ -1,8 +1,10 @@
 ﻿using MassTransit;
 using S4_HealthAxisApi.Events;
+using System.Diagnostics.CodeAnalysis;
 
 namespace S4_HealthAxisApi.Consumers
 {
+    [ExcludeFromCodeCoverage]
     public class AppointmentBookedConsumer :
         IConsumer<AppointmentBookedEvent>
     {

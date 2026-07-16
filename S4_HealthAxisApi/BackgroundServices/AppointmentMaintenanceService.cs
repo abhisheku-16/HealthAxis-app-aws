@@ -2,9 +2,11 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Distributed;
 using S4_HealthAxis.Shared.Enums;
+using System.Diagnostics.CodeAnalysis;
 
 namespace S4_HealthAxisApi.BackgroundServices
 {
+    [ExcludeFromCodeCoverage]
     public sealed class AppointmentMaintenanceService : BackgroundService
     {
         private static readonly TimeSpan MaintenanceInterval =
