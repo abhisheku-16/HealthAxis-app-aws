@@ -292,6 +292,8 @@ app.UseCors("BlazorPolicy");
 
 app.UseAuthentication();
 
+app.UseMiddleware<SecurityAuditMiddleware>();
+
 app.UseAuthorization();
 
 app.MapControllers();

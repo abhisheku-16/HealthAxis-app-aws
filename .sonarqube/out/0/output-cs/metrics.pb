@@ -1,8 +1,8 @@
 a
-TC:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Shared\Enums\UserRole.csr		w
-TC:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Shared\Enums\TimeSlot.csr	
-!"$%'()*Ä
-iC:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Shared\DTOs\Patient\PatientSearchResultDto.cs 8r		Ç`
+TC:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Shared\Enums\UserRole.csr		â
+cC:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Shared\DTOs\Patient\UpdatePatientDto.cs 8r	Ç	j
+[C:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Shared\Enums\InsuranceStatus.csr	
+`
 RC:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Shared\Enums\Gender.csr
 	
 
@@ -10,11 +10,11 @@ RC:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Shared\Enums\Gender
 !"#$k
 ]C:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Shared\Enums\AppointmentStatus.csr
 	
-â
-cC:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Shared\DTOs\Patient\UpdatePatientDto.cs 8r	Ç	z
-dC:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Shared\DTOs\Patient\PatientSummaryDto.cs 8r	Çj
-[C:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Shared\Enums\InsuranceStatus.csr	
-{
+w
+TC:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Shared\Enums\TimeSlot.csr	
+!"$%'()*z
+dC:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Shared\DTOs\Patient\PatientSummaryDto.cs 8r	ÇÄ
+iC:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Shared\DTOs\Patient\PatientSearchResultDto.cs 8r		Ç{
 ]C:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Shared\DTOs\Patient\PatientDto.cs 8r	
 Çz
 gC:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Shared\DTOs\Patient\DeactivatePatientDto.cs 8r		
@@ -53,23 +53,23 @@ XC:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Shared\DTOs\Auth\Lo
 r	
 Çz
 aC:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Shared\DTOs\Auth\ChangePasswordDto.cs 8r		
-Ç	É
-qC:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Shared\DTOs\Appointment\UpdateAppointmentStatusDto.cs 8r	|
-_C:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Shared\DTOs\Auth\AuthResponseDto.cs 8r	Ç	~
+Ç	|
+_C:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Shared\DTOs\Auth\AuthResponseDto.cs 8r	Ç	É
+qC:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Shared\DTOs\Appointment\UpdateAppointmentStatusDto.cs 8r	~
 kC:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Shared\DTOs\Appointment\UpdateAppointmentDto.cs 8r	
 ç
 sC:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Shared\DTOs\Appointment\PatientAppointmentHistoryDto.cs 8r	
-Ç	ä
-lC:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Shared\DTOs\Appointment\AppointmentDetailsDto.cs 8r	
-Ç	|
-eC:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Shared\DTOs\Appointment\AppointmentDto.cs 8r	
-{
-bC:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Shared\DTOs\Admin\UserManagementDto.cs 8r
-	Ç	à
-lC:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Shared\DTOs\Appointment\DoctorScheduleItemDto.cs 8r	Ç
+Ç	
 kC:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Shared\DTOs\Appointment\CreateAppointmentDto.cs 8r
-	w
+	|
+eC:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Shared\DTOs\Appointment\AppointmentDto.cs 8r	
+à
+lC:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Shared\DTOs\Appointment\DoctorScheduleItemDto.cs 8r	Çä
+lC:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Shared\DTOs\Appointment\AppointmentDetailsDto.cs 8r	
+Ç	Ä
+kC:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Shared\DTOs\Appointment\CancelAppointmentDto.cs 8rÇy
+bC:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Shared\DTOs\Admin\AdminDashboardDto.cs 8r	w
 cC:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Shared\DTOs\Admin\AdminStatisticsDto.cs 8r
-	y
-bC:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Shared\DTOs\Admin\AdminDashboardDto.cs 8r	Ä
-kC:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Shared\DTOs\Appointment\CancelAppointmentDto.cs 8rÇ
+	{
+bC:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Shared\DTOs\Admin\UserManagementDto.cs 8r
+	Ç	

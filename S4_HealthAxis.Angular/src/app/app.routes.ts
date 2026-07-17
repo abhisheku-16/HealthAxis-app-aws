@@ -4,7 +4,13 @@ import { authGuard } from './core/guards/auth.guard';
 import { roleGuard } from './core/guards/role.guard';
 import { doctorPasswordGuard } from './core/guards/doctor-password.guard';
 
+import { ForbiddenComponent } from './pages/forbidden/forbidden';
+
 export const routes: Routes = [
+  {
+    path: 'forbidden',
+    component: ForbiddenComponent
+  },
   {
     path: '',
     loadComponent: () =>
@@ -151,4 +157,3 @@ export const routes: Routes = [
     redirectTo: ''
   }
 ];
-

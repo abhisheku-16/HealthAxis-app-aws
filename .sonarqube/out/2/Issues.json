@@ -729,18 +729,18 @@
           }
         },
         {
-          "ruleId": "S1192",
+          "ruleId": "S4136",
           "level": "warning",
-          "message": "Define a constant instead of using this literal 'Patient' 6 times.",
+          "message": "All 'ExistsSamePatientSameDoctorSameDateAsync' method overloads should be adjacent.",
           "locations": [
             {
               "resultFile": {
-                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/Controllers/AppointmentController.cs",
+                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/Repositories/Interface/IAppointmentRepository.cs",
                 "region": {
-                  "startLine": 42,
-                  "startColumn": 31,
-                  "endLine": 42,
-                  "endColumn": 40
+                  "startLine": 14,
+                  "startColumn": 20,
+                  "endLine": 14,
+                  "endColumn": 60
                 }
               }
             }
@@ -748,56 +748,12 @@
           "relatedLocations": [
             {
               "physicalLocation": {
-                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/Controllers/AppointmentController.cs",
+                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/Repositories/Interface/IAppointmentRepository.cs",
                 "region": {
-                  "startLine": 61,
-                  "startColumn": 31,
-                  "endLine": 61,
-                  "endColumn": 40
-                }
-              }
-            },
-            {
-              "physicalLocation": {
-                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/Controllers/AppointmentController.cs",
-                "region": {
-                  "startLine": 127,
-                  "startColumn": 35,
-                  "endLine": 127,
-                  "endColumn": 44
-                }
-              }
-            },
-            {
-              "physicalLocation": {
-                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/Controllers/AppointmentController.cs",
-                "region": {
-                  "startLine": 176,
-                  "startColumn": 35,
-                  "endLine": 176,
-                  "endColumn": 44
-                }
-              }
-            },
-            {
-              "physicalLocation": {
-                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/Controllers/AppointmentController.cs",
-                "region": {
-                  "startLine": 262,
-                  "startColumn": 31,
-                  "endLine": 262,
-                  "endColumn": 40
-                }
-              }
-            },
-            {
-              "physicalLocation": {
-                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/Controllers/AppointmentController.cs",
-                "region": {
-                  "startLine": 295,
-                  "startColumn": 35,
-                  "endLine": 295,
-                  "endColumn": 44
+                  "startLine": 18,
+                  "startColumn": 20,
+                  "endLine": 18,
+                  "endColumn": 60
                 }
               }
             }
@@ -805,11 +761,81 @@
           "properties": {
             "warningLevel": 1,
             "customProperties": {
-              "0": null,
-              "1": null,
-              "2": null,
-              "3": null,
-              "4": null
+              "0": "Non-adjacent overload"
+            }
+          }
+        },
+        {
+          "ruleId": "S4136",
+          "level": "warning",
+          "message": "All 'ExistsSamePatientSameSlotSameDateAsync' method overloads should be adjacent.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/Repositories/Interface/IAppointmentRepository.cs",
+                "region": {
+                  "startLine": 15,
+                  "startColumn": 20,
+                  "endLine": 15,
+                  "endColumn": 58
+                }
+              }
+            }
+          ],
+          "relatedLocations": [
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/Repositories/Interface/IAppointmentRepository.cs",
+                "region": {
+                  "startLine": 20,
+                  "startColumn": 20,
+                  "endLine": 20,
+                  "endColumn": 58
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1,
+            "customProperties": {
+              "0": "Non-adjacent overload"
+            }
+          }
+        },
+        {
+          "ruleId": "S4136",
+          "level": "warning",
+          "message": "All 'ExistsSameDoctorSameSlotSameDateAsync' method overloads should be adjacent.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/Repositories/Interface/IAppointmentRepository.cs",
+                "region": {
+                  "startLine": 16,
+                  "startColumn": 20,
+                  "endLine": 16,
+                  "endColumn": 57
+                }
+              }
+            }
+          ],
+          "relatedLocations": [
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/Repositories/Interface/IAppointmentRepository.cs",
+                "region": {
+                  "startLine": 22,
+                  "startColumn": 20,
+                  "endLine": 22,
+                  "endColumn": 57
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1,
+            "customProperties": {
+              "0": "Non-adjacent overload"
             }
           }
         },
@@ -925,18 +951,18 @@
           }
         },
         {
-          "ruleId": "S4136",
+          "ruleId": "S1192",
           "level": "warning",
-          "message": "All 'ExistsSamePatientSameDoctorSameDateAsync' method overloads should be adjacent.",
+          "message": "Define a constant instead of using this literal 'Patient' 6 times.",
           "locations": [
             {
               "resultFile": {
-                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/Repositories/Interface/IAppointmentRepository.cs",
+                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/Controllers/AppointmentController.cs",
                 "region": {
-                  "startLine": 14,
-                  "startColumn": 20,
-                  "endLine": 14,
-                  "endColumn": 60
+                  "startLine": 42,
+                  "startColumn": 31,
+                  "endLine": 42,
+                  "endColumn": 40
                 }
               }
             }
@@ -944,86 +970,56 @@
           "relatedLocations": [
             {
               "physicalLocation": {
-                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/Repositories/Interface/IAppointmentRepository.cs",
+                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/Controllers/AppointmentController.cs",
                 "region": {
-                  "startLine": 18,
-                  "startColumn": 20,
-                  "endLine": 18,
-                  "endColumn": 60
+                  "startLine": 61,
+                  "startColumn": 31,
+                  "endLine": 61,
+                  "endColumn": 40
                 }
               }
-            }
-          ],
-          "properties": {
-            "warningLevel": 1,
-            "customProperties": {
-              "0": "Non-adjacent overload"
-            }
-          }
-        },
-        {
-          "ruleId": "S4136",
-          "level": "warning",
-          "message": "All 'ExistsSamePatientSameSlotSameDateAsync' method overloads should be adjacent.",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/Repositories/Interface/IAppointmentRepository.cs",
-                "region": {
-                  "startLine": 15,
-                  "startColumn": 20,
-                  "endLine": 15,
-                  "endColumn": 58
-                }
-              }
-            }
-          ],
-          "relatedLocations": [
+            },
             {
               "physicalLocation": {
-                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/Repositories/Interface/IAppointmentRepository.cs",
+                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/Controllers/AppointmentController.cs",
                 "region": {
-                  "startLine": 20,
-                  "startColumn": 20,
-                  "endLine": 20,
-                  "endColumn": 58
+                  "startLine": 127,
+                  "startColumn": 35,
+                  "endLine": 127,
+                  "endColumn": 44
                 }
               }
-            }
-          ],
-          "properties": {
-            "warningLevel": 1,
-            "customProperties": {
-              "0": "Non-adjacent overload"
-            }
-          }
-        },
-        {
-          "ruleId": "S4136",
-          "level": "warning",
-          "message": "All 'ExistsSameDoctorSameSlotSameDateAsync' method overloads should be adjacent.",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/Repositories/Interface/IAppointmentRepository.cs",
-                "region": {
-                  "startLine": 16,
-                  "startColumn": 20,
-                  "endLine": 16,
-                  "endColumn": 57
-                }
-              }
-            }
-          ],
-          "relatedLocations": [
+            },
             {
               "physicalLocation": {
-                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/Repositories/Interface/IAppointmentRepository.cs",
+                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/Controllers/AppointmentController.cs",
                 "region": {
-                  "startLine": 22,
-                  "startColumn": 20,
-                  "endLine": 22,
-                  "endColumn": 57
+                  "startLine": 176,
+                  "startColumn": 35,
+                  "endLine": 176,
+                  "endColumn": 44
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/Controllers/AppointmentController.cs",
+                "region": {
+                  "startLine": 262,
+                  "startColumn": 31,
+                  "endLine": 262,
+                  "endColumn": 40
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/Controllers/AppointmentController.cs",
+                "region": {
+                  "startLine": 295,
+                  "startColumn": 35,
+                  "endLine": 295,
+                  "endColumn": 44
                 }
               }
             }
@@ -1031,50 +1027,12 @@
           "properties": {
             "warningLevel": 1,
             "customProperties": {
-              "0": "Non-adjacent overload"
+              "0": null,
+              "1": null,
+              "2": null,
+              "3": null,
+              "4": null
             }
-          }
-        },
-        {
-          "ruleId": "S6667",
-          "level": "warning",
-          "message": "Logging in a catch clause should pass the caught exception as a parameter.",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/BackgroundServices/NotificationCleanupService.cs",
-                "region": {
-                  "startLine": 39,
-                  "startColumn": 17,
-                  "endLine": 39,
-                  "endColumn": 93
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 1
-          }
-        },
-        {
-          "ruleId": "S6667",
-          "level": "warning",
-          "message": "Logging in a catch clause should pass the caught exception as a parameter.",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/BackgroundServices/HeartbeatService.cs",
-                "region": {
-                  "startLine": 34,
-                  "startColumn": 17,
-                  "endLine": 34,
-                  "endColumn": 83
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 1
           }
         },
         {
@@ -1084,12 +1042,12 @@
           "locations": [
             {
               "resultFile": {
-                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/BackgroundServices/HeartbeatService.cs",
+                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/Consumers/AppointmentBookedConsumer.cs",
                 "region": {
                   "startLine": 25,
-                  "startColumn": 21,
-                  "endLine": 27,
-                  "endColumn": 44
+                  "startColumn": 13,
+                  "endLine": 47,
+                  "endColumn": 56
                 }
               }
             }
@@ -1147,12 +1105,54 @@
           "locations": [
             {
               "resultFile": {
-                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/Consumers/AppointmentBookedConsumer.cs",
+                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/Messaging/RabbitMqPublisher.cs",
                 "region": {
-                  "startLine": 25,
+                  "startLine": 29,
                   "startColumn": 13,
-                  "endLine": 47,
-                  "endColumn": 56
+                  "endLine": 31,
+                  "endColumn": 39
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "S6667",
+          "level": "warning",
+          "message": "Logging in a catch clause should pass the caught exception as a parameter.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/BackgroundServices/HeartbeatService.cs",
+                "region": {
+                  "startLine": 34,
+                  "startColumn": 17,
+                  "endLine": 34,
+                  "endColumn": 83
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "S6667",
+          "level": "warning",
+          "message": "Logging in a catch clause should pass the caught exception as a parameter.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/BackgroundServices/NotificationCleanupService.cs",
+                "region": {
+                  "startLine": 39,
+                  "startColumn": 17,
+                  "endLine": 39,
+                  "endColumn": 93
                 }
               }
             }
@@ -1168,12 +1168,12 @@
           "locations": [
             {
               "resultFile": {
-                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/Messaging/RabbitMqPublisher.cs",
+                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/BackgroundServices/HeartbeatService.cs",
                 "region": {
-                  "startLine": 29,
-                  "startColumn": 13,
-                  "endLine": 31,
-                  "endColumn": 39
+                  "startLine": 25,
+                  "startColumn": 21,
+                  "endLine": 27,
+                  "endColumn": 44
                 }
               }
             }
@@ -1216,6 +1216,27 @@
                   "startColumn": 13,
                   "endLine": 77,
                   "endColumn": 28
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "S927",
+          "level": "warning",
+          "message": "Rename parameter 'builder' to 'modelBuilder' to match the base class declaration.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/Data/AppDbContext.cs",
+                "region": {
+                  "startLine": 26,
+                  "startColumn": 62,
+                  "endLine": 26,
+                  "endColumn": 69
                 }
               }
             }
@@ -1367,139 +1388,6 @@
               "8": "May belong to responsibility #2.",
               "9": "May belong to responsibility #2."
             }
-          }
-        },
-        {
-          "ruleId": "S927",
-          "level": "warning",
-          "message": "Rename parameter 'builder' to 'modelBuilder' to match the base class declaration.",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/Data/AppDbContext.cs",
-                "region": {
-                  "startLine": 26,
-                  "startColumn": 62,
-                  "endLine": 26,
-                  "endColumn": 69
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 1
-          }
-        },
-        {
-          "ruleId": "S6664",
-          "level": "warning",
-          "message": "Reduce the number of Information logging calls within this code block from 3 to the 2 allowed.",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/Services/Implementation/AppointmentService.cs",
-                "region": {
-                  "startLine": 138,
-                  "startColumn": 13,
-                  "endLine": 158,
-                  "endColumn": 49
-                }
-              }
-            }
-          ],
-          "relatedLocations": [
-            {
-              "physicalLocation": {
-                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/Services/Implementation/AppointmentService.cs",
-                "region": {
-                  "startLine": 162,
-                  "startColumn": 13,
-                  "endLine": 176,
-                  "endColumn": 49
-                }
-              }
-            },
-            {
-              "physicalLocation": {
-                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/Services/Implementation/AppointmentService.cs",
-                "region": {
-                  "startLine": 178,
-                  "startColumn": 13,
-                  "endLine": 198,
-                  "endColumn": 36
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 1,
-            "customProperties": {
-              "0": "Reduce the number of Information logging calls within this code block from 3 to the 2 allowed.",
-              "1": "Reduce the number of Information logging calls within this code block from 3 to the 2 allowed."
-            }
-          }
-        },
-        {
-          "ruleId": "CA1873",
-          "level": "note",
-          "message": "Evaluation of this argument may be expensive and unnecessary if logging is disabled",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/Services/Implementation/AppointmentService.cs",
-                "region": {
-                  "startLine": 138,
-                  "startColumn": 13,
-                  "endLine": 158,
-                  "endColumn": 49
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 1
-          }
-        },
-        {
-          "ruleId": "CA1873",
-          "level": "note",
-          "message": "Evaluation of this argument may be expensive and unnecessary if logging is disabled",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/Services/Implementation/AppointmentService.cs",
-                "region": {
-                  "startLine": 162,
-                  "startColumn": 13,
-                  "endLine": 176,
-                  "endColumn": 49
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 1
-          }
-        },
-        {
-          "ruleId": "CA1873",
-          "level": "note",
-          "message": "Evaluation of this argument may be expensive and unnecessary if logging is disabled",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/Services/Implementation/AppointmentService.cs",
-                "region": {
-                  "startLine": 178,
-                  "startColumn": 13,
-                  "endLine": 198,
-                  "endColumn": 36
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 1
           }
         },
         {
@@ -1659,6 +1547,118 @@
             "customProperties": {
               "paramName": "columns"
             }
+          }
+        },
+        {
+          "ruleId": "S6664",
+          "level": "warning",
+          "message": "Reduce the number of Information logging calls within this code block from 3 to the 2 allowed.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/Services/Implementation/AppointmentService.cs",
+                "region": {
+                  "startLine": 138,
+                  "startColumn": 13,
+                  "endLine": 158,
+                  "endColumn": 49
+                }
+              }
+            }
+          ],
+          "relatedLocations": [
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/Services/Implementation/AppointmentService.cs",
+                "region": {
+                  "startLine": 162,
+                  "startColumn": 13,
+                  "endLine": 176,
+                  "endColumn": 49
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/Services/Implementation/AppointmentService.cs",
+                "region": {
+                  "startLine": 178,
+                  "startColumn": 13,
+                  "endLine": 198,
+                  "endColumn": 36
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1,
+            "customProperties": {
+              "0": "Reduce the number of Information logging calls within this code block from 3 to the 2 allowed.",
+              "1": "Reduce the number of Information logging calls within this code block from 3 to the 2 allowed."
+            }
+          }
+        },
+        {
+          "ruleId": "CA1873",
+          "level": "note",
+          "message": "Evaluation of this argument may be expensive and unnecessary if logging is disabled",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/Services/Implementation/AppointmentService.cs",
+                "region": {
+                  "startLine": 138,
+                  "startColumn": 13,
+                  "endLine": 158,
+                  "endColumn": 49
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA1873",
+          "level": "note",
+          "message": "Evaluation of this argument may be expensive and unnecessary if logging is disabled",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/Services/Implementation/AppointmentService.cs",
+                "region": {
+                  "startLine": 162,
+                  "startColumn": 13,
+                  "endLine": 176,
+                  "endColumn": 49
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA1873",
+          "level": "note",
+          "message": "Evaluation of this argument may be expensive and unnecessary if logging is disabled",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxisApi/Services/Implementation/AppointmentService.cs",
+                "region": {
+                  "startLine": 178,
+                  "startColumn": 13,
+                  "endLine": 198,
+                  "endColumn": 36
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
           }
         },
         {

@@ -2613,7 +2613,39 @@ lC:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Shared\DTOs\Appoint
 ;. /
 }0 1
 } 
-} ù
+} „
+kC:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Shared\DTOs\Appointment\CancelAppointmentDto.cs
+	namespace 	
+S4_HealthAxis
+ 
+. 
+Shared 
+. 
+DTOs #
+.# $
+Appointment$ /
+{ 
+public 
+
+class  
+CancelAppointmentDto %
+{ 
+public 
+string 
+CancellationReason (
+{) *
+get+ .
+;. /
+set0 3
+;3 4
+}5 6
+=7 8
+string9 ?
+.? @
+Empty@ E
+;E F
+} 
+} ù
 kC:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Shared\DTOs\Appointment\CreateAppointmentDto.cs
 	namespace 	
 S4_HealthAxis
@@ -2667,39 +2699,7 @@ kC:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Shared\DTOs\Appoint
 ;& '
 }( )
 }		 
-} „
-kC:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Shared\DTOs\Appointment\CancelAppointmentDto.cs
-	namespace 	
-S4_HealthAxis
- 
-. 
-Shared 
-. 
-DTOs #
-.# $
-Appointment$ /
-{ 
-public 
-
-class  
-CancelAppointmentDto %
-{ 
-public 
-string 
-CancellationReason (
-{) *
-get+ .
-;. /
-set0 3
-;3 4
-}5 6
-=7 8
-string9 ?
-.? @
-Empty@ E
-;E F
-} 
-} ×
+} ×
 eC:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Shared\DTOs\Appointment\AppointmentDto.cs
 	namespace 	
 S4_HealthAxis
@@ -2928,71 +2928,7 @@ DoctorName		  
 ;4 5
 }6 7
 } 
-} ‚	
-bC:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Shared\DTOs\Admin\UserManagementDto.cs
-	namespace 	
-S4_HealthAxis
- 
-. 
-Shared 
-. 
-DTOs #
-.# $
-Admin$ )
-{ 
-public 
-
-class 
-UserManagementDto "
-{ 
-public 
-int 
-UserId 
-{ 
-get 
-;  
-set! $
-;$ %
-}& '
-public 
-string 
-Email 
-{ 
-get !
-;! "
-set# &
-;& '
-}( )
-=* +
-string, 2
-.2 3
-Empty3 8
-;8 9
-public		 
-string		 
-Role		 
-{		 
-get		  
-;		  !
-set		" %
-;		% &
-}		' (
-=		) *
-string		+ 1
-.		1 2
-Empty		2 7
-;		7 8
-public 
-bool 
-IsActive 
-{ 
-get "
-;" #
-set$ '
-;' (
-}) *
-} 
-} Ü
+} Ü
 bC:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Shared\DTOs\Admin\AdminDashboardDto.cs
 	namespace 	
 S4_HealthAxis
@@ -3126,5 +3062,69 @@ cC:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Shared\DTOs\Admin\A
 set( +
 ;+ ,
 }- .
+} 
+} ‚	
+bC:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Shared\DTOs\Admin\UserManagementDto.cs
+	namespace 	
+S4_HealthAxis
+ 
+. 
+Shared 
+. 
+DTOs #
+.# $
+Admin$ )
+{ 
+public 
+
+class 
+UserManagementDto "
+{ 
+public 
+int 
+UserId 
+{ 
+get 
+;  
+set! $
+;$ %
+}& '
+public 
+string 
+Email 
+{ 
+get !
+;! "
+set# &
+;& '
+}( )
+=* +
+string, 2
+.2 3
+Empty3 8
+;8 9
+public		 
+string		 
+Role		 
+{		 
+get		  
+;		  !
+set		" %
+;		% &
+}		' (
+=		) *
+string		+ 1
+.		1 2
+Empty		2 7
+;		7 8
+public 
+bool 
+IsActive 
+{ 
+get "
+;" #
+set$ '
+;' (
+}) *
 } 
 } 

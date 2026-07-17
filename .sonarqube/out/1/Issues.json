@@ -249,27 +249,6 @@
           "locations": [
             {
               "resultFile": {
-                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxis.Blazor/Pages/Doctor.razor",
-                "region": {
-                  "startLine": 471,
-                  "startColumn": 20,
-                  "endLine": 471,
-                  "endColumn": 31
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 1
-          }
-        },
-        {
-          "ruleId": "S2292",
-          "level": "warning",
-          "message": "Make this an auto-implemented property and remove its backing field.",
-          "locations": [
-            {
-              "resultFile": {
                 "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxis.Blazor/Pages/UserManagement.razor",
                 "region": {
                   "startLine": 176,
@@ -297,6 +276,27 @@
                   "startColumn": 18,
                   "endLine": 508,
                   "endColumn": 30
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "S2292",
+          "level": "warning",
+          "message": "Make this an auto-implemented property and remove its backing field.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxis.Blazor/Pages/Doctor.razor",
+                "region": {
+                  "startLine": 471,
+                  "startColumn": 20,
+                  "endLine": 471,
+                  "endColumn": 31
                 }
               }
             }
@@ -369,6 +369,30 @@
           }
         },
         {
+          "ruleId": "CA1860",
+          "level": "note",
+          "message": "Prefer comparing 'Count' to 0 rather than using 'Any()', both for clarity and for performance",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxis.Blazor/Services/Implementation/DoctorService.cs",
+                "region": {
+                  "startLine": 26,
+                  "startColumn": 17,
+                  "endLine": 26,
+                  "endColumn": 28
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1,
+            "customProperties": {
+              "DiagnosticPropertyKey": "Count"
+            }
+          }
+        },
+        {
           "ruleId": "S112",
           "level": "warning",
           "message": "'System.Exception' should not be thrown by user code.",
@@ -381,6 +405,27 @@
                   "startColumn": 19,
                   "endLine": 38,
                   "endColumn": 76
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "S112",
+          "level": "warning",
+          "message": "'System.Exception' should not be thrown by user code.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxis.Blazor/Services/Implementation/AppointmentService.cs",
+                "region": {
+                  "startLine": 43,
+                  "startColumn": 19,
+                  "endLine": 44,
+                  "endColumn": 101
                 }
               }
             }
@@ -461,10 +506,10 @@
               "resultFile": {
                 "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxis.Blazor/Services/Implementation/AppointmentService.cs",
                 "region": {
-                  "startLine": 43,
+                  "startLine": 95,
                   "startColumn": 19,
-                  "endLine": 44,
-                  "endColumn": 101
+                  "endLine": 96,
+                  "endColumn": 119
                 }
               }
             }
@@ -495,30 +540,6 @@
           }
         },
         {
-          "ruleId": "CA1860",
-          "level": "note",
-          "message": "Prefer comparing 'Count' to 0 rather than using 'Any()', both for clarity and for performance",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxis.Blazor/Services/Implementation/DoctorService.cs",
-                "region": {
-                  "startLine": 26,
-                  "startColumn": 17,
-                  "endLine": 26,
-                  "endColumn": 28
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 1,
-            "customProperties": {
-              "DiagnosticPropertyKey": "Count"
-            }
-          }
-        },
-        {
           "ruleId": "S112",
           "level": "warning",
           "message": "'System.Exception' should not be thrown by user code.",
@@ -527,10 +548,10 @@
               "resultFile": {
                 "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxis.Blazor/Services/Implementation/AppointmentService.cs",
                 "region": {
-                  "startLine": 95,
+                  "startLine": 126,
                   "startColumn": 19,
-                  "endLine": 96,
-                  "endColumn": 119
+                  "endLine": 127,
+                  "endColumn": 97
                 }
               }
             }
@@ -548,10 +569,10 @@
               "resultFile": {
                 "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxis.Blazor/Services/Implementation/AppointmentService.cs",
                 "region": {
-                  "startLine": 126,
+                  "startLine": 111,
                   "startColumn": 19,
-                  "endLine": 127,
-                  "endColumn": 97
+                  "endLine": 112,
+                  "endColumn": 123
                 }
               }
             }
@@ -678,27 +699,6 @@
                   "startColumn": 19,
                   "endLine": 202,
                   "endColumn": 108
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 1
-          }
-        },
-        {
-          "ruleId": "S112",
-          "level": "warning",
-          "message": "'System.Exception' should not be thrown by user code.",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Users/287766/source/repos/S4_HealthAxisApp/S4_HealthAxis.Blazor/Services/Implementation/AppointmentService.cs",
-                "region": {
-                  "startLine": 111,
-                  "startColumn": 19,
-                  "endLine": 112,
-                  "endColumn": 123
                 }
               }
             }

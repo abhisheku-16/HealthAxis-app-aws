@@ -1,17 +1,54 @@
 import { inject } from '@angular/core';
-import { CanActivateFn, Router } from '@angular/router';
+import {
+  ActivatedRouteSnapshot,
+  CanActivateFn,
+  Router,
+  RouterStateSnapshot
+} from '@angular/router';
 
+import { SecurityAuditService } from '../services/security-audit.service';
 import { TokenService } from '../services/token.service';
 
-export const authGuard: CanActivateFn = () => {
+export const authGuard: CanActivateFn = (
+  route: ActivatedRouteSnapshot,
+  state: RouterStateSnapshot
+) => {
   const tokenService = inject(TokenService);
   const router = inject(Router);
+  const securityAuditService = inject<SecurityAuditService>(SecurityAuditService);
 
-  if (tokenService.isLoggedIn()) {
+  if (!tokenService.isLoggedIn()) {
+    return router.createUrlTree(['/login']);
+  }
+
+  const allowedRoles =
+    route.data['roles'] as string[] | undefined;
+
+  if (!allowedRoles?.length) {
     return true;
   }
 
-  router.navigate(['/login']);
-  return false;
-};
+  const currentRole =
+    tokenService.getRole();
 
+  if (currentRole && allowedRoles.includes(currentRole)) {
+    return true;
+  }
+
+  securityAuditService
+    .logForbiddenAccess({
+      attemptedPath: state.url,
+      userRole: currentRole ?? 'Unknown',
+      requiredRoles: allowedRoles
+    })
+    .subscribe({
+      next: () => {},
+      error: () => {}
+    });
+
+  return router.createUrlTree(['/forbidden'], {
+    queryParams: {
+      from: state.url
+    }
+  });
+};

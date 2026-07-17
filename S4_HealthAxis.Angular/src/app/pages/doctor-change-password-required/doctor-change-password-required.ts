@@ -52,7 +52,7 @@ export class DoctorChangePasswordRequired {
   }
 
   get hasSpecialCharacter(): boolean {
-    return /[^A-Za-z\d]/.test(this.form.newPassword);
+    return /[^A-Za-z0-9]/.test(this.form.newPassword);
   }
 
   get isNewPasswordStrong(): boolean {

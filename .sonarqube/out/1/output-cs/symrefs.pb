@@ -1081,16 +1081,7 @@ XC:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Blazor\Pages\Dashbo
 ÜÜ +é
 VC:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Blazor\Pages\Counter.razor
  ! - 
- 		* 8ó
-eC:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Blazor\Services\Interface\IAuthService.cs
-
- !
-
- 
-
-' .
-
- ¥
+ 		* 8¥
 ZC:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Blazor\Layout\MainLayout.razord
 TT """, =00G X33 *
 íí 
@@ -1157,56 +1148,7 @@ ZC:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Blazor\Layout\MainL
 		 $^^ )^^= G
 ±± 
   
-ØØ ê
-iC:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Blazor\Services\TokenAuthenticationHandler.cs
-
- +
-$ .  (
-
-
-5 > "
-
-; D
-X _ ( /
-	s Ñ1 B
- + 0X ]ù
-gC:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Blazor\Services\Interface\IDoctorService.cs
-
- #
-
- *
-
-3 9
-
-G U
-
- %
-
-* ,
-
-		' 2
-
-		C F
-
-
-
- 
-
-
-
-# %
-
-
-
-7 :
-
-  
-
-% '
-
- "
-
-' )ø,
+ØØ ø,
 ZC:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Blazor\Pages\Appointment.razorR
 
 ™™) 6   
@@ -1731,222 +1673,12 @@ ZC:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Blazor\Pages\Appoin
  .
 ßß& 8
 ÿÿ $
-íí $ 
-lC:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Blazor\Services\Interface\IAppointmentService.cs
-
- (
-
-+ 6
-
-% 1
-
-6 8
-
-		2 H
-
-		M V
-
-
-
-+ F
-
-
-
-K S
-
-+ E
-
-J R
-
-] f
-
-q x
-
-+ I
-
-N V
-
- )
-
-? B
-
- 
-
-# %
-
-< ?
-
- $
-
-) +
-
-H K
-
- 
-
-$ &
-
-  
-
-% '
-
- 
-
-# %
-
-< ?]
+íí $]
 [C:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Blazor\Layout\EmptyLayout.razorä
 \C:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Blazor\Components\StatCard.razor
  	 
  	 N
-LC:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Blazor\App.razorﬁ
-XC:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Blazor\Services\JwtParser.cs
-
- !
-
-) ;
-C F 
-
-
-   
- 6 =
- W `
-    -
-5 8F IO R
- 7 52
-? E   , 2û
-hC:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Blazor\Services\Interface\IPatientService.cs
-
- $
-
-  +
-
- &
-
-+ -
-
-		, =
-
-		E I
-
-
-
- %
-
-
-
-7 :
-
- 
-
-# %
-
-8 ;
-
-  
-
-% '
-
- "
-
-' )˛
-iC:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Blazor\Services\Implementation\AuthService.cs
-
- 
-
-
-$ /  !Ç
-$ . @@ EE JJ OO VV  ]]  ee ii mm qq uu (
-5 G 00& 8::& 8
- ! $
-   "
-( 9! 2
-
-  *
-4 ; 
-  %% 2
-$$ (( ))* 6..$ 011* 6
-
-66 %
->> ,.. #F
->>= ICC HH MM RR TT YY  
-cc -88 $£
-kC:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Blazor\Services\Implementation\DoctorService.cs
-
- P
-$ /  $"" $''! ,11! ,77! ,==! ,
-
-
-( 2 $
-
-, 7
-@ F+ 1$ *
-T b , :
-  G J2
-    . 3
-
-  & 2
-  7 9""P R
-
-%%4 ?
-%%P S''L O
-'' (( ** %
-
-//  +
-//0 211K M
-//D G11Q T
-11 22 
-
-55  -
-552 477E G
-77 88 
-
-;;  /
-;;4 6==E G
-== >> ò
-fC:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Blazor\Services\Interface\IAdminService.cs
-
- "
-
- -
-
-
-
- /
-
-' 4–
-lC:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Blazor\Services\Implementation\PatientService.cs
-
- Z
-$ /  $ $ $  ! ,++! ,55! ,;;! ,
-
-
-) 3 $
-
-- 8
-
-' 3
-8 :R T
-
-9 J
-R Vp t
-
-' 2
-D G  M P(
-   !! ## %&&& .
-
-))  +
-))0 2++L N
-))E H++R U
-++ ,, 00& .
-
-33  -
-332 455F H
-55 66 
-
-99  /
-994 6;;F H
-;; << ∑
+LC:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Blazor\App.razor∑
 pC:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Blazor\Services\Implementation\AppointmentService.cs
 
  #ñ
@@ -2073,7 +1805,275 @@ pC:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Blazor\Services\Imp
   L T
 
 «« 
-  c hÊ
+  c hó
+eC:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Blazor\Services\Interface\IAuthService.cs
+
+ !
+
+ 
+
+' .
+
+ –
+lC:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Blazor\Services\Implementation\PatientService.cs
+
+ Z
+$ /  $ $ $  ! ,++! ,55! ,;;! ,
+
+
+) 3 $
+
+- 8
+
+' 3
+8 :R T
+
+9 J
+R Vp t
+
+' 2
+D G  M P(
+   !! ## %&&& .
+
+))  +
+))0 2++L N
+))E H++R U
+++ ,, 00& .
+
+33  -
+332 455F H
+55 66 
+
+99  /
+994 6;;F H
+;; << ˛
+iC:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Blazor\Services\Implementation\AuthService.cs
+
+ 
+
+
+$ /  !Ç
+$ . @@ EE JJ OO VV  ]]  ee ii mm qq uu (
+5 G 00& 8::& 8
+ ! $
+   "
+( 9! 2
+
+  *
+4 ; 
+  %% 2
+$$ (( ))* 6..$ 011* 6
+
+66 %
+>> ,.. #F
+>>= ICC HH MM RR TT YY  
+cc -88 $ê
+iC:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Blazor\Services\TokenAuthenticationHandler.cs
+
+ +
+$ .  (
+
+
+5 > "
+
+; D
+X _ ( /
+	s Ñ1 B
+ + 0X ]ﬁ
+XC:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Blazor\Services\JwtParser.cs
+
+ !
+
+) ;
+C F 
+
+
+   
+ 6 =
+ W `
+    -
+5 8F IO R
+ 7 52
+? E   , 2û
+hC:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Blazor\Services\Interface\IPatientService.cs
+
+ $
+
+  +
+
+ &
+
++ -
+
+		, =
+
+		E I
+
+
+
+ %
+
+
+
+7 :
+
+ 
+
+# %
+
+8 ;
+
+  
+
+% '
+
+ "
+
+' )ù
+gC:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Blazor\Services\Interface\IDoctorService.cs
+
+ #
+
+ *
+
+3 9
+
+G U
+
+ %
+
+* ,
+
+		' 2
+
+		C F
+
+
+
+ 
+
+
+
+# %
+
+
+
+7 :
+
+  
+
+% '
+
+ "
+
+' ) 
+lC:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Blazor\Services\Interface\IAppointmentService.cs
+
+ (
+
++ 6
+
+% 1
+
+6 8
+
+		2 H
+
+		M V
+
+
+
++ F
+
+
+
+K S
+
++ E
+
+J R
+
+] f
+
+q x
+
++ I
+
+N V
+
+ )
+
+? B
+
+ 
+
+# %
+
+< ?
+
+ $
+
+) +
+
+H K
+
+ 
+
+$ &
+
+  
+
+% '
+
+ 
+
+# %
+
+< ?ò
+fC:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Blazor\Services\Interface\IAdminService.cs
+
+ "
+
+ -
+
+
+
+ /
+
+' 4£
+kC:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Blazor\Services\Implementation\DoctorService.cs
+
+ P
+$ /  $"" $''! ,11! ,77! ,==! ,
+
+
+( 2 $
+
+, 7
+@ F+ 1$ *
+T b , :
+  G J2
+    . 3
+
+  & 2
+  7 9""P R
+
+%%4 ?
+%%P S''L O
+'' (( ** %
+
+//  +
+//0 211K M
+//D G11Q T
+11 22 
+
+55  -
+552 477E G
+77 88 
+
+;;  /
+;;4 6==E G
+== >> Ê
 jC:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Blazor\Services\Implementation\AdminService.cs
 
  2
@@ -2105,7 +2105,48 @@ fC:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Blazor\Services\Cus
 
 00 $
 22 33D Q
-33 44- 6Ô
+33 44- 6ª
+YC:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Blazor\Models\DashboardDto.cs
+
+ 
+
+ 
+
+  
+
+  
+
+		 !
+
+ $
+
+ &
+
+ (π
+WC:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Blazor\Models\PatientDto.cs
+
+ 
+
+ 
+
+ 
+
+		 #
+
+ 
+
+ !
+
+ 
+
+ 
+YC:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Blazor\Models\LoginRequest.cs
+
+ 
+
+ 
+
+ Ô
 MC:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Blazor\Program.cst
  		 
 
@@ -2147,31 +2188,7 @@ ZC:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Blazor\Models\Stati
 
 		 (
 
- (π
-WC:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Blazor\Models\PatientDto.cs
-
- 
-
- 
-
- 
-
-		 #
-
- 
-
- !
-
- 
-
- 
-YC:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Blazor\Models\LoginRequest.cs
-
- 
-
- 
-
- ∏
+ (∏
 VC:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Blazor\Models\DoctorDto.cs
 
  
@@ -2197,24 +2214,7 @@ aC:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Blazor\Models\Docto
 
  
 
-		 'ª
-YC:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Blazor\Models\DashboardDto.cs
-
- 
-
- 
-
-  
-
-  
-
-		 !
-
- $
-
- &
-
- (™
+		 '™
 `C:\Users\287766\source\repos\S4_HealthAxisApp\S4_HealthAxis.Blazor\Models\CreateDoctorRequest.cs
 
  $
