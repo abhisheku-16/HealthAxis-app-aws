@@ -267,7 +267,8 @@ namespace S4_HealthAxisApi.Services.Implementation
                 return (false, "New password cannot be the same as current password.");
             }
 
-            var passwordValidationMessage = ValidatePasswordStrength(request.NewPassword);
+            var passwordValidationMessage =
+                ValidatePasswordStrength(request.NewPassword);
 
             if (!string.IsNullOrWhiteSpace(passwordValidationMessage))
             {
@@ -305,7 +306,8 @@ namespace S4_HealthAxisApi.Services.Implementation
             return (true, "Password changed successfully.");
         }
 
-        private static string? ValidatePasswordStrength(string password)
+        private static string? ValidatePasswordStrength(
+            string password)
         {
             if (password.Length < 8)
             {
@@ -335,16 +337,63 @@ namespace S4_HealthAxisApi.Services.Implementation
             return null;
         }
 
-        private string GenerateToken(User user)
+        private string GenerateToken(
+            User user)
         {
-            var jwtSettings = _configuration.GetSection("Jwt");
+            var jwtSettings =
+                _configuration.GetSection("JwtSettings");
 
-            var key = new SymmetricSecurityKey(
-                Encoding.UTF8.GetBytes(jwtSettings["Key"]!));
+            var secret =
+                jwtSettings["Secret"];
 
-            var credentials = new SigningCredentials(
-                key,
-                SecurityAlgorithms.HmacSha256);
+            if (string.IsNullOrWhiteSpace(secret))
+            {
+                throw new InvalidOperationException(
+                    "JwtSettings:Secret is missing.");
+            }
+
+            if (secret.Length < 32)
+            {
+                throw new InvalidOperationException(
+                    "JwtSettings:Secret must contain at least 32 characters.");
+            }
+
+            var issuer =
+                jwtSettings["Issuer"];
+
+            if (string.IsNullOrWhiteSpace(issuer))
+            {
+                throw new InvalidOperationException(
+                    "JwtSettings:Issuer is missing.");
+            }
+
+            var audience =
+                jwtSettings["Audience"];
+
+            if (string.IsNullOrWhiteSpace(audience))
+            {
+                throw new InvalidOperationException(
+                    "JwtSettings:Audience is missing.");
+            }
+
+            var expirationMinutesValue =
+                jwtSettings["AccessTokenExpirationMinutes"];
+
+            if (!int.TryParse(
+                    expirationMinutesValue,
+                    out var expirationMinutes))
+            {
+                expirationMinutes = 60;
+            }
+
+            var key =
+                new SymmetricSecurityKey(
+                    Encoding.UTF8.GetBytes(secret));
+
+            var credentials =
+                new SigningCredentials(
+                    key,
+                    SecurityAlgorithms.HmacSha256);
 
             var claims = new List<Claim>
             {
@@ -365,6 +414,10 @@ namespace S4_HealthAxisApi.Services.Implementation
                     user.UserId.ToString()),
 
                 new Claim(
+                    ClaimTypes.Email,
+                    user.Email),
+
+                new Claim(
                     ClaimTypes.Role,
                     user.Role.ToString()),
 
@@ -377,13 +430,14 @@ namespace S4_HealthAxisApi.Services.Implementation
                     user.MustChangePassword.ToString())
             };
 
-            var token = new JwtSecurityToken(
-                issuer: jwtSettings["Issuer"],
-                audience: jwtSettings["Audience"],
-                claims: claims,
-                expires: DateTime.UtcNow.AddMinutes(
-                    int.Parse(jwtSettings["AccessTokenExpirationMinutes"]!)),
-                signingCredentials: credentials);
+            var token =
+                new JwtSecurityToken(
+                    issuer: issuer,
+                    audience: audience,
+                    claims: claims,
+                    expires: DateTime.UtcNow.AddMinutes(
+                        expirationMinutes),
+                    signingCredentials: credentials);
 
             return new JwtSecurityTokenHandler()
                 .WriteToken(token);

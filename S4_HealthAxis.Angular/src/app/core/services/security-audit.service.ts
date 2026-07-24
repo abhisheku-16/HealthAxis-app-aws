@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-
+import { environment } from '../../../environments/environment';
 export interface ForbiddenAccessLogRequest {
   attemptedPath: string;
   userRole: string;
@@ -12,7 +12,7 @@ export interface ForbiddenAccessLogRequest {
   providedIn: 'root'
 })
 export class SecurityAuditService {
-  private readonly apiUrl = 'https://localhost:<api-port>/api/security-audit';
+  private readonly apiUrl = `${environment.apiBaseUrl}/security-audit`;
 
   constructor(private readonly http: HttpClient) {}
 

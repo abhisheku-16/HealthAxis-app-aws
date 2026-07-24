@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../../environments/environment';
 
 import {
   CancelAppointmentRequest,
@@ -13,9 +14,8 @@ import { PatientAppointment } from '../../shared/models/patient-dashboard.models
   providedIn: 'root'
 })
 export class AppointmentService {
-  private readonly apiBaseUrl = 'https://localhost:7258/api';
-
-  constructor(private readonly http: HttpClient) {}
+  private readonly apiBaseUrl = environment.apiBaseUrl;
+  constructor(private readonly http: HttpClient) { }
 
   createAppointment(request: CreateAppointmentRequest): Observable<PatientAppointment> {
     return this.http.post<PatientAppointment>(

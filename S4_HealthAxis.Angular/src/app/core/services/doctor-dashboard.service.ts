@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../../environments/environment';
 
 import {
   CreateHealthRecordRequest,
@@ -14,9 +15,8 @@ import {
   providedIn: 'root'
 })
 export class DoctorDashboardService {
-  private readonly apiBaseUrl = 'https://localhost:7258/api';
-
-  constructor(private readonly http: HttpClient) {}
+  private readonly apiBaseUrl = environment.apiBaseUrl;
+  constructor(private readonly http: HttpClient) { }
 
   getTodaySchedule(doctorId: number): Observable<DoctorScheduleItem[]> {
     return this.http.get<DoctorScheduleItem[]>(

@@ -6,28 +6,37 @@ namespace HealthAxis.API.Data
 {
     public class HealthAxisDbContext : DbContext
     {
-        public HealthAxisDbContext(DbContextOptions<HealthAxisDbContext> options)
+        public HealthAxisDbContext(
+            DbContextOptions<HealthAxisDbContext> options)
             : base(options)
         {
         }
 
-        public DbSet<Patient> Patients => Set<Patient>();
+        public DbSet<Patient> Patients =>
+            Set<Patient>();
 
-        public DbSet<Doctor> Doctors => Set<Doctor>();
+        public DbSet<Doctor> Doctors =>
+            Set<Doctor>();
 
-        public DbSet<Appointment> Appointments => Set<Appointment>();
+        public DbSet<Appointment> Appointments =>
+            Set<Appointment>();
 
-        public DbSet<HealthRecord> HealthRecords => Set<HealthRecord>();
+        public DbSet<HealthRecord> HealthRecords =>
+            Set<HealthRecord>();
 
-        public DbSet<User> AppUsers => Set<User>();
+        public DbSet<User> AppUsers =>
+            Set<User>();
 
-        public DbSet<Notification> Notifications => Set<Notification>();
+        public DbSet<Notification> Notifications =>
+            Set<Notification>();
 
-        protected override void OnModelCreating(ModelBuilder builder)
+        protected override void OnModelCreating(
+            ModelBuilder builder)
         {
             base.OnModelCreating(builder);
 
-            builder.Entity<User>().ToTable("Users");
+            builder.Entity<User>()
+                .ToTable("Users");
 
             builder.Entity<User>()
                 .HasIndex(user => user.Email)
@@ -60,12 +69,26 @@ namespace HealthAxis.API.Data
                     appointment.ScheduledDate,
                     appointment.TimeSlot
                 })
-                .IsUnique();
+                .IsUnique()
+                .HasDatabaseName(
+                    "UX_Appointments_Doctor_Date_TimeSlot");
+
+            builder.Entity<Appointment>()
+                .HasIndex(appointment => new
+                {
+                    appointment.PatientId,
+                    appointment.ScheduledDate,
+                    appointment.TimeSlot
+                })
+                .IsUnique()
+                .HasDatabaseName(
+                    "UX_Appointments_Patient_Date_TimeSlot");
 
             builder.Entity<HealthRecord>()
                 .HasOne(healthRecord => healthRecord.Appointment)
                 .WithOne(appointment => appointment.HealthRecord)
-                .HasForeignKey<HealthRecord>(healthRecord => healthRecord.AppointmentId)
+                .HasForeignKey<HealthRecord>(
+                    healthRecord => healthRecord.AppointmentId)
                 .OnDelete(DeleteBehavior.Restrict);
 
             builder.Entity<HealthRecord>()
@@ -82,7 +105,9 @@ namespace HealthAxis.API.Data
 
             builder.Entity<HealthRecord>()
                 .HasIndex(healthRecord => healthRecord.AppointmentId)
-                .IsUnique();
+                .IsUnique()
+                .HasDatabaseName(
+                    "UX_HealthRecords_AppointmentId");
 
             builder.Entity<Doctor>()
                 .Property(doctor => doctor.ConsultationFee)
@@ -92,67 +117,57 @@ namespace HealthAxis.API.Data
                 .Property(notification => notification.Message)
                 .HasMaxLength(500);
 
-            builder.Entity<Patient>().HasData(
-                new Patient
-                {
-                    PatientId = 1,
-                    FullName = "Ayush Sharma",
-                    DateOfBirth = new DateOnly(1995, 5, 10),
-                    Gender = Gender.Male,
-                    PhoneNumber = "9876543210",
-                    Email = "ayush.sharma@example.com",
-                    InsuranceStatus = InsuranceStatus.Active,
-                    InsuranceNumber = "INS1001",
-                    IsActive = true
-                },
-                new Patient
-                {
-                    PatientId = 2,
-                    FullName = "Riya Shukla",
-                    DateOfBirth = new DateOnly(2000, 11, 5),
-                    Gender = Gender.Female,
-                    PhoneNumber = "9876543211",
-                    Email = "riya.shukla@example.com",
-                    InsuranceStatus = InsuranceStatus.Active,
-                    InsuranceNumber = "INS1002",
-                    IsActive = true
-                }
-            );
+            builder.Entity<Patient>()
+                .HasData(
+                    new Patient
+                    {
+                        PatientId = 1,
+                        FullName = "Ayush Sharma",
+                        DateOfBirth = new DateOnly(1995, 5, 10),
+                        Gender = Gender.Male,
+                        PhoneNumber = "9876543210",
+                        Email = "ayush.sharma@example.com",
+                        InsuranceStatus = InsuranceStatus.Active,
+                        InsuranceNumber = "INS1001",
+                        IsActive = true
+                    },
+                    new Patient
+                    {
+                        PatientId = 2,
+                        FullName = "Riya Shukla",
+                        DateOfBirth = new DateOnly(2000, 11, 5),
+                        Gender = Gender.Female,
+                        PhoneNumber = "9876543211",
+                        Email = "riya.shukla@example.com",
+                        InsuranceStatus = InsuranceStatus.Active,
+                        InsuranceNumber = "INS1002",
+                        IsActive = true
+                    });
 
-            builder.Entity<Doctor>().HasData(
-                new Doctor
-                {
-                    DoctorId = 1,
-                    FullName = "Arun Nair",
-                    Email = "arun.nair@healthaxis.com",
-                    Specialisation = DoctorSpecialisation.GeneralPractitioner,
-                    YearsOfExperience = 8,
-                    ConsultationFee = 500.00m,
-                    IsActive = true
-                },
-                new Doctor
-                {
-                    DoctorId = 2,
-                    FullName = "Rohan Menon",
-                    Email = "rohan.menon@healthaxis.com",
-                    Specialisation = DoctorSpecialisation.Cardiologist,
-                    YearsOfExperience = 12,
-                    ConsultationFee = 1000.00m,
-                    IsActive = true
-                }
-            );
-
-            builder.Entity<Appointment>().HasData(
-                new Appointment
-                {
-                    AppointmentId = 1,
-                    PatientId = 1,
-                    DoctorId = 1,
-                    ScheduledDate = new DateOnly(2026, 7, 20),
-                    TimeSlot = AppointmentTimeSlot.TenAM,
-                    Status = AppointmentStatus.Pending
-                }
-            );
+            builder.Entity<Doctor>()
+                .HasData(
+                    new Doctor
+                    {
+                        DoctorId = 1,
+                        FullName = "Arun Nair",
+                        Email = "arun.nair@healthaxis.com",
+                        Specialisation =
+                            DoctorSpecialisation.GeneralPractitioner,
+                        YearsOfExperience = 8,
+                        ConsultationFee = 500.00m,
+                        IsActive = true
+                    },
+                    new Doctor
+                    {
+                        DoctorId = 2,
+                        FullName = "Rohan Menon",
+                        Email = "rohan.menon@healthaxis.com",
+                        Specialisation =
+                            DoctorSpecialisation.Cardiologist,
+                        YearsOfExperience = 12,
+                        ConsultationFee = 1000.00m,
+                        IsActive = true
+                    });
         }
     }
 }

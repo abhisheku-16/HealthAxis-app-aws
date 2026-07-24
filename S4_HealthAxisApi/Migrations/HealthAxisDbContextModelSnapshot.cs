@@ -51,23 +51,15 @@ namespace S4_HealthAxisApi.Migrations
 
                     b.HasKey("AppointmentId");
 
-                    b.HasIndex("PatientId");
-
                     b.HasIndex("DoctorId", "ScheduledDate", "TimeSlot")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasDatabaseName("UX_Appointments_Doctor_Date_TimeSlot");
+
+                    b.HasIndex("PatientId", "ScheduledDate", "TimeSlot")
+                        .IsUnique()
+                        .HasDatabaseName("UX_Appointments_Patient_Date_TimeSlot");
 
                     b.ToTable("Appointments");
-
-                    b.HasData(
-                        new
-                        {
-                            AppointmentId = 1,
-                            DoctorId = 1,
-                            PatientId = 1,
-                            ScheduledDate = new DateOnly(2026, 7, 20),
-                            Status = 0,
-                            TimeSlot = 1
-                        });
                 });
 
             modelBuilder.Entity("S4_HealthAxisApi.Models.Doctor", b =>
@@ -168,7 +160,8 @@ namespace S4_HealthAxisApi.Migrations
                     b.HasKey("HealthRecordId");
 
                     b.HasIndex("AppointmentId")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasDatabaseName("UX_HealthRecords_AppointmentId");
 
                     b.HasIndex("DoctorId");
 

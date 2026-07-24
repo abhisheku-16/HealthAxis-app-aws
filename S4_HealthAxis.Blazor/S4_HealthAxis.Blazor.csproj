@@ -22,4 +22,8 @@
 		<ProjectReference Include="..\S4_HealthAxis.Shared\S4_HealthAxis.Shared.csproj" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Folder Include="Artifacts\" />
+	</ItemGroup>
+
 </Project>

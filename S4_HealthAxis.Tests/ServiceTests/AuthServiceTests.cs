@@ -1213,10 +1213,20 @@ namespace S4_HealthAxis.Tests.ServiceTests
         {
             var values = new Dictionary<string, string?>
             {
-                ["Jwt:Key"] = "ThisIsAReallyLongJwtSigningKeyForUnitTests1234567890",
-                ["Jwt:Issuer"] = "HealthAxis.Tests",
-                ["Jwt:Audience"] = "HealthAxis.TestClients",
-                ["Jwt:AccessTokenExpirationMinutes"] = "60"
+                ["JwtSettings:Secret"] =
+                    "ThisIsAReallyLongJwtSigningKeyForUnitTests1234567890",
+
+                ["JwtSettings:Issuer"] =
+                    "HealthAxis.Tests",
+
+                ["JwtSettings:Audience"] =
+                    "HealthAxis.TestClients",
+
+                ["JwtSettings:AccessTokenExpirationMinutes"] =
+                    "60",
+
+                ["JwtSettings:RefreshTokenExpirationDays"] =
+                    "7"
             };
 
             return new ConfigurationBuilder()

@@ -167,7 +167,7 @@
             customAuthStateProvider.NotifyUserAuthentication(AccessToken);
         }
 
-        Navigation.NavigateTo("/dashboard", forceLoad: true);
+        Navigation.NavigateTo("dashboard", forceLoad: true);
     }
 
     private async Task Login()
@@ -181,7 +181,7 @@
 
         if (success)
         {
-            Navigation.NavigateTo("/dashboard");
+            Navigation.NavigateTo("dashboard");
         }
         else
         {

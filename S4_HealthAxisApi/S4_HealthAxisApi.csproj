@@ -4,7 +4,8 @@
 		<TargetFramework>net10.0</TargetFramework>
 		<Nullable>enable</Nullable>
 		<ImplicitUsings>enable</ImplicitUsings>
-	</PropertyGroup>
+	  <UserSecretsId>6ce470b4-92aa-43e2-a5a8-48920a3c7196</UserSecretsId>
+  </PropertyGroup>
 
 	<ItemGroup>
 	  <Compile Remove="Enums\**" />
@@ -28,7 +29,6 @@
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
 		<PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="10.0.9" />
-		<PackageReference Include="Microsoft.Extensions.Identity.Core" Version="10.0.9" />
 		<PackageReference Include="Serilog.AspNetCore" Version="10.0.0" />
 		<PackageReference Include="Serilog.Sinks.Console" Version="6.1.1" />
 		<PackageReference Include="Serilog.Sinks.File" Version="7.0.0" />
@@ -47,6 +47,11 @@
 
 	<ItemGroup>
 	  <ProjectReference Include="..\S4_HealthAxis.Shared\S4_HealthAxis.Shared.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="wwwroot\Angular\" />
+	  <Folder Include="wwwroot\Blazor\" />
 	</ItemGroup>
 
 </Project>

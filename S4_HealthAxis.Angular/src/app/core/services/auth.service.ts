@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../../environments/environment';
 
 import {
   ApiMessageResponse,
@@ -16,12 +17,11 @@ import { TokenService } from './token.service';
   providedIn: 'root'
 })
 export class AuthService {
-  private readonly apiBaseUrl = 'https://localhost:7258/api';
-
+  private readonly apiBaseUrl = environment.apiBaseUrl;
   constructor(
     private readonly http: HttpClient,
     private readonly tokenService: TokenService
-  ) {}
+  ) { }
 
   login(request: LoginRequest): Observable<AuthResponse> {
     return this.http.post<AuthResponse>(

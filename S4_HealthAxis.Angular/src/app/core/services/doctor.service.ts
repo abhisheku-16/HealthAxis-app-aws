@@ -1,16 +1,15 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
-
+import { environment } from '../../../environments/environment';
 import { Doctor } from '../../shared/models/doctor.models';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DoctorService {
-  private readonly apiBaseUrl = 'https://localhost:7258/api';
-
-  constructor(private readonly http: HttpClient) {}
+  private readonly apiBaseUrl = environment.apiBaseUrl;
+  constructor(private readonly http: HttpClient) { }
 
   getDoctors(sortBy = 'name', specialisation?: number | null): Observable<Doctor[]> {
     let params = new HttpParams().set('sortBy', sortBy);

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, forkJoin, map, of } from 'rxjs';
+import { environment } from '../../../environments/environment';
 
 import { PatientHealthRecord } from '../../shared/models/patient-dashboard.models';
 import { HealthHistoryRecord } from '../../shared/models/health-history.models';
@@ -31,7 +32,7 @@ export interface UpdatePatientProfileRequest {
   providedIn: 'root'
 })
 export class PatientPortalService {
-  private readonly baseUrl = 'https://localhost:7258/api';
+  private readonly baseUrl = environment.apiBaseUrl;
 
   private readonly patientUrl = `${this.baseUrl}/patients`;
   private readonly appointmentUrl = `${this.baseUrl}/appointments`;

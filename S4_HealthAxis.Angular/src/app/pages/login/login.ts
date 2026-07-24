@@ -4,6 +4,7 @@ import { Router, RouterLink } from '@angular/router';
 
 import { AuthService } from '../../core/services/auth.service';
 import { TokenService } from '../../core/services/token.service';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +18,7 @@ import { TokenService } from '../../core/services/token.service';
 })
 export class Login {
 
-  private readonly blazorAdminLoginUrl = 'https://localhost:7206/login';
+  private readonly blazorAdminLoginUrl = `${environment.blazorBaseUrl}/login`;
 
   loading = false;
   errorMessage = '';

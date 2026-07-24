@@ -20,9 +20,9 @@
                 <i class="bi bi-list"></i>
             </button>
 
-            <a href="/dashboard" class="ha-brand-top">
+            <NavLink href="dashboard" class="ha-brand">
                 HealthAxis Admin
-            </a>
+            </NavLink>
         </div>
 
         <div class="ha-topbar-right">
@@ -33,12 +33,14 @@
                             @onclick="ToggleUserMenu"
                             aria-expanded="@_showUserDropdown"
                             aria-haspopup="true">
+
                         <div class="ha-user-avatar">
                             @GetInitials(_displayName)
                         </div>
 
                         <div class="ha-user-info">
                             <span class="ha-user-name">@_displayName</span>
+
                             @if (!string.IsNullOrWhiteSpace(_role))
                             {
                                 <span class="ha-user-role">@_role</span>
@@ -51,7 +53,8 @@
                     @if (_showUserDropdown)
                     {
                         <div class="ha-user-dropdown">
-                            <button class="ha-dropdown-item ha-logout-item" @onclick="Logout">
+                            <button class="ha-dropdown-item ha-logout-item"
+                                    @onclick="Logout">
                                 <i class="bi bi-box-arrow-right"></i>
                                 <span>Logout</span>
                             </button>
@@ -66,14 +69,17 @@
 
         @if (_isSidebarOpen)
         {
-            <div class="ha-sidebar-backdrop" @onclick="CloseSidebar"></div>
+            <div class="ha-sidebar-backdrop"
+                 @onclick="CloseSidebar">
+            </div>
         }
 
         <aside class="ha-sidebar @(_isSidebarOpen ? "open" : "")">
             <NavMenu OnNavigate="HandleNavClick" />
         </aside>
 
-        <main class="ha-content" @onclick="CloseUserMenu">
+        <main class="ha-content"
+              @onclick="CloseUserMenu">
             @Body
         </main>
 
@@ -81,8 +87,8 @@
 </div>
 
 @code {
-    private bool _showUserDropdown = false;
-    private bool _isSidebarOpen = false;
+    private bool _showUserDropdown;
+    private bool _isSidebarOpen;
 
     private string _displayName = "Admin User";
     private string _role = string.Empty;
@@ -91,12 +97,18 @@
     {
         get
         {
-            var relativePath = Navigation.ToBaseRelativePath(Navigation.Uri);
+            var relativePath =
+                Navigation.ToBaseRelativePath(Navigation.Uri);
 
             if (string.IsNullOrWhiteSpace(relativePath))
+            {
                 return true;
+            }
 
-            relativePath = relativePath.Split('?', '#')[0].Trim('/');
+            relativePath =
+                relativePath
+                    .Split('?', '#')[0]
+                    .Trim('/');
 
             return string.IsNullOrWhiteSpace(relativePath);
         }
@@ -105,10 +117,13 @@
     protected override async Task OnInitializedAsync()
     {
         await LoadUserInfoAsync();
-        AuthenticationStateProvider.AuthenticationStateChanged += OnAuthenticationStateChanged;
+
+        AuthenticationStateProvider.AuthenticationStateChanged +=
+            OnAuthenticationStateChanged;
     }
 
-    private async void OnAuthenticationStateChanged(Task<AuthenticationState> task)
+    private async void OnAuthenticationStateChanged(
+        Task<AuthenticationState> task)
     {
         await LoadUserInfoAsync();
         await InvokeAsync(StateHasChanged);
@@ -116,8 +131,11 @@
 
     private async Task LoadUserInfoAsync()
     {
-        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
-        var user = authState.User;
+        var authState =
+            await AuthenticationStateProvider.GetAuthenticationStateAsync();
+
+        var user =
+            authState.User;
 
         if (user.Identity?.IsAuthenticated == true)
         {
@@ -143,55 +161,75 @@
 
     private void ToggleUserMenu()
     {
-        _showUserDropdown = !_showUserDropdown;
+        _showUserDropdown =
+            !_showUserDropdown;
     }
 
     private void CloseUserMenu()
     {
-        _showUserDropdown = false;
+        _showUserDropdown =
+            false;
     }
 
     private void ToggleSidebar()
     {
-        _isSidebarOpen = !_isSidebarOpen;
+        _isSidebarOpen =
+            !_isSidebarOpen;
     }
 
     private void CloseSidebar()
     {
-        _isSidebarOpen = false;
+        _isSidebarOpen =
+            false;
     }
 
     private void HandleNavClick()
     {
-        _isSidebarOpen = false;
-        _showUserDropdown = false;
+        _isSidebarOpen =
+            false;
+
+        _showUserDropdown =
+            false;
     }
 
     private async Task Logout()
     {
-        _showUserDropdown = false;
-        _isSidebarOpen = false;
+        _showUserDropdown =
+            false;
+
+        _isSidebarOpen =
+            false;
 
         await AuthService.LogoutAsync();
 
-        Navigation.NavigateTo("http://localhost:4200/login", forceLoad: true);
+        Navigation.NavigateTo("/Angular/login", forceLoad: true);
     }
 
     private static string GetInitials(string name)
     {
         if (string.IsNullOrWhiteSpace(name))
+        {
             return "A";
+        }
 
-        var parts = name.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+        var parts =
+            name.Split(
+                ' ',
+                StringSplitOptions.RemoveEmptyEntries);
 
         if (parts.Length == 1)
-            return parts[0][0].ToString().ToUpper();
+        {
+            return parts[0][0]
+                .ToString()
+                .ToUpper();
+        }
 
         return $"{char.ToUpper(parts[0][0])}{char.ToUpper(parts[1][0])}";
     }
 
     public void Dispose()
     {
-        AuthenticationStateProvider.AuthenticationStateChanged -= OnAuthenticationStateChanged;
+        AuthenticationStateProvider.AuthenticationStateChanged -=
+            OnAuthenticationStateChanged;
     }
 }

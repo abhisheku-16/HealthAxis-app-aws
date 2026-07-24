@@ -1,6 +1,5 @@
 ﻿using FluentAssertions;
 using MassTransit;
-using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Logging;
 using Moq;
 using S4_HealthAxis.Shared.DTOs.Appointment;
@@ -20,7 +19,6 @@ namespace S4_HealthAxis.Tests.ServiceTests
         private readonly Mock<IDoctorRepository> _doctorRepositoryMock;
         private readonly Mock<IPublishEndpoint> _publishEndpointMock;
         private readonly Mock<ILogger<AppointmentService>> _loggerMock;
-        private readonly Mock<IDistributedCache> _cacheMock;
 
         private readonly AppointmentService _service;
 
@@ -41,16 +39,13 @@ namespace S4_HealthAxis.Tests.ServiceTests
             _loggerMock =
                 new Mock<ILogger<AppointmentService>>();
 
-            _cacheMock =
-                new Mock<IDistributedCache>(MockBehavior.Strict);
 
             _service = new AppointmentService(
                 _appointmentRepositoryMock.Object,
                 _patientRepositoryMock.Object,
                 _doctorRepositoryMock.Object,
                 _publishEndpointMock.Object,
-                _loggerMock.Object,
-                _cacheMock.Object);
+                _loggerMock.Object);
         }
 
         #region GetAllAsync
@@ -352,7 +347,7 @@ namespace S4_HealthAxis.Tests.ServiceTests
         #region CreateAsync Success
 
         [Fact]
-        public async Task CreateAsync_ShouldCreateAppointmentInvalidateCacheAndPublishEvent_WhenRequestIsValid()
+        public async Task CreateAsync_ShouldCreateAppointmentAndPublishEvent_WhenRequestIsValid()
         {
             var dto =
                 BuildValidCreateAppointmentDto();
@@ -375,11 +370,6 @@ namespace S4_HealthAxis.Tests.ServiceTests
                 .Setup(repository => repository.SaveChangesAsync())
                 .Returns(Task.CompletedTask);
 
-            _cacheMock
-                .Setup(cache => cache.RemoveAsync(
-                    BuildExpectedCacheKey(dto.DoctorId, dto.ScheduledDate),
-                    It.IsAny<CancellationToken>()))
-                .Returns(Task.CompletedTask);
 
             _patientRepositoryMock
                 .Setup(repository => repository.GetByIdAsync(dto.PatientId))
@@ -426,11 +416,6 @@ namespace S4_HealthAxis.Tests.ServiceTests
                 repository => repository.SaveChangesAsync(),
                 Times.Once);
 
-            _cacheMock.Verify(
-                cache => cache.RemoveAsync(
-                    BuildExpectedCacheKey(dto.DoctorId, dto.ScheduledDate),
-                    It.IsAny<CancellationToken>()),
-                Times.Once);
 
             _publishEndpointMock.Verify(
                 publisher => publisher.Publish(
@@ -559,11 +544,6 @@ namespace S4_HealthAxis.Tests.ServiceTests
                 .Setup(repository => repository.SaveChangesAsync())
                 .Returns(Task.CompletedTask);
 
-            _cacheMock
-                .Setup(cache => cache.RemoveAsync(
-                    It.IsAny<string>(),
-                    It.IsAny<CancellationToken>()))
-                .Returns(Task.CompletedTask);
 
             _patientRepositoryMock
                 .Setup(repository => repository.GetByIdAsync(dto.PatientId))
@@ -872,7 +852,7 @@ namespace S4_HealthAxis.Tests.ServiceTests
         }
 
         [Fact]
-        public async Task UpdateAsync_ShouldUpdateAppointmentAndInvalidateOldAndNewCacheKeys_WhenValid()
+        public async Task UpdateAsync_ShouldUpdateAppointment_WhenValid()
         {
             var oldDate =
                 DateOnly.FromDateTime(DateTime.Today.AddDays(2));
@@ -910,18 +890,6 @@ namespace S4_HealthAxis.Tests.ServiceTests
                 .Setup(repository => repository.SaveChangesAsync())
                 .Returns(Task.CompletedTask);
 
-            _cacheMock
-                .Setup(cache => cache.RemoveAsync(
-                    BuildExpectedCacheKey(20, oldDate),
-                    It.IsAny<CancellationToken>()))
-                .Returns(Task.CompletedTask);
-
-            _cacheMock
-                .Setup(cache => cache.RemoveAsync(
-                    BuildExpectedCacheKey(21, newDate),
-                    It.IsAny<CancellationToken>()))
-                .Returns(Task.CompletedTask);
-
             await _service.UpdateAsync(1, dto);
 
             appointment.DoctorId.Should().Be(21);
@@ -936,17 +904,6 @@ namespace S4_HealthAxis.Tests.ServiceTests
                 repository => repository.SaveChangesAsync(),
                 Times.Once);
 
-            _cacheMock.Verify(
-                cache => cache.RemoveAsync(
-                    BuildExpectedCacheKey(20, oldDate),
-                    It.IsAny<CancellationToken>()),
-                Times.Once);
-
-            _cacheMock.Verify(
-                cache => cache.RemoveAsync(
-                    BuildExpectedCacheKey(21, newDate),
-                    It.IsAny<CancellationToken>()),
-                Times.Once);
         }
 
         [Fact]
@@ -1158,11 +1115,6 @@ namespace S4_HealthAxis.Tests.ServiceTests
 
             appointment.Status.Should().Be(AppointmentStatus.Confirmed);
 
-            _cacheMock.Verify(
-                cache => cache.RemoveAsync(
-                    It.IsAny<string>(),
-                    It.IsAny<CancellationToken>()),
-                Times.Never);
         }
 
         [Fact]
@@ -1260,11 +1212,6 @@ namespace S4_HealthAxis.Tests.ServiceTests
                 .Setup(repository => repository.SaveChangesAsync())
                 .Returns(Task.CompletedTask);
 
-            _cacheMock
-                .Setup(cache => cache.RemoveAsync(
-                    BuildExpectedCacheKey(20, appointment.ScheduledDate),
-                    It.IsAny<CancellationToken>()))
-                .Returns(Task.CompletedTask);
 
             var dto = new UpdateAppointmentStatusDto
             {
@@ -1277,11 +1224,6 @@ namespace S4_HealthAxis.Tests.ServiceTests
             appointment.Status.Should().Be(AppointmentStatus.Cancelled);
             appointment.CancellationReason.Should().Be("Patient requested cancellation");
 
-            _cacheMock.Verify(
-                cache => cache.RemoveAsync(
-                    BuildExpectedCacheKey(20, appointment.ScheduledDate),
-                    It.IsAny<CancellationToken>()),
-                Times.Once);
         }
 
         [Fact]
@@ -1475,11 +1417,7 @@ namespace S4_HealthAxis.Tests.ServiceTests
                 .Setup(repository => repository.SaveChangesAsync())
                 .Returns(Task.CompletedTask);
 
-            _cacheMock
-                .Setup(cache => cache.RemoveAsync(
-                    BuildExpectedCacheKey(20, appointment.ScheduledDate),
-                    It.IsAny<CancellationToken>()))
-                .Returns(Task.CompletedTask);
+
 
             var dto = new CancelAppointmentDto
             {
@@ -1491,11 +1429,6 @@ namespace S4_HealthAxis.Tests.ServiceTests
             appointment.Status.Should().Be(AppointmentStatus.Cancelled);
             appointment.CancellationReason.Should().Be("Doctor unavailable");
 
-            _cacheMock.Verify(
-                cache => cache.RemoveAsync(
-                    BuildExpectedCacheKey(20, appointment.ScheduledDate),
-                    It.IsAny<CancellationToken>()),
-                Times.Once);
         }
 
         [Fact]

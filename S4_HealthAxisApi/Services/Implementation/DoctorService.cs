@@ -1,35 +1,27 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.Caching.Distributed;
 using S4_HealthAxis.Shared.DTOs.Doctor;
 using S4_HealthAxis.Shared.Enums;
 using S4_HealthAxisApi.Models;
 using S4_HealthAxisApi.Repository.Interface;
 using S4_HealthAxisApi.Services.Interface;
-using System.Text.Json;
 
 namespace S4_HealthAxisApi.Services.Implementation
 {
     public class DoctorService : IDoctorService
     {
-        private static readonly TimeSpan AvailabilityCacheDuration =
-            TimeSpan.FromMinutes(5);
-
         private readonly IDoctorRepository _doctorRepository;
         private readonly IUserService _userService;
-        private readonly IDistributedCache _cache;
         private readonly ILogger<DoctorService> _logger;
         private readonly IPasswordHasher<User> _passwordHasher;
 
         public DoctorService(
             IDoctorRepository doctorRepository,
             IUserService userService,
-            IDistributedCache cache,
             ILogger<DoctorService> logger,
             IPasswordHasher<User> passwordHasher)
         {
             _doctorRepository = doctorRepository;
             _userService = userService;
-            _cache = cache;
             _logger = logger;
             _passwordHasher = passwordHasher;
         }
@@ -128,57 +120,6 @@ namespace S4_HealthAxisApi.Services.Implementation
                 throw new KeyNotFoundException("Doctor not found.");
             }
 
-            var cacheKey =
-                BuildAvailabilityCacheKey(doctorId, date);
-
-            var cachedAvailability =
-                await _cache.GetStringAsync(cacheKey);
-
-            if (!string.IsNullOrWhiteSpace(cachedAvailability))
-            {
-                var cachedSlots =
-                    JsonSerializer.Deserialize<List<int>>(cachedAvailability)
-                    ?? [];
-
-                _logger.LogInformation(
-                    """
-                    ====================================
-                    GARNET CACHE HIT
-                    ====================================
-
-                    Doctor Id  : {DoctorId}
-                    Date       : {Date:yyyy-MM-dd}
-                    Cache Key  : {CacheKey}
-                    Slot Count : {SlotCount}
-
-                    ====================================
-                    """,
-                    doctorId,
-                    date,
-                    cacheKey,
-                    cachedSlots.Count);
-
-                return cachedSlots;
-            }
-
-            _logger.LogInformation(
-                """
-                ====================================
-                GARNET CACHE MISS
-                ====================================
-
-                Doctor Id : {DoctorId}
-                Date      : {Date:yyyy-MM-dd}
-                Cache Key : {CacheKey}
-
-                Querying database for booked slots...
-
-                ====================================
-                """,
-                doctorId,
-                date,
-                cacheKey);
-
             var bookedSlots =
                 await _doctorRepository.GetBookedSlotsAsync(
                     doctorId,
@@ -193,37 +134,21 @@ namespace S4_HealthAxisApi.Services.Implementation
                     .Except(bookedSlots)
                     .ToList();
 
-            var serializedAvailability =
-                JsonSerializer.Serialize(availableSlots);
-
-            await _cache.SetStringAsync(
-                cacheKey,
-                serializedAvailability,
-                new DistributedCacheEntryOptions
-                {
-                    AbsoluteExpirationRelativeToNow =
-                        AvailabilityCacheDuration
-                });
-
             _logger.LogInformation(
                 """
                 ====================================
-                GARNET CACHE STORED
+                DOCTOR AVAILABILITY CALCULATED
                 ====================================
 
-                Doctor Id   : {DoctorId}
-                Date        : {Date:yyyy-MM-dd}
-                Cache Key   : {CacheKey}
-                Slot Count  : {SlotCount}
-                TTL Minutes : {TTLMinutes}
+                Doctor Id  : {DoctorId}
+                Date       : {Date:yyyy-MM-dd}
+                Slot Count : {SlotCount}
 
                 ====================================
                 """,
                 doctorId,
                 date,
-                cacheKey,
-                availableSlots.Count,
-                AvailabilityCacheDuration.TotalMinutes);
+                availableSlots.Count);
 
             return availableSlots;
         }
@@ -314,13 +239,6 @@ namespace S4_HealthAxisApi.Services.Implementation
             await _doctorRepository.SaveChangesAsync();
         }
 
-        private static string BuildAvailabilityCacheKey(
-            int doctorId,
-            DateOnly date)
-        {
-            return $"doctors:{doctorId}:availability:{date:yyyy-MM-dd}";
-        }
-
         private static void ValidateDoctor(CreateDoctorDto dto)
         {
             if (string.IsNullOrWhiteSpace(dto.FullName))
@@ -398,4 +316,3 @@ namespace S4_HealthAxisApi.Services.Implementation
         }
     }
 }
-
