@@ -208,3 +208,4 @@ namespace S4_HealthAxisApi.Middleware
     }
 }
 
+// Exception middleware file. 
