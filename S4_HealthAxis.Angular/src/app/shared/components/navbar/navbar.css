@@ -8,14 +8,7 @@
   align-items: center;
   justify-content: space-between;
 
-  background:
-    linear-gradient(
-      135deg,
-      rgba(14, 116, 144, 0.78),
-      rgba(37, 99, 235, 0.66),
-      rgba(59, 130, 246, 0.58)
-    ),
-    rgba(255, 255, 255, 0.12);
+  background: linear-gradient(135deg, #1E3A8A 0%, #3B82F6 100%);
 
   backdrop-filter: blur(22px);
   -webkit-backdrop-filter: blur(22px);
