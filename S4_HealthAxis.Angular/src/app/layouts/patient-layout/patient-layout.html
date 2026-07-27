@@ -1,5 +1,30 @@
 <section class="ha-patient-layout">
-  <aside class="ha-patient-sidebar">
+  
+  <!-- Floating Hamburger Button (Only visible on mobile) -->
+  <button 
+    class="ha-mobile-hamburger" 
+    (click)="toggleMobileMenu()" 
+    [class.hidden]="isMobileMenuOpen"
+    aria-label="Open mobile menu"
+  >
+    <i class="bi bi-list"></i>
+  </button>
+
+  <!-- Dark overlay when menu is open -->
+  @if (isMobileMenuOpen) {
+    <div class="ha-sidebar-backdrop" (click)="closeMobileMenu()"></div>
+  }
+
+  <!-- Sidebar (Sliding drawer on mobile) -->
+  <aside class="ha-patient-sidebar" [class.mobile-open]="isMobileMenuOpen">
+    
+    <!-- Mobile close button -->
+    <div class="ha-mobile-close-bar">
+      <button (click)="closeMobileMenu()" aria-label="Close mobile menu">
+        <i class="bi bi-x-lg"></i>
+      </button>
+    </div>
+
     <div class="ha-patient-sidebar-top">
       <span class="ha-patient-sidebar-logo">
         <i class="bi bi-heart-pulse"></i>
@@ -15,6 +40,7 @@
         routerLink="/patient/dashboard"
         routerLinkActive="active"
         class="ha-patient-sidebar-link"
+        (click)="closeMobileMenu()"
       >
         <i class="bi bi-grid-1x2"></i>
         <span>Dashboard</span>
@@ -24,6 +50,7 @@
         routerLink="/patient/doctors"
         routerLinkActive="active"
         class="ha-patient-sidebar-link"
+        (click)="closeMobileMenu()"
       >
         <i class="bi bi-calendar-plus"></i>
         <span>Book Appointment</span>
@@ -33,6 +60,7 @@
         routerLink="/patient/appointments"
         routerLinkActive="active"
         class="ha-patient-sidebar-link"
+        (click)="closeMobileMenu()"
       >
         <i class="bi bi-calendar2-week"></i>
         <span>My Appointments</span>
@@ -42,6 +70,7 @@
         routerLink="/patient/history"
         routerLinkActive="active"
         class="ha-patient-sidebar-link"
+        (click)="closeMobileMenu()"
       >
         <i class="bi bi-journal-medical"></i>
         <span>Health History</span>
@@ -51,6 +80,7 @@
         routerLink="/patient/profile"
         routerLinkActive="active"
         class="ha-patient-sidebar-link"
+        (click)="closeMobileMenu()"
       >
         <i class="bi bi-person-vcard"></i>
         <span>My Profile</span>

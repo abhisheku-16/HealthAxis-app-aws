@@ -83,41 +83,6 @@
   box-shadow: 0 12px 28px rgba(37, 99, 235, 0.34);
 }
 
-/* ==========================================================================
-   MOBILE NAVIGATION OPTIMIZATIONS
-   ========================================================================== */
-@media (max-width: 760px) {
-  .ha-navbar {
-    height: auto;
-    min-height: auto;
-    padding: 16px;
-    align-items: center;
-    flex-direction: column;
-    gap: 16px;
-  }
-
-  .ha-nav-links {
-    width: 100%;
-    overflow-x: auto;
-    gap: 16px;
-    padding-bottom: 4px;
-    justify-content: center;
-    
-    /* Smooth touch scrolling and hide scrollbar for clean UI */
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none; /* Firefox */
-  }
-  
-  .ha-nav-links::-webkit-scrollbar {
-    display: none; /* Chrome/Safari/Edge */
-  }
-
-  .ha-nav-links a {
-    white-space: nowrap;
-    padding: 8px 4px; /* Increases touch target area */
-  }
-}
-
 .ha-profile-menu {
   position: relative;
 }
@@ -244,25 +209,6 @@
   color: #b91c1c;
 }
 
-@media (max-width: 760px) {
-  .ha-profile-menu {
-    width: 100%;
-    max-width: 320px; /* Keep it from stretching too wide on landscape phones */
-    margin: 0 auto;
-  }
-
-  .ha-profile-button {
-    width: 100%;
-    justify-content: space-between;
-  }
-
-  .ha-profile-dropdown {
-    position: static;
-    width: 100%;
-    margin-top: 10px;
-  }
-}
-
 /* CHANGE PASSWORD MODAL */
 
 .ha-password-modal-backdrop {
@@ -287,7 +233,7 @@
   border: 1px solid rgba(203, 232, 255, 0.95);
   box-shadow: 0 30px 80px rgba(15, 23, 42, 0.28);
   padding: 34px;
-  max-height: 90vh; /* Prevent modal from overflowing off screen vertically */
+  max-height: 90vh;
   overflow-y: auto;
 }
 
@@ -525,31 +471,6 @@
   border: 1px solid #bfdbfe;
 }
 
-/* ==========================================================================
-   MOBILE MODAL OPTIMIZATIONS
-   ========================================================================== */
-@media (max-width: 700px) {
-  .ha-password-modal-backdrop {
-    padding: 16px; /* Less padding to give modal more room */
-  }
-
-  .ha-password-modal-card {
-    padding: 24px 20px; /* Tighter internal padding for small screens */
-    border-radius: 20px;
-  }
-
-  .ha-password-modal-actions {
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .ha-password-primary-btn,
-  .ha-password-secondary-btn,
-  .ha-logout-danger-btn {
-    width: 100%;
-  }
-}
-
 /* LOGOUT CONFIRMATION MODAL */
 
 .ha-logout-confirm-card {
@@ -613,4 +534,65 @@
 
 .ha-password-rules li.valid::before {
   content: "✓";
+}
+
+/* ==========================================================================
+   MOBILE NAVIGATION OPTIMIZATIONS
+   ========================================================================== */
+@media (max-width: 760px) {
+  .ha-navbar {
+    height: 76px;
+    min-height: 76px;
+    padding: 0 16px;
+    flex-direction: row; 
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .ha-nav-links {
+    width: auto;
+    padding-bottom: 0;
+    gap: 10px;
+    overflow: visible; 
+  }
+
+  /* Hide the user's name on mobile to save space */
+  .ha-profile-text {
+    display: none;
+  }
+
+  .ha-profile-button {
+    padding: 6px 12px;
+    width: auto;
+  }
+
+  /* Force the dropdown to float over the content */
+  .ha-profile-dropdown {
+    position: absolute;
+    right: 0;
+    top: calc(100% + 12px);
+    width: 260px;
+    margin-top: 0;
+  }
+
+  /* Modal responsive rules */
+  .ha-password-modal-backdrop {
+    padding: 16px; 
+  }
+
+  .ha-password-modal-card {
+    padding: 24px 20px; 
+    border-radius: 20px;
+  }
+
+  .ha-password-modal-actions {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .ha-password-primary-btn,
+  .ha-password-secondary-btn,
+  .ha-logout-danger-btn {
+    width: 100%;
+  }
 }
