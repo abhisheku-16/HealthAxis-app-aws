@@ -6,7 +6,7 @@
     <span>HealthAxis</span>
   </a>
 
-  <nav class="ha-nav-links">
+  <nav class="ha-nav-links" aria-label="Main Navigation">
     @if (!isLoggedIn) {
       @if (showHomeLink) {
         <a
@@ -39,7 +39,7 @@
 
     @if (isLoggedIn) {
       <div class="ha-profile-menu">
-        <button type="button" class="ha-profile-button" (click)="toggleMenu()">
+        <button type="button" class="ha-profile-button" (click)="toggleMenu()" aria-label="Toggle profile menu">
           <span class="ha-profile-avatar">
             <i class="bi bi-person-circle"></i>
           </span>
@@ -91,6 +91,7 @@
         class="ha-password-modal-close"
         [disabled]="changingPassword"
         (click)="closeChangePasswordModal()"
+        aria-label="Close password modal"
       >
         <i class="bi bi-x-lg"></i>
       </button>
@@ -134,6 +135,7 @@
             type="button"
             class="ha-password-toggle"
             (click)="toggleCurrentPasswordVisibility()"
+            aria-label="Toggle current password visibility"
           >
             <i
               class="bi"
@@ -159,6 +161,7 @@
             type="button"
             class="ha-password-toggle"
             (click)="toggleNewPasswordVisibility()"
+            aria-label="Toggle new password visibility"
           >
             <i
               class="bi"
@@ -213,6 +216,7 @@
             type="button"
             class="ha-password-toggle"
             (click)="toggleConfirmPasswordVisibility()"
+            aria-label="Toggle confirm password visibility"
           >
             <i
               class="bi"

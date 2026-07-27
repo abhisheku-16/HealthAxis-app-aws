@@ -479,6 +479,8 @@
   border: 1px solid rgba(203, 232, 255, 0.95);
   box-shadow: 0 30px 80px rgba(15, 23, 42, 0.28);
   padding: 34px;
+  max-height: 90vh; /* Prevent modal overflowing on small screens */
+  overflow-y: auto;
   animation: modalSlideUp 0.25s ease;
 }
 
@@ -612,7 +614,9 @@
   }
 }
 
-/* RESPONSIVE */
+/* ==========================================================================
+   MOBILE OPTIMIZATIONS
+   ========================================================================== */
 
 @media (max-width: 1000px) {
   .ha-book-hero,
@@ -635,16 +639,21 @@
   }
 }
 
-@media (max-width: 700px) {
+@media (max-width: 768px) {
   .ha-book-page {
-    padding: 28px 18px 56px;
+    padding: 24px 16px 60px; /* Standardized mobile padding */
   }
 
   .ha-book-hero,
   .ha-book-panel,
   .ha-confirm-panel,
   .ha-modal-card {
-    padding: 28px;
+    padding: 24px 20px;
+    border-radius: 26px;
+  }
+
+  .ha-book-hero h1 {
+    font-size: clamp(2rem, 8vw, 2.8rem);
   }
 
   .ha-slot-grid,
@@ -654,7 +663,7 @@
 
   .ha-confirm-actions,
   .ha-modal-actions {
-    flex-direction: column;
+    flex-direction: column-reverse; /* "Cancel" falls below primary action */
   }
 
   .ha-confirm-actions a,
@@ -672,4 +681,3 @@
     text-align: left;
   }
 }
-  

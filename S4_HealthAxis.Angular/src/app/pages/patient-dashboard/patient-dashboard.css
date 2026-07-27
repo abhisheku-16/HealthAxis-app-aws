@@ -101,6 +101,7 @@
   border-radius: 15px;
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 9px;
   text-decoration: none;
   font-weight: 850;
@@ -521,7 +522,9 @@
   gap: 8px;
 }
 
-/* RESPONSIVE */
+/* ==========================================================================
+   MOBILE OPTIMIZATIONS
+   ========================================================================== */
 
 @media (max-width: 1100px) {
   .ha-dashboard-hero,
@@ -542,17 +545,35 @@
   }
 }
 
-@media (max-width: 700px) {
+@media (max-width: 768px) {
   .ha-dashboard-page {
-    padding: 28px 18px 56px;
+    padding: 24px 16px 60px;
   }
 
-  .ha-dashboard-hero {
-    padding: 28px;
+  .ha-dashboard-hero,
+  .ha-panel,
+  .ha-next-appointment-card {
+    padding: 24px 20px;
+    border-radius: 26px;
+  }
+
+  .ha-dashboard-hero h1 {
+    font-size: clamp(2rem, 8vw, 2.8rem);
+  }
+
+  /* Make actions full width on small screens */
+  .ha-dashboard-actions {
+    flex-direction: column;
+  }
+  
+  .ha-primary-btn,
+  .ha-secondary-btn {
+    width: 100%;
   }
 
   .ha-stat-grid {
     grid-template-columns: 1fr;
+    gap: 14px;
   }
 
   .ha-appointment-meta {
@@ -561,19 +582,27 @@
 
   .ha-appointment-meta div {
     width: 100%;
+    justify-content: center; /* Center the icon and text when stacked */
   }
 
   .ha-panel-header {
     flex-direction: column;
+    gap: 8px;
   }
 
   .ha-list-item {
     align-items: flex-start;
     flex-direction: column;
+    gap: 10px;
   }
 
   .ha-status {
     width: fit-content;
   }
+  
+  .ha-doctor-line {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
 }
-

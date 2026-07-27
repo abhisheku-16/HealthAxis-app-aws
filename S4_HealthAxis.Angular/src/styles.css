@@ -1,1 +1,54 @@
-/* You can add global styles to this file, and also import other style files */
+/* ==========================================================================
+   GLOBAL MOBILE RESETS & FOUNDATION
+   ========================================================================== */
+
+/* Ensure padding and borders don't break width calculations */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+/* Prevent horizontal scrolling (a very common issue on mobile devices) */
+html, body {
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
+}
+
+/* Remove default blue tap highlight on mobile to make buttons feel native */
+a, button, input, select, textarea {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Smooth momentum scrolling for responsive tables on iOS */
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch; 
+}
+
+/* ==========================================================================
+   MOBILE-SPECIFIC ACCESSIBILITY (Screens under 768px)
+   ========================================================================== */
+@media screen and (max-width: 768px) {
+  
+  /* 
+   * iOS Safari automatically zooms in if input text is less than 16px. 
+   * This forces inputs to 16px to prevent annoying auto-zooming.
+   */
+  input, select, textarea {
+    font-size: 16px !important;
+  }
+
+  /* Ensure interactive elements have a minimum tap target height of 44px */
+  button, 
+  .btn, 
+  .form-control,
+  .form-select {
+    min-height: 44px;
+  }
+}

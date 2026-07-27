@@ -384,8 +384,9 @@
   line-height: 1.75;
 }
 
-/* RESPONSIVE */
-
+/* ==========================================================================
+   MOBILE OPTIMIZATIONS
+   ========================================================================== */
 @media (max-width: 1100px) {
   .ha-hero {
     grid-template-columns: 1fr;
@@ -396,22 +397,42 @@
   }
 }
 
-@media (max-width: 760px) {
+@media (max-width: 768px) {
   .ha-landing {
-    padding: 34px 18px 56px;
+    padding: 24px 16px 56px;
+  }
+
+  /* Fade out background orbs on mobile to reduce visual noise */
+  .ha-bg-orb {
+    opacity: 0.2;
+    transform: scale(0.7);
   }
 
   .ha-hero-copy,
   .ha-preview-card {
-    padding: 30px;
+    padding: 28px 22px;
+    border-radius: 26px;
   }
 
   .ha-hero-copy h1 {
     font-size: clamp(2.1rem, 12vw, 3.2rem);
   }
+  
+  /* Make buttons full width on small screens for easier thumb tapping */
+  .ha-hero-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .ha-primary-btn,
+  .ha-secondary-btn {
+    width: 100%;
+    justify-content: center;
+  }
 
   .ha-preview-header {
     flex-direction: column;
+    gap: 10px;
   }
 
   .ha-preview-bottom {
@@ -422,4 +443,3 @@
     grid-template-columns: 1fr;
   }
 }
-

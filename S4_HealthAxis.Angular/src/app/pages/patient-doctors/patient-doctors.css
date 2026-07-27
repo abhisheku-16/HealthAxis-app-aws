@@ -212,6 +212,8 @@
 
 .ha-doctor-card {
   padding: 24px;
+  display: flex;
+  flex-direction: column;
   transition:
     transform 0.22s ease,
     box-shadow 0.22s ease,
@@ -290,6 +292,7 @@
   display: grid;
   gap: 10px;
   margin-bottom: 20px;
+  flex-grow: 1; /* Pushes the book button to the bottom of the card */
 }
 
 .ha-doctor-meta span {
@@ -326,6 +329,7 @@
 
 .ha-doctor-actions {
   display: flex;
+  margin-top: auto; /* Ensures buttons align at bottom even if card heights differ */
 }
 
 .ha-book-btn {
@@ -401,14 +405,12 @@
   color: #112033;
 }
 
-/* RESPONSIVE */
+/* ==========================================================================
+   MOBILE OPTIMIZATIONS
+   ========================================================================== */
 
 @media (max-width: 1100px) {
   .ha-doctors-hero {
-    grid-template-columns: 1fr;
-  }
-
-  .ha-filter-panel {
     grid-template-columns: 1fr;
   }
 
@@ -417,24 +419,41 @@
   }
 }
 
-@media (max-width: 700px) {
+@media (max-width: 768px) {
   .ha-doctors-page {
-    padding: 28px 18px 56px;
+    padding: 24px 16px 60px; /* Standardized mobile padding */
   }
 
-  .ha-doctors-hero {
-    padding: 28px;
+  .ha-doctors-hero,
+  .ha-filter-panel {
+    padding: 24px 20px;
+    border-radius: 26px;
+  }
+  
+  .ha-doctors-hero h1 {
+    font-size: clamp(2rem, 8vw, 2.8rem);
+  }
+
+  .ha-filter-panel {
+    grid-template-columns: 1fr; /* Stacks Search, Filter, and Clear button vertically */
+    gap: 16px;
+  }
+
+  .ha-clear-btn {
+    width: 100%;
+    margin-top: 8px; /* Adds a little separation from the inputs */
   }
 
   .ha-doctor-grid {
     grid-template-columns: 1fr;
   }
 
+  /* Keep the internal doctor stats 50/50 on mobile for space efficiency */
   .ha-doctor-info-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr); 
   }
-
-  .ha-clear-btn {
+  
+  .ha-book-btn {
     width: 100%;
   }
 }

@@ -271,6 +271,8 @@
 
 .ha-card-actions {
   margin-top: 18px;
+  display: flex;
+  gap: 12px;
 }
 
 .ha-cancel-btn,
@@ -376,6 +378,8 @@
   max-width: 560px;
   padding: 34px;
   background: rgba(255, 255, 255, 0.96);
+  max-height: 90vh; /* Prevent modal overflowing on small screens */
+  overflow-y: auto;
 }
 
 .ha-modal-close {
@@ -479,7 +483,9 @@
   gap: 12px;
 }
 
-/* RESPONSIVE */
+/* ==========================================================================
+   MOBILE OPTIMIZATIONS
+   ========================================================================== */
 
 @media (max-width: 1000px) {
   .ha-appointments-hero {
@@ -495,14 +501,15 @@
   }
 }
 
-@media (max-width: 700px) {
+@media (max-width: 768px) {
   .ha-appointments-page {
-    padding: 28px 18px 56px;
+    padding: 24px 16px 60px; /* Standardized mobile padding */
   }
 
   .ha-appointments-hero,
   .ha-modal-card {
-    padding: 28px;
+    padding: 24px 20px;
+    border-radius: 26px;
   }
 
   .ha-stat-grid {
@@ -510,23 +517,35 @@
   }
 
   .ha-card-top {
-    flex-direction: column;
+    flex-direction: column; /* Stack header elements on mobile */
+    gap: 8px;
+  }
+  
+  .ha-status {
+    align-self: flex-start; /* Ensure status badge doesn't stretch when stacked */
+  }
+  
+  .ha-card-actions {
+    flex-direction: column; /* Stack cancel buttons */
   }
 
   .ha-review-list div {
-    flex-direction: column;
+    flex-direction: column; /* Stack summary items in modal */
+    gap: 4px;
   }
 
   .ha-review-list strong {
-    text-align: left;
+    text-align: left; /* Align text left when stacked */
   }
 
   .ha-modal-actions {
-    flex-direction: column;
+    flex-direction: column-reverse; /* "Cancel" below primary action */
   }
 
-  .ha-modal-actions button {
+  .ha-modal-actions button,
+  .ha-modal-actions .ha-primary-btn,
+  .ha-modal-actions .ha-secondary-btn,
+  .ha-modal-actions .ha-danger-btn {
     width: 100%;
   }
 }
-

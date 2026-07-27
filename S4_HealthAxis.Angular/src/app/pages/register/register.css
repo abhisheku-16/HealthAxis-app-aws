@@ -383,24 +383,50 @@
   }
 }
 
-/* Responsive */
-
-@media (max-width: 760px) {
-  .ha-register-card {
-    padding: 28px;
+/* ==========================================================================
+   MOBILE OPTIMIZATIONS
+   ========================================================================== */
+@media (max-width: 768px) {
+  .ha-register-page {
+    padding: 24px 16px;
+    align-items: flex-start; /* Prevents top of form cutting off on very small phones */
   }
 
+  .ha-register-card {
+    padding: 28px 22px;
+    border-radius: 26px;
+  }
+
+  .ha-register-header h2 {
+    font-size: 1.7rem;
+  }
+
+  /* Keep stepper horizontal but hide the text descriptions to save space */
   .ha-stepper {
-    grid-template-columns: 1fr;
+    grid-template-columns: auto 1fr auto;
+    gap: 14px;
+    padding: 0 10px;
+  }
+
+  .ha-step strong, 
+  .ha-step small {
+    display: none; 
+  }
+
+  .ha-step span {
+    width: 38px;
+    height: 38px;
+  }
+
+  /* Stack form buttons, pushing primary action to the top for easy reach */
+  .ha-step-actions {
+    display: flex;
+    flex-direction: column-reverse; /* "Next" on top, "Back" on bottom */
     gap: 12px;
   }
 
-  .ha-step-line {
-    display: none;
-  }
-
-  .ha-step-actions {
-    grid-template-columns: 1fr;
+  .ha-primary-action, 
+  .ha-secondary-action {
+    width: 100%;
   }
 }
-
