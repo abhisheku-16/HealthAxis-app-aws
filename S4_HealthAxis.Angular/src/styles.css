@@ -53,3 +53,24 @@ a, button, input, select, textarea {
     min-height: 44px;
   }
 }
+
+/* ==========================================================================
+   GLOBAL GAP & SPACING FIX
+   ========================================================================== */
+
+/* 1. Force all Angular routed components to behave as blocks and strip rogue margins */
+router-outlet + * {
+    display: block !important;
+    margin-top: 0 !important;
+    width: 100%;
+}
+
+/* 2. Ensure all layout wrappers and main tags snap flush to the fixed navbar */
+main, section, [class$="-page"], [class*="-layout"] {
+    margin-top: 0 !important;
+}
+
+/* 3. Strip any rogue margins from the top headers inside pages that might cause margin-collapse */
+.ha-page-header, h1, h2, h3 {
+    margin-top: 0;
+}
