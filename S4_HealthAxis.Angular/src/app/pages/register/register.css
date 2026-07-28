@@ -1,10 +1,11 @@
 .ha-register-page {
-  margin-top: 0; /* Prevents margin collapse that causes the white strip */
-  min-height: calc(100vh - 76px); /* Adjusted for removed footer */
+  margin-top: 0;
+  min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 42px 20px 42px; /* Standardized bottom padding without footer gap */
+  padding: 120px 20px 42px;
+  /* 76px for the navbar + 44px breathing room */
 }
 
 .ha-register-card {
@@ -40,7 +41,8 @@
 }
 
 .ha-register-header h2 {
-  margin: 0 0 10px; /* Zero top margin prevents pushing the background down */
+  margin: 0 0 10px;
+  /* Zero top margin prevents pushing the background down */
   color: #101827;
   font-size: 2rem;
   font-weight: 850;
@@ -389,8 +391,9 @@
    ========================================================================== */
 @media (max-width: 768px) {
   .ha-register-page {
-    padding: 24px 16px 24px; /* Standardized mobile padding without footer gap */
-    align-items: flex-start; /* Prevents top of form cutting off on very small phones */
+    padding: 100px 16px 24px;
+    /* Keeps it clear of the navbar on mobile */
+    align-items: flex-start;
   }
 
   .ha-register-card {
@@ -409,9 +412,9 @@
     padding: 0 10px;
   }
 
-  .ha-step strong, 
+  .ha-step strong,
   .ha-step small {
-    display: none; 
+    display: none;
   }
 
   .ha-step span {
@@ -422,11 +425,12 @@
   /* Stack form buttons, pushing primary action to the top for easy reach */
   .ha-step-actions {
     display: flex;
-    flex-direction: column-reverse; /* "Next" on top, "Back" on bottom */
+    flex-direction: column-reverse;
+    /* "Next" on top, "Back" on bottom */
     gap: 12px;
   }
 
-  .ha-primary-action, 
+  .ha-primary-action,
   .ha-secondary-action {
     width: 100%;
   }

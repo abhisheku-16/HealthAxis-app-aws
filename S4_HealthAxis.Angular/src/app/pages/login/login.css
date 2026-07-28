@@ -1,7 +1,7 @@
 .ha-login-page {
-  margin-top: 0; /* Prevents margin collapse that causes the white strip */
-  min-height: calc(100vh - 76px); /* Adjusted for removed footer */
-  padding: 54px 24px 42px; /* Reduced bottom padding since footer is gone */
+  margin-top: 0; 
+  min-height: 100vh; 
+  padding: 120px 24px 42px; /* 76px for the navbar + 44px breathing room */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -258,8 +258,8 @@
    ========================================================================== */
 @media (max-width: 768px) {
   .ha-login-page {
-    padding: 24px 16px 24px; /* Standardized mobile padding without footer gap */
-    align-items: flex-start; /* Prevents top of form cutting off on very small phones */
+    padding: 100px 16px 24px; /* Keeps it clear of the navbar on mobile */
+    align-items: flex-start;
   }
 
   .ha-login-card {
