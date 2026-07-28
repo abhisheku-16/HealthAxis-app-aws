@@ -10,7 +10,6 @@ import {
   AppointmentStatus,
   AppointmentTimeSlot,
   PatientAppointment,
-  PatientHealthRecord,
   PatientProfile
 } from '../../shared/models/patient-dashboard.models';
 
@@ -29,7 +28,6 @@ export class PatientDashboard implements OnInit {
 
   patient?: PatientProfile;
   appointments: PatientAppointment[] = [];
-  healthRecords: PatientHealthRecord[] = [];
 
   constructor(
     private readonly tokenService: TokenService,
@@ -59,19 +57,7 @@ export class PatientDashboard implements OnInit {
       next: ({ patient, appointments }) => {
         this.patient = patient;
         this.appointments = this.sortAppointments(appointments ?? []);
-
-        this.patientPortalService
-          .getHealthRecordsForAppointments(this.appointments)
-          .subscribe({
-            next: (records) => {
-              this.healthRecords = records ?? [];
-              this.loading = false;
-            },
-            error: () => {
-              this.healthRecords = [];
-              this.loading = false;
-            }
-          });
+        this.loading = false;
       },
       error: (error) => {
         this.loading = false;
@@ -169,10 +155,6 @@ export class PatientDashboard implements OnInit {
     return this.appointments.slice(0, 4);
   }
 
-  get recentHealthRecords(): PatientHealthRecord[] {
-    return this.healthRecords.slice(0, 3);
-  }
-
   statusText(status: number): string {
     switch (status) {
       case AppointmentStatus.Pending:
@@ -254,35 +236,6 @@ export class PatientDashboard implements OnInit {
     }
   }
 
-  recordDoctorName(record: PatientHealthRecord): string {
-    return (
-      record.doctorName ??
-      record.doctorFullName ??
-      'Doctor'
-    );
-  }
-
-  recordSpecialisation(record: PatientHealthRecord): string {
-    return (
-      record.specialisation ??
-      record.doctorSpecialisation ??
-      'Specialist'
-    );
-  }
-
-  recordVisitDate(record: PatientHealthRecord): string | undefined {
-    return record.visitDate ?? record.createdDate;
-  }
-
-  recordMedication(record: PatientHealthRecord): string {
-    return (
-      record.prescription ??
-      record.prescribedMedication ??
-      record.medication ??
-      'Medication not available'
-    );
-  }
-
   private sortAppointments(appointments: PatientAppointment[]): PatientAppointment[] {
     return [...appointments].sort((a, b) => {
       const dateA = this.getAppointmentDate(a.scheduledDate)?.getTime() ?? 0;
@@ -306,4 +259,3 @@ export class PatientDashboard implements OnInit {
     return Number.isNaN(date.getTime()) ? null : date;
   }
 }
-

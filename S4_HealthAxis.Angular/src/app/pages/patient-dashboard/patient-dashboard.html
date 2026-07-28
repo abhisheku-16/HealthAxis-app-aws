@@ -25,7 +25,7 @@
           <h1>Welcome back, {{ patientName }}.</h1>
 
           <p>
-            Search doctors, book appointments, track visits, and view your health history
+            Search doctors, book appointments, and track visits
             from one simple dashboard.
           </p>
 
@@ -198,60 +198,7 @@
           </div>
         </div>
       </section>
-
-      <!-- HEALTH HISTORY SECTION -->
-      <section class="ha-panel ha-health-panel">
-        <div class="ha-panel-header">
-          <div>
-            <span>Health History</span>
-            <h2>Recent health records</h2>
-          </div>
-
-          <strong class="ha-health-count">
-            {{ healthRecords.length }} record(s)
-          </strong>
-        </div>
-
-        @if (recentHealthRecords.length > 0) {
-          <div class="ha-health-record-grid">
-            @for (record of recentHealthRecords; track $index) {
-              <div class="ha-health-record-card">
-                <div class="ha-health-record-top">
-                  <i class="bi bi-file-medical"></i>
-
-                  <div>
-                    <strong>{{ recordDoctorName(record) }}</strong>
-                    <span>{{ recordSpecialisation(record) }}</span>
-                  </div>
-                </div>
-
-                <p class="ha-diagnosis">
-                  {{ record.diagnosis || 'Diagnosis not available' }}
-                </p>
-
-                <div class="ha-record-meta">
-                  <span>
-                    <i class="bi bi-calendar-event"></i>
-                    {{ recordVisitDate(record) | date:'dd MMM yyyy' }}
-                  </span>
-
-                  <span>
-                    <i class="bi bi-capsule"></i>
-                    {{ recordMedication(record) }}
-                  </span>
-                </div>
-              </div>
-            }
-          </div>
-        } @else {
-          <div class="ha-empty-state">
-            <i class="bi bi-journal-x"></i>
-            <p>No health records found yet.</p>
-          </div>
-        }
-      </section>
     }
 
   </div>
 </section>
-
