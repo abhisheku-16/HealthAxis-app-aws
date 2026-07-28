@@ -1,7 +1,9 @@
 .ha-navbar {
-  position: sticky;
+  position: fixed; /* Changed from sticky to fixed */
   top: 0;
-  z-index: 1000;
+  left: 0;         /* Added */
+  width: 100%;     /* Added to ensure it spans the whole screen */
+  z-index: 2000;   /* Bumped to 2000 so it sits above the mobile sidebar */
   height: 76px;
   padding: 0 34px;
   display: flex;
