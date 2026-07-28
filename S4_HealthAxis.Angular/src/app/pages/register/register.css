@@ -1,9 +1,10 @@
 .ha-register-page {
-  min-height: calc(100vh - 140px);
+  margin-top: 0; /* Prevents margin collapse that causes the white strip */
+  min-height: calc(100vh - 76px); /* Adjusted for removed footer */
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 42px 20px;
+  padding: 42px 20px 42px; /* Standardized bottom padding without footer gap */
 }
 
 .ha-register-card {
@@ -39,7 +40,7 @@
 }
 
 .ha-register-header h2 {
-  margin: 0 0 10px;
+  margin: 0 0 10px; /* Zero top margin prevents pushing the background down */
   color: #101827;
   font-size: 2rem;
   font-weight: 850;
@@ -388,7 +389,7 @@
    ========================================================================== */
 @media (max-width: 768px) {
   .ha-register-page {
-    padding: 24px 16px;
+    padding: 24px 16px 24px; /* Standardized mobile padding without footer gap */
     align-items: flex-start; /* Prevents top of form cutting off on very small phones */
   }
 

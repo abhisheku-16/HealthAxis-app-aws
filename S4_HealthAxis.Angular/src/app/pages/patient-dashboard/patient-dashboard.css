@@ -1,6 +1,7 @@
 .ha-dashboard-page {
-  padding: 42px 30px 80px;
-  min-height: calc(100vh - 140px);
+  margin-top: 0; /* Prevents margin collapse that causes the white strip */
+  padding: 42px 30px 42px; /* Reduced bottom padding since footer is gone */
+  min-height: calc(100vh - 76px); /* Adjusted for removed footer */
 }
 
 .ha-dashboard-shell {
@@ -547,7 +548,7 @@
 
 @media (max-width: 768px) {
   .ha-dashboard-page {
-    padding: 24px 16px 60px;
+    padding: 24px 16px 24px; /* Reduced bottom padding on mobile as well */
   }
 
   .ha-dashboard-hero,

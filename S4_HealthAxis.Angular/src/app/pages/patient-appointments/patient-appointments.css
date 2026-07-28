@@ -1,6 +1,7 @@
 .ha-appointments-page {
-  min-height: calc(100vh - 140px);
-  padding: 42px 30px 80px;
+  margin-top: 0; /* Prevents margin collapse that causes the white strip */
+  padding: 42px 30px 42px; /* Reduced bottom padding since footer is gone */
+  min-height: calc(100vh - 76px); /* Adjusted for removed footer */
 }
 
 .ha-appointments-shell {
@@ -503,7 +504,7 @@
 
 @media (max-width: 768px) {
   .ha-appointments-page {
-    padding: 24px 16px 60px; /* Standardized mobile padding */
+    padding: 24px 16px 24px; /* Standardized mobile padding without footer gap */
   }
 
   .ha-appointments-hero,
