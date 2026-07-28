@@ -137,6 +137,7 @@
 
 .ha-patient-layout-content {
   padding-left: 78px;
+  padding-top: 76px; /* Offset for the fixed 76px navbar */
 }
 
 .ha-patient-layout-content > * {
@@ -162,6 +163,7 @@
   /* Remove desktop layout offset */
   .ha-patient-layout-content {
     padding-left: 0;
+    padding-top: 76px; /* Keep top offset for fixed navbar */
   }
 
   /* Floating Hamburger Button */

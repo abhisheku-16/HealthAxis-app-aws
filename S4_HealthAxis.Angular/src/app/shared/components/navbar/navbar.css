@@ -1,20 +1,18 @@
 .ha-navbar {
-  position: fixed; /* Changed from sticky to fixed */
+  position: fixed; 
   top: 0;
-  left: 0;         /* Added */
-  width: 100%;     /* Added to ensure it spans the whole screen */
-  z-index: 2000;   /* Bumped to 2000 so it sits above the mobile sidebar */
+  left: 0;
+  width: 100%;
+  z-index: 2000;
   height: 76px;
   padding: 0 34px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-
+  
   background: linear-gradient(135deg, #1E3A8A 0%, #3B82F6 100%);
-
   backdrop-filter: blur(22px);
   -webkit-backdrop-filter: blur(22px);
-
   border-bottom: 1px solid rgba(219, 234, 254, 0.36);
   box-shadow: 0 14px 34px rgba(37, 99, 235, 0.18);
 }

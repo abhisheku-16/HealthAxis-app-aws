@@ -132,6 +132,7 @@
 /* Page content offset */
 .ha-doctor-layout-content {
   padding-left: 78px;
+  padding-top: 76px; /* Offset for the fixed navbar */
 }
 
 /* Make child pages sit properly inside sidebar layout */
@@ -147,7 +148,7 @@
 
   .ha-doctor-sidebar {
     position: sticky;
-    top: 76px;
+    top: 76px; /* Anchors the mobile sidebar perfectly below the navbar */
     width: 100%;
     height: auto;
     display: flex;
@@ -155,6 +156,7 @@
     border-right: none;
     border-bottom: 1px solid rgba(203, 232, 255, 0.95);
     overflow-x: auto;
+    z-index: 1100;
   }
 
   .ha-doctor-sidebar:hover {
@@ -185,5 +187,6 @@
 
   .ha-doctor-layout-content {
     padding-left: 0;
+    padding-top: 76px; /* Offset for the fixed navbar on mobile */
   }
 }
