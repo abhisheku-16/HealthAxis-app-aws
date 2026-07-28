@@ -7,14 +7,15 @@
   box-sizing: border-box;
 }
 
-/* Prevent horizontal scrolling (a very common issue on mobile devices) */
+/* Prevent horizontal scrolling and zero-out body margins */
 html, body {
   width: 100%;
   max-width: 100vw;
   overflow-x: hidden;
-  margin: 0;
-  padding: 0;
-  padding-top: 76px; /* Offset to prevent content from hiding behind the fixed navbar */
+  margin: 0 !important;
+  padding: 0 !important;
+  padding-top: 76px !important; /* Offset to prevent content from hiding behind the fixed navbar */
+  background-color: #f0f6ff !important; /* Light blue fallback to hide any sub-pixel white lines */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   scroll-behavior: smooth;
@@ -55,22 +56,33 @@ a, button, input, select, textarea {
 }
 
 /* ==========================================================================
-   GLOBAL GAP & SPACING FIX
+   ULTIMATE GAP & MARGIN CRUSHER (FIXES WHITE STRIPS)
    ========================================================================== */
 
-/* 1. Force all Angular routed components to behave as blocks and strip rogue margins */
-router-outlet + * {
+/* 1. Force the main layout wrappers to sit exactly flush against the navbar */
+main, section, main[class*="-layout-content"], [class*="-layout"] {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+}
+
+/* 2. Force ALL Angular component tags to behave as solid blocks and strip top margins */
+router-outlet + *,
+app-root > * {
     display: block !important;
     margin-top: 0 !important;
+    padding-top: 0 !important;
     width: 100%;
 }
 
-/* 2. Ensure all layout wrappers and main tags snap flush to the fixed navbar */
-main, section, [class$="-page"], [class*="-layout"] {
+/* 3. Strip rogue margins from all individual page containers */
+[class$="-page"], 
+[class$="-wrapper"] {
     margin-top: 0 !important;
 }
 
-/* 3. Strip any rogue margins from the top headers inside pages that might cause margin-collapse */
+/* 4. Prevent headings and first-child elements at the top of a page from pushing the background down (Margin Collapse) */
+.ha-dashboard-page > *:first-child,
+[class$="-page"] > *:first-child,
 .ha-page-header, h1, h2, h3 {
-    margin-top: 0;
+    margin-top: 0 !important;
 }
