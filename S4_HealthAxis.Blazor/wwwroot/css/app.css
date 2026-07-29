@@ -2811,3 +2811,27 @@ code {
         width: 260px !important;
     }
 }
+
+/* ==========================================================================
+   HEALTHAXIS ADMIN TOPBAR BRAND FIX
+   ========================================================================== */
+.ha-brand {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    outline: none !important;
+    color: #ffffff !important;
+    font-weight: 850 !important;
+    font-size: 1.15rem !important;
+    text-decoration: none !important;
+    padding: 0 !important;
+    display: inline-flex;
+    align-items: center;
+}
+
+    .ha-brand:hover,
+    .ha-brand:focus {
+        color: #ffffff !important;
+        background: transparent !important;
+        text-decoration: none !important;
+    }
