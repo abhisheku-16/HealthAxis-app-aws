@@ -2857,3 +2857,12 @@ code {
     border-bottom: 1px solid rgba(219, 234, 254, 0.36);
     box-shadow: 0 14px 34px rgba(37, 99, 235, 0.18);
 }
+
+/* ==========================================================================
+   BLAZOR MAIN CONTENT PADDING FIX
+   ========================================================================== */
+.ha-content,
+.ha-main-content,
+main {
+    padding-top: 96px !important; /* 76px navbar height + 20px comfortable breathing room */
+}
