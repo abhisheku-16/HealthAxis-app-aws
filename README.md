@@ -59,7 +59,6 @@ Here’s what we have so far:
 ### Blazor Admin Workflow
 ![HealthAxis Blazor Admin Screen](docs/screenshots/blazor-admin.png)
 
-*(Note: If a screenshot is missing from your clone, it just means I haven't generated the placeholder image yet!)*
 
 ---
 
