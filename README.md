@@ -8,35 +8,34 @@
 ![AWS Elastic Beanstalk](https://img.shields.io/badge/AWS-Elastic%20Beanstalk-FF9900?style=flat-square&logo=amazonaws)
 ![Jenkins](https://img.shields.io/badge/Jenkins-CI%2FCD-D24939?style=flat-square&logo=jenkins)
 
-**HealthAxis** is a full-stack clinic and healthcare appointment management system built with ASP.NET Core, Angular, Blazor WebAssembly, SQL Server, RabbitMQ, MassTransit, AWS Elastic Beanstalk, and Jenkins CI/CD.
+HealthAxis is a clinic and appointment management system I built to get hands-on with a "real" full-stack setup instead of another CRUD tutorial project. It's got an ASP.NET Core Web API on the backend, two separate frontends (Angular for patients/doctors, Blazor WebAssembly for admin stuff), SQL Server for persistence, RabbitMQ + MassTransit for the event side of things, and it's deployed to AWS through a Jenkins pipeline.
 
-The application supports patient registration, patient login, doctor workflows, appointment booking, patient history, doctor schedules, health records, admin-oriented Blazor workflows, JWT authentication, SQL Server persistence, RabbitMQ messaging, automated tests, AWS deployment, and CI/CD automation.
+It's not a polished commercial product — think of it as a portfolio-grade project that's been pushed far enough to actually behave like production software: real auth, real deployment pipeline, real "why is readiness failing" debugging sessions.
 
 ---
 
-## Live Project URLs
+## Live URLs
 
 | Area | URL |
 |---|---|
 | Angular App | [http://healthaxis-v2-dev.eba-pbcv4if3.ap-south-1.elasticbeanstalk.com/Angular/](http://healthaxis-v2-dev.eba-pbcv4if3.ap-south-1.elasticbeanstalk.com/Angular/) |
 | API Base URL | [http://healthaxis-v2-dev.eba-pbcv4if3.ap-south-1.elasticbeanstalk.com](http://healthaxis-v2-dev.eba-pbcv4if3.ap-south-1.elasticbeanstalk.com) |
-| API Swagger Page | [http://healthaxis-v2-dev.eba-pbcv4if3.ap-south-1.elasticbeanstalk.com/swagger](http://healthaxis-v2-dev.eba-pbcv4if3.ap-south-1.elasticbeanstalk.com/swagger) |
 | Health Check | [http://healthaxis-v2-dev.eba-pbcv4if3.ap-south-1.elasticbeanstalk.com/health](http://healthaxis-v2-dev.eba-pbcv4if3.ap-south-1.elasticbeanstalk.com/health) |
 | Readiness Check | [http://healthaxis-v2-dev.eba-pbcv4if3.ap-south-1.elasticbeanstalk.com/health/ready](http://healthaxis-v2-dev.eba-pbcv4if3.ap-south-1.elasticbeanstalk.com/health/ready) |
 
-> **Note:** Swagger availability may depend on whether Swagger/OpenAPI is enabled in the current deployment environment.
+This is the dev environment, so don't expect five-nines uptime — I redeploy it fairly often while I'm working through Sprint 4 hardening.
 
 ---
 
 ## Screenshots
 
-Add screenshots to the following folder:
+I still need to actually take and drop these in. Folder for them is:
 
 ```text
 docs/screenshots/
 ```
 
-Recommended screenshot files:
+Planned screenshots (filenames below are what the README links expect, so keep them named this way when you add them):
 
 ```text
 docs/screenshots/healthaxis-landing.png
@@ -49,174 +48,108 @@ docs/screenshots/doctor-dashboard.png
 docs/screenshots/blazor-admin.png
 ```
 
-Example screenshot references:
-
 ### Landing Page
-
 ![HealthAxis Landing Page](docs/screenshots/healthaxis-landing.png)
 
 ### Login Page
-
 ![HealthAxis Login Page](docs/screenshots/angular-login.png)
 
 ### Registration Page
-
 ![HealthAxis Registration Page](docs/screenshots/angular-register.png)
 
 ### Patient Dashboard
-
 ![HealthAxis Patient Dashboard](docs/screenshots/patient-dashboard.png)
 
 ### Patient Appointments
-
 ![HealthAxis Patient Appointments](docs/screenshots/patient-appointments.png)
 
 ### Patient History
-
 ![HealthAxis Patient History](docs/screenshots/patient-history.png)
 
 ### Doctor Dashboard
-
 ![HealthAxis Doctor Dashboard](docs/screenshots/doctor-dashboard.png)
 
 ### Blazor Admin Workflow
-
 ![HealthAxis Blazor Admin Screen](docs/screenshots/blazor-admin.png)
 
-> If a screenshot is not available yet, keep the placeholder path and add the image later.
+(Placeholders are fine for now — just don't rename the files without updating the links above.)
 
 ---
 
 ## Table of Contents
 
-- [Project Overview](#project-overview)
-- [Problem Statement](#problem-statement)
-- [Feature List](#feature-list)
-- [Architecture Overview](#architecture-overview)
-- [Application Flow](#application-flow)
-- [Appointment Booking Message Flow](#appointment-booking-message-flow)
-- [Static Hosting Flow](#static-hosting-flow)
-- [CI/CD and AWS Publish Flow](#cicd-and-aws-publish-flow)
-- [Repository Structure](#repository-structure)
-- [Technology Stack](#technology-stack)
-- [Prerequisites](#prerequisites)
-- [Local Setup and Run Instructions](#local-setup-and-run-instructions)
-- [Database Setup and Migration Command](#database-setup-and-migration-command)
-- [Environment Variable Reference](#environment-variable-reference)
-- [Running Tests](#running-tests)
-- [Build and Publish Instructions](#build-and-publish-instructions)
-- [Static Hosting Notes for Angular and Blazor](#static-hosting-notes-for-angular-and-blazor)
-- [AWS Elastic Beanstalk Deployment Notes](#aws-elastic-beanstalk-deployment-notes)
-- [Jenkins CI/CD Pipeline Overview](#jenkins-cicd-pipeline-overview)
-- [Representative API Endpoints](#representative-api-endpoints)
+- [Why This Exists](#why-this-exists)
+- [What It Actually Does](#what-it-actually-does)
+- [Architecture](#architecture)
+- [How a Request Flows Through the App](#how-a-request-flows-through-the-app)
+- [Appointment Booking → RabbitMQ](#appointment-booking--rabbitmq)
+- [How Angular/Blazor Get Served](#how-angularblazor-get-served)
+- [CI/CD Pipeline Flow](#cicd-pipeline-flow)
+- [Repo Layout](#repo-layout)
+- [Tech Stack](#tech-stack)
+- [Before You Start](#before-you-start)
+- [Getting It Running Locally](#getting-it-running-locally)
+- [Database Setup](#database-setup)
+- [Environment Variables](#environment-variables)
+- [Running the Tests](#running-the-tests)
+- [Build & Publish](#build--publish)
+- [Static Hosting Notes](#static-hosting-notes)
+- [AWS Elastic Beanstalk Notes](#aws-elastic-beanstalk-notes)
+- [Jenkins Pipeline](#jenkins-pipeline)
+- [A Few API Endpoints](#a-few-api-endpoints)
 - [Troubleshooting](#troubleshooting)
 - [Security Notes](#security-notes)
-- [Future Improvements](#future-improvements)
-- [What You May Need to Change](#what-you-may-need-to-change)
-- [License and Ownership](#license-and-ownership)
+- [What's Left / Ideas](#whats-left--ideas)
+- [Things You'll Need to Change for Your Own Fork](#things-youll-need-to-change-for-your-own-fork)
+- [License](#license)
 
 ---
 
-## Project Overview
+## Why This Exists
 
-HealthAxis is a multi-project healthcare appointment management application designed to digitize common clinic workflows. It combines a backend API, Angular frontend, Blazor WebAssembly frontend, shared DTO/contracts project, automated tests, SQL Server persistence, RabbitMQ messaging, AWS deployment, and Jenkins CI/CD automation.
+Clinics still run a lot of scheduling by phone calls, sticky notes, and shared spreadsheets. That's fine at small scale, but it falls apart fast once you've got multiple doctors, overlapping schedules, and patients who need to see their own history. I wanted to build something that handles:
 
-The application is centered around the `S4_HealthAxisApi` project. This API project serves backend endpoints and also hosts the compiled Angular and Blazor static files:
+- Patient registration and login
+- Doctor and patient dashboards that don't feel like an afterthought
+- Appointment booking that's actually validated server-side (slot, doctor, patient)
+- Appointment history per patient
+- Doctor schedules
+- Health record association tied to appointments
+- An admin surface that's architecturally separate from the patient-facing app (hence Blazor living on its own)
+- Everything backed by SQL Server, with appointment events flowing through RabbitMQ instead of being handled inline
 
-```text
-/Angular/ -> Angular frontend
-/Blazor/  -> Blazor WebAssembly frontend
-/api/...  -> ASP.NET Core Web API endpoints
-/health   -> liveness endpoint
-/health/ready -> readiness endpoint
-```
+## What It Actually Does
 
-This deployment approach allows HealthAxis to be deployed as a single AWS Elastic Beanstalk application while still keeping Angular, Blazor, API, shared contracts, and tests separated in the source code.
+**Auth**
+JWT-based login, role-based authorization, protected endpoints behind bearer tokens.
 
----
+**Patients**
+Registration, login, dashboard, profile lookup, appointment history, browsing doctors and booking a slot.
 
-## Problem Statement
+**Doctors**
+Doctor-facing views and schedule handling through the Angular app.
 
-Clinic and healthcare appointment workflows often involve manual scheduling, fragmented patient and doctor coordination, limited appointment visibility, and disconnected administrative workflows. These problems can reduce operational efficiency and make it harder to track patient history and upcoming care.
+**Appointments**
+Booking, per-patient history, doctor/patient association, and an event published to RabbitMQ once a booking is confirmed.
 
-HealthAxis addresses this by providing a digital workflow for:
+**Health records**
+Tied to appointments, surfaced through the patient history views.
 
-- Patient registration and login.
-- Doctor and patient dashboards.
-- Appointment booking.
-- Patient appointment history.
-- Doctor schedules.
-- Health record/history association.
-- Admin-oriented Blazor workflows.
-- Reliable persistence through SQL Server.
-- Asynchronous event processing through RabbitMQ and MassTransit.
-- Cloud deployment through AWS Elastic Beanstalk.
-- Automated CI/CD through Jenkins.
+**Admin (Blazor)**
+A separate WebAssembly app under `/Blazor/` for admin-side workflows — kept apart from the Angular app on purpose so the two frontends don't end up tangled together.
 
----
+**Messaging**
+RabbitMQ + MassTransit. Appointment bookings publish to `appointment-booked-queue`.
 
-## Feature List
+**Health checks**
+`/health` for liveness, `/health/ready` for actually checking SQL Server and RabbitMQ are reachable — this one caught a real infra bug for me, more on that below.
 
-### Authentication and Authorization
-
-- JWT-based authentication.
-- Role-based authorization.
-- Login endpoint for authenticated users.
-- Token-driven access for protected API endpoints.
-
-### Patient Workflows
-
-- Patient registration.
-- Patient login.
-- Patient dashboard.
-- Patient profile retrieval.
-- Patient appointment history.
-- Patient doctor listing and booking workflows.
-
-### Doctor Workflows
-
-- Doctor-facing workflows.
-- Doctor schedule support.
-- Doctor dashboard and patient-related views through the Angular application.
-
-### Appointment Management
-
-- Appointment booking.
-- Appointment history retrieval by patient.
-- Appointment association with doctor and patient records.
-- Appointment-related message flow through RabbitMQ/MassTransit.
-
-### Health Records and History
-
-- Health record/history association with appointments.
-- Patient history views backed by API data.
-
-### Admin-Oriented Blazor Workflows
-
-- Blazor WebAssembly frontend served under `/Blazor/`.
-- Admin-oriented workflows through a separate frontend client.
-
-### Messaging
-
-- RabbitMQ broker integration.
-- MassTransit messaging abstraction.
-- Appointment queue: `appointment-booked-queue`.
-
-### Service Health
-
-- `/health` liveness endpoint.
-- `/health/ready` readiness endpoint.
-
-### DevOps and Deployment
-
-- AWS Elastic Beanstalk deployment.
-- S3-hosted deployment bundles.
-- Jenkins CI/CD pipeline.
-- GitHub source control.
+**Deployment**
+AWS Elastic Beanstalk, deployment bundles staged through S3, Jenkins doing the build/test/deploy.
 
 ---
 
-## Architecture Overview
+## Architecture
 
 ```mermaid
 flowchart LR
@@ -233,7 +166,7 @@ flowchart LR
     API --> Health[/health and /health/ready/]
 ```
 
-High-level deployment architecture:
+And roughly how a deploy moves:
 
 ```mermaid
 flowchart LR
@@ -247,9 +180,19 @@ flowchart LR
     EB --> Env[healthaxis-v2-dev Environment]
 ```
 
----
+One thing worth calling out: the API project (`S4_HealthAxisApi`) is also what serves the two frontends. Rather than standing up separate static hosting, the Angular build output and the Blazor publish output both get copied into the API's `wwwroot` and served from there:
 
-## Application Flow
+```text
+/Angular/ -> Angular frontend
+/Blazor/  -> Blazor WebAssembly frontend
+/api/...  -> ASP.NET Core Web API endpoints
+/health   -> liveness endpoint
+/health/ready -> readiness endpoint
+```
+
+Not the "correct" microservices way of doing it, but it means one Elastic Beanstalk environment covers everything, which was the right tradeoff for this project's scale.
+
+## How a Request Flows Through the App
 
 ```mermaid
 sequenceDiagram
@@ -266,9 +209,7 @@ sequenceDiagram
     Angular-->>User: Show dashboard / workflow page
 ```
 
----
-
-## Appointment Booking Message Flow
+## Appointment Booking → RabbitMQ
 
 ```mermaid
 sequenceDiagram
@@ -288,9 +229,9 @@ sequenceDiagram
     API-->>Patient: Return booking response
 ```
 
----
+The booking itself is validated and saved synchronously — the message publish happens after the DB write succeeds, not before, so a broker hiccup doesn't block a patient from booking.
 
-## Static Hosting Flow
+## How Angular/Blazor Get Served
 
 ```mermaid
 flowchart TD
@@ -301,16 +242,14 @@ flowchart TD
     HealthRoute[GET /health or /health/ready] --> HealthChecks[Health endpoints]
 ```
 
-The API project must include SPA fallback routes:
+Both SPAs need fallback routes registered in the API, or refreshing on a client-side route (like `/Angular/dashboard`) 404s:
 
 ```csharp
 app.MapFallbackToFile("/Angular/{*path:nonfile}", "Angular/index.html");
 app.MapFallbackToFile("/Blazor/{*path:nonfile}", "Blazor/index.html");
 ```
 
----
-
-## CI/CD and AWS Publish Flow
+## CI/CD Pipeline Flow
 
 ```mermaid
 flowchart TD
@@ -332,7 +271,7 @@ flowchart TD
 
 ---
 
-## Repository Structure
+## Repo Layout
 
 ```text
 HealthAxis/
@@ -341,95 +280,61 @@ HealthAxis/
 │   Main solution file.
 │
 ├── S4_HealthAxisApi/
-│   ASP.NET Core Web API project and deployment host.
-│   Contains controllers, authentication, EF Core access, messaging setup,
-│   health checks, static frontend hosting, and deployment configuration.
+│   The API project — also doubles as the deployment host. Controllers,
+│   auth, EF Core, MassTransit/RabbitMQ wiring, health checks, and the
+│   static frontend hosting all live here.
 │
 │   └── wwwroot/
-│       ├── Angular/
-│       │   Angular production build output served under /Angular/.
-│       │
-│       └── Blazor/
-│           Blazor WebAssembly publish output served under /Blazor/.
+│       ├── Angular/   <- Angular production build output, served at /Angular/
+│       └── Blazor/    <- Blazor WASM publish output, served at /Blazor/
 │
 ├── S4_HealthAxis.Angular/
-│   Angular frontend for landing, login, registration, patient, doctor,
-│   dashboard, and appointment workflows.
+│   Angular frontend — landing, login, registration, patient/doctor
+│   dashboards, appointment booking and history.
 │
 ├── S4_HealthAxis.Blazor/
-│   Blazor WebAssembly frontend for admin-oriented workflows.
+│   Blazor WebAssembly frontend for the admin-side workflows.
 │
 ├── S4_HealthAxis.Shared/
-│   Shared DTOs, common models, and cross-project contracts.
+│   Shared DTOs and contracts used across the API and both frontends.
 │
 ├── S4_HealthAxis.Tests/
 │   Automated test project.
 │
 ├── docs/
-│   Optional documentation and screenshots.
+│   Docs and screenshots.
 │
 └── Jenkinsfile
-    Jenkins CI/CD pipeline definition.
+    CI/CD pipeline definition.
 ```
 
----
+## Tech Stack
 
-## Technology Stack
+**Backend** — .NET 10, ASP.NET Core Web API, EF Core, SQL Server, JWT auth, role-based authorization, Serilog, global exception handling, health/readiness endpoints.
 
-### Backend
+**Frontend** — Angular + TypeScript + Bootstrap/Bootstrap Icons, Blazor WebAssembly for admin.
 
-- .NET 10
-- ASP.NET Core Web API
-- Entity Framework Core
-- SQL Server
-- JWT authentication
-- Role-based authorization
-- Serilog logging
-- Global exception handling
-- Health and readiness endpoints
+**Messaging** — RabbitMQ, MassTransit, `appointment-booked-queue`.
 
-### Frontend
+**Cloud/DevOps** — AWS Elastic Beanstalk (Linux, NGINX reverse proxy in front of Kestrel), S3 for deployment bundles, Jenkins, GitHub.
 
-- Angular
-- TypeScript
-- Bootstrap
-- Bootstrap Icons
-- Blazor WebAssembly
-
-### Messaging
-
-- RabbitMQ
-- MassTransit
-- Queue: `appointment-booked-queue`
-
-### Cloud and DevOps
-
-- AWS Elastic Beanstalk on Linux
-- NGINX reverse proxy on Elastic Beanstalk
-- Amazon S3 for deployment bundles
-- Jenkins CI/CD
-- GitHub source control
-
-### Testing
-
-- `S4_HealthAxis.Tests`
-- `dotnet test`
+**Testing** — `S4_HealthAxis.Tests`, run via `dotnet test`.
 
 ---
 
-## Prerequisites
+## Before You Start
 
-Install the following before running locally:
+You'll need:
 
 - .NET 10 SDK
-- Node.js and npm
+- Node.js + npm
 - SQL Server
 - RabbitMQ
 - Git
-- AWS CLI, if deploying manually
-- Jenkins, if running the CI/CD pipeline locally or on a build server
+- AWS CLI (only if you're deploying manually)
+- Jenkins (only if you're running the pipeline yourself)
 
-Verify tooling:
+Quick sanity check:
 
 ```powershell
 dotnet --info
@@ -439,26 +344,24 @@ git --version
 aws --version
 ```
 
----
+## Getting It Running Locally
 
-## Local Setup and Run Instructions
-
-### 1. Clone the Repository
+**1. Clone it**
 
 ```powershell
 git clone https://github.com/<your-user-or-org>/<your-repo>.git
 cd <your-repo>
 ```
 
-> Replace the repository URL with the actual HealthAxis GitHub repository URL.
+(swap in the actual repo URL)
 
-### 2. Restore .NET Dependencies
+**2. Restore the .NET side**
 
 ```powershell
 dotnet restore .\S4_HealthAxis.slnx
 ```
 
-### 3. Install Angular Dependencies
+**3. Install Angular deps**
 
 ```powershell
 cd .\S4_HealthAxis.Angular
@@ -466,15 +369,9 @@ npm ci
 cd ..
 ```
 
-### 4. Configure Local Settings
+**4. Set your local config**
 
-Configure the API through one of the following:
-
-- `appsettings.Development.json`
-- .NET user secrets
-- Environment variables
-
-Required configuration areas:
+Pick one: `appsettings.Development.json`, .NET user secrets, or environment variables. You'll need values for:
 
 ```text
 ConnectionStrings:Default
@@ -484,56 +381,54 @@ Cors
 ElasticSearch
 ```
 
-Do not commit real secrets.
+Don't commit real secrets into any of these.
 
-### 5. Ensure SQL Server and RabbitMQ Are Running
+**5. Make sure SQL Server and RabbitMQ are actually reachable**
 
-The API requires SQL Server and RabbitMQ to be reachable.
-
-For AWS deployment, the known private infrastructure endpoint is:
+The AWS-deployed environment talks to both at:
 
 ```text
 SQL Server: 10.20.13.213:1433
 RabbitMQ:   10.20.13.213:5672
 ```
 
-For local development, use local SQL Server/RabbitMQ instances or project-specific tunnel configuration.
+Locally, just point at your own SQL Server/RabbitMQ instances (or tunnel into the AWS ones if that's your setup).
 
-### 6. Apply Database Migrations or Initialize Database
+**6. Apply migrations**
 
-Install EF tooling if required:
+Install the EF tool if you don't have it:
 
 ```powershell
 dotnet tool install --global dotnet-ef
 ```
 
-Apply migrations:
+Then:
 
 ```powershell
 dotnet ef database update --project .\S4_HealthAxisApi\S4_HealthAxisApi.csproj
 ```
 
-If migrations are stored in another project or if the solution requires a startup project parameter, adapt the command accordingly.
+If your migrations live somewhere else, or the solution needs an explicit startup project, adjust accordingly.
 
-### 7. Build the Solution
+**7. Build**
 
 ```powershell
 dotnet build .\S4_HealthAxis.slnx -c Release
 ```
 
-### 8. Run Tests
+**8. Run the tests** (worth doing before you assume anything works)
 
 ```powershell
 dotnet test .\S4_HealthAxis.slnx -c Release
 ```
 
-### 9. Start the API
+**9. Run the API**
 
 ```powershell
 dotnet run --project .\S4_HealthAxisApi\S4_HealthAxisApi.csproj
 ```
 
-### 10. Build Angular Static Output
+**10. Build the Angular static output**
 
 ```powershell
 cd .\S4_HealthAxis.Angular
@@ -541,13 +436,13 @@ npm run build
 cd ..
 ```
 
-The Angular output should be available under:
+Output should land in:
 
 ```text
 S4_HealthAxisApi\wwwroot\Angular
 ```
 
-### 11. Publish and Copy Blazor Static Output
+**11. Publish Blazor and copy it into the API's wwwroot**
 
 ```powershell
 Remove-Item .\blazor-publish-temp -Recurse -Force -ErrorAction SilentlyContinue
@@ -565,22 +460,14 @@ Copy-Item .\blazor-publish-temp\wwwroot\* `
   -Force
 ```
 
-Verify:
+Sanity check (both should say `True`):
 
 ```powershell
 Test-Path .\S4_HealthAxisApi\wwwroot\Blazor\index.html
 Test-Path .\S4_HealthAxisApi\wwwroot\Blazor\_framework
 ```
 
-Both commands should return:
-
-```text
-True
-```
-
-### 12. Access the Application Locally
-
-Depending on the configured local URL, use:
+**12. Hit it locally**
 
 ```text
 /Angular/
@@ -588,28 +475,19 @@ Depending on the configured local URL, use:
 /api/...
 /health
 /health/ready
-/swagger
 ```
-
-Swagger availability may depend on environment-specific API configuration.
 
 ---
 
-## Database Setup and Migration Command
+## Database Setup
 
-HealthAxis uses SQL Server through Entity Framework Core.
-
-The main connection string key is:
+EF Core against SQL Server. The connection string key is:
 
 ```text
 ConnectionStrings__Default
 ```
 
-This maps to:
-
-```text
-ConnectionStrings:Default
-```
+which maps to `ConnectionStrings:Default` in config.
 
 Migration command:
 
@@ -617,9 +495,7 @@ Migration command:
 dotnet ef database update --project .\S4_HealthAxisApi\S4_HealthAxisApi.csproj
 ```
 
-If the project uses a separate migrations assembly or startup project, update the command as needed.
-
-Example with startup project:
+If you're using a separate migrations assembly or need to specify a startup project explicitly:
 
 ```powershell
 dotnet ef database update `
@@ -629,45 +505,35 @@ dotnet ef database update `
 
 ---
 
-## Environment Variable Reference
+## Environment Variables
 
-> Do not commit secrets. Use local user secrets, Jenkins credentials, Elastic Beanstalk environment properties, or a managed secret store.
+Don't commit any of these with real values. Use user secrets locally, Jenkins credentials for CI, and Elastic Beanstalk environment properties (or a proper secret store) for the deployed environment.
 
-| Name | Description | Example Value |
+| Name | What it's for | Example |
 |---|---|---|
-| `ASPNETCORE_ENVIRONMENT` | ASP.NET Core runtime environment. | `Production` |
-| `ASPNETCORE_URLS` | ASP.NET Core listening URL used by Elastic Beanstalk/NGINX. | `http://+:5000` |
-| `ConnectionStrings__Default` | SQL Server connection string. Maps to `ConnectionStrings:Default`. | `Server=10.20.13.213,1433;Database=HealthAxisDb;User Id=healthaxis_app;Password=<password>;Encrypt=True;TrustServerCertificate=True;Connect Timeout=30;MultipleActiveResultSets=True;` |
-| `JwtSettings__Secret` | JWT signing secret. | `<long-random-secret>` |
-| `JwtSettings__Issuer` | JWT token issuer. | `HealthAxis` |
-| `JwtSettings__Audience` | JWT token audience. | `HealthAxisUsers` |
-| `RabbitMq__Host` | RabbitMQ host or private IP. | `10.20.13.213` |
-| `RabbitMq__Port` | RabbitMQ AMQP port. | `5672` |
-| `RabbitMq__Username` | RabbitMQ username. | `<rabbitmq-user>` |
-| `RabbitMq__Password` | RabbitMQ password. | `<rabbitmq-password>` |
-| `RabbitMq__VirtualHost` | RabbitMQ virtual host. | `/` |
-| `RabbitMq__UseSsl` | Determines whether RabbitMQ SSL is enabled. | `false` |
-| `RabbitMq__AppointmentQueue` | Queue used for appointment-related messages. | `appointment-booked-queue` |
-| `Cors__AllowedOrigins__0` | Allowed browser origin for CORS. | `http://healthaxis-v2-dev.eba-pbcv4if3.ap-south-1.elasticbeanstalk.com` |
-| `ElasticSearch__Enabled` | Enables or disables Elasticsearch integration. | `false` |
+| `ASPNETCORE_ENVIRONMENT` | Runtime environment | `Production` |
+| `ASPNETCORE_URLS` | Listening URL behind EB/NGINX | `http://+:5000` |
+| `ConnectionStrings__Default` | SQL Server connection string | `Server=10.20.13.213,1433;Database=HealthAxisDb;User Id=healthaxis_app;Password=<password>;Encrypt=True;TrustServerCertificate=True;Connect Timeout=30;MultipleActiveResultSets=True;` |
+| `JwtSettings__Secret` | JWT signing secret | `<long-random-secret>` |
+| `JwtSettings__Issuer` | JWT issuer | `HealthAxis` |
+| `JwtSettings__Audience` | JWT audience | `HealthAxisUsers` |
+| `RabbitMq__Host` | RabbitMQ host/private IP | `10.20.13.213` |
+| `RabbitMq__Port` | RabbitMQ AMQP port | `5672` |
+| `RabbitMq__Username` | RabbitMQ user | `<rabbitmq-user>` |
+| `RabbitMq__Password` | RabbitMQ password | `<rabbitmq-password>` |
+| `RabbitMq__VirtualHost` | RabbitMQ vhost | `/` |
+| `RabbitMq__UseSsl` | Toggle RabbitMQ SSL | `false` |
+| `RabbitMq__AppointmentQueue` | Appointment events queue | `appointment-booked-queue` |
+| `Cors__AllowedOrigins__0` | Allowed browser origin | `http://healthaxis-v2-dev.eba-pbcv4if3.ap-south-1.elasticbeanstalk.com` |
+| `ElasticSearch__Enabled` | Toggle Elasticsearch integration | `false` |
 
 ---
 
-## Running Tests
+## Running the Tests
 
-The test project is:
+Test project: `S4_HealthAxis.Tests`
 
-```text
-S4_HealthAxis.Tests
-```
-
-Known test suite result:
-
-```text
-355 tests passed
-```
-
-Run tests:
+Last full run: **355 tests passed**.
 
 ```powershell
 dotnet test .\S4_HealthAxis.slnx -c Release
@@ -675,36 +541,26 @@ dotnet test .\S4_HealthAxis.slnx -c Release
 
 ---
 
-## Build and Publish Instructions
-
-### Restore
+## Build & Publish
 
 ```powershell
+# restore
 dotnet restore .\S4_HealthAxis.slnx
-```
 
-### Build
-
-```powershell
+# build
 dotnet build .\S4_HealthAxis.slnx -c Release --no-restore
-```
 
-### Test
-
-```powershell
+# test
 dotnet test .\S4_HealthAxis.slnx -c Release --no-build
-```
 
-### Build Angular
-
-```powershell
+# Angular
 cd .\S4_HealthAxis.Angular
 npm ci
 npm run build
 cd ..
 ```
 
-### Publish Blazor and Copy Output
+Publish Blazor and copy its output into the API:
 
 ```powershell
 Remove-Item .\blazor-publish-temp -Recurse -Force -ErrorAction SilentlyContinue
@@ -722,7 +578,7 @@ Copy-Item .\blazor-publish-temp\wwwroot\* `
   -Force
 ```
 
-### Publish API
+Publish the API:
 
 ```powershell
 dotnet publish .\S4_HealthAxisApi\S4_HealthAxisApi.csproj `
@@ -730,7 +586,7 @@ dotnet publish .\S4_HealthAxisApi\S4_HealthAxisApi.csproj `
   -o .\publish
 ```
 
-For Linux self-contained deployment, if required:
+Self-contained Linux build, if you need it:
 
 ```powershell
 dotnet publish .\S4_HealthAxisApi\S4_HealthAxisApi.csproj `
@@ -742,11 +598,9 @@ dotnet publish .\S4_HealthAxisApi\S4_HealthAxisApi.csproj `
 
 ---
 
-## Static Hosting Notes for Angular and Blazor
+## Static Hosting Notes
 
-The API project hosts the frontend applications from `wwwroot`.
-
-Required behavior:
+The API hosts both frontends out of `wwwroot`:
 
 ```text
 /          -> redirects to /Angular/
@@ -754,33 +608,29 @@ Required behavior:
 /Blazor/  -> Blazor WebAssembly frontend
 ```
 
-Required fallback routes in `S4_HealthAxisApi/Program.cs`:
+Fallback routes need to exist in `S4_HealthAxisApi/Program.cs`:
 
 ```csharp
 app.MapFallbackToFile("/Angular/{*path:nonfile}", "Angular/index.html");
 app.MapFallbackToFile("/Blazor/{*path:nonfile}", "Blazor/index.html");
 ```
 
-Blazor requirement:
+Blazor needs its base href set correctly:
 
 ```html
 <base href="/Blazor/" />
 ```
 
-or equivalent base href configuration inside:
+(in `S4_HealthAxis.Blazor/wwwroot/index.html`)
 
-```text
-S4_HealthAxis.Blazor/wwwroot/index.html
-```
-
-Correct deployed Blazor output:
+Correct output layout:
 
 ```text
 S4_HealthAxisApi/wwwroot/Blazor/index.html
 S4_HealthAxisApi/wwwroot/Blazor/_framework
 ```
 
-Incorrect nested output:
+Not this (easy mistake if you forget the `wwwroot/*` glob when copying):
 
 ```text
 S4_HealthAxisApi/wwwroot/Blazor/wwwroot/index.html
@@ -788,83 +638,75 @@ S4_HealthAxisApi/wwwroot/Blazor/wwwroot/index.html
 
 ---
 
-## AWS Elastic Beanstalk Deployment Notes
+## AWS Elastic Beanstalk Notes
 
-### Known Environment
+**Current environment:**
 
 ```text
 AWS region: ap-south-1
-Elastic Beanstalk application: healthaxis-v2
-Elastic Beanstalk environment: healthaxis-v2-dev
-Elastic Beanstalk URL: http://healthaxis-v2-dev.eba-pbcv4if3.ap-south-1.elasticbeanstalk.com
+EB application: healthaxis-v2
+EB environment: healthaxis-v2-dev
+EB URL: http://healthaxis-v2-dev.eba-pbcv4if3.ap-south-1.elasticbeanstalk.com
 S3 bucket: healthaxis-db-script-bucket
 ```
 
-### Network Requirement
+**Networking**
 
-The deployed API expects to reach:
+The API needs to reach:
 
 ```text
 SQL Server: 10.20.13.213:1433
 RabbitMQ:   10.20.13.213:5672
 ```
 
-Elastic Beanstalk must either:
+which means Elastic Beanstalk either needs to be in the same VPC as those, or have proper peering/route tables/NACLs/security groups set up if it isn't.
 
-- run in the same VPC as SQL Server/RabbitMQ, or
-- have correct VPC peering, route tables, NACLs, and security group rules.
+I actually hit this: I originally stood up the EB environment in the wrong VPC. The app deployed fine and `/health` was green, but `/health/ready` kept failing because it genuinely couldn't reach RabbitMQ or SQL Server over the private IP — the instance just had no route there. Recreating the environment in the correct VPC fixed it immediately. If you're seeing the same split (liveness fine, readiness failing), check VPC placement before you touch anything else.
 
-A previously resolved deployment issue was caused by Elastic Beanstalk being created in a different VPC from SQL Server/RabbitMQ. In that state, the application could start but readiness failed because RabbitMQ and/or SQL Server were unreachable over the private IP.
+**Security groups**
 
-### Security Group Guidance
+- Allow TCP 1433 from the EB security group → SQL Server security group
+- Allow TCP 5672 from the EB security group → RabbitMQ security group
+- Neither SQL Server nor RabbitMQ should be publicly reachable
 
-- Allow TCP `1433` from the Elastic Beanstalk security group to the SQL Server security group.
-- Allow TCP `5672` from the Elastic Beanstalk security group to the RabbitMQ security group.
-- Do not expose SQL Server or RabbitMQ publicly.
+**Procfile**
 
-### Procfile
-
-Framework-dependent example:
+Framework-dependent:
 
 ```text
 web: dotnet S4_HealthAxisApi.dll
 ```
 
-Self-contained Linux executable example:
+Self-contained:
 
 ```text
 web: ./S4_HealthAxisApi
 ```
 
-Use the format that matches the published bundle.
+Match whichever one your published bundle actually is.
 
 ---
 
-## Jenkins CI/CD Pipeline Overview
+## Jenkins Pipeline
 
-The Jenkins pipeline is expected to run on a Windows agent.
+Runs on a Windows agent. Steps, roughly in order:
 
-Pipeline responsibilities:
+1. Checkout from GitHub
+2. `dotnet restore`
+3. `dotnet build`
+4. `dotnet test`
+5. Build Angular
+6. Publish Blazor
+7. Copy Blazor `wwwroot` into `S4_HealthAxisApi/wwwroot/Blazor`
+8. Publish the API
+9. Generate the `Procfile`
+10. Zip the published output
+11. Upload to S3
+12. Create an EB application version
+13. Update the EB environment
+14. Wait for the deploy to finish, print status
 
-1. Checkout from GitHub.
-2. Restore .NET dependencies.
-3. Build the solution.
-4. Run tests.
-5. Build Angular.
-6. Publish Blazor.
-7. Copy Blazor `wwwroot` into `S4_HealthAxisApi/wwwroot/Blazor`.
-8. Publish API.
-9. Create `Procfile`.
-10. Zip published output.
-11. Upload ZIP to S3.
-12. Create Elastic Beanstalk application version.
-13. Update Elastic Beanstalk environment.
-14. Wait for deployment.
-15. Print deployment status.
-
-Jenkins AWS credentials must be configured in Jenkins Credentials and must not be hardcoded in the repository.
-
-Known deployment values:
+AWS credentials are stored in Jenkins Credentials — nothing hardcoded in the repo.
 
 ```text
 AWS_REGION=ap-south-1
@@ -875,260 +717,120 @@ S3_BUCKET=healthaxis-db-script-bucket
 
 ---
 
-## Live URLs
+## A Few API Endpoints
 
-### Angular App
+Not a full spec, just enough to get oriented:
 
-```text
-http://healthaxis-v2-dev.eba-pbcv4if3.ap-south-1.elasticbeanstalk.com/Angular/
-```
-
-### API Base URL
-
-```text
-http://healthaxis-v2-dev.eba-pbcv4if3.ap-south-1.elasticbeanstalk.com
-```
-
-### API Swagger Page
-
-```text
-http://healthaxis-v2-dev.eba-pbcv4if3.ap-south-1.elasticbeanstalk.com/swagger
-```
-
-Swagger availability may depend on whether Swagger/OpenAPI is enabled for the current deployment environment.
-
-### Health Endpoints
-
-```text
-http://healthaxis-v2-dev.eba-pbcv4if3.ap-south-1.elasticbeanstalk.com/health
-http://healthaxis-v2-dev.eba-pbcv4if3.ap-south-1.elasticbeanstalk.com/health/ready
-```
-
----
-
-## Representative API Endpoints
-
-| Method | Endpoint | Purpose |
+| Method | Endpoint | What it does |
 |---|---|---|
-| `POST` | `/api/auth/login` | Authenticates a user and returns authentication response data. |
-| `GET` | `/api/patients/{id}` | Retrieves patient details by ID. |
-| `GET` | `/api/appointments/patient/{patientId}` | Retrieves appointment history for a patient. |
-| `GET` | `/health` | Liveness check. |
-| `GET` | `/health/ready` | Readiness check for infrastructure dependencies. |
-
-This is a representative endpoint list, not a complete API specification.
-
----
-
-## Screenshots
-
-Add screenshots to a repository folder such as:
-
-```text
-docs/screenshots/
-```
-
-Suggested screenshots:
-
-### Landing Page
-
-```text
-docs/screenshots/angular-landing.png
-```
-
-### Login Page
-
-```text
-docs/screenshots/angular-login.png
-```
-
-### Registration Page
-
-```text
-docs/screenshots/angular-register.png
-```
-
-### Patient Dashboard
-
-```text
-docs/screenshots/patient-dashboard.png
-```
-
-### Doctor Dashboard
-
-```text
-docs/screenshots/doctor-dashboard.png
-```
-
-### Blazor Admin Screen
-
-```text
-docs/screenshots/blazor-admin.png
-```
-
-Markdown example:
-
-```md
-![Angular Login](docs/screenshots/angular-login.png)
-```
+| `POST` | `/api/auth/login` | Authenticates a user, returns auth data |
+| `GET` | `/api/patients/{id}` | Gets a patient by ID |
+| `GET` | `/api/appointments/patient/{patientId}` | Gets appointment history for a patient |
+| `GET` | `/health` | Liveness check |
+| `GET` | `/health/ready` | Readiness check (SQL Server + RabbitMQ reachability) |
 
 ---
 
 ## Troubleshooting
 
-### `/health` Works but `/health/ready` Fails
+**`/health` is fine but `/health/ready` fails**
 
-Likely causes:
+Usually one of:
+- SQL Server unreachable
+- RabbitMQ unreachable
+- EB is in the wrong VPC (see the AWS notes above — this got me once already)
+- Missing security group rules
+- Bad env var values
 
-- SQL Server unreachable.
-- RabbitMQ unreachable.
-- Elastic Beanstalk is in the wrong VPC.
-- Security group rules are missing.
-- Environment variables are incorrect.
+Check `ConnectionStrings__Default`, `RabbitMq__Host`, `RabbitMq__Port`, security group inbound rules, and VPC/subnet placement.
 
-Check:
+**RabbitMQ unreachable**
 
-```text
-ConnectionStrings__Default
-RabbitMq__Host
-RabbitMq__Port
-Security group inbound rules
-VPC/subnet placement
-```
-
-### RabbitMQ Unreachable
-
-Symptoms may include:
+Symptoms look like:
 
 ```text
 Broker unreachable
 Connection failed, host 10.20.13.213:5672
 ```
 
-Check:
+Check that RabbitMQ is actually running, port 5672 is listening, `RabbitMq__Host`/`RabbitMq__Port` are correct, EB can route to that private IP, and the RabbitMQ security group allows inbound 5672 from EB.
 
-- RabbitMQ service is running.
-- Port `5672` is listening.
-- `RabbitMq__Host` is correct.
-- `RabbitMq__Port` is correct.
-- Elastic Beanstalk can reach the RabbitMQ private IP.
-- RabbitMQ security group allows inbound `5672` from Elastic Beanstalk.
+**CORS blows up at startup**
 
-### CORS Startup Failure
-
-If the application fails at startup with CORS validation errors, check:
-
-```text
-Cors__AllowedOrigins__0
-```
-
-Correct example:
+Check `Cors__AllowedOrigins__0`. It should look exactly like:
 
 ```text
 http://healthaxis-v2-dev.eba-pbcv4if3.ap-south-1.elasticbeanstalk.com
 ```
 
-Avoid:
+No quotes, no trailing comma, no trailing slash, and don't append `/Angular` or `/Blazor` to it.
 
-```text
-Quotes
-Commas
-Trailing slash
-/Angular path
-/Blazor path
-HTML anchor text
-```
+**`/Blazor/login` 404s**
 
-### `/Blazor/login` Returns 404
+Check that:
+- The Blazor fallback route is actually in `Program.cs`
+- `S4_HealthAxisApi/wwwroot/Blazor/index.html` and `_framework` exist
+- `index.html` has `base href="/Blazor/"`
+- Output isn't nested under `wwwroot/Blazor/wwwroot`
 
-Check:
+**Angular build budget failures in CI**
 
-- `Program.cs` contains the Blazor fallback route.
-- `S4_HealthAxisApi/wwwroot/Blazor/index.html` exists.
-- `S4_HealthAxisApi/wwwroot/Blazor/_framework` exists.
-- Blazor `index.html` uses base href `/Blazor/`.
-- Blazor output is not nested under `wwwroot/Blazor/wwwroot`.
+Look at `S4_HealthAxis.Angular/angular.json`. Bump the budget thresholds if it's warranted, or trim oversized component CSS — just don't do it blindly, make it a deliberate change.
 
-### Angular Build Budget Failure in CI
+**EB in the wrong VPC**
 
-If Angular fails due to CSS or bundle budget errors:
-
-- Review `S4_HealthAxis.Angular/angular.json`.
-- Increase budget thresholds if appropriate.
-- Optimize oversized component CSS.
-- Keep changes intentional and documented.
-
-### Elastic Beanstalk Created in Wrong VPC
-
-If Elastic Beanstalk cannot reach SQL Server or RabbitMQ using private IP `10.20.13.213`, verify the Elastic Beanstalk EC2 instance VPC.
-
-Recommended fix:
-
-- Create/recreate the Elastic Beanstalk environment in the VPC that can reach SQL Server/RabbitMQ.
-
-Alternative:
-
-- Configure VPC peering, route tables, network ACLs, and security groups correctly.
+If EB can't reach `10.20.13.213` for SQL Server/RabbitMQ, check which VPC the EB EC2 instance actually landed in. Easiest fix is usually to recreate the environment in the right VPC rather than trying to retrofit peering after the fact.
 
 ---
 
 ## Security Notes
 
-- Do not commit secrets.
-- Do not commit database passwords, RabbitMQ passwords, JWT secrets, or AWS credentials.
-- Store AWS credentials in Jenkins Credentials.
-- Store production runtime configuration in Elastic Beanstalk environment properties or a managed secret store.
-- Restrict SQL Server and RabbitMQ inbound rules to Elastic Beanstalk security groups.
-- Avoid public exposure of database and message broker ports.
-- Rotate JWT, database, and RabbitMQ credentials if they are exposed in logs, screenshots, or chat.
-- Consider HTTPS and a custom domain before production use.
-- Consider AWS Secrets Manager or AWS Systems Manager Parameter Store for future secret management.
+- No secrets in the repo — not DB passwords, RabbitMQ credentials, JWT secrets, or AWS keys
+- AWS credentials live in Jenkins Credentials
+- Production config lives in EB environment properties (or should eventually move to a proper secret store)
+- SQL Server and RabbitMQ inbound rules are restricted to the EB security group
+- Neither DB nor broker port should ever be publicly exposed
+- Rotate anything that accidentally ends up in logs, screenshots, or chat history
+- Still need HTTPS + a real domain before this goes anywhere near production
 
 ---
 
-## Future Improvements
+## What's Left / Ideas
 
-Potential improvements:
-
-- Move secrets to AWS Secrets Manager or AWS Systems Manager Parameter Store.
-- Add HTTPS and a custom domain.
-- Automate database migrations in CI/CD.
-- Add blue/green deployment.
-- Add centralized observability dashboards.
-- Add structured operational alerts.
-- Containerize the application using Docker.
-- Use a managed RabbitMQ service or Amazon MQ for production-grade messaging.
-- Expand admin workflows.
-- Add full API documentation and generated OpenAPI artifacts.
-- Add end-to-end UI tests.
-- Improve mobile browser responsiveness across all frontend pages.
+- Move secrets to AWS Secrets Manager or SSM Parameter Store
+- HTTPS + custom domain
+- Automate migrations as part of CI/CD instead of running them by hand
+- Blue/green deployments
+- Actual observability dashboards instead of tailing logs
+- Structured alerting
+- Docker, eventually
+- Managed RabbitMQ (Amazon MQ) instead of self-hosted, if this ever needs to be "real"
+- More admin workflows in the Blazor app
+- Generated API docs
+- End-to-end UI tests
+- Mobile responsiveness pass across the frontend — it's usable but not great on small screens
 
 ---
 
-## What You May Need to Change
+## Things You'll Need to Change for Your Own Fork
 
-Before committing this README to another environment, review and update the following values if they differ:
-
-| Item | Current Value | When to Change |
+| Item | Current value | Change it when... |
 |---|---|---|
-| GitHub clone URL | `https://github.com/<your-user-or-org>/<your-repo>.git` | Replace with the actual repository URL. |
-| Angular live URL | `http://healthaxis-v2-dev.eba-pbcv4if3.ap-south-1.elasticbeanstalk.com/Angular/` | Change if the EB CNAME or custom domain changes. |
-| API base URL | `http://healthaxis-v2-dev.eba-pbcv4if3.ap-south-1.elasticbeanstalk.com` | Change if the EB CNAME or custom domain changes. |
-| Swagger URL | `http://healthaxis-v2-dev.eba-pbcv4if3.ap-south-1.elasticbeanstalk.com/swagger` | Change if Swagger is moved or disabled in Production. |
-| S3 bucket | `healthaxis-db-script-bucket` | Change if Jenkins deploys artifacts to a different bucket. |
-| EB application name | `healthaxis-v2` | Change if the EB application name changes. |
-| EB environment name | `healthaxis-v2-dev` | Change if deploying to staging/production. |
-| SQL/RabbitMQ private IP | `10.20.13.213` | Change if infrastructure is moved. |
-| Screenshot paths | `docs/screenshots/*.png` | Add actual screenshots and keep names aligned with README links. |
-| Procfile command | `dotnet S4_HealthAxisApi.dll` or `./S4_HealthAxisApi` | Match the deployment type used by the published bundle. |
+| GitHub clone URL | `https://github.com/<your-user-or-org>/<your-repo>.git` | you're not me |
+| Angular URL | `http://healthaxis-v2-dev.eba-pbcv4if3.ap-south-1.elasticbeanstalk.com/Angular/` | the EB CNAME or domain changes |
+| API base URL | `http://healthaxis-v2-dev.eba-pbcv4if3.ap-south-1.elasticbeanstalk.com` | same as above |
+| S3 bucket | `healthaxis-db-script-bucket` | Jenkins deploys somewhere else |
+| EB application name | `healthaxis-v2` | it's renamed |
+| EB environment name | `healthaxis-v2-dev` | deploying to staging/prod |
+| SQL/RabbitMQ private IP | `10.20.13.213` | infra moves |
+| Screenshot paths | `docs/screenshots/*.png` | you actually add the screenshots |
+| Procfile command | `dotnet S4_HealthAxisApi.dll` or `./S4_HealthAxisApi` | depends on framework-dependent vs self-contained publish |
 
 ---
 
-## License and Ownership
+## License
 
-This project is intended for learning, demonstration, and portfolio/review purposes unless otherwise specified.
-
-Add a license file before redistribution or production use.
+This is a learning/portfolio project unless stated otherwise. No formal license file yet — add one before reusing this for anything beyond that.
 
 ```text
 Copyright (c) 2026.
