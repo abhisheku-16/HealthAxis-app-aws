@@ -737,6 +737,5 @@ If you're forking this repo to deploy it yourself, be sure to update these varia
 
 I built this project for learning, demonstration, and portfolio review. If you plan to redistribute or use this in production, please add an appropriate `LICENSE` file.
 Abhishek Upadhyay
-abhishek.upadhyay@ust.com
 
 Copyright (c) 2026. All rights reserved unless a LICENSE file states otherwise.
