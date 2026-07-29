@@ -1,7 +1,8 @@
 .ha-landing {
   position: relative;
   overflow: hidden;
-  padding: 48px 30px 80px;
+  margin-top: 0; /* Prevents margin collapse that causes the white strip */
+  padding: 120px 30px 80px; /* 76px navbar clearance + 44px top padding */
 }
 
 .ha-bg-orb {
@@ -16,7 +17,7 @@
   width: 320px;
   height: 320px;
   background: rgba(56, 189, 248, 0.2);
-  top: 40px;
+  top: 80px; /* Adjusted down slightly to stay clear of the fixed navbar */
   left: -110px;
 }
 
@@ -25,7 +26,7 @@
   height: 420px;
   background: rgba(37, 99, 235, 0.13);
   right: -140px;
-  top: 120px;
+  top: 160px;
 }
 
 /* HERO */
@@ -399,7 +400,7 @@
 
 @media (max-width: 768px) {
   .ha-landing {
-    padding: 24px 16px 56px;
+    padding: 100px 16px 56px; /* Clearance for fixed navbar on mobile */
   }
 
   /* Fade out background orbs on mobile to reduce visual noise */
