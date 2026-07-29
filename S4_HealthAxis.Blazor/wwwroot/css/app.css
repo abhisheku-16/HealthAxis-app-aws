@@ -2835,3 +2835,25 @@ code {
         background: transparent !important;
         text-decoration: none !important;
     }
+
+/* ==========================================================================
+   HEALTHAXIS ADMIN TOPBAR - POLISHED GRADIENT FIX
+   ========================================================================== */
+.ha-topbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 2000;
+    height: 76px;
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    /* Richer, darker, and more polished gradient matching the app */
+    background: linear-gradient(135deg, #1E3A8A 0%, #3B82F6 100%) !important;
+    backdrop-filter: blur(22px);
+    -webkit-backdrop-filter: blur(22px);
+    border-bottom: 1px solid rgba(219, 234, 254, 0.36);
+    box-shadow: 0 14px 34px rgba(37, 99, 235, 0.18);
+}
